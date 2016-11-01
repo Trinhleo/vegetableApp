@@ -3,10 +3,12 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 var UserSchema = new Schema({
     firstName: {
+        type: String,
         trim: true,
         default: '',
     },
     lastName: {
+        type: String,
         trim: true,
         default: '',
     },
@@ -32,7 +34,7 @@ var UserSchema = new Schema({
     },
     profileImageURL: {
         type: String,
-        default: 'public/img/profile/default.png'
+        default: '/img/profile/default.png'
     },
     creationDate: {
         type: 'Date', default: Date.now

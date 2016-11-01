@@ -1,4 +1,3 @@
-'use strict';
 
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
@@ -32,7 +31,7 @@ var GardenSchema = new Schema({
     },
     imgUrl: {
         type: String,
-        default: 'public/img/gardens/no-images.png'
+        default: '/img/gardens/no-images.png'
     },
     created: {
         type: Date,
@@ -44,7 +43,7 @@ var GardenSchema = new Schema({
     },
     location: {
         type: [Number], required: true
-    }, // [Long, Lat]
+    }, 
     productionItem:
     [{
         type: Schema.ObjectId,

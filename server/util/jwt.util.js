@@ -27,7 +27,8 @@ function verify(token, callback) {
     } catch (err) {
         callback(1, null);
         return;
-    }
+    };
+    
     if (Date.now() > (new Date(decoded.exp))) {
         console.log(2);
         callback(2, null);
