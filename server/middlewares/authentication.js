@@ -1,6 +1,7 @@
 var jwt = require('./../util/jwt.util');
 module.exports = {
-    authentication: authentication
+    authentication: authentication,
+    hasRole: hasRole
 };
 
 function authentication(req, res, next) {

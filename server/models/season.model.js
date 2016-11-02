@@ -14,7 +14,8 @@ var SeasonSchema = new Schema({
     },
     garden: {
         type: Schema.ObjectId,
-        ref: 'Garden'
+        ref: 'Garden',
+        require: true
     },
     imgUrl: {
         type: String,
@@ -24,9 +25,10 @@ var SeasonSchema = new Schema({
         type: Number,
         default: 0
     },
-    vegetable: {
+    productionItem: {
         type: Schema.ObjectId,
-        ref: 'Vegetablecat'
+        ref: 'ProductionItem',
+        require: true
     },
     startDate: {
         type: Date

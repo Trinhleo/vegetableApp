@@ -47,7 +47,7 @@ var GardenSchema = new Schema({
     productionItem:
     [{
         type: Schema.ObjectId,
-        ref: 'productionItem'
+        ref: 'ProductionItem'
     }],
     isDeleted: {
         type: Boolean,

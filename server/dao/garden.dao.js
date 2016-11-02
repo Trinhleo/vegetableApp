@@ -34,7 +34,7 @@ function readGardenById(id, callback) {
 
 function readGarden(garden, callback) {
     Garden.findOne({
-        name: garden.gardenname
+        name: garden.name
     }, function (err, result) {
         if (err) {
             return callback(err, null);
@@ -45,9 +45,9 @@ function readGarden(garden, callback) {
 
 function createGarden(info, callback) {
     
-    var Garden = new Garden(info);
+    var garden = new Garden(info);
 
-    Garden.save(function (err, result) {
+    garden.save(function (err, result) {
         if (err) {
             return callback(err, null);
         }
@@ -58,7 +58,7 @@ function createGarden(info, callback) {
 
 function updateGarden(id, info, callback) {
 
-    Garden.findByIdAndUpdate(id, creditial, function (err, result) {
+    Garden.findByIdAndUpdate(id, info, function (err, result) {
         if (err) {
             return callback(err, null);
         }

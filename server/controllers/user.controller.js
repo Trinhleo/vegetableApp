@@ -12,27 +12,26 @@ function getMyUserInfo(req, res) {
         console.log(result);
         if (err || null === result) {
             console.log(err);
-            res.status(400).send();
-        } else {
-            var userInfo = {
-                _id: result._id,
-                firstName: result.firstName,
-                lastName: result.lastName,
-                email: result.email,
-                creationDate: result.creationDate,
-                profileImageURL: result.profileImageURL
-            };
-            res.status(200).send(userInfo);
+            return res.status(400).send();
         }
+        var userInfo = {
+            _id: result._id,
+            firstName: result.firstName,
+            lastName: result.lastName,
+            email: result.email,
+            creationDate: result.creationDate,
+            profileImageURL: result.profileImageURL
+        };
+        res.status(200).send(userInfo);
     });
 };
 
 function getUserInfo(req, res) {
     var userId = req.params.userId;
-    if (!id) {
+    if (!userId) {
         return res.status(400).send("not found");
     }
-    userDao.readUserById(id, function (err, result) {
+    userDao.readUserById(userId, function (err, result) {
         console.log(result);
         if (err || null === result) {
             console.log(err);

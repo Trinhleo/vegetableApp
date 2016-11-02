@@ -34,7 +34,7 @@ function readSeasonById(id, callback) {
 
 function readSeason(season, callback) {
     Season.findOne({
-        Seasonname: season.seasonname
+       name: season.name
     }, function (err, result) {
         if (err) {
             return callback(err, null);
@@ -44,9 +44,9 @@ function readSeason(season, callback) {
 }
 
 function createSeason(creditial, callback) {
-    var Season = new Season(creditial);
+    var season = new Season(creditial);
 
-    Season.save(function (err, result) {
+    season.save(function (err, result) {
         if (err) {
             return callback(err, null);
         }
@@ -55,9 +55,9 @@ function createSeason(creditial, callback) {
 
 }
 
-function updateSeason(id, creditial, callback) {
+function updateSeason(id, info, callback) {
 
-    Season.findByIdAndUpdate(id, creditial, function (err, result) {
+    Season.findByIdAndUpdate(id, info, function (err, result) {
         if (err) {
             return callback(err, null);
         }
