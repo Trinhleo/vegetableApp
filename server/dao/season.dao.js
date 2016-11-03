@@ -1,9 +1,7 @@
 
 var mongoose = require('mongoose');
-
 require('../models/season.model.js');
 var Season = mongoose.model('Season');
-var _ = require('lodash');
 
 module.exports = {
     listAllSeasons: listAllSeasons,
@@ -34,7 +32,7 @@ function readSeasonById(id, callback) {
 
 function readSeason(season, callback) {
     Season.findOne({
-       name: season.name
+        name: season.name
     }, function (err, result) {
         if (err) {
             return callback(err, null);
@@ -55,9 +53,9 @@ function createSeason(creditial, callback) {
 
 }
 
-function updateSeason(id, info, callback) {
+function updateSeason(seasonId, info, callback) {
 
-    Season.findByIdAndUpdate(id, info, function (err, result) {
+    Season.findByIdAndUpdate(seasonId, info, function (err, result) {
         if (err) {
             return callback(err, null);
         }
@@ -65,8 +63,8 @@ function updateSeason(id, info, callback) {
     });
 }
 
-function deleteSeason(id, callback) {
-    Season.findByIdAndRemove(id, function (err, result) {
+function deleteSeason(seasonId, callback) {
+    Season.findByIdAndRemove(seasonId, function (err, result) {
         if (err) {
             return callback(err, null);
         }

@@ -2,6 +2,7 @@ var seasonDao = require('./../dao/season.dao');
 module.exports = {
     listAllSeasons: listAllSeasons,
     getSeason: getSeason,
+    createSeason: createSeason,
     updateSeason: updateSeason,
     deleteSeason: deleteSeason
 };
@@ -17,6 +18,7 @@ function listAllSeasons(req, res) {
 }
 
 function getSeason(req, res) {
+    var userId = req.decoded._id;
     var seasonId = req.params.seasonId;
     if (!seasonId) {
         return res.status(400).send({
@@ -25,12 +27,14 @@ function getSeason(req, res) {
         });
     }
 
-    SeasonDao.readSeasonById(seasonId, cb);
+    seasonDao.readSeasonById(seasonId, cb);
 
     function cb(err, result) {
         if (err) {
             return res.status(400).send(err);
         }
+        result.isOwner = userId.toString() === result.user.toString() ? true : false
+        result.isAdmin = req.decoded.role[0] === 'admin' ? true : false;
         res.status(200).send(result);
     }
 }
@@ -51,7 +55,7 @@ function createSeason(req, res) {
         endDate: req.body.endDate,
         seedQuantity: req.body.seedQuantity
     };
-    gardenDao.createSeason(seasonInfo, cb);
+    seasonDao.createSeason(seasonInfo, cb);
     function cb(err, result) {
         if (err) {
             return res.status(400).send(err);
@@ -61,6 +65,7 @@ function createSeason(req, res) {
 }
 
 function updateSeason(req, res) {
+    var userId = req.decoded._id;
     var seasonId = req.params.seasonId;
     var seasonInfo = req.body
     if (!seasonId) {
@@ -69,14 +74,27 @@ function updateSeason(req, res) {
             errMsg: "Không tìm thấy!"
         });
     }
-    SeasonDao.updateSeason(seasonId, seasonInfo, cb);
-    function cb(err, result) {
-        if (err) {
-            return res.status(400).send(err);
+
+    seasonDao.readSeason({
+        user: userId,
+        _id: seasonId
+    }, function (err, season) {
+        if (err || !season) {
+            return res.status(400).send({
+                errCode: 1,
+                errMsg: "Bạn không phải là chủ mùa vụ!"
+            });
         }
 
-        res.status(200).send(result);
-    }
+        seasonDao.updateSeason(seasonId, seasonInfo, cb);
+        function cb(err, result) {
+            if (err) {
+                return res.status(400).send(err);
+            }
+
+            res.status(200).send(result);
+        }
+    })
 }
 
 function deleteSeason(req, res) {
@@ -88,13 +106,24 @@ function deleteSeason(req, res) {
         });
     }
 
-    SeasonDao.deleteSeason(seasonId, cb);
-
-    function cb(err, result) {
-        if (err) {
-            return res.status(400).send(err);
+    seasonDao.readSeason({
+        _id: gardenId,
+        user: userId
+    }, function (err, result) {
+        if (err || null === result) {
+            return res.status(400).send({
+                errCode: 1,
+                errMsg: "Bạn không phải là chủ mùa vụ!"
+            });
         }
+        SeasonDao.deleteSeason(seasonId, cb);
 
-        res.status(200).send(result);
-    }
+        function cb(err, result) {
+            if (err) {
+                return res.status(400).send(err);
+            }
+
+            res.status(200).send(result);
+        }
+    });
 }

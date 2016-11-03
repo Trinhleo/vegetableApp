@@ -1,9 +1,7 @@
 
 var mongoose = require('mongoose');
-
 require('../models/productionItem.model.js');
 var ProductionItem = mongoose.model('ProductionItem');
-var _ = require('lodash');
 
 module.exports = {
     listAllProductionItems: listAllProductionItems,
@@ -23,7 +21,7 @@ function listAllProductionItems(callback) {
     });
 }
 
-function readproductionItemById(id, callback) {
+function readProductionItemById(id, callback) {
     ProductionItem.findById(id, function (err, result) {
         if (err) {
             return callback(err, null);
@@ -65,7 +63,7 @@ function updateProductionItem(id, info, callback) {
     });
 }
 
-function deleteproductionItem(id, callback) {
+function deleteProductionItem(id, callback) {
     productionItem.findByIdAndRemove(id, function (err, result) {
         if (err) {
             return callback(err, null);

@@ -1,9 +1,7 @@
 
 var mongoose = require('mongoose');
-
 require('../models/user.model.js');
 var User = mongoose.model('User');
-var _ = require('lodash');
 
 module.exports = {
     listAllUsers: listAllUsers,

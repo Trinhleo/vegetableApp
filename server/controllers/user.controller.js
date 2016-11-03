@@ -18,6 +18,7 @@ function getMyUserInfo(req, res) {
             _id: result._id,
             firstName: result.firstName,
             lastName: result.lastName,
+            displayName: result.displayName
             email: result.email,
             creationDate: result.creationDate,
             profileImageURL: result.profileImageURL
@@ -39,9 +40,7 @@ function getUserInfo(req, res) {
         }
         var userInfo = {
             _id: result._id,
-            firstName: result.firstName,
-            lastName: result.lastName,
-            email: result.email,
+            displayName: result.displayName
             creationDate: result.creationDate,
             profileImageURL: result.profileImageURL
         };

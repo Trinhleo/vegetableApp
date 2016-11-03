@@ -8,6 +8,10 @@ var SeasonSchema = new Schema({
         trim: true,
         unique: true
     },
+    user: {
+        type: Schema.ObjectId,
+        ref: 'User'
+    }
     created: {
         type: Date,
         default: Date.now

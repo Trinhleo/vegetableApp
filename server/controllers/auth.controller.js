@@ -38,7 +38,6 @@ function signin(req, res) {
                 createtionDate: result.createtionDate
             };
             var token = jwt.signToken(token_info);
-
             res.status(200).send({
                 userInfo: token_info,
                 access_token: token

@@ -1,9 +1,7 @@
 
 var mongoose = require('mongoose');
-
 require('../models/garden.model.js');
 var Garden = mongoose.model('Garden');
-var _ = require('lodash');
 
 module.exports = {
     listAllGardens: listAllGardens,

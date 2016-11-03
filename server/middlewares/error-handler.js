@@ -4,7 +4,7 @@ module.exports.errorHandler = function () {
         console.log(err);
         if (err) {
             res.status(err.statusCode || 500).send({
-                message: err.message
+                message: 'internal error!'
             });
         }
     };
