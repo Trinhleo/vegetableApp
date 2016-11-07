@@ -12,7 +12,6 @@
 
         function loadNewNotifications() {
             var deferred = $q.defer();
-            debugger;
             $http.get(apiUrl + '/unread').then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {

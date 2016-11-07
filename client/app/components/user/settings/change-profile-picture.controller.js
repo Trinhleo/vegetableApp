@@ -7,10 +7,10 @@
     function ChangeProfilePictureController($timeout, $window, FileUploader, appConfigs, $localStorage) {
         vm = this;
         vm.user = $localStorage.userInfo;
-        vm.imageURL = vm.user?vm.user.profileImageURL :'';
+        vm.imageURL = vm.user ? vm.user.profileImageURL : '';
         // Create file uploader instance
         vm.uploader = new FileUploader({
-            url: appConfigs.baseUrl.concat(appConfigs.port).concat(appConfigs.baseApiUrl).concat('user/me/picture-profile'),
+            url: appConfigs.baseUrl.concat(appConfigs.port).concat(appConfigs.baseApiUrl).concat('user/picture-profile'),
             headers: {
                 authorization: $localStorage.token
             },
@@ -51,7 +51,7 @@
             // Show success message
             vm.success = true;
             debugger;
-         $localStorage.userInfo.profileImageURL = response;
+            $localStorage.userInfo.profileImageURL = response;
             // Clear upload buttons
             vm.cancelUpload();
         };

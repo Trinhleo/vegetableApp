@@ -8,7 +8,7 @@
                 .otherwise(function ($injector) {
                     var $state = $injector.get('$state');
                     console.log($state);
-                    $state.go('index.events');
+                    $state.go('index.product');
                 });
         });
 

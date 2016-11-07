@@ -12,7 +12,7 @@
 
         vm.notifications = [];
         vm.readNotification = readNotification;
-        $rootScope.userInfo = $localStorage.userInfo;
+        // $rootScope.userInfo = $localStorage.userInfo;
         // vm.newNotifications = [];
         vm.bage = 0;
         loadNewNotificatons();

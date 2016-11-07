@@ -1,8 +1,8 @@
 (function () {
     angular.module('app.garden')
         .controller('GardenController', GardenController);
-    GardenController.$inject = [];
+    // GardenController.$inject = [];
     function GardenController() {
 
     };
-})
+})();

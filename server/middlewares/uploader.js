@@ -54,6 +54,7 @@ function uploadSingle(req, res, next) {
             }
 
             req.profileImageURL = imgUrl + "/" + req.file.filename;
+            console.log(req);
             next();
         });
     });

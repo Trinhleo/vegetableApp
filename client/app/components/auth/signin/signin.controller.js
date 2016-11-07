@@ -20,7 +20,7 @@
                 $localStorage.user = res.name;
                 $localStorage.userInfo = res.userInfo;
                 $rootScope.userInfo = $localStorage.userInfo;
-                $state.go('index.events');
+                $state.go('index.product');
             }, function (err) {
                 // console.log(err)
                 // vm.alert = err.data.message || err.message;

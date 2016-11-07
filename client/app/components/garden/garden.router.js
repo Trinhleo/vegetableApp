@@ -6,11 +6,10 @@
         $stateProvider
             .state('index.garden', {
                 url: "/garden",
-                abstract: true,
                 templateUrl: 'app/components/garden/garden.html',
                 controller: 'GardenController',
                 controllerAs: 'vm'
             })
 
     }
-})
+})();
