@@ -1,0 +1,40 @@
+{
+  "name": "mufc",
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.0",
+    "angular": "~1.4.8",
+    "ngstorage": "^0.3.11",
+    "angular-bootstrap": "angular-bootstrap-forked#0.14.0",
+    "angular-ui-router": "~0.2.15",
+    "lodash": "~4.0.1",
+    "font-awesome": "fontawesome#^4.5.0",
+    "bootstrap": "^3.3.7",
+    "angular-file-upload": "^2.3.4",
+    "angular-animate": "^1.5.8",
+    "socket-io-client": "^1.4.5",
+    "socket-io": "^1.0.0",
+    "angular-geolocation": "*",
+    "ngGeolocation": "^0.0.8",
+    "angularjs-geolocation": "^0.1.1",
+    "install": "^1.0.4",
+    "ng-file-upload": "^12.2.12",
+    "angular-toastr": "^2.1.1"
+  },
+  "overrides": {
+    "font-awesome": {
+      "main": [
+        "css/font-awesome.css"
+      ]
+    }
+  }
+}

@@ -1,0 +1,113 @@
+<style>
+	.messages-form {
+		background: rgba(51, 122, 183, 0.2);
+		padding: 3px;
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		max-height: 70%;
+	}
+	
+	#messages {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+	}
+	
+	#messages li {
+		padding: 5px 10px;
+	}
+	
+	#messages li:nth-child(odd) {
+		background: #eee;
+	}
+</style>
+<section>
+	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+		<div class="row">
+			<h2>Room list</h2>
+			<ul class="list-group">
+				<div data-ng-repeat="room in vm.rooms">
+					<button type="button" class="btn btn-success" style="margin: 5px" data-ng-click="vm.joinRoom(room)">{{room.name}}</button>
+				</div>
+			</ul>
+		</div>
+		<div class="row">
+			<h2>Online:</h2>
+			<ul class="list-group">
+				<li class="list-group-item" data-ng-repeat="user in vm.online">
+					<img alt="" class="img-responsive text-center" style="height: 32px; width: 32px;border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.1);" ng-src="{{user.profileImageURL}}" />
+					<span>{{user.nickname}}</span>
+				</li>
+			</ul>
+		</div>
+		<div "row">
+			<button style="position: fixed;" type="button" class="btn btn-primary" ng-click="vm.toggleChatBox();">{{vm.enableChat?'Close chat box':' Open chat box'}}</button>
+		</div>
+	</div>
+
+	<div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+		<div class="row">
+			<button type="button" class="btn btn-primary" data-ng-click="vm.toggleMyRoomOnOff();"> My room</button>
+			<button type="button" class="btn btn-primary" data-ng-click="vm.toggleCreateRoom();"> Create room</button>
+		</div>
+		<div class="row" data-ng-show="vm.createRoomOnOff">
+			<form class="form-inline">
+				<div class="form-group">
+					<label for="roomName ">Room Name:</label>
+					<input type="text" ng-model="vm.roomInfo.name " class="form-control" id="roomName" placeholder="Enter room name " />
+					<button id="submitRoom" type="button" class="btn btn-primary" type="button" class="btn btn-default" ng-click="vm.createRoom(vm.roomInfo); ">Submit</button>
+				</div>
+			</form>
+		</div>
+		<div class="row" data-ng-show="vm.myRoomOnOff">
+			<h2> My Rooms </h2>
+			<ul data-ng-repeat="room in vm.myRooms">
+				<div class="row">
+					<input class="form-control" data-ng-disabled="!vm.edit" ng-model="room.name" />
+					<button data-ng-disabled="!vm.edit" type="button" class="btn btn-success" style="margin: 5px" data-ng-click="vm.editRoom(room)">Submit</button>
+					<button type="button" class="btn btn-success" style="margin: 5px" data-ng-click="vm.toggleEditRoom()">Edit room</button>
+					<button type="button" class="btn btn-warning" style="margin: 5px" data-ng-click="vm.deleteRoom(room._id)">Delete room</button>
+				</div>
+				<div>
+					<h3>User online</h3>
+					<ul class="list-group">
+						<li class="list-group-item" data-ng-repeat="user in vm.online">
+							<img alt="" class="img-responsive text-center" style="height:32px; width:32px;border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.1);" ng-src="{{user.profileImageURL}}" />
+							<span>{{user.nickname}}</span>
+							<button id="ban" type="button" class="btn btn-primary" type="button" class="btn btn-default" ng-click="vm.ban(room,user); ">Ban</button>
+						</li>
+					</ul>
+				</div>
+				<div>
+					<h3>User Attended</h3>
+					<ul class="list-group">
+						<li class="list-group-item" data-ng-repeat="user in room.listUserAttend">
+							<img alt="" class="img-responsive text-center" style="height:32px; width:32px;border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.1);" ng-src="{{user.profileImageURL}}" />
+							<span>{{user.nickname}}</span>
+							<button id="ban" type="button" class="btn btn-primary" type="button" class="btn btn-default" ng-click="vm.ban(room,user); ">Ban</button>
+						</li>
+					</ul>
+				</div>
+			</ul>
+		</div>
+		<div class="row" ng-show="vm.enableChat">
+			<form class="messages-form">
+				<h3>{{vm.roomName?vm.roomName:'Please choose a room chat!'}}</h3>
+				<ul class="messages list-group"></ul>
+				<div>
+					<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<input class="form-control" id="m" ng-model="vm.message" autocomplete="off" />
+					</div>
+					<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<button type="button" class="btn btn-primary" id="send" data-ng-click="vm.sendMessage(vm.message);">Send</button>
+						<button type="button" class="btn btn-primary" id="leaveRoom" data-ng-click="vm.leaveRoom();">LeaveRoom</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,14 @@
+<section>
+	<!-- slider container -->
+	<div class="container slider">
+		<ul class="list-group">
+			<li class="list-group-item" ng-repeat="photo in vm.images">
+				<!--<img src="{{photo.imgUrl}}" alt="{{photo.name}}" title="{{photo.name}}" ng-click="vm.showPhoto($index);" />-->
+				<div class="img_container row" style="max-width: 500px; max-height:500px">
+					<img alt="{{photo.name}}" class="img-responsive text-center" ng-src="{{photo.imgUrl}}" />
+				</div>
+				<button type="submit " class="btn btn-warning" ng-click="vm.delete(photo._id,$index); ">Delete</button>
+			</li>
+		</ul>
+	</div>
+</section>

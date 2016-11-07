@@ -10,6 +10,7 @@ var path = require('path');
 var serveStatic = require('serve-static');
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
+var favicon = require('serve-favicon');
 // var socketConfig = require('./config/socket');
 var morgan = require('morgan');
 // =======================
@@ -28,7 +29,7 @@ db.init();
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(methodOverride())
+// app.use(methodOverride())
 app.use(errorHandler.errorHandler());
 app.use(allowCrossDomain);
 
@@ -38,7 +39,7 @@ app.use('/', express.static(path.resolve('./public')));
 //socket io
 // socketConfig(io, app);
 //register routes
-// routes(app);
+routes(app);
 // register socket io
 // socketIoConfig(app);
 // use morgan to log requests to the console

@@ -1,0 +1,26 @@
+<div class="ng-fader">
+	<ul>
+		<li ng-repeat="image in images" ng-click="toggleStartStop()" ng-swipe-right="sliderBack()" ng-swipe-left="sliderForward()"><img class="image-responsive" style="height: 200px; width:300px" data-ng-src="{{image.imgUrl}}" data-ng-alt="{{image.name}}" ng-class="show($index)" /></li>
+	</ul>
+	<div class="ng-fader-pagination">
+		<ul>
+			<li ng-repeat="i in dots(numberOfImages) track by $index" ng-class="{current: selectedImage==$index}" ng-click="setSelected($index)"></li>
+		</ul>
+	</div>
+	<div class="ng-fader-controls">
+		<ul>
+			<li ng-click="sliderBack()">
+				<i class="ngfader-back"></i>
+			</li>
+			<li ng-click="stopSlider()">
+				<i class="ngfader-pause" ng-class="{\'active\': activePause}"></i>
+			</li>
+			<li ng-click="startSlider()">
+				<i class="ngfader-play" ng-class="{\'active\': activeStart}"></i>
+			</li>
+			<li ng-click="sliderForward()">
+				<i class="ngfader-forward"></i>
+			</li>
+		</ul>
+	</div>
+</div>

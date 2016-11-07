@@ -1,0 +1,23 @@
+<section>
+	<div class="page-header">
+		<h1>User Setting</h1>
+	</div>
+	<div class="row">
+		<nav class="col-sm-2 col-md-2">
+			<ul class="nav nav-pills nav-stacked">
+				<!--<li ui-sref-active="active">
+					<a ui-sref="index.user">User profile</a>
+				</li>-->
+				<li ui-sref-active="active">
+					<a ui-sref="index.settings.profile">Edit profile</a>
+				</li>
+				<li ui-sref-active="active">
+					<a ui-sref="index.settings.picture">Change profile picture</a>
+				</li>
+			</ul>
+		</nav>
+		<div class="col-sm-9 col-md-8 settings-view">
+			<div ui-view></div>
+		</div>
+	</div>
+</section>

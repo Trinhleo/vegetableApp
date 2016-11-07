@@ -1,0 +1,29 @@
+<section class="row">
+	<div class="col-xs-offset-1 col-xs-10 col-md-offset-4 col-md-4">
+		<form name="userForm">
+			<fieldset>
+				<div class="form-group" show-errors>
+					<label for="firstName">First Name</label>
+					<input type="text" id="firstName" name="firstName" class="form-control" ng-model="vm.userInfo.firstName" placeholder="First Name"
+						required>
+				</div>
+				<div class="form-group" show-errors>
+					<label for="lastName">Last Name</label>
+					<input type="text" id="lastName" name="lastName" class="form-control" ng-model="vm.userInfo.lastName" placeholder="Last Name"
+						required>
+				</div>
+				<div class="form-group" show-errors>
+					<label for="email">Email</label>
+					<input type="email" id="email" name="email" class="form-control" ng-model="vm.userInfo.email" placeholder="Email" lowercase
+						required>
+				</div>
+				<div class="text-center form-group">
+					<button type="submit" ng-click="vm.updateUserInfo();" class="btn btn-primary">Save</button>
+				</div>
+				<div ng-show="$root.alert" class="text-center">
+					<strong>{{$root.alert}}</strong>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>

@@ -1,0 +1,45 @@
+<nav data-role="navbar" class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+			<ul class="nav nav-pills">
+				<li ng-class="{ active: vm.isActive('/events')}"><a ui-sref="index.events">Home</a></li>
+				<!--<li ng-class="{ active: vm.isActive('/events')}"><a ui-sref="index.events">List Events</a></li>-->
+				<!--<li ng-class="{ active: vm.isActive('/events/add')}"><a ui-sref="index.add">Add event</a></li>-->
+			</ul>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pull-right">
+			<div ng-show="!$root.userInfo" class="nav navbar-nav navbar-right">
+				<a ui-sref="index.signin">Sign In /</a>
+				<a ui-sref="index.signup">Sign Up</a>
+			</div>
+
+			<ul class="nav nav-pills" ng-show="$root.userInfo">
+				<li>
+					<img alt="" class="img-responsive text-center" style="height: 32px; width: 32px;border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.1);" ng-src="{{$root.userInfo.profileImageURL}}" />
+				</li>
+				<li>
+					<a ui-sref="index.user"><strong>{{$root.userInfo.displayName}} </strong></a>
+				</li>
+
+				<li>
+					<button class="btn btn-primary glyphicon glyphicon-bullhorn dropdown-toggle" type="button" data-toggle="dropdown">
+  <span class="badge todos-pending-count">{{vm.bage}}</span>
+  <span class="caret"></span>
+  </button>
+					<ul class="dropdown-menu">
+						<li class="list-group-item" ng-repeat="noti in vm.notifications" ng-click="vm.readNotification(noti.content._id)"><a href="#/events/{{noti.content._id}} ">{{noti.content.name}}</a></li>
+					</ul>
+				</li>
+				<li>
+					<a ui-sref="index.signout">Sign out!</a>
+				</li>
+			</ul>
+		</div>
+</nav>
+
+
+<div class="container-fluid" style="padding-left:0;padding-right:0">
+	<div class="clear-fix" style="height:55px"></div>
+	<div ui-view="" class="page-content app-content-body"></div>
+</div>
