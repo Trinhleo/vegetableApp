@@ -6,6 +6,6 @@ module.exports = function () {
     // User Routes
     router.get('/me', authMiddlewares.authentication, authMiddlewares.hasRole, userController.me);
     router.put('/me', authMiddlewares.authentication, authMiddlewares.hasRole, userController.updateProfile);
-    router.post('/profile-picture', authMiddlewares.authentication, authMiddlewares.hasRole, uploader.uploadSingle, userController.changePictureProfile);
+    router.post('me/profile-picture', authMiddlewares.authentication, authMiddlewares.hasRole, uploader.uploadSingle, userController.changePictureProfile);
     return router;
 };

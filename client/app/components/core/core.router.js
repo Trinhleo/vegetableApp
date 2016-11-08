@@ -10,7 +10,7 @@
                 abstract: true,
                 controller: 'CoreController',
                 controllerAs: 'vm',
-                redirectTo: 'index.events'
+                redirectTo: 'index.product'
             });
     }
 })();

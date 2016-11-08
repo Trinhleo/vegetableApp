@@ -1,9 +1,10 @@
 (function () {
     angular.module('app.core')
         .controller('CoreController', CoreController);
-    CoreController.$inject = ['$location', '$rootScope', '$localStorage', '$timeout', 'toastr', '$filter', 'NotificationService']
-    function CoreController($location, $rootScope, $localStorage, $timeout, toastr, $filter, NotificationService) {
+    CoreController.$inject = ['$state','$location', '$rootScope', '$localStorage', '$timeout', 'toastr', '$filter', 'NotificationService', '$scope']
+    function CoreController($state,$location, $rootScope, $localStorage, $timeout, toastr, $filter, NotificationService, $scope) {
         var vm = this;
+        $rootScope.userInfo = $localStorage.userInfo;
         var socket = io.connect('http://localhost:3000/notification');
         vm.isActive = function (viewLocation) {
             return viewLocation === $location.path();
@@ -15,7 +16,25 @@
         // $rootScope.userInfo = $localStorage.userInfo;
         // vm.newNotifications = [];
         vm.bage = 0;
-        loadNewNotificatons();
+
+        // navigation
+        $scope.$state = $state;
+
+        // // Get the topbar menu
+        // $scope.menu = Menus.getMenu('topbar');
+
+        // Toggle the menu items
+        vm.isCollapsed = false;
+        vm.toggleCollapsibleMenu = function () {
+            vm.isCollapsed = !vm.isCollapsed;
+        };
+
+        // Collapsing the menu after navigation
+        $scope.$on('$stateChangeSuccess', function () {
+            vm.isCollapsed = false;
+        });
+
+        // loadNewNotificatons();
 
         function loadNewNotificatons() {
             NotificationService.loadNewNotifications().then(function (res) {
@@ -26,7 +45,7 @@
 
                 })
         }
-        
+
         function readNotification(id) {
             NotificationService.readNotification(id).then(function (res) {
                 console.log(res);

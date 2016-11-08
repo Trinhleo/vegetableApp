@@ -10,9 +10,10 @@
         vm.imageURL = vm.user ? vm.user.profileImageURL : '';
         // Create file uploader instance
         vm.uploader = new FileUploader({
-            url: appConfigs.baseUrl.concat(appConfigs.port).concat(appConfigs.baseApiUrl).concat('user/picture-profile'),
+            url: appConfigs.baseUrl.concat(appConfigs.port).concat(appConfigs.baseApiUrl).concat('user/me/picture-profile'),
             headers: {
-                authorization: $localStorage.token
+                authorization: $localStorage.token,
+                'Content-Type': 'text/plain'
             },
             alias: 'myfile'
         });
