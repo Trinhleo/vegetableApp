@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid" style="padding-left:0; padding-right: 0;margin-top:5px">
 	<div class="navbar-header">
 		<button class="navbar-toggle" type="button" ng-click="vm.toggleCollapsibleMenu()">
       <span class="sr-only">Toggle navigation</span>
@@ -12,22 +12,27 @@
 					href="/" src="modules/core/client/img/brand/home.png">
 			</div>
 			<div class="col-lg-5 col-md-5 col-sm-5 col-xs-6" style="padding-left:0;padding-right:0;">
-				<a ui-sref="home" class="navbar-brand" href="/">vuonrau.io </a>
+				<a  class="navbar-brand" href="/">FreshVegetable </a>
 			</div>
 		</div>
 	</div>
 	<nav class="collapse navbar-collapse" collapse="!vm.isCollapsed" role="navigation">
-		<ul class="nav navbar-nav" ng-if="menu.shouldRender($root.userInfo);">
-			<li ng-repeat="item in menu.items | orderBy: 'position'" ng-if="item.shouldRender(authentication.user);" ng-switch="item.type"
-				ng-class="{ active: $state.includes(item.state), dropdown: item.type === 'dropdown' }" class="{{item.class}}" dropdown="item.type === 'dropdown'">
-				<a ng-switch-when="dropdown" class="dropdown-toggle" dropdown-toggle role="button">{{::item.title}}&nbsp;<span class="caret"></span></a>
-				<ul ng-switch-when="dropdown" class="dropdown-menu">
-					<li ng-repeat="subitem in item.items | orderBy: 'position'" ng-if="subitem.shouldRender(authentication);" ui-sref-active="active">
-						<a ui-sref="{{subitem.state}}" ng-bind="subitem.title"></a>
-					</li>
-				</ul>
-				<a ng-switch-default ui-sref="{{item.state}}" ng-bind="item.title"></a>
-			</li>
+		<ul class="nav navbar-nav navbar-left">
+                        <li class="dropdown">
+                            <a href="/" class="dropbtn">TRANG CHỦ</a>
+                        </li>
+                        <li class="dropdown"  ><a ui-sref="index.product" ui-sref-active="active" class="dropbtn">SẢN PHẨM</a>
+                        </li>
+                        <li class="dropdown" ><a ui-sref-active="active" ui-sref="index.garden" class="dropbtn">VƯỜN RAU</a>
+                        </li>
+						 <!--<li class="dropdown"><a ui-sref="index.garden" class="dropbtn">QUẢN LÝ SẢN XUẤT</a>
+						 <ul class="dropdown-menu">
+							 <li><a ui-sref="index.addGarden">THÊM VƯỜN</a></li>
+							 <li><a ui-sref="index.myGarden">VƯỜN CỦA TÔI</li>
+						 </ul>
+                        </li>-->
+						<li class="dropdown"><a href="#" ui-sref-active="active" class="dropbtn">LIÊN HỆ</a>
+                        </li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right" ng-hide="$root.userInfo">
 			<li ui-sref-active="active">
@@ -41,8 +46,7 @@
 		<ul class="nav navbar-nav navbar-right" ng-show="$root.userInfo">
 			<li class="dropdown" dropdown>
 				<a class="dropdown-toggle user-header-dropdown-toggle" dropdown-toggle role="button">
-					<img ng-src="{{$root.userInfo.profileImageURL}}" alt="{{$root.userInfo.displayName}}" class="header-profile-image"
-					/>
+					<img ng-src="{{$root.userInfo.profileImageURL}}" alt="{{$root.userInfo.displayName}}" class="header-profile-image" />
 					<span ng-bind="$root.userInfo.displayName"></span> <b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu" role="menu">

@@ -1,38 +1,40 @@
 .title-lv1 {
-		color : #337ab7;
-	};
+		color : #009900;
+	}
 .no-padding {
 		padding-left: 0 !important;
 		padding-right: 0 !important;
-	};
+	}
 
 .avatar-and-button {
   padding-top: 8px;
   display: flex;
-};
+}
 
 .avatar-and-button div {
   margin-left: 15px
-};
+}
 
 .middle {
     display: table-cell;
     vertical-align: middle;
-};
-a{
-  color :#009900 !important;
-} 
+}
+
 .nav-pills>li.active>a{
   background-color : #009900 !important;
+  color: white important;
 }
 md-tabs {
   color: #009900 !important;
 }
+md-tab-item {
+  color: green !important;
+}
 h1,h2{
-  color:#5d9842;
+  color:#009900;
 };
 h3{
-  color:#337ab7;
+  color:#009900;
 }
 img{
   max-height:200px;
@@ -75,50 +77,21 @@ a:hover .header-profile-image {
 .has-error .help-inline.error-text {
   display: inline;
 }
-.navbar {
+.navbar-collapse {
+   background-image: -webkit-gradient(linear, left top, left bottom, from(white), to(#f0f5f5));
+   background-image: -webkit-linear-gradient(top, white, #f0f5f5);
+   background-image: -moz-linear-gradient(top, white,#f0f5f5);
+   background-image: linear-gradient(to bottom, white, #f0f5f5);
 
 }
 .navbar-toggle .icon-bar {
-  background-color: green;
+  background-color: #009900;
 }
-.navbar-inverse {
-  background-image: -webkit-linear-gradient(top,#90b85c 0%, #5cb85c 100%);
-  background-image: -o-linear-gradient(top,#90b85c 0%, #5cb85c 100%);
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#3c3c3c), to(#5cb85c));
-  background-image: linear-gradient(to bottom, #90b85c 0%, #5cb85c 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff3c3c3c', endColorstr='#ff222222', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
-  background-repeat: repeat-x;
-  border-radius: 4px;
-  background-color: #90b85c; 
-  border-color: #5cb85c; 
-  /*    text-decoration-color: #5cb85c !important;*/
+
+.navbar-brand {
+  color: green;
 }
-.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .active > a {
-  background-image: -webkit-linear-gradient(top,#337ab7 0%, #2e6da4 100%);
-  background-image: -o-linear-gradient(top,#337ab7 0%, #2e6da4 100%);
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#080808), to(#0f0f0f));
-  background-image: linear-gradient(to bottom, #337ab7 0%, #2e6da4 100%);
-}
-.navbar-inverse .navbar-nav > li > a {
-  color: rgba(255, 255, 255, 0.98);
-}
-.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav > li > a {
-  text-shadow: none;
-}
-.navbar-inverse .navbar-brand {
-  color: #400c0c;
-}
-.jumbotron {
-  background-color: #eaffea;
-}
-.navbar-inverse .navbar-toggle {
- background-image: -webkit-linear-gradient(top,  #90b85c 0%,  #5cb85c 100%);
- background-image: -o-linear-gradient(top, #90b85c 0%,  #5cb85c 100%);
- background-image: -webkit-gradient(linear, left top, left bottom, from(#90b85c), to(#5cb85c));
- background-image: linear-gradient(to bottom, #90b85c 0%, #5cb85c 100%);
- border-color: rgba(255, 255, 255, 0.98);
-}
+
 @media (max-width: 767px){
   .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
     color:#337ab7;
@@ -137,3 +110,49 @@ a:hover .header-profile-image {
     max-height: 200px;
     max-width:200px;
   }
+  .dropbtn {
+    font-weight: bold;
+    padding: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+
+.dropdown:hover .dropdown-menu {
+    border-top: 3px solid  white;
+    display: block;
+     text-decoration: none;
+}
+
+.dropdown-menu:hover li a:hover  {
+    background-color:  #009900;
+    color: white;
+    transition: all 100ms ease-in-out;
+
+}
+/*
+.dropdown:hover .dropbtn,.dropdown:focus .dropbtn {
+   color:  white !important;
+   border-bottom: 3px solid white;
+}*/
+.dropbtn:hover, .dropbtn.active{
+    color:  #009900 !important;
+   border-bottom: 1px solid green;
+   /*background-image: -webkit-gradient(linear, left top, left bottom, from(green), to(#009900));
+   background-image: -webkit-linear-gradient(top, green, #009900);
+   background-image: -moz-linear-gradient(top, green,#009900);
+   background-image: linear-gradient(to bottom, green, #009900);*/
+}
+/*.nav>li>a {
+color: #009900 !important;
+}*/
+md-tabs md-ink-bar {
+  color : #009900;
+  background-color: #009900;
+}
+   
