@@ -1,6 +1,9 @@
 var gardenDao = require('./../dao/garden.dao');
 module.exports = {
     listAllGardens: listAllGardens,
+
+    listAllGardensOfUser: listAllGardensOfUser,
+    listMyGardens: listMyGardens,
     getGarden: getGarden,
     createGarden: createGarden,
     updateGarden: updateGarden,
@@ -10,6 +13,45 @@ module.exports = {
 function listAllGardens(req, res) {
     userId = req.decoded._id;
     gardenDao.listAllGardens(cb);
+    function cb(err, result) {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        for (var x in result) {
+            if (result[x].user._id.toString() === userId.toString()) {
+                result.isOwner = true;
+            }
+        }
+        res.status(200).send(result);
+    }
+}
+
+function listMyGardens(req, res) {
+    userId = req.decoded._id;
+    gardenDao.listAllGardensByUserId(userId, cb);
+    function cb(err, result) {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        for (var x in result) {
+            if (result[x].user._id.toString() === userId.toString()) {
+                result.isOwner = true;
+            }
+        }
+        res.status(200).send(result);
+    }
+}
+
+function listAllGardensOfUser(req, res) {
+
+    if (!req.params.userId) {
+        return res.status(400).send({
+            errCode: 0,
+            errMsg: "Không tìm thấy!"
+        });
+    }
+    userId = req.params.userId;
+    gardenDao.listAllGardensByUserId(userId, cb);
     function cb(err, result) {
         if (err) {
             return res.status(500).send(err);

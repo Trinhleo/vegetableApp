@@ -7,7 +7,7 @@
             restrict: 'E',
             template: '<div></div>',
             scope: {
-                events: '=events',
+                gardens: '=gardens',
                 editable: '=editable',
                 myId: '=myId',
                 add: '=add'
@@ -54,17 +54,17 @@
             //     }
             // });
 
-            scope.$watch('events', function (events) {
+            scope.$watch('gardens', function (gardens) {
                 $timeout(function () {
-                    if (scope.events.length > 0) {
-                        setMarker(scope.events);
+                    if (scope.gardens.length > 0) {
+                        setMarker(scope.gardens);
                         // try {
                         //  
                         //     var position = [lastEvent.location[1], lastEvent.location[0]];
                         // } catch (err) {
                         //     return;
                         // }
-                        var lastEvent = scope.events[scope.events.length - 1];
+                        var lastEvent = scope.gardens[scope.gardens.length - 1];
                         try {
                             position = new google.maps.LatLng(lastEvent.location[1], lastEvent.location[0]);
                         } catch (e) {
@@ -160,14 +160,14 @@
                     // Create the DIV to hold the control and call the CenterControl()
                     // constructor passing in this DIV.
                     var centerControlDiv = document.createElement('div');
-                    var centerControl = new controlMap(centerControlDiv, 0, 'Reset Location', map);
+                    var centerControl = new controlMap(centerControlDiv, 0, 'Vị trí khởi tạo', map);
 
                     centerControlDiv.index = 1;
                     map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
 
                     var rightControlDiv = document.createElement('div');
 
-                    var rightControl = new controlMap(rightControlDiv, 1, 'My Location', map);
+                    var rightControl = new controlMap(rightControlDiv, 1, 'Vị trí của tôi', map);
 
                     centerControlDiv.index = 2;
                     map.controls[google.maps.ControlPosition.TOP_RIGHT].push(rightControlDiv);
@@ -329,10 +329,10 @@
             };
 
 
-            function setMarker(events) {
+            function setMarker(gardens) {
                 clearMarkers();
 
-                events.forEach(function (evt) {
+                gardens.forEach(function (evt) {
                     var position
                     try {
                         position = new google.maps.LatLng(evt.location[1], evt.location[0]);
@@ -351,12 +351,12 @@
                             img: image,
                             name: name
                         });
-                    var startTime = $filter('date')(evt.startTime, 'medium', '+070');
-                    var endTime = $filter('date')(evt.endTime, 'medium', '+070')
+                    // var startDate = $filter('date')(evt.startTime, 'medium', '+070');
+                    // var endTime = $filter('date')(evt.endTime, 'medium', '+070')
                     var description = evt.description;
                     var eventHostId = evt.userHost;
                     var hostProfileLink = '#/users/' + evt.userHost._id;
-                    var detailsLink = '#/events/' + evt._id;
+                    var detailsLink = '#/gardens/' + evt._id;
                     var editLink = detailsLink.concat('/edit');
                     var address = evt.address
                     var contentString = '<div id="iw-container"><div class="iw-title"> <a style="color:#f5f5f5" href="' + detailsLink + '">' + name + '</a></div>'

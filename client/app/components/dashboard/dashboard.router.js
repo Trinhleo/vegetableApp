@@ -4,10 +4,9 @@
 
 
     function DashboardRoute($stateProvider) {
-        console.log("hi");
         $stateProvider
             .state('index.dashboard', {
-                url: "dashboard",
+                url: "/dashboard",
                 templateUrl: 'app/components/dashboard/dashboard.html',
                 controller: 'DashboardController',
                 controllerAs: 'vm'

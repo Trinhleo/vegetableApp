@@ -4,7 +4,7 @@
     UserRouter.$inject = ['$stateProvider'];
     function UserRouter($stateProvider) {
         $stateProvider
-            .state('index.user', {
+            .state('index.me', {
                 url: "/me",
                 templateUrl: 'app/components/user/user.html',
                 controller: 'UserController',

@@ -67,46 +67,6 @@ function changePictureProfile(req, res) {
     var user = {
         profileImageURL: req.profileImageURL
     };
-    // var dir = profileImgPath + id;
-    // var imgUrl = profileImgPathUrl + id;
-    // var storage = multer.diskStorage({
-    //     destination: function (req, file, cb) {
-    //         cb(null, dir);
-    //     },
-    //     filename: function (req, file, cb) {
-    //         cb(null, Date.now() + '-' + file.originalname);
-    //     }
-    // });
-
-    // var upload = multer({
-    //     storage: storage,
-    //     limits: { fileSize: maxImgFileSize }
-    // }).single(fileField);
-
-    // // make dir and upload
-    // fs.mkdirs(dir, function (err) {
-    //     if (err) {
-    //         return res.status(500).send('cannot make dir!');
-    //     }
-
-    //     upload(req, res, function (uploadError) {
-    //         console.log(req.file);
-    //         if (!req.file) {
-    //             return res.status(403).send("file not found or file is more large!");
-    //         }
-
-    //         if (req.file.mimetype !== 'image/png' && req.file.mimetype !== 'image/jpg' && req.file.mimetype !== 'image/jpeg' && req.file.mimetype !== 'image/gif') {
-    //             return res.status(403).send("not image format!");
-    //         }
-
-    //         if (uploadError) {
-    //             console.log(uploadError);
-    //             return res.status(400).send({
-    //                 message: 'error in uploading /n' + uploadError
-    //             });
-    //         }
-
-    //       
 
     userDao.updateUser(id, user, function (err, result) {
         console.log(result);
@@ -114,8 +74,8 @@ function changePictureProfile(req, res) {
             console.log(err);
             return res.status(400).send();
         }
-        console.log(result);
-        res.status(200).send("success uploading image!");
+        console.log("change avatar", result);
+        res.status(200).send({ profileImageURL: req.profileImageURL });
 
     });
     //     });

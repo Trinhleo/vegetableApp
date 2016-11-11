@@ -35,7 +35,8 @@ function signin(req, res) {
                 displayName: result.displayName,
                 roles: result.roles,
                 email: result.email,
-                createtionDate: result.createtionDate
+                createtionDate: result.createtionDate,
+                profileImageURL: result.profileImageURL
             };
             var token = jwt.signToken(token_info);
             res.status(200).send({
@@ -44,7 +45,7 @@ function signin(req, res) {
             });
         } else {
             res.status(400).send({
-                message: "username or password is false!"
+                message: "tên đăng nhập hoặc mật khẩu sai!"
             });
         }
     });

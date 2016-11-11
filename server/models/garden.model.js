@@ -62,6 +62,10 @@ var GardenSchema = new Schema({
     },
     editDate: {
         type: Date
+    },
+    description: {
+        type: String,
+        default: ''
     }
 });
 

@@ -25,7 +25,8 @@
             'app.garden',
             'app.season',
             'app.product',
-            'app.production-item'
+            'app.production-item',
+            'app.dashboard'
         ])
         .run(function ($rootScope, $state, $localStorage) {
             // Check authentication before changing state

@@ -5,6 +5,7 @@ var Garden = mongoose.model('Garden');
 
 module.exports = {
     listAllGardens: listAllGardens,
+    listAllGardensByUserId: listAllGardensByUserId,
     readGardenById: readGardenById,
     readGarden: readGarden,
     createGarden: createGarden,
@@ -14,6 +15,15 @@ module.exports = {
 
 function listAllGardens(callback) {
     Garden.find({}, function (err, result) {
+        if (err) {
+            return callback(err, null);
+        }
+        callback(null, result);
+    });
+}
+
+function listAllGardensByUserId(userId,callback) {
+    Garden.find({user: userId}, function (err, result) {
         if (err) {
             return callback(err, null);
         }

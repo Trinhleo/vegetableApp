@@ -1,77 +1,84 @@
-<div class="container-fluid" style="padding-left:0; padding-right: 0;margin-top:5px">
-	<div class="navbar-header">
-		<button class="navbar-toggle" type="button" ng-click="vm.toggleCollapsibleMenu()">
+<div class="container-fluid">
+	<div class="row" style="margin-top:5px; margin-bottom:2px">
+		<nav class="collapse navbar-collapse navbar-fixed-top" collapse="!vm.isCollapsed" role="navigation">
+			<div class="navbar-header ">
+				<button class="navbar-toggle" type="button" ng-click="vm.toggleCollapsibleMenu()">
       <span class="sr-only">Toggle navigation</span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-		<div class="col-lg-10 col-md-10 col-sm-10">
-			<div class="col-lg-5 col-md-5 hidden-sm col-xs-2" style="padding-left:0;padding-right:0;">
-				<img ui-sref="home" alt="vuonrau.io" class="img-responsive text-center" style="max-height:48px;" ng-src="modules/core/client/img/brand/home.png"
-					href="/" src="modules/core/client/img/brand/home.png">
+				<div class="col-lg-10 col-md-10 col-sm-10">
+					<div class="col-lg-4 col-md-4 hidden-sm hidden-xs">
+						<img ui-sref="home" alt="vuonrau.io" class="img-responsive text-center" style="max-height:48px;" ng-src="app/img/home.png"
+							href="/">
+					</div>
+					<div class="col-lg-8 col-md-8 col-sm-6 col-xs-6">
+						<a class="navbar-brand" href="/">FreshVegetable </a>
+					</div>
+				</div>
 			</div>
-			<div class="col-lg-5 col-md-5 col-sm-5 col-xs-6" style="padding-left:0;padding-right:0;">
-				<a  class="navbar-brand" href="/">FreshVegetable </a>
-			</div>
-		</div>
-	</div>
-	<nav class="collapse navbar-collapse" collapse="!vm.isCollapsed" role="navigation">
-		<ul class="nav navbar-nav navbar-left">
-                        <li class="dropdown">
-                            <a href="/" class="dropbtn">TRANG CHỦ</a>
-                        </li>
-                        <li class="dropdown"  ><a ui-sref="index.product" ui-sref-active="active" class="dropbtn">SẢN PHẨM</a>
-                        </li>
-                        <li class="dropdown" ><a ui-sref-active="active" ui-sref="index.garden" class="dropbtn">VƯỜN RAU</a>
-                        </li>
-						 <!--<li class="dropdown"><a ui-sref="index.garden" class="dropbtn">QUẢN LÝ SẢN XUẤT</a>
-						 <ul class="dropdown-menu">
-							 <li><a ui-sref="index.addGarden">THÊM VƯỜN</a></li>
-							 <li><a ui-sref="index.myGarden">VƯỜN CỦA TÔI</li>
-						 </ul>
-                        </li>-->
-						<li class="dropdown"><a href="#" ui-sref-active="active" class="dropbtn">LIÊN HỆ</a>
-                        </li>
-		</ul>
-		<ul class="nav navbar-nav navbar-right" ng-hide="$root.userInfo">
-			<li ui-sref-active="active">
-				<a ui-sref="index.signup">Đăng ký</a>
-			</li>
-			<li class="divider-vertical"></li>
-			<li ui-sref-active="active">
-				<a ui-sref="index.signin">Đăng nhập</a>
-			</li>
-		</ul>
-		<ul class="nav navbar-nav navbar-right" ng-show="$root.userInfo">
-			<li class="dropdown" dropdown>
-				<a class="dropdown-toggle user-header-dropdown-toggle" dropdown-toggle role="button">
-					<img ng-src="{{$root.userInfo.profileImageURL}}" alt="{{$root.userInfo.displayName}}" class="header-profile-image" />
-					<span ng-bind="$root.userInfo.displayName"></span> <b class="caret"></b>
-				</a>
-				<ul class="dropdown-menu" role="menu">
-					<li ui-sref-active="active">
-						<a ui-sref="index.settings.profile">Sửa thông tin cá nhân</a>
-					</li>
-					<li ui-sref-active="active">
-						<a ui-sref="index.settings.picture">Thay đổi ảnh đại diện</a>
-					</li>
-					<!--<li ui-sref-active="active" ng-show="authentication.user.provider === 'local'">
+			<ul class="nav navbar-nav navbar-left">
+				<li class="dropdown">
+					<a ui-sref="index.dashboard"  ui-sref-active="active" class="dropbtn">TRANG CHỦ</a>
+				</li>
+				<li class="dropdown"><a ui-sref="index.product" ui-sref-active="active" class="dropbtn">SẢN PHẨM</a>
+				</li>
+				<li class="dropdown"><a ui-sref-active="active" ui-sref="index.garden" class="dropbtn">VƯỜN RAU</a>
+				</li>
+				<li class="dropdown"><a class="dropbtn">QUẢN TRỊ VIÊN</a>
+					<ul class="dropdown-menu">
+						<li><a ui-sref="">ĐỐI TƯỢNG SẢN XUẤT</a></li>
+						<li><a ui-sref="">QUẢN LÝ SENSOR NODE</a></li>
+						<li><a ui-sref="">DANH SÁCH CHỜ DUYỆT VƯỜN</a></li>
+						<li><a ui-sref="">QUẢN LÝ NGƯỜI DÙNG</a></li>
+					</ul>
+				</li>
+				<li class="dropdown"><a href="#" ui-sref-active="active" class="dropbtn">LIÊN HỆ</a>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right" ng-hide="$root.userInfo">
+				<li ui-sref-active="active">
+					<a ui-sref="index.signup">Đăng ký</a>
+				</li>
+				<li class="divider-vertical"></li>
+				<li ui-sref-active="active">
+					<a ui-sref="index.signin">Đăng nhập</a>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right" ng-show="$root.userInfo">
+				<li class="dropdown" dropdown>
+					<a class="dropdown-toggle user-header-dropdown-toggle" dropdown-toggle role="button">
+						<img ng-src="{{$root.userInfo.profileImageURL}}" alt="{{$root.userInfo.displayName}}" class="header-profile-image" />
+						<span ng-bind="$root.userInfo.displayName"></span> <b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu" role="menu">
+						<li ui-sref-active="active">
+							<a ui-sref="index.me">Thông tin cá nhân</a>
+						</li>
+						<li ui-sref-active="active">
+							<a ui-sref="index.settings.profile">Sửa thông tin cá nhân</a>
+						</li>
+						<li ui-sref-active="active">
+							<a ui-sref="index.settings.picture">Thay đổi ảnh đại diện</a>
+						</li>
+						<!--<li ui-sref-active="active" ng-show="authentication.user.provider === 'local'">
 						<a ui-sref="settings.password">Đổi mật khẩu</a>
 					</li>-->
-					<!--<li ui-sref-active="active">-->
-					<!--<a ui-sref="settings.accounts">Quản lý tài khoản mạng xã hội</a>-->
-					<!--</li>-->
-					<li class="divider"></li>
-					<li>
-						<a ui-sref="index.signout">Đăng xuất</a>
-					</li>
-				</ul>
-			</li>
-		</ul>
-	</nav>
-</div>
-<div class="container-fluid">
-	<div class="clear-fix" style="height:55px"></div>
-	<div ui-view="" class="page-content app-content-body"></div>
+						<!--<li ui-sref-active="active">-->
+						<!--<a ui-sref="settings.accounts">Quản lý tài khoản mạng xã hội</a>-->
+						<!--</li>-->
+						<li class="divider"></li>
+						<li>
+							<a ui-sref="index.signout">Đăng xuất</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+	</div>
+	<div class="row">
+		<div class="clear-fix" style="height:55px"></div>
+		<div ui-view="" class="page-content app-content-body"></div>
+	</div>
 </div>

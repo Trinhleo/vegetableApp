@@ -60,7 +60,8 @@ function updateUser(id, creditial, callback) {
         if (err) {
             return callback(err, null);
         }
-        callback(null, true);
+        console.log('update:',result);
+        callback(null, result);
     });
 }
 

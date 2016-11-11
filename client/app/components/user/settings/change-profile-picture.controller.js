@@ -10,10 +10,9 @@
         vm.imageURL = vm.user ? vm.user.profileImageURL : '';
         // Create file uploader instance
         vm.uploader = new FileUploader({
-            url: appConfigs.baseUrl.concat(appConfigs.port).concat(appConfigs.baseApiUrl).concat('user/me/picture-profile'),
+            url: appConfigs.baseUrl.concat(appConfigs.port).concat(appConfigs.baseApiUrl).concat('user/me/profile-picture'),
             headers: {
                 authorization: $localStorage.token,
-                'Content-Type': 'text/plain'
             },
             alias: 'myfile'
         });
@@ -52,7 +51,7 @@
             // Show success message
             vm.success = true;
             debugger;
-            $localStorage.userInfo.profileImageURL = response;
+            $localStorage.userInfo.profileImageURL = response.profileImageURL;
             // Clear upload buttons
             vm.cancelUpload();
         };
@@ -72,6 +71,7 @@
             vm.success = vm.error = null;
 
             // Start upload
+
             vm.uploader.uploadAll();
         };
 

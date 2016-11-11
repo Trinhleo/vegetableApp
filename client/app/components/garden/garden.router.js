@@ -10,6 +10,13 @@
                 controller: 'GardenController',
                 controllerAs: 'vm'
             })
+             .state('index.garden-add', {
+                url: "/garden-add",
+                templateUrl: 'app/components/garden/garden-add.html',
+                controller: 'AddGardenController',
+                controllerAs: 'vm'
+            })
+
 
     }
 })();

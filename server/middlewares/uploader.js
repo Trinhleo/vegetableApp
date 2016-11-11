@@ -1,8 +1,8 @@
 const fileField = 'myfile';
-const profileImgPath = './uploads/profile/';
+const profileImgPath = './public/img/profile/';
 const hostName = 'http://localhost:';
 const port = 3000;
-const profileImgPathUrl = '/profile/';
+const profileImgPathUrl = '/img/profile/';
 const maxImgFileSize = 1024 * 1024;
 
 var multer = require('multer');
@@ -53,7 +53,7 @@ function uploadSingle(req, res, next) {
                 });
             }
 
-            req.profileImageURL = imgUrl + "/" + req.file.filename;
+            req.profileImageURL = 'http://127.0.0.1:3000'   + imgUrl + "/" + req.file.filename;
             console.log(req);
             next();
         });

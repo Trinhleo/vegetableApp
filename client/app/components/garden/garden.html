@@ -11,63 +11,63 @@
     </a>
   </div>-->
     <!--</div> <br>-->
-    <md-tabs md-dynamic-height md-border-bottom>
-        <md-tab label="Danh sách vườn rau">
-            <md-input-container>
-                <input class="form-control col-md-4" type="text" ng-model="vm.search" placeholder="Tìm kiếm" ng-change="vm.figureOutItemsToDisplay()"
-                />
-            </md-input-container>
-            <md-divider style="margin-bottom:30px;"></md-divider>
-            <div class="list-group">
-                <md-card data-ng-repeat="garden in vm.pagedItems" data-ui-sref="gardens.view({ gardenId: garden._id }) " class="list-group-item">
-                    <div class="alert alert-danger" ng-show="!garden.approved">
-                        <strong>Chưa được duyệt!</strong>
-                    </div>
-                    <div class="alert alert-success" ng-show="garden.approved">
-                        <strong>Đã được duyệt</strong>
-                    </div>
-                    <small class="list-group-item-text">
+
+    {{vm.alert}}
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <button ui-sref="index.garden-add" class="btn btn-primary glyphicon glyphicon-plus" data-toggle="tooltip" title="Tạo vườn"></button>
+        <ul class="nav nav-tabs pull-right">
+            <li ng-class="{ active:vm.type === 0}"> <a ng-click="vm.getEventsLocation(0)">Tất cả vườn rau</a>
+            </li>
+            <li ng-class="{ active:vm.type === 1}" ng-show="$root.userInfo"><a ng-click="vm.getEventsLocation(1)">Vườn rau của tôi</a>
+            </li>
+            <li ng-class="{ active:vm.type === 2}" ng-show="$root.userInfo"><a ng-click="vm.getEventsLocation(2)">Vườn rau yêu thích</a>
+            </li>
+            <!--<li ng-class="{ active: vm.isActive('/events/add')}"><a ui-sref="index.add">Add new event</a></li>-->
+        </ul>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="Danh sách vườn rau">
+                <md-input-container>
+                    <input class="form-control col-md-4" type="text" ng-model="vm.search" placeholder="Tìm kiếm" ng-change="vm.figureOutItemsToDisplay()"
+                    />
+                </md-input-container>
+                <md-divider style="margin-bottom:30px;"></md-divider>
+                <div class="list-group">
+                    <md-card data-ng-repeat="garden in vm.pagedItems" data-ui-sref="gardens.view({ gardenId: garden._id }) " class="list-group-item">
+                        <div class="alert alert-danger" ng-show="!garden.approved">
+                            <strong>Chưa được duyệt!</strong>
+                        </div>
+                        <div class="alert alert-success" ng-show="garden.approved">
+                            <strong>Đã được duyệt</strong>
+                        </div>
+                        <small class="list-group-item-text">
     Đã tạo lúc
     <span data-ng-bind="garden.created | date:'short'"></span>
     chủ vườn:
     <span data-ng-if="garden.user" data-ng-bind="garden.user.displayName"></span>
     <span data-ng-if="!garden.user">Người dùng đã bị xóa</span>
   </small>
-                    <h4 class="list-group-item-heading" data-ng-bind="garden.name"></h4>
-                    <div class="img_container"><img alt="" class="img-responsive text-center" ng-src="{{garden.imgUrl}}" /></div>
-                </md-card>
-            </div>
-            <div class="alert alert-warning text-center" data-ng-if="vm.gardens.$resolved && !vm.gardens.length">
-                Chưa có vườn, hãy <a data-ui-sref="gardens.create">tạo một vườn</a>
-            </div>
-            <!--<pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength"
-ng-model="vm.currentPage" ng-change="vm.pageChanged()">
-</pagination>-->
-        </md-tab>
-        <md-tab label="Tổng hợp mùa vụ">
-            <md-input-container>
-                <input class="form-control col-md-4" type="text" ng-model="vm.search2" placeholder="Tìm kiếm" ng-change="vm.figureOutItemsToDisplay2()"
-                />
-            </md-input-container>
-            <md-divider style="margin-bottom:30px;"></md-divider>
-            <div class="list-group">
-                <md-card data-ng-repeat="season in vm.pagedItems2" ng-click="vm.gotoView(season._id)" class="list-group-item">
-                    <div>
-                        <span class="alert alert-danger" ng-show="season.status===2">Đã kết thúc</span>
-                        <span class="alert alert-success" ng-show="season.status===1">Đang diễn ra</span>
-                        <span class="alert alert-warning" ng-show="season.status===0">Chưa bắt đầu</span>
-                    </div>
-                    <br>
-                    <small class="list-group-item-text">
-    Đã tạo lúc
-    <span data-ng-bind="season.created | date:'short'"></span>
-  </small>
-                    <h4 data-ng-bind="season.garden.name"></h4>
-                    <h4 class="list-group-item-heading" data-ng-bind="season.name"></h4>
-                </md-card>
-            </div>
-            <pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage2" total-items="vm.filterLength2"
-ng-model="vm.currentPage2" ng-change="vm.pageChanged2()"></pagination>
-        </md-tab>
-    </md-tabs>
+                        <h4 class="list-group-item-heading" data-ng-bind="garden.name"></h4>
+                        <div class="img_container"><img alt="" class="img-responsive text-center" ng-src="{{garden.imgUrl}}" /></div>
+                    </md-card>
+                </div>
+                <div class="alert alert-warning text-center" data-ng-if="vm.gardens.$resolved && !vm.gardens.length">
+                    Chưa có vườn, hãy <a data-ui-sref="gardens.create">tạo một vườn</a>
+                </div>
+                <!--<pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage"
+                ng-change="vm.pageChanged()">
+            </pagination>-->
+            </md-tab>
+            <md-tab label="Vị trí bản đồ">
+                <!--<md-input-container>
+                    <input class="form-control col-md-4" type="text" ng-model="vm.search2" placeholder="Tìm kiếm" ng-change="vm.figureOutItemsToDisplay2()"
+                    />
+                </md-input-container>-->
+                <!--<md-divider style="margin-bottom:30px;"></md-divider>-->
+
+                <my-map id="map_canvas" events="vm.events" my-id="vm.myId"></my-map>
+            </md-tab>
+        </md-tabs>
+    </div>
 </section>

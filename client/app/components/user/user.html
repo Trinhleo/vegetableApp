@@ -5,7 +5,7 @@
 	}
 </style>
 <section>
-	<h1 class="title-lv1">User Profile</h1>
+	<h1 class="title-lv1">Thông tin cá nhân</h1>
 	<button style="margin-left:15px" class="btn btn-primary" ng-show="!vm.isMe" ng-click="vm.doFollow()">{{vm.isFollow?'Unfollow':'Follow this user'}}</button>
 	<hr>
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
@@ -13,23 +13,23 @@
     border: 5px solid #337ab7;" /><br>
 			<button class="col-md-offset-2 btn btn-primary" ui-sref="index.settings.picture" ng-show="vm.isMe">Change Avatar</button></div>
 		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 middle">
-			<h4>User's information</h4>
+			<h4>Thông tin</h4>
 			<div>
 				<div>
-					<label>First Name: </label><span> {{vm.userInfo.firstName}} </span>
+					<label>Tên: </label><span> {{vm.userInfo.firstName}} </span>
 				</div>
 				<div>
-					<label>Last Name: </label><span> {{vm.userInfo.lastName}}</span></div>
+					<label>Họ </label><span> {{vm.userInfo.lastName}}</span></div>
 				<div ng-show="vm.isMe">
 					<label>Email: </label><span> {{vm.userInfo.email}}</span></div>
 				<div ng-show="vm.isMe">
-					<label>Creation Date: </label><span> {{vm.userInfo.creationDate | date:'short'}}</span></div>
+					<label>Ngày tạo: </label><span> {{vm.userInfo.creationDate | date:'short'}}</span></div>
 				<button class="btn btn-primary glyphicon glyphicon-pencil" data-toggle="tooltip" title="Edit user profile" ui-sref="index.settings.profile"
 					ng-show="vm.isMe"></button>
 			</div>
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-			<h4>Events hosted</h4>
+			<h4>Danh sách vườn rau:</h4>
 			<ul class="list-group" ng-repeat="event in vm.events">
 				<a href="#events/{{event._id}}">
 					<li class="list-group-item" style="display: inline-block" class="row">
