@@ -13,6 +13,7 @@
             'angularFileUpload',
             'ui.bootstrap.datetimepicker',
             'geolocation',
+            'md.data.table',
             'app.config',
             'app.routes',
             'app.core',

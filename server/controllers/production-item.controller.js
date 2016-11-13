@@ -26,7 +26,7 @@ function getProductionItem(req, res) {
         });
     }
 
-    productionItemDao.readProductionsItemById(productionItemId, cb);
+    productionItemDao.readProductionItemById(productionItemId, cb);
 
     function cb(err, result) {
         if (err) {
@@ -73,7 +73,7 @@ function updateProductionItem(req, res) {
         });
     }
 
-    productionItemDao.updateProductionItemId(productionsItemId, piInfo, cb);
+    productionItemDao.updateProductionItem(productionsItemId, piInfo, cb);
     function cb(err, result) {
         if (err) {
             return res.status(400).send(err);

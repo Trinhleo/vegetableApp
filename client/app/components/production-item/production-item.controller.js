@@ -4,7 +4,7 @@
     ProductionItemController.$inject = ['ProductionItemService', 'toastr'];
     function ProductionItemController(ProductionItemService, toastr) {
         vm = this;
-        vm.productionItem = {};
+        vm.productionItem = [];
         ProductionItemService.listAllProductionItems().then(
             function (res) {
                 vm.productionItem = res;

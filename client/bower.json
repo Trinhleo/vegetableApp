@@ -1,5 +1,5 @@
 {
-  "name": "mufc",
+  "name": "freshVegetable",
   "description": "",
   "main": "",
   "moduleType": [],
@@ -31,7 +31,8 @@
     "angular-toastr": "^2.1.1",
     "angular-material": "^1.1.1",
     "angular-aria": "^1.5.8",
-    "angular-messages": "^1.5.8"
+    "angular-messages": "^1.5.8",
+    "angular-material-data-table": "^0.10.9"
   },
   "overrides": {
     "font-awesome": {

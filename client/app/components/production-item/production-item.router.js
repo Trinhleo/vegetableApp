@@ -26,7 +26,7 @@
                 url: "/product-items/:productionItemId",
                 templateUrl: 'app/components/production-item/production-item-details.html',
                 controller: 'DetailsProductionItemController',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
             });
     }
 })();

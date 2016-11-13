@@ -55,7 +55,7 @@ function createProductionItem(info, callback) {
 
 function updateProductionItem(id, info, callback) {
 
-    productionItem.findByIdAndUpdate(id, info, function (err, result) {
+    ProductionItem.findByIdAndUpdate(id, info, function (err, result) {
         if (err) {
             return callback(err, null);
         }
@@ -64,7 +64,7 @@ function updateProductionItem(id, info, callback) {
 }
 
 function deleteProductionItem(id, callback) {
-    productionItem.findByIdAndRemove(id, function (err, result) {
+    ProductionItem.findByIdAndRemove(id, function (err, result) {
         if (err) {
             return callback(err, null);
         }
