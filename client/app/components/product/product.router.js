@@ -5,11 +5,17 @@
     function ProductRouter($stateProvider) {
         $stateProvider
             .state('index.product', {
-                url: "/product",
+                url: "/products",
                 templateUrl: 'app/components/product/product.html',
                 controller: 'ProductController',
                 controllerAs: 'vm'
             })
+            .state('index.product-details', {
+                url: "/products/:productId",
+                templateUrl: 'app/components/product/product-details.html',
+                controller: 'DetailsProductController',
+                controllerAs: 'vm'
+            });
 
     }
 })();

@@ -1,14 +1,14 @@
-var productDao = require('./../dao/product.dao');
+var DeviceNodeDao = require('./../dao/device-node.dao');
 module.exports = {
-    listAllProducts: listAllProducts,
-    getProduct: getProduct,
-    createProduct: createProduct,
-    updateProduct: updateProduct,
-    deleteProduct: deleteProduct
+    listAllDeviceNodes: listAllDeviceNodes,
+    getDeviceNode: getDeviceNode,
+    createDeviceNode: createDeviceNode,
+    updateDeviceNode: updateDeviceNode,
+    deleteDeviceNode: deleteDeviceNode
 };
 
-function listAllProducts(req, res) {
-    productDao.listAllProducts(cb);
+function listAllDeviceNodes(req, res) {
+    DeviceNodeDao.listAllDeviceNodes(cb);
     function cb(err, result) {
         if (err) {
             return res.status(500).send(err);
@@ -17,16 +17,16 @@ function listAllProducts(req, res) {
     }
 }
 
-function getProduct(req, res) {
-    var productId = req.params.productId;
-    if (!productId) {
+function getDeviceNode(req, res) {
+    var deviceNodeId = req.params.deviceNodeId;
+    if (!deviceNodeId) {
         return res.status(400).send({
             errCode: 0,
             errMsg: "Không tìm thấy!"
         });
     }
 
-    productDao.readProductById(productId, cb);
+    DeviceNodeDao.readDeviceNodeById(deviceNodeId, cb);
 
     function cb(err, result) {
         if (err) {
@@ -37,7 +37,7 @@ function getProduct(req, res) {
 }
 
 
-function createProduct(req, res) {
+function createDeviceNode(req, res) {
     if (!req.body.name) {
         return res.status(500).send({
             errCode: 0,
@@ -47,7 +47,7 @@ function createProduct(req, res) {
     var pInfo = {
         name: req.body.name
     };
-    productDao.createSeason(pInfo, cb);
+    DeviceNodeDao.createSeason(pInfo, cb);
     function cb(err, result) {
         if (err) {
             return res.status(400).send(err);
@@ -56,8 +56,8 @@ function createProduct(req, res) {
     }
 }
 
-function updateProduct(req, res) {
-    var productId = req.params.productId;
+function updateDeviceNode(req, res) {
+    var DeviceNodeId = req.params.DeviceNodeId;
     var pInfo = req.body
     if (req.decoded.roles[0].toString() !== 'admin') {
         return status(403).send({
@@ -65,14 +65,14 @@ function updateProduct(req, res) {
             errMsg: "Bạn không có quyền quản trị"
         });
     }
-    if (!productId) {
+    if (!DeviceNodeId) {
         return res.status(400).send({
             errCode: 0,
             errMsg: "Không tìm thấy!"
         });
     }
 
-    productDao.updateProductId(productId, piInfo, cb);
+    DeviceNodeDao.updateDeviceNodeId(DeviceNodeId, piInfo, cb);
     function cb(err, result) {
         if (err) {
             return res.status(400).send(err);
@@ -82,15 +82,15 @@ function updateProduct(req, res) {
     }
 }
 
-function deleteProduct(req, res) {
-    var productId = req.params.productId;
+function deleteDeviceNode(req, res) {
+    var DeviceNodeId = req.params.DeviceNodeId;
     if (req.decoded.roles[0].toString() !== 'admin') {
         return status(403).send({
             errCode: 1,
             errMsg: "Bạn không có quyền quản trị"
         });
     }
-    if (!productId) {
+    if (!DeviceNodeId) {
         return res.status(400).send({
             errCode: 0,
             errMsg: "Không tìm thấy!"
@@ -98,7 +98,7 @@ function deleteProduct(req, res) {
     }
 
 
-    productDao.deleteproduct(productId, cb);
+    DeviceNodeDao.deleteDeviceNode(DeviceNodeId, cb);
 
     function cb(err, result) {
         if (err) {

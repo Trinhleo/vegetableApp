@@ -1,16 +1,16 @@
 (function () {
     angular.module('app.core')
         .controller('CoreController', CoreController);
-    CoreController.$inject = ['$state','$location', '$rootScope', '$localStorage', '$timeout', 'toastr', '$filter', 'NotificationService', '$scope']
-    function CoreController($state,$location, $rootScope, $localStorage, $timeout, toastr, $filter, NotificationService, $scope) {
+    CoreController.$inject = ['$state', '$location', '$rootScope', '$localStorage', '$timeout', 'toastr', '$filter', 'NotificationService', '$scope']
+    function CoreController($state, $location, $rootScope, $localStorage, $timeout, toastr, $filter, NotificationService, $scope) {
         var vm = this;
         $rootScope.userInfo = $localStorage.userInfo;
+        $rootScope.isAdmin = $localStorage.userInfo.roles[0] === 'admin' ? true : false;
         var socket = io.connect('http://localhost:3000/notification');
         vm.isActive = function (viewLocation) {
             return viewLocation === $location.path();
         };
         // ======CONFIGURE NOTIFICATION========
-
         vm.notifications = [];
         vm.readNotification = readNotification;
         // $rootScope.userInfo = $localStorage.userInfo;
@@ -25,15 +25,25 @@
 
         // Toggle the menu items
         vm.isCollapsed = false;
-        vm.toggleCollapsibleMenu = function () {
-            vm.isCollapsed = !vm.isCollapsed;
-        };
+        vm.toggleCollapsibleMenu = toggleCollapsibleMenu;
+
+
 
         // Collapsing the menu after navigation
         $scope.$on('$stateChangeSuccess', function () {
             vm.isCollapsed = false;
         });
 
+        function toggleCollapsibleMenu() {
+            vm.isCollapsed = !vm.isCollapsed;
+            if (vm.isCollapsed) {
+                $('.navbar-collapse').addClass('mobile-dropdown-menu');
+                $('body').addClass('navbar-collapse');
+            } else {
+                $('.navbar-collapse').removeClass('mobile-dropdown-menu');
+                $('body').removeClass('navbar-collapse');
+            };
+        };
         // loadNewNotificatons();
 
         function loadNewNotificatons() {

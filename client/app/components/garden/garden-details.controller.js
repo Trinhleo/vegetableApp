@@ -1,10 +1,10 @@
 (function () {
     angular.module('app.garden')
-        .controller('EditGardenController', EditGardenController);
+        .controller('DetailsGardenController', DetailsGardenController);
 
-    EditGardenController.$inject = ['$state', '$localStorage', '$rootScope', '$scope', 'GardenService', 'geolocation', 'FileUploader', 'appConfigs', '$window', '$timeout', 'toastr'];
+    DetailsGardenController.$inject = ['$state', '$localStorage', '$rootScope', '$scope', 'GardenService', 'geolocation', 'FileUploader', 'appConfigs', '$window', '$timeout', 'toastr'];
 
-    function EditGardenController($state, $localStorage, $rootScope, $scope, GardenService, geolocation, FileUploader, appConfigs, $window, $timeout, toastr) {
+    function DetailsGardenController($state, $localStorage, $rootScope, $scope, GardenService, geolocation, FileUploader, appConfigs, $window, $timeout, toastr) {
         var vm = this;
     //     // Initializes Variables
     //     // ----------------------------------------------------------------------------

@@ -18,15 +18,15 @@ function listAllProductionItems(req, res) {
 }
 
 function getProductionItem(req, res) {
-    var productionsItemId = req.params.productionsItemId;
-    if (!seasonId) {
+    var productionItemId = req.params.productionItemId;
+    if (!productionItemId) {
         return res.status(400).send({
             errCode: 0,
             errMsg: "Không tìm thấy!"
         });
     }
 
-    productionItemDao.readProductionsItemById(productionsItemId, cb);
+    productionItemDao.readProductionsItemById(productionItemId, cb);
 
     function cb(err, result) {
         if (err) {
@@ -57,7 +57,7 @@ function createProductionItem(req, res) {
 }
 
 function updateProductionItem(req, res) {
-    var productionsItemId = req.params.productionsItemId;
+    var productionsItemId = req.params.productionItemId;
     var piInfo = req.body
     if (req.decoded.roles[0].toString() !== 'admin') {
         return status(403).send({
@@ -83,14 +83,14 @@ function updateProductionItem(req, res) {
 }
 
 function deleteProductionItem(req, res) {
-    var productionsItemId = req.params.productionsItemId;
+    var productionItemId = req.params.productionItemId;
     if (req.decoded.roles[0].toString() !== 'admin') {
         return status(403).send({
             errCode: 1,
             errMsg: "Bạn không có quyền quản trị"
         });
     }
-    if (!productionsItemId) {
+    if (!productionItemId) {
         return res.status(400).send({
             errCode: 0,
             errMsg: "Không tìm thấy!"
@@ -98,7 +98,7 @@ function deleteProductionItem(req, res) {
     }
 
 
-    productionItemDao.deleteProductionItem(productionsItemId, cb);
+    productionItemDao.deleteProductionItem(productionItemId, cb);
 
     function cb(err, result) {
         if (err) {

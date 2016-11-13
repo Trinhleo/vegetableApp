@@ -9,4 +9,5 @@ module.exports = function (app) {
     app.use('/api/gardens', require('./garden.routes.js')());
     app.use('/api/seasons', require('./season.routes.js')());
     app.use('/api/production-items', require('./production-item.routes.js')());
+    app.use('/api/device-nodes', require('./device-node.routes.js')());
 };

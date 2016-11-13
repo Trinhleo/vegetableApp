@@ -11,6 +11,7 @@
             delete $localStorage.token;
             delete $localStorage.userInfo;
             delete $rootScope.userInfo;
+            delete $rootScope.isAdmin;
             $state.go('index.product');
         }, function (err) {
             $rootScope.alert = err.data.message;

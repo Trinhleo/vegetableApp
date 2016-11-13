@@ -97,7 +97,7 @@ img {
   display: inline;
 }
 
-.navbar-collapse {
+.navbar-collapse, .brand {
   background-image: -webkit-gradient(linear, left top, left bottom, from(white), to(#f0f5f5));
   background-image: -webkit-linear-gradient(top, white, #f0f5f5);
   background-image: -moz-linear-gradient(top, white, #f0f5f5);
@@ -148,12 +148,23 @@ img {
   border-top: 3px solid white;
   display: block;
   text-decoration: none;
+  top: 52px;
 }
 
 .dropdown-menu:hover li a:hover {
   background-color: #009900;
   color: white !important;
   transition: all 100ms ease-in-out;
+}
+
+.mobile-dropdown-menu {
+  top: 50px !important;
+}
+
+@media (min-width: 768px) {
+  .navbar-collapse {
+    left: 25% !important;
+  }
 }
 
 

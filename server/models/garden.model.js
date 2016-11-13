@@ -25,6 +25,10 @@ var GardenSchema = new Schema({
         max: 1000000,
         required: true,
     },
+    deviceNode: {
+        type: Schema.ObjectId,
+        ref: 'DeviceNode'
+    },
     approved: {
         type: Boolean,
         default: false
@@ -43,7 +47,7 @@ var GardenSchema = new Schema({
     },
     location: {
         type: [Number], required: true
-    }, 
+    },
     productionItem:
     [{
         type: Schema.ObjectId,

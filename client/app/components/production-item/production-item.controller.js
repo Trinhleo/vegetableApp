@@ -1,7 +1,7 @@
 (function () {
     angular.module('app.production-item')
         .controller('ProductionItemController', ProductionItemController);
-    ProductionItemController.$inject = [];
+    // ProductionItemController.$inject = [];
     function ProductionItemController() {
 
     };

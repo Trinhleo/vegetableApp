@@ -20,6 +20,7 @@
                 $localStorage.user = res.name;
                 $localStorage.userInfo = res.userInfo;
                 $rootScope.userInfo = $localStorage.userInfo;
+                $rootScope.isAdmin = $localStorage.userInfo.roles[0] === 'admin' ? true : false;
                 $state.go('index.product');
             }, function (err) {
                 // console.log(err)
