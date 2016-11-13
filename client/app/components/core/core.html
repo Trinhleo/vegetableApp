@@ -46,7 +46,7 @@
 					<a ui-sref="index.signin">Đăng nhập</a>
 				</li>
 			</ul>
-			<ul class="nav navbar-nav navbar-right" ng-show="$root.userInfo">
+			<ul class="nav navbar-nav navbar-right" ng-if="$root.userInfo">
 				<li class="dropdown" dropdown>
 					<a class="dropdown-toggle user-header-dropdown-toggle" dropdown-toggle role="button">
 						<img ng-src="{{$root.userInfo.profileImageURL}}" alt="{{$root.userInfo.displayName}}" class="header-profile-image" />

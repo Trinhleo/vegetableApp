@@ -8,9 +8,13 @@ var mongoose = require('mongoose'),
 var ProductionItemSchema = new Schema({
     name: {
         type: String,
-        default: true,
+        default: '',
         trim: true,
         unique: true
+    },
+    description: {
+        type: String,
+        default: ''
     },
     created: {
         type: Date,

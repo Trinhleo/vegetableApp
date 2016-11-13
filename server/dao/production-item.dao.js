@@ -42,7 +42,7 @@ function readProductionItem(productionItem, callback) {
 }
 
 function createProductionItem(info, callback) {
-    var productionItem = new productionItem(info);
+    var productionItem = new ProductionItem(info);
 
     productionItem.save(function (err, result) {
         if (err) {

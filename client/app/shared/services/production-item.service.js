@@ -4,7 +4,7 @@
 
     ProductionItemService.$inject = ['$q', '$http', 'appConfigs', '$localStorage'];
     function ProductionItemService($q, $http, appConfigs, $localStorage) {
-        var apiUrl = appConfigs.baseUrl.concat(appConfigs.port).concat(appConfigs.baseApiUrl).concat("production-item");
+        var apiUrl = appConfigs.baseUrl.concat(appConfigs.port).concat(appConfigs.baseApiUrl).concat("production-items");
         return {
             listAllProductionItems: listAllProductionItems,
             getProductionItem: getProductionItem,

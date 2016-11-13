@@ -60,12 +60,11 @@
             GardenService.loadMyGardens().then(
                 function (res) {
                     vm.gardens = res;
-                    // drop();
 
                 },
                 function (err) {
                     console.log(err)
-                    toastr.error(err, 'Oops');
+                    toastr.error(err, 'Lỗi');
                 });
         }
 

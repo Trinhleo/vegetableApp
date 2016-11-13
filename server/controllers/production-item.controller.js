@@ -8,7 +8,7 @@ module.exports = {
 };
 
 function listAllProductionItems(req, res) {
-    productionItemDao.listAllProductionsItems(cb);
+    productionItemDao.listAllProductionItems(cb);
     function cb(err, result) {
         if (err) {
             return res.status(500).send(err);
@@ -45,9 +45,10 @@ function createProductionItem(req, res) {
         });
     }
     var piInfo = {
-        name: req.body.name
+        name: req.body.name,
+        description: req.body.description || ""
     };
-    productionItemDao.createSeason(piInfo, cb);
+    productionItemDao.createProductionItem(piInfo, cb);
     function cb(err, result) {
         if (err) {
             return res.status(400).send(err);

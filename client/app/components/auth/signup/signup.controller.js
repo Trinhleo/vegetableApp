@@ -15,7 +15,6 @@
             username: "",
             password: "",
         };
-        vm.alert = "";
         function signup() {
 
             AuthService.signup(vm.credentials).then(function (res) {
