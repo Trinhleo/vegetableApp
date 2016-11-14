@@ -17,6 +17,10 @@ var DeviceNodeSchema = new Schema({
         type: Number,
         default: 0
     },
+    created:{
+        type: Date,
+        default: Date.now
+    },
     isDeleted: {
         type: Boolean,
         default: false
@@ -30,6 +34,10 @@ var DeviceNodeSchema = new Schema({
     },
     editDate: {
         type: Date
+    },
+    description: {
+        type: String,
+        default: ''
     }
 });
 mongoose.model('DeviceNode', DeviceNodeSchema);

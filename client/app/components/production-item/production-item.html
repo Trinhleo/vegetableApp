@@ -7,36 +7,19 @@
             data-ui-sref="index.production-item-add">
         </button>
     </div>
-    <md-input-container>
+    <!--<md-input-container>
         <input class="form-control col-md-4" type="text" ng-model="vm.search" placeholder="Tìm kiếm" ng-change="vm.figureOutItemsToDisplay()"
         />
-    </md-input-container>
-    <div class="list-group">
-        <a data-ng-repeat="productionItem in vm.productionItem" data-ui-sref="index.production-item-details({ productionItemId: productionItem._id })"
-            class="list-group-item">
-            <small class="list-group-item-text">
-    Tạo lúc
-    <span data-ng-bind="productionItem.created | date:'short'"></span>
+    </md-input-container>-->
+    <div class="col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        <md-card data-ng-repeat="productionItem in vm.productionItem" layout-align="center center">
+            <a data-ui-sref="index.production-item-details({ productionItemId: productionItem._id })">
+                <h4 style="color:green" class="text-center">{{productionItem.name}}</h4>
+                <small class="list-group-item-text">
+      <span>Tạo lúc: {{productionItem.created | date:'short'}}</span>
   </small>
-            <h4 class="list-group-item-heading" data-ng-bind="productionItem.name"></h4>
-        </a>
+                <div class="img_container"><img alt="" class="img-responsive" ng-src="{{productionItem.imgUrl}}" /></div>
+            </a>
+        </md-card>
     </div>
-    <md-table-container>
-        <table md-table style="color:#5d9842;">
-            <thead md-head md-order="" md-on-reorder="">
-                <tr md-row>
-                    <th md-column md-order-by=""><span></span>Tên đối tượng</th>
-                    <th md-column></th>
-                </tr>
-            </thead>
-            <tbody md-body>
-                <tr md-row data-ng-repeat="productionItem in vm.productionItem" ng-show="productionItem">
-                    <td md-cell><a data-ui-sref="index.production-item-details({ productionItemId: productionItem._id })">{{productionItem.name}}</a></td>
-                    <td md-cell>
-                        <div class="img_container"><img alt="" class="img-responsive text-center" ng-src="{{productionItem.imgUrl}}" /></div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </md-table-container>
 </section>

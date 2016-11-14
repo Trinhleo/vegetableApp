@@ -4,7 +4,7 @@
 
     DeviceNodeService.$inject = ['$q', '$http', 'appConfigs', '$localStorage'];
     function DeviceNodeService($q, $http, appConfigs, $localStorage) {
-        var apiUrl = appConfigs.baseUrl.concat(appConfigs.port).concat(appConfigs.baseApiUrl).concat("device-node");
+        var apiUrl = appConfigs.baseUrl.concat(appConfigs.port).concat(appConfigs.baseApiUrl).concat("device-nodes");
         return {
             listAllDeviceNodes: listAllDeviceNodes,
             getDeviceNode: getDeviceNode,
@@ -53,8 +53,9 @@
             return deferred.promise;
         };
 
-        function deleteDeviceNode(piId) {
-            $http.delete(apiUrl + '/' + piId).then(function (res) {
+        function deleteDeviceNode(dvnId) {
+            var deferred = $q.defer();
+            $http.delete(apiUrl + '/' + dvnId).then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {
                 deferred.reject(err);

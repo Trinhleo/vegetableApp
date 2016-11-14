@@ -1,0 +1,29 @@
+<section>
+    <div class="page-header">
+        <h1 data-ng-bind="vm.deviceNode.name"></h1>
+    </div>
+    <div style="margin: 20px">
+        <button data-toggle="tooltip" title="Danh sách thiết bị" class="btn btn-primary glyphicon glyphicon-th-list" data-ui-sref="index.device-node">
+        </button>
+    </div>
+    <div class="pull-right">
+        <button class="btn btn-primary glyphicon glyphicon-edit" data-ui-sref="index.device-node-edit({ deviceNodeId: vm.deviceNode._id })">
+        </button>
+        <button class="btn btn-primary glyphicon glyphicon-trash" data-ng-click="vm.remove()">
+        </button>
+    </div>
+    <small>
+    <em class="text-muted">
+      Tạo lúc
+      <span data-ng-bind="vm.deviceNode.created | date:'short'"></span>
+    </em>
+  </small>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+        <h2><label>Loại :</label> {{vm.deviceNode.type===0?'Dùng chung': 'Dùng riêng'}}</h2>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+        <h2><label>Mô tả :</label> {{vm.deviceNode.description}}</h2>
+    </div>
+</section>

@@ -44,10 +44,11 @@ function createDeviceNode(req, res) {
             errMsg: "Lỗi nhập liệu"
         });
     }
-    var pInfo = {
-        name: req.body.name
+    var dvnInfo = {
+        name: req.body.name,
+        description: req.body.description|| ''
     };
-    DeviceNodeDao.createSeason(pInfo, cb);
+    DeviceNodeDao.createDeviceNode(dvnInfo, cb);
     function cb(err, result) {
         if (err) {
             return res.status(400).send(err);
@@ -57,8 +58,8 @@ function createDeviceNode(req, res) {
 }
 
 function updateDeviceNode(req, res) {
-    var DeviceNodeId = req.params.DeviceNodeId;
-    var pInfo = req.body
+    var DeviceNodeId = req.params.deviceNodeId;
+    var dvnInfo = req.body
     if (req.decoded.roles[0].toString() !== 'admin') {
         return status(403).send({
             errCode: 1,
@@ -72,7 +73,7 @@ function updateDeviceNode(req, res) {
         });
     }
 
-    DeviceNodeDao.updateDeviceNodeId(DeviceNodeId, piInfo, cb);
+    DeviceNodeDao.updateDeviceNode  (DeviceNodeId, dvnInfo, cb);
     function cb(err, result) {
         if (err) {
             return res.status(400).send(err);
@@ -83,7 +84,7 @@ function updateDeviceNode(req, res) {
 }
 
 function deleteDeviceNode(req, res) {
-    var DeviceNodeId = req.params.DeviceNodeId;
+    var DeviceNodeId = req.params.deviceNodeId;
     if (req.decoded.roles[0].toString() !== 'admin') {
         return status(403).send({
             errCode: 1,

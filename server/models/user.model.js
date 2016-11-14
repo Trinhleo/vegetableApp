@@ -34,7 +34,7 @@ var UserSchema = new Schema({
     },
     profileImageURL: {
         type: String,
-        default: '/img/profile/default.png'
+        default: 'http://localhost:3000/img/profile/default.png'
     },
     creationDate: {
         type: 'Date', default: Date.now

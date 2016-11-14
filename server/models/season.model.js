@@ -23,7 +23,7 @@ var SeasonSchema = new Schema({
     },
     imgUrl: {
         type: String,
-        default: '/img/seasons/no-images.png'
+        default: 'http://localhost:3000/img/seasons/no-images.png'
     },
     status: {
         type: Number,

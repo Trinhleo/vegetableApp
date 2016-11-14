@@ -54,6 +54,7 @@
         };
 
         function deleteProductionItem(piId) {
+             var deferred = $q.defer();
             $http.delete(apiUrl + '/' + piId).then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {

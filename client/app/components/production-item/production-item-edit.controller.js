@@ -8,7 +8,7 @@
         vm.productionItemId = $stateParams.productionItemId;
         vm.formData = {};
         vm.update = update;
-        ProductionItemService.getProductionItem($stateParams.productionItemId).then(
+        ProductionItemService.getProductionItem(vm.productionItemId).then(
             function (res) {
                 vm.formData = res;
             },
