@@ -11,14 +11,13 @@ module.exports = {
 };
 
 function listAllGardens(req, res) {
-    userId = req.decoded._id;
     gardenDao.listAllGardens(cb);
     function cb(err, result) {
         if (err) {
             return res.status(500).send(err);
         }
         for (var x in result) {
-            if (result[x].user._id.toString() === userId.toString()) {
+            if (req.decoded && (result[x].user._id.toString() === req.decoded._id.toString())) {
                 result.isOwner = true;
             }
         }
@@ -27,7 +26,7 @@ function listAllGardens(req, res) {
 }
 
 function listMyGardens(req, res) {
-    userId = req.decoded._id;
+    var userId = req.decoded._id;
     gardenDao.listAllGardensByUserId(userId, cb);
     function cb(err, result) {
         if (err) {
@@ -98,7 +97,9 @@ function createGarden(req, res) {
         area: req.body.area,
         user: req.decoded._id,
         location: req.body.location,
-        productionItem: req.body.productionItem
+        productionItem: req.body.productionItem,
+        deviceNode: req.body.deviceNode,
+        description: req.body.description,
     };
     gardenDao.createGarden(gardenInfo, cb);
     function cb(err, result) {

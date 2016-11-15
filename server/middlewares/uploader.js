@@ -53,7 +53,7 @@ function uploadSingle(req, res, next) {
                 });
             }
 
-            req.profileImageURL = 'http://127.0.0.1:3000'   + imgUrl + "/" + req.file.filename;
+            req.profileImageURL = imgUrl + "/" + req.file.filename;
             console.log(req);
             next();
         });

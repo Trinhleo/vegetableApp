@@ -9,7 +9,7 @@
 	<button style="margin-left:15px" class="btn btn-primary" ng-show="!vm.isMe" ng-click="vm.doFollow()">{{vm.isFollow?'Unfollow':'Follow this user'}}</button>
 	<hr>
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 "><img alt="" class="img-responsive text-center" ng-src="{{vm.userInfo.profileImageURL}}" style="height: 200px;width:200px; border-radius: 5%;
+		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 "><img alt="" class="img-responsive text-center" ng-src="//localhost:3000{{vm.userInfo.profileImageURL}}" style="height: 200px;width:200px; border-radius: 5%;
     border: 5px solid #337ab7;" /><br>
 			<button class="col-md-offset-2 btn btn-primary" ui-sref="index.settings.picture" ng-show="vm.isMe">Change Avatar</button></div>
 		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 middle">

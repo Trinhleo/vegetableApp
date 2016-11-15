@@ -21,11 +21,11 @@
                 <div class="form-group">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="padding-left:0;">
                         <label for="latitude ">Vĩ độ</label>
-                        <input type="text " class="form-control " id="latitude " ng-model="vm.formData.latitude " readonly required>
+                        <input type="text" class="form-control" id="latitude" ng-model="vm.formData.latitude" readonly required>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="padding-right:0;">
                         <label for="longitude ">Kinh độ</label>
-                        <input type="text " class="form-control " id="longitude " ng-model="vm.formData.longitude " readonly required>
+                        <input type="text" class="form-control" id="longitude" ng-model="vm.formData.longitude" readonly required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -33,7 +33,7 @@
                     <input type="text" class="form-control" id="address" ng-model="vm.formData.address" required>
                 </div>
                 <div class="form-group">
-                    <label for="area">Diện tích canh tác</label>
+                    <label for="area">Diện tích canh tác (m2)</label>
                     <input type="number" min=0 max=10000000 class="form-control" id="area" ng-model="vm.formData.area" required>
                 </div>
                 <div class="form-group">
@@ -45,12 +45,35 @@
                             <span ng-if="vm.isChecked()">Bỏ </span>Chọn Tất Cả
                         </md-checkbox>
                     </div>
-                    <div class="choose-vegetable" flex="100" ng-repeat="item in vm.productItem" ng-if="true">
+                    <div class="choose-vegetable" flex="100" ng-repeat="item in vm.productionItem" ng-if="true">
                         <md-checkbox ng-checked="vm.exists(item, vm.selected)" ng-click="vm.toggle(item,vm.selected)">
                             {{item.name}}
                         </md-checkbox>
                     </div>
+                    <div>
+                        <label class="control-label">Thêm loại rau mới</label>
+                        <input type="text" class="form-control" id="area" ng-model="vm.newProductionItem" />
+                    </div>
                 </div>
+                <div class="form-group">
+                    <label class="control-label">Chọn loại thiết bị</label>
+                    <select class="form-control" id="dvn-select" ng-model="vm.formData.deviceNode" ng-options="dvn._id as dvn.name for dvn in vm.deviceNode"
+                        required>
+                        <option value="" selected="selected">--Hãy chọn một thiết bị--</option>
+                     </select>
+                </div>
+                <!--<div layout="row" layout-wrap flex>
+                    <div flex-xs flex="50" ng-if="true">
+                        <md-checkbox aria-label="Chọn Tất Cả" ng-checked="vm.isChecked()" md-indeterminate="vm.isIndeterminate()" ng-click="vm.toggleAll()">
+                            <span ng-if="vm.isChecked()">Bỏ </span>Chọn Tất Cả
+                        </md-checkbox>
+                    </div>
+                    <div class="choose-vegetable" flex="100" ng-repeat="item in vm.deviceNode" ng-if="true">
+                        <md-checkbox ng-checked="vm.exists(item, vm.selected)" ng-click="vm.toggle(item,vm.selected)">
+                            {{item.name}}
+                        </md-checkbox>
+                    </div>
+                </div>-->
                 <div class="form-group">
                     <label for="description">Mô tả</label>
                     <textarea type="text" class="form-control" id="description" placeholder="Nhập mô tả" ng-model="vm.formData.description">
@@ -59,16 +82,15 @@
                 <div class="form-group text-center">
                     <img ng-src="{{vm.imageURL}}" alt="" class="img-thumbnail" style="max-height:200px; max-width: 200px">
                 </div>
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label for="gardenImage">Ảnh đại diện</label>
                     <span class="btn btn-default btn-file te">Choose an image<input type="file" nv-file-select uploader="vm.uploader"></span>
-                </div>
+                </div>-->
                 <!-- Submit button. Note that its tied to createUser() function from addCtrl. Also note ng-disabled logic which prgardens early submits.  -->
-                <button type="submit" class="btn btn-danger btn-block" ng-click="vm.creategarden()" ng-disabled="addForm.$invalid||!vm.uploader.queue.length">Submit</button>
-                <div ng-show="vm.success">{{vm.success}}</div>
-                <div ng-show="vm.error">{{vm.error}}</div>
+                <button type="submit" class="btn btn-danger btn-block" ng-click="vm.createGarden()" ng-disabled="addForm.$invalid">Tạo</button>
+                <!--<div ng-show="vm.success">{{vm.success}}</div>
+                <div ng-show="vm.error">{{vm.error}}</div>-->
             </form>
-            <div><span>{{$root.alert}}</span></div>
         </div>
     </div>
     </div>

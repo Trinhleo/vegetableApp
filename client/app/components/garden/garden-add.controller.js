@@ -2,9 +2,9 @@
     angular.module('app.garden')
         .controller('AddGardenController', AddGardenController);
 
-    AddGardenController.$inject = ['$state', '$localStorage', '$rootScope', '$scope', 'GardenService', 'geolocation', 'FileUploader', 'appConfigs', '$window', '$timeout', 'toastr'];
+    AddGardenController.$inject = ['$state', '$localStorage', '$rootScope', '$scope', 'GardenService', 'ProductionItemService', 'DeviceNodeService', 'geolocation', 'FileUploader', 'appConfigs', '$window', '$timeout', 'toastr'];
 
-    function AddGardenController($state, $localStorage, $rootScope, $scope, GardenService, geolocation, FileUploader, appConfigs, $window, $timeout, toastr) {
+    function AddGardenController($state, $localStorage, $rootScope, $scope, GardenService, ProductionItemService, DeviceNodeService, geolocation, FileUploader, appConfigs, $window, $timeout, toastr) {
         var vm = this;
         // Initializes Variables
         // ----------------------------------------------------------------------------
@@ -20,6 +20,8 @@
         vm.startDateBeforeRender = startDateBeforeRender;
         vm.startDateOnSetTime = startDateOnSetTime;
         vm.garden = {};
+        vm.productionItem = [];
+        vm.deviceNode = [];
         // Set initial coordinates to the center of the US
         // vm.formData.latitude = 10.350;
         // vm.formData.longitude = 106.500;
@@ -43,6 +45,12 @@
         vm.uploader.onErrorItem = onErrorItem;
         vm.uploadGardenImage = uploadGardenImage;
         vm.cancelUpload = cancelUpload;
+        vm.toggle = toggle;
+        vm.exists = exists;
+        vm.isIndeterminate = isIndeterminate;
+        vm.isChecked = isChecked;
+        vm.toggleAll = toggleAll;
+        vm.selected = [];
 
         this.isOpen = false;
 
@@ -53,35 +61,6 @@
             vm.isOpen = true;
         };
 
-
-        getGardensLocation();
-
-        function getGardensLocation() {
-            GardenService.loadMyGardens().then(
-                function (res) {
-                    vm.gardens = res;
-
-                },
-                function (err) {
-                    console.log(err)
-                    toastr.error(err, 'Lỗi');
-                });
-        }
-
-
-        // // Get User's actual coordinates based on HTML5 at window load
-        // geolocation.getLocation().then(function (data) {
-
-        //     // Set the latitude and longitude equal to the HTML5 coordinates
-        //     var coords = { lat: data.coords.latitude, long: data.coords.longitude };
-
-        //     vm.myLocation = [coords.long, coords.lat];
-
-        // });
-
-
-
-        // Get coordinates based on mouse click. When a click garden is detected....
         $rootScope.$on("clicked", function () {
 
             // Run the gservice functions associated with identifying coordinates
@@ -100,6 +79,47 @@
             });
         });
 
+
+        getGardensLocation();
+        getProductionItem();
+        getDeviceNode();
+
+        function getGardensLocation() {
+            GardenService.loadMyGardens().then(
+                function (res) {
+                    vm.gardens = res;
+
+                },
+                function (err) {
+                    console.log(err)
+                    toastr.error(err, 'Lỗi');
+                });
+        }
+
+
+        function getProductionItem() {
+            ProductionItemService.listAllProductionItems().then(
+                function (res) {
+                    vm.productionItem = res
+                },
+                function (err) {
+                    toastr.error(err, 'Lỗi');
+                }
+            );
+        };
+
+        function getDeviceNode() {
+            DeviceNodeService.listAllDeviceNodes().then(
+                function (res) {
+                    vm.deviceNode = res
+                },
+                function (err) {
+                    toastr.error(err, 'Lỗi');
+                }
+            )
+        };
+
+
         function createGarden() {
 
             // Grabs all of the text box fields
@@ -109,7 +129,10 @@
                 endTime: vm.formData.endTime,
                 location: [vm.formData.longitude, vm.formData.latitude],
                 description: vm.formData.description,
-                address: vm.formData.address
+                address: vm.formData.address,
+                productionItem: vm.selected,
+                deviceNode: vm.formData.deviceNode,
+                area: vm.formData.area
             };
 
             GardenService.createGarden(gardenData)
@@ -121,12 +144,14 @@
                     vm.formData.endTime = "";
                     vm.formData.description = "";
                     vm.formData.address = "";
+                    vm.formData.area = "";
                     vm.garden = res;
-                    getgardensLocation();
-                    vm.uploadgardenImage();
+                    vm.selected = [];
+                    getGardensLocation();
+                    // vm.uploadgardenImage();
                     vm.gardenId = res._id;
                 }, function (err) {
-                    toastr.error(err.data.message, 'Oops');
+                    toastr.error(err.data.message, 'Lỗi');
                 });
 
         };
@@ -225,6 +250,37 @@
         // Cancel the upload process
         function cancelUpload() {
             vm.uploader.clearQueue();
+        };
+
+
+        function toggle(item, selected) {
+            var idx = selected.indexOf(item._id);
+            if (idx > -1) {
+                selected.splice(idx, 1);
+            }
+            else {
+                selected.push(item._id)
+            }
+        };
+
+        //check bõ handle
+        function exists(item, selected) {
+            return selected.indexOf(item._id) > -1;
+        };
+
+        function isIndeterminate() {
+            return (vm.selected.length !== 0 &&
+                vm.selected.length !== vm.productionItem.length);
+        };
+        function isChecked() {
+            return vm.selected.length === vm.productionItem.length;
+        }
+        function toggleAll() {
+            if (vm.selected.length === vm.productionItem.length) {
+                vm.selected = [];
+            } else if (vm.selected.length === 0 || vm.selected.length > 0) {
+                vm.selected = vm.productionItem.slice(0);
+            }
         };
     };
 })();

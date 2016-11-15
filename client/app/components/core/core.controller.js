@@ -18,32 +18,59 @@
         vm.bage = 0;
 
         // navigation
-        $scope.$state = $state;
-
-        // // Get the topbar menu
-        // $scope.menu = Menus.getMenu('topbar');
-
-        // Toggle the menu items
-        vm.isCollapsed = false;
-        vm.toggleCollapsibleMenu = toggleCollapsibleMenu;
-
+        vm.openNav = openNav;
+        vm.closeNav = closeNav;
+        vm.isOpenSideBar = true;
+        vm.isMenuPin = true;
+        vm.pinMenu = pinMenu;
+        loadNewNotificatons();
+        openNav();
 
 
         // Collapsing the menu after navigation
         $scope.$on('$stateChangeSuccess', function () {
-            vm.isCollapsed = false;
+            if (vm.isOpenSideBar && !vm.isMenuPin) {
+                closeNav();
+            }
         });
 
-        function toggleCollapsibleMenu() {
-            vm.isCollapsed = !vm.isCollapsed;
-            if (vm.isCollapsed) {
-                $('.navbar-collapse').addClass('mobile-dropdown-menu');
-                $('body').addClass('navbar-collapse');
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            // document.getElementById("main").style.marginLeft = "250px";
+
+            vm.isOpenSideBar = true;
+            if (vm.isMenuPin) {
+                var mainWidth = $('#main').width();
+                $('#main').width(mainWidth - 250);
+                $('#main').addClass('pull-right');
+            }
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            var mainWidth = $('#main').width();
+            if (vm.isMenuPin) {
+                var mainWidth = $('#main').width();
+                $('#main').width(mainWidth + 250);
+                $('#main').removeClass('pull-right');
+            }
+            vm.isOpenSideBar = false;
+        }
+
+        function pinMenu() {
+            if (vm.isMenuPin) {
+                var mainWidth = $('#main').width();
+                $('#main').width(mainWidth + 250);
+                $('#main').removeClass('pull-right');
+                vm.isMenuPin = false;
             } else {
-                $('.navbar-collapse').removeClass('mobile-dropdown-menu');
-                $('body').removeClass('navbar-collapse');
-            };
-        };
+                var mainWidth = $('#main').width();
+                $('#main').width(mainWidth - 250);
+                $('#main').addClass('pull-right');
+                vm.isMenuPin = true;
+            }
+        }
+
         // loadNewNotificatons();
 
         function loadNewNotificatons() {
