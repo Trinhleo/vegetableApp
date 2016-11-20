@@ -45,6 +45,8 @@ function getUserInfo(req, res) {
         }
         var userInfo = {
             _id: result._id,
+            firstName: result.firstName,
+            lastName: result.lastName,
             displayName: result.displayName,
             creationDate: result.creationDate,
             profileImageURLFull: urlPrefix.concat(result.profileImageURL),

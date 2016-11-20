@@ -17,6 +17,8 @@
         vm.isLiked = false;
         vm.initLocation = [];
         vm.carouselIndex = 0;
+        vm.approve = approve;
+        vm.unApprove = unApprove;
         // vm.socket = io.connect('http://localhost:3000/chat');
 
         // checkFav();
@@ -48,31 +50,33 @@
         //         }
         //     );
         // };
+        getGarden();
+        function getGarden() {
+            GardenService.getGarden($stateParams.gardenId).then(
+                function (res) {
+                    var gd = res;
+                    var userId = gd.user ? gd.user._id : gd[0].user._id;
+                    vm.isMyGarden = $localStorage.userInfo && $localStorage.userInfo._id === userId ? true : false;
+                    vm.initLocation = gd.location;
 
-        GardenService.getGarden($stateParams.gardenId).then(
-            function (res) {
-                var gd = res;
-                var userId = gd.user ? gd.user._id : gd[0].user._id;
-                vm.isMyGarden = $localStorage.userInfo && $localStorage.userInfo._id === userId ? true : false;
-                vm.initLocation = gd.location;
-
-                if (gd.length) {
-                    vm.garden = gd[0];
-                    // vm.room = evt;
-                    vm.gardens = gd;
-                } else {
-                    vm.garden = gd;
-                    vm.gardens.push(gd);
+                    if (gd.length) {
+                        vm.garden = gd[0];
+                        // vm.room = evt;
+                        vm.gardens = gd;
+                    } else {
+                        vm.garden = gd;
+                        vm.gardens.push(gd);
+                    }
+                    $rootScope.garden = vm.garden;
+                    $rootScope.garden.isOwner = vm.isMyGarden;
+                    setMapSize();
+                },
+                function (err) {
+                    toastr.error(err.errMsg, 'Lỗi')
+                    $state.go('index.garden');
                 }
-                $rootScope.garden = vm.garden;
-                $rootScope.garden.isOwner = vm.isMyGarden;
-                setMapSize();
-            },
-            function (err) {
-                toastr.error(err.errMsg, 'Lỗi')
-                $state.go('index.garden');
-            }
-        );
+            );
+        };
 
         // GardenService.getGardenImages($stateParams.gardenId).then(
         //     function (res) {
@@ -147,5 +151,29 @@
                     });
             }
         };
+
+        function approve() {
+            GardenService.approve(vm.garden._id).then(
+                function (res) {
+                    toastr.success('Duyệt thành công!', 'Thành công');
+                    getGarden()
+                },
+                function (err) {
+                    toastr.error(err.errMsg, 'Lỗi');
+                }
+            )
+        };
+
+        function unApprove() {
+            GardenService.unApprove(vm.garden._id).then(
+                function (res) {
+                    toastr.success('Duyệt thành công!', 'Thành công');
+                    getGarden();
+                },
+                function (err) {
+                    toastr.error(err.errMsg, 'Lỗi');
+                }
+            )
+        }
     };
 })();

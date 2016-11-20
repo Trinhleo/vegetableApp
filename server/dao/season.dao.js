@@ -4,7 +4,7 @@ require('../models/season.model.js');
 var Season = mongoose.model('Season');
 
 module.exports = {
-    listAllSeasons: listAllSeasons,
+    listSeasons: listSeasons,
     readSeasonById: readSeasonById,
     readSeason: readSeason,
     createSeason: createSeason,
@@ -12,8 +12,8 @@ module.exports = {
     deleteSeason: deleteSeason
 };
 
-function listAllSeasons(callback) {
-    Season.find({}, function (err, result) {
+function listSeasons(query,callback) {
+    Season.find(query, function (err, result) {
         if (err) {
             return callback(err, null);
         }

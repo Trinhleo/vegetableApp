@@ -5,10 +5,12 @@
     GardenService.$inject = ['$http', '$q', 'appConfigs']
     function GardenService($http, $q, appConfigs) {
         var apiUrl = appConfigs.baseUrl.concat(appConfigs.port).concat(appConfigs.baseApiUrl).concat("gardens");
-    
+
         return {
             loadGardens: loadGardens,
+            loadGardensApproved: loadGardensApproved,
             loadMyGardens: loadMyGardens,
+            loadSeasons: loadSeasons,
             getGarden: getGarden,
             createGarden: createGarden,
             updateGarden: updateGarden,
@@ -17,18 +19,11 @@
             addToFavoriteGardens: addToFavoriteGardens,
             removeFavoriteGarden: removeFavoriteGarden,
             checkFavoriteGarden: checkFavoriteGarden,
-            myFavoriteGardens: myFavoriteGardens
+            myFavoriteGardens: myFavoriteGardens,
+            approve,
+            unApprove
         };
 
-        function loadMyGardens() {
-            var deferred = $q.defer();
-            $http.get(apiUrl + '/my-gardens').then(function (res) {
-                deferred.resolve(res.data);
-            }, function (err) {
-                    deferred.reject(err);
-                });
-            return deferred.promise;
-        };
 
         function loadGardens() {
             var deferred = $q.defer();
@@ -39,6 +34,34 @@
             });
             return deferred.promise;
         };
+        function loadGardensApproved() {
+            var deferred = $q.defer();
+            $http.get(apiUrl + '/approved').then(function (res) {
+                deferred.resolve(res.data);
+            }, function (err) {
+                deferred.reject(err);
+            });
+            return deferred.promise;
+        };
+
+        function loadMyGardens() {
+            var deferred = $q.defer();
+            $http.get(apiUrl + '/my-gardens').then(function (res) {
+                deferred.resolve(res.data);
+            }, function (err) {
+                deferred.reject(err);
+            });
+            return deferred.promise;
+        };
+
+        function loadSeasons(gardenId) {
+            var deferred = $q.defer();
+            $http.get(apiUrl + '/' + gardenId + '/seasons').then(function (res) {
+                deferred.resolve(res.data);
+            }, function (err) {
+                deferred.reject(err.data);
+            });
+        }
 
         function getGarden(id) {
             var deferred = $q.defer();
@@ -134,6 +157,28 @@
                 deferred.reject(err);
             });
             return deferred.promise;
+        };
+
+        function approve(gardenId) {
+            var deferred = $q.defer();
+            $http.get(apiUrl + '/' + gardenId + '/approve').then(function (res) {
+                deferred.resolve(res.data);
+            }, function (err) {
+                deferred.reject(err);
+            });
+            return deferred.promise;
+
+        };
+
+        function unApprove(gardenId) {
+            var deferred = $q.defer();
+            $http.get(apiUrl + '/' + gardenId + '/un-approve').then(function (res) {
+                deferred.resolve(res.data);
+            }, function (err) {
+                deferred.reject(err);
+            });
+            return deferred.promise;
+
         };
     };
 })();

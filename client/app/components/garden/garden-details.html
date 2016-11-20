@@ -10,15 +10,14 @@
         </div>
         <div style="padding-left:15px">
             <span class="alert alert-danger" ng-show="!vm.garden.approved">
-                <strong>Chưa được duyệt! </strong>
-                <a data-toggle="tooltip" title="Duyệt" data-ng-click="vm.approve();" ng-if="$root.isAdmin">
-                    <i class="fa fa-remove"></i></a>
-                </span>
+                <strong>Chưa được duyệt! </strong></span>
             <span class="alert alert-success" ng-show="vm.garden.approved"> <strong>Đã được duyệt! </strong>
-            <a data-toggle="tooltip" title="Bỏ duyệt" ng-click="vm.approve()" ng-if="$root.isAdmin"><i class="fa fa-check-square-o"></i> </a> 
-      </span>
+                </span>
+            <a ng-show="!vm.garden.approved" data-toggle="tooltip" title="Duyệt" data-ng-click="vm.approve();" ng-if="$root.isAdmin">
+                <i class="fa fa-check">Duyệt</i></a>
+            <a ng-show="vm.garden.approved" data-toggle="tooltip" title="Bỏ duyệt" ng-click="vm.unApprove()" ng-if="$root.isAdmin"><i class="fa fa-remove">Bỏ duyệt</i> </a>
         </div>
-        <div ng-show="vm.isMyGarden" style="margin-left:15px"><a style="color:white !important" href="#/gardens/{{vm.garden._id}}/seasons" class="btn btn-primary">Quản lý mùa vụ</a></div>
+        <div ng-show="vm.isMyGarden$$vm.garden.approved" style="margin-left:15px"><a style="color:white !important" href="#/gardens/{{vm.garden._id}}/seasons" class="btn btn-primary">Quản lý mùa vụ</a></div>
     </div>
     <article>
         <div class="parallax-garden full-page " id="garden-infomation">

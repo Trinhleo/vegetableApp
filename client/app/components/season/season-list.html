@@ -1,2 +1,39 @@
-list season
-  {{vm.garden.isOwner}}
+<section>
+  <div class="page-header">
+    <h1>Danh sách mùa vụ</h1>
+    <!-- <div class="col-md-4" style="margin-top: 20px">
+      <a data-toggle="tooltip" title="Tạo mùa vụ mới" class="btn btn-primary"
+         data-ui-sref="seasons.create">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+    </div> -->
+    <div class="col-md-4">
+      <md-input-container>
+        <input class="form-control" type="text" ng-model="vm.search" placeholder="Tìm kiếm" ng-change="vm.figureOutItemsToDisplay()"
+        />
+      </md-input-container>
+    </div>
+  </div>
+  <div class="col-md-12" style="padding:0">
+    <div class="list-group">
+      <a data-ng-repeat="season in vm.pagedItems" ng-click="vm.gotoView(season._id);" class="list-group-item">
+        <span class="alert alert-danger" ng-show="vm.season.status===2">Đã kết thúc</span>
+        <span class="alert alert-success" ng-show="vm.season.status===1">Đang diễn ra</span>
+        <span class="alert alert-warning" ng-show="vm.season.status===0">Chưa bắt đầu</span>
+        </span>
+        <small>
+    Tạo lúc
+    <span data-ng-bind="season.created | date:'short'"></span>
+  </small>
+        <h4 data-ng-bind="season.garden.name"></h4>
+        <h4 data-ng-bind="season.name"></h4>
+      </a>
+    </div>
+    <pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage"
+      ng-change="vm.pageChanged()"></pagination>
+    <div class="alert alert-warning text-center" data-ng-if="vm.season.$resolved && !vm.season.length">
+      Không có dữ liệu!</a>
+    </div>
+  </div>
+  <!--</form>-->
+</section>

@@ -15,9 +15,19 @@
             deleteSeason: deleteSeason,
         };
 
+        // function loadSeasonsOfGarden() {
+        //     var deferred = $q.defer();
+        //     $http.get(apiUrl + '/garden-seasons').then(function (res) {
+        //         deferred.resolve(res.data);
+        //     }, function (err) {
+        //         deferred.reject(err);
+        //     });
+        //     return deferred.promise;
+        // };
+
         function loadMySeasons() {
             var deferred = $q.defer();
-            $http.get(apiUrl + '/my-Seasons').then(function (res) {
+            $http.get(apiUrl + '/my-seasons').then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {
                 deferred.reject(err);

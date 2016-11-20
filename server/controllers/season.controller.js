@@ -1,6 +1,9 @@
 var seasonDao = require('./../dao/season.dao');
+var gardenDao = require('./../dao/garden.dao');
 module.exports = {
     listAllSeasons: listAllSeasons,
+    listAllSeasonsOfGarden: listAllSeasonsOfGarden,
+    listMySeasons: listMySeasons,
     getSeason: getSeason,
     createSeason: createSeason,
     updateSeason: updateSeason,
@@ -8,7 +11,35 @@ module.exports = {
 };
 
 function listAllSeasons(req, res) {
-    seasonDao.listAllSeasons(cb);
+    seasonDao.listSeasons({}, cb);
+    function cb(err, result) {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.status(200).send(result);
+    }
+}
+
+function listAllSeasonsOfGarden(req, res) {
+    var gardenId = req.params.gardenId;
+    if (!gardenId) {
+        return res.status(400).send({
+            errCode: 0,
+            errMsg: "Không tìm thấy!"
+        });
+    };
+    seasonDao.listSeasons({
+        garden: gardenId
+    }, cb);
+    function cb(err, result) {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.status(200).send(result);
+    }
+}
+function listMySeasons(req, res) {
+    seasonDao.listSeasons({ user: req.decoded._id }, cb);
     function cb(err, result) {
         if (err) {
             return res.status(500).send(err);

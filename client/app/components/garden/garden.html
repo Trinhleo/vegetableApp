@@ -4,12 +4,14 @@
     </div>
     <div class="row" style="padding-left: 5px; padding-right:5px; margin-top:5px">
         <ul class="nav nav-tabs pull-right">
-            <li ng-class="{ active:vm.type === 0}"> <a ng-click="vm.getEventsLocation(0)">Tất cả vườn rau</a>
+            <li ng-class="{ active:vm.type === 0}" ng-show="$root.isAdmin"><a ng-click="vm.loadGardens(0)">Tất cả vườn</a>
             </li>
-            <li ng-class="{ active:vm.type === 1}" ng-show="$root.userInfo"><a ng-click="vm.getEventsLocation(1)">Vườn rau của tôi</a>
+            <li ng-class="{ active:vm.type === 1}"> <a ng-click="vm.loadGardens(1)">Vườn đã cấp phép</a>
             </li>
-            <li ng-class="{ active:vm.type === 2}" ng-show="$root.userInfo"><a ng-click="vm.getEventsLocation(2)">Vườn rau yêu thích</a>
+            <li ng-class="{ active:vm.type === 2}" ng-show="$root.userInfo"><a ng-click="vm.loadGardens(2)">Vườn của tôi</a>
             </li>
+            <!--<li ng-class="{ active:vm.type === 3}" ng-show="$root.userInfo"><a ng-click="vm.getEventsLocation(2)">Vườn rau yêu thích</a>
+            </li>-->
             <!--<li ng-class="{ active: vm.isActive('/events/add')}"><a ui-sref="index.add">Add new event</a></li>-->
         </ul>
     </div>
@@ -21,11 +23,11 @@
                     />
                 </md-input-container>-->
                 <md-divider style="margin-bottom:30px;"></md-divider>
-                <div class="alert alert-warning text-center" data-ng-if="vm.gardens&&vm.gardens.length===0">
+                <!--<div class="alert alert-warning text-center" data-ng-if="vm.gardens&&vm.gardens.length===0">
                     Chưa có vườn, hãy <a data-ui-sref="index.garden-add">tạo một vườn</a>
-                </div>
-                <div class="list-group col-lg-offset-4 col-md-offset-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <md-card style="cursor: pointer" data-ng-repeat="garden in vm.gardens" data-ui-sref="index.garden-details ({ gardenId: garden._id }) "
+                </div>-->
+                <div class="list-group row parralax" >
+                    <md-card class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style="cursor: pointer; margin-left:6% ; margin-bottom: 6%" data-ng-repeat="garden in vm.gardens" data-ui-sref="index.garden-details ({ gardenId: garden._id }) "
                         class="list-group-item">
                         <div class="alert alert-danger" ng-show="!garden.approved">
                             <strong>Chưa được duyệt!</strong>
@@ -58,5 +60,6 @@
                 <my-map id="map_canvas" gardens="vm.gardens" my-id="vm.myId" ng-if="vm.gardens"></my-map>
             </md-tab>
         </md-tabs>
+        <div class="full-page parralax"></div>
     </div>
 </section>

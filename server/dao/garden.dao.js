@@ -13,8 +13,8 @@ module.exports = {
     deleteGarden: deleteGarden
 };
 
-function listAllGardens(callback) {
-    Garden.find().sort('-created').populate('user', 'displayName profileImageURL').populate('productionItem').populate('deviceNode', 'name description').exec(function (err, result) {
+function listAllGardens(query, callback) {
+    Garden.find(query).sort('-created').populate('user', 'displayName profileImageURL').populate('productionItem').populate('deviceNode', 'name description').exec(function (err, result) {
         if (err) {
             return callback(err, null);
         }

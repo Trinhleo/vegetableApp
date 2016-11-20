@@ -6,16 +6,40 @@ var urlPrefix = ('//').concat(myHost).concat(':').concat(port);
 var _ = require('lodash');
 module.exports = {
     listAllGardens: listAllGardens,
-    listAllGardensOfUser: listAllGardensOfUser,
+    listAllGardensApproved: listAllGardensApproved,
     listMyGardens: listMyGardens,
+    listAllGardensOfUser: listAllGardensOfUser,
     getGarden: getGarden,
     createGarden: createGarden,
     updateGarden: updateGarden,
-    deleteGarden: deleteGarden
+    deleteGarden: deleteGarden,
+    approve: approve,
+    unApprove: unApprove
 };
 
 function listAllGardens(req, res) {
-    gardenDao.listAllGardens(cb);
+    gardenDao.listAllGardens({}, cb);
+    function cb(err, result) {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        var gardens = result;
+        _.forEach(gardens, function (gd) {
+            var g = gd;
+            if (req.decoded && (g.user._id.toString() === req.decoded._id.toString())) {
+                g.isOwner = true;
+            }
+            g._doc.imgUrlFull = urlPrefix.concat(g.imgUrl);
+            g._doc.userHostProfileImageURL = urlPrefix.concat(gd.user.profileImageURL);
+            _.forEach(gd.productionItem, function (pi) {
+                pi._doc.imgUrlFull = urlPrefix.concat(pi.imgUrl);
+            });
+        });
+        res.status(200).send(gardens);
+    }
+}
+function listAllGardensApproved(req, res) {
+    gardenDao.listAllGardens({ approved: true }, cb);
     function cb(err, result) {
         if (err) {
             return res.status(500).send(err);
@@ -36,9 +60,10 @@ function listAllGardens(req, res) {
     }
 }
 
+
 function listMyGardens(req, res) {
     var userId = req.decoded._id;
-    gardenDao.listAllGardensByUserId(userId, cb);
+    gardenDao.listAllGardens({ user: userId }, cb);
     function cb(err, result) {
         if (err) {
             return res.status(500).send(err);
@@ -199,4 +224,42 @@ function deleteGarden(req, res) {
             res.status(200).send(result);
         }
     });
+}
+function approve(req, res) {
+
+    var gardenId = req.params.gardenId;
+    gardenDao.updateGarden(gardenId, { approved: true }, cb);
+    function cb(err, result) {
+        if (err) {
+            return res.status(400).send(
+                {
+                    errCode: 0,
+                    errMsg: "Lỗi hệ thống!"
+                }
+            )
+        };
+        res.status(200).send({
+            msg: "Vườn được duyệt thành công!"
+        });
+    }
+}
+
+function unApprove(req, res) {
+
+    var gardenId = req.params.gardenId;
+
+    gardenDao.updateGarden(gardenId, { approved: false }, cb);
+    function cb(err, result) {
+        if (err) {
+            return res.status(400).send(
+                {
+                    errCode: 0,
+                    errMsg: "Lỗi hệ thống!"
+                }
+            )
+        };
+        res.status(200).send({
+            msg: "Vườn được bỏ duyệt thành công!"
+        });
+    }
 }

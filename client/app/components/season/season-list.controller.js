@@ -1,11 +1,11 @@
 (function () {
     angular.module('app.season')
         .controller('ListSeasonController', ListSeasonController);
-    ListSeasonController.$inject = ['GardenService', '$stateParams', '$rootScope', '$localStorage'];
-    function ListSeasonController(GardenService, $stateParams, $rootScope, $localStorage) {
+    ListSeasonController.$inject = ['SeasonService', 'GardenService', '$stateParams', '$rootScope', '$localStorage', 'toastr'];
+    function ListSeasonController(SeasonService, GardenService, $stateParams, $rootScope, $localStorage, toastr) {
         vm = this;
         vm.gardenId = $stateParams.gardenId || '';
-        vm.gardenId = $stateParams.gardenId || '';
+        vm.seasons = [];
         vm.garden = $rootScope.garden || {};
         if ($.isEmptyObject(vm.garden)) {
             GardenService.getGarden(vm.gardenId).then(
@@ -20,5 +20,13 @@
                 }
             )
         }
+        SeasonService.loadSeasons(vm.gardenId).then(
+            function (res) {
+                vm.seasons = res;
+            },
+            function (err) {
+                toastr.error(err.errMsg)
+            }
+        )
     };
 })();
