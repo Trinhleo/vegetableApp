@@ -15,10 +15,11 @@
         vm.clickLong = 106.500;
         vm.gardenId = '';
         vm.formData = {};
-        vm.endDateBeforeRender = endDateBeforeRender;
-        vm.endDateOnSetTime = endDateOnSetTime;
-        vm.startDateBeforeRender = startDateBeforeRender;
-        vm.startDateOnSetTime = startDateOnSetTime;
+        vm.vegetableCategory = [];
+        // vm.endDateBeforeRender = endDateBeforeRender;
+        // vm.endDateOnSetTime = endDateOnSetTime;
+        // vm.startDateBeforeRender = startDateBeforeRender;
+        // vm.startDateOnSetTime = startDateOnSetTime;
         vm.garden = {};
         vm.productionItem = [];
         vm.deviceNode = [];
@@ -51,10 +52,26 @@
         vm.isChecked = isChecked;
         vm.toggleAll = toggleAll;
         vm.selected = [];
+        vm.openCalendar = openCalendar;
+        vm.isOpen = false;
+        setMapSize();
+        $(window).resize(function () {
+            setMapSize();
+        });
 
-        this.isOpen = false;
+        function setMapSize() {
+            // var subHeight = 140;
+            // if ($(window).innerWidth() <= 500) {
+            //     subHeight = 120;
+            // }
+            // var height = $(window).innerHeight() - $('.action-bar').height() - subHeight;
+            var height = $('#add-form').height() + 200;
+            $('#map_canvas').height(height);
+        }
 
-        this.openCalendar = function (e) {
+
+
+        function openCalendar(e) {
             e.prgardenDefault();
             e.stopPropagation();
 
@@ -101,6 +118,7 @@
             ProductionItemService.listAllProductionItems().then(
                 function (res) {
                     vm.productionItem = res
+                    getProductionItemCategory(vm.productionItem);
                 },
                 function (err) {
                     toastr.error(err, 'Lỗi');
@@ -150,45 +168,46 @@
                     getGardensLocation();
                     // vm.uploadgardenImage();
                     vm.gardenId = res._id;
+                    toastr.success('Tạo vườn thành công!', 'Thành công!')
                 }, function (err) {
-                    toastr.error(err.data.message, 'Lỗi');
+                    toastr.error(err.errMsg, 'Lỗi');
                 });
 
         };
 
 
 
-        function startDateOnSetTime() {
-            $scope.$broadcast('start-date-changed');
-        }
+        // function startDateOnSetTime() {
+        //     $scope.$broadcast('start-date-changed');
+        // }
 
-        function endDateOnSetTime() {
-            $scope.$broadcast('end-date-changed');
-        }
+        // function endDateOnSetTime() {
+        //     $scope.$broadcast('end-date-changed');
+        // }
 
-        function startDateBeforeRender($dates) {
-            if (vm.formData.endTime) {
-                var activeDate = moment(vm.formData.endTime);
+        // function startDateBeforeRender($dates) {
+        //     if (vm.formData.endTime) {
+        //         var activeDate = moment(vm.formData.endTime);
 
-                $dates.filter(function (date) {
-                    return date.localDateValue() >= activeDate.valueOf()
-                }).forEach(function (date) {
-                    date.selectable = false;
-                })
-            }
-        }
+        //         $dates.filter(function (date) {
+        //             return date.localDateValue() >= activeDate.valueOf()
+        //         }).forEach(function (date) {
+        //             date.selectable = false;
+        //         })
+        //     }
+        // }
 
-        function endDateBeforeRender($view, $dates) {
-            if (vm.formData.startTime) {
-                var activeDate = moment(vm.formData.startTime).subtract(1, $view).add(1, 'minute');
+        // function endDateBeforeRender($view, $dates) {
+        //     if (vm.formData.startTime) {
+        //         var activeDate = moment(vm.formData.startTime).subtract(1, $view).add(1, 'minute');
 
-                $dates.filter(function (date) {
-                    return date.localDateValue() <= activeDate.valueOf()
-                }).forEach(function (date) {
-                    date.selectable = false;
-                })
-            };
-        };
+        //         $dates.filter(function (date) {
+        //             return date.localDateValue() <= activeDate.valueOf()
+        //         }).forEach(function (date) {
+        //             date.selectable = false;
+        //         })
+        //     };
+        // };
         // Called after the user selected a new picture file
         function onAfterAddingFile(fileItem) {
             if ($window.FileReader) {
@@ -253,33 +272,40 @@
         };
 
 
-        function toggle(item, selected) {
-            var idx = selected.indexOf(item._id);
+        function toggle(item) {
+            var idx = vm.selected.indexOf(item._id);
             if (idx > -1) {
-                selected.splice(idx, 1);
+                vm.selected.splice(idx, 1);
             }
             else {
-                selected.push(item._id)
+                vm.selected.push(item._id)
             }
+            console.log(vm.selected);
         };
-
+        function getProductionItemCategory(vegetable) {
+            for (var x in vegetable) {
+                vm.vegetableCategory.push(vegetable[x]._id);
+            }
+        }
         //check bõ handle
-        function exists(item, selected) {
-            return selected.indexOf(item._id) > -1;
+        function exists(item) {
+            return vm.selected.indexOf(item._id) > -1;
         };
 
         function isIndeterminate() {
             return (vm.selected.length !== 0 &&
-                vm.selected.length !== vm.productionItem.length);
+                vm.selected.length !== vm.vegetableCategory.length);
         };
         function isChecked() {
-            return vm.selected.length === vm.productionItem.length;
+            return vm.selected.length === vm.vegetableCategory.length;
         }
         function toggleAll() {
-            if (vm.selected.length === vm.productionItem.length) {
+            if (vm.selected.length === vm.vegetableCategory.length) {
                 vm.selected = [];
+                console.log(vm.selected);
             } else if (vm.selected.length === 0 || vm.selected.length > 0) {
-                vm.selected = vm.productionItem.slice(0);
+                vm.selected = vm.vegetableCategory.slice(0);
+                console.log(vm.selected);
             }
         };
     };

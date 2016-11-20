@@ -33,8 +33,14 @@ function getSeason(req, res) {
         if (err) {
             return res.status(400).send(err);
         }
-        result.isOwner = userId.toString() === result.user.toString() ? true : false
-        result.isAdmin = req.decoded.role[0] === 'admin' ? true : false;
+        if (null === result) {
+            return res.status(400).send({
+                errCode: 0,
+                errMsg: "Không tìm thấy!"
+            });
+        }
+        result_doc.isOwner = userId.toString() === result.user.toString() ? true : false
+        result_doc.isAdmin = req.decoded.role[0] === 'admin' ? true : false;
         res.status(200).send(result);
     }
 }
@@ -48,6 +54,7 @@ function createSeason(req, res) {
         });
     }
     var seasonInfo = {
+        user: req.decoded._id,
         name: req.body.name,
         garden: req.body.garden,
         productionItem: req.body.productionItem,

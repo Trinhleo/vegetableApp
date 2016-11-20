@@ -1,7 +1,11 @@
 var gardenDao = require('./../dao/garden.dao');
+var myIp = require('ip').address() || '127.0.0.1';
+var myHost = require('./../config/server').HOST;
+var port = require('./../config/server').PORT;
+var urlPrefix = ('//').concat(myHost).concat(':').concat(port);
+var _ = require('lodash');
 module.exports = {
     listAllGardens: listAllGardens,
-
     listAllGardensOfUser: listAllGardensOfUser,
     listMyGardens: listMyGardens,
     getGarden: getGarden,
@@ -16,12 +20,19 @@ function listAllGardens(req, res) {
         if (err) {
             return res.status(500).send(err);
         }
-        for (var x in result) {
-            if (req.decoded && (result[x].user._id.toString() === req.decoded._id.toString())) {
-                result.isOwner = true;
+        var gardens = result;
+        _.forEach(gardens, function (gd) {
+            var g = gd;
+            if (req.decoded && (g.user._id.toString() === req.decoded._id.toString())) {
+                g.isOwner = true;
             }
-        }
-        res.status(200).send(result);
+            g._doc.imgUrlFull = urlPrefix.concat(g.imgUrl);
+            g._doc.userHostProfileImageURL = urlPrefix.concat(gd.user.profileImageURL);
+            _.forEach(gd.productionItem, function (pi) {
+                pi._doc.imgUrlFull = urlPrefix.concat(pi.imgUrl);
+            });
+        });
+        res.status(200).send(gardens);
     }
 }
 
@@ -32,12 +43,15 @@ function listMyGardens(req, res) {
         if (err) {
             return res.status(500).send(err);
         }
-        for (var x in result) {
-            if (result[x].user._id.toString() === userId.toString()) {
-                result.isOwner = true;
-            }
-        }
-        res.status(200).send(result);
+        var gardens = result;
+        _.forEach(gardens, function (gd) {
+            var g = gd;
+            g._doc.imgUrlFull = urlPrefix.concat(g.imgUrl);
+            _.forEach(g.productionItem, function (pi) {
+                pi._doc.imgUrlFull = urlPrefix.concat(pi.imgUrl);
+            });
+        });
+        res.status(200).send(gardens);
     }
 }
 
@@ -55,17 +69,21 @@ function listAllGardensOfUser(req, res) {
         if (err) {
             return res.status(500).send(err);
         }
-        for (var x in result) {
-            if (result[x].user._id.toString() === userId.toString()) {
-                result.isOwner = true;
-            }
-        }
-        res.status(200).send(result);
+        var gardens = result;
+        _.forEach(gardens, function (gd) {
+            var g = gd;
+            g._doc.imgUrlFull = urlPrefix.concat(g.imgUrl);
+            _.forEach(g.productionItem, function (pi) {
+                pi._doc.imgUrlFull = urlPrefix.concat(pi.imgUrl);
+            });
+        });
+        res.status(200).send(gardens);
     }
 }
 
 function getGarden(req, res) {
-    var userId = req.decoded._id;
+    var userId = req.decoded ? req.decoded._id : '';
+    // var isAdmin = req.decoded && req.decoded.roles[0] === 'admin' ? true : false;
     var gardenId = req.params.gardenId;
 
     if (!gardenId) {
@@ -78,8 +96,19 @@ function getGarden(req, res) {
         if (err) {
             return res.status(400).send(err);
         }
-        result.isOwner = userId.toString === result.user.toString() ? true : false;
-        res.status(200).send(result);
+        if (null === result) {
+            return res.status(400).send({
+                errCode: 0,
+                errMsg: "Không tìm thấy!"
+            });
+        }
+        var garden = result;
+        garden._doc.imgUrlFull = urlPrefix.concat(garden.imgUrl);
+        garden._doc.userHostProfileImageURL = urlPrefix.concat(result.user.profileImageURL);
+        _.forEach(garden.productionItem, function (pi) {
+            pi._doc.imgUrlFull = urlPrefix.concat(pi.imgUrl);
+        });
+        res.status(200).send(garden);
     }
 }
 
@@ -143,6 +172,7 @@ function updateGarden(req, res) {
 }
 
 function deleteGarden(req, res) {
+    var userId = req.decoded._id;
     var gardenId = req.params.gardenId;
     if (!gardenId) {
         return res.status(400).send({

@@ -21,11 +21,13 @@
                 $localStorage.userInfo = res.userInfo;
                 $rootScope.userInfo = $localStorage.userInfo;
                 $rootScope.isAdmin = $localStorage.userInfo.roles[0] === 'admin' ? true : false;
-                $state.go('index.product');
-            }, function (err) {
+                console.log($state.previous.state);
+                $state.go(!$state.previous.state.abstract ? $state.previous.state : 'index.product')
                 // console.log(err)
                 // vm.alert = err.data.message || err.message;
-                toastr.error(err.data.message, 'sign in');
+
+            }, function (err) {
+                toastr.error(err.errMsg, 'Lỗi đăng nhập');
             });
         };
     };

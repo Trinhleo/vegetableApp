@@ -1,269 +1,496 @@
-.title-lv1 {
-    color: #337ab7;
-}
-
-.no-padding {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-}
-
-.avatar-and-button {
-    padding-top: 8px;
-    display: flex;
-}
-
-.avatar-and-button div {
-    margin-left: 15px
-}
-
-.middle {
-    display: table-cell;
-    vertical-align: middle;
-}
-
-.header-profile-image {
-    opacity: 0.8;
-    height: 28px;
-    width: 28px;
-    border-radius: 50%;
-    margin-right: 5px;
-}
-
-.open .header-profile-image, a:hover .header-profile-image {
-    opacity: 1;
-}
-
-.user-header-dropdown-toggle {
-    padding-top: 11px !important;
-    padding-bottom: 11px !important;
-}
-
-.navbar-collapse {
-    /*background-image: -webkit-gradient(linear, left top, left bottom, from(#99d6ff), to(#f0f5f5));
+    .title-lv1 {
+        color: white !important;
+        background-color: #009900 !important;
+    }
+    
+    .no-padding {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    
+    .middle {
+        display: table-cell;
+        vertical-align: middle;
+    }
+    
+    .header-profile-image {
+        opacity: 0.8;
+        height: 28px;
+        width: 28px;
+        border-radius: 50%;
+        margin-right: 5px;
+    }
+    
+    .open .header-profile-image, a:hover .header-profile-image {
+        opacity: 1;
+    }
+    
+    .user-header-dropdown-toggle {
+        padding-top: 11px !important;
+        padding-bottom: 11px !important;
+    }
+    
+    .navbar-collapse {
+        /*background-image: -webkit-gradient(linear, left top, left bottom, from(#99d6ff), to(#f0f5f5));
   background-image: -webkit-linear-gradient(top, #99d6ff, #f0f5f5);
   background-image: -moz-linear-gradient(top, #99d6ff, #f0f5f5);
   background-image: linear-gradient(to bottom, #99d6ff, #f0f5f5);*/
-    background: white;
-}
-
-.navbar-toggle .icon-bar {
-    background-color: #337ab7;
-}
-
-.navbar_brand {
-    color: #337ab7;
-    margin-left: 20px;
-}
-
-.dropbtn {
-    font-weight: bold;
-    padding: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-.nav-dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-menu {
-    border: 1px solid #337ab7 !important;
-    border-radius: 0 !important;
-    position: relative !important;
-    width: 100%;
-}
-
-/*.nav-dropdown a:hover, .nav-dropdown a:focus {
+        background: white;
+    }
+    
+    .navbar-toggle .icon-bar {
+        background-color: #009900;
+    }
+    
+    .navbar_brand {
+        color: #009900;
+        margin-left: 20px;
+    }
+    
+    .dropbtn {
+        font-weight: bold;
+        padding: 16px;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .nav-dropdown {
+        position: relative;
+        display: inline-block;
+    }
+    
+    .dropdown-menu {
+        border: 1px solid #009900 !important;
+        border-radius: 0 !important;
+        position: relative !important;
+        width: 100%;
+        word-break: break-all;
+    }
+    /*.nav-dropdown a:hover, .nav-dropdown a:focus {
     background-color: #609dd2 !important;
 }*/
-
-.nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
-    background-color: #609dd2 !important;
-}
-
-.dropdown-menu:hover li a:hover {
-    background-color: #337ab7;
-    color: white !important;
-    transition: all 100ms ease-in-out;
-}
-
-.mobile-dropdown-menu {
-    top: 50px !important;
-}
-
-@media (min-width: 768px) {
-    .navbar-collapse {
-        left: 25% !important;
+    
+    .nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+        background-color: #609dd2 !important;
     }
-    .navbar_brand {
-        float: right;
+    
+    .dropdown-menu:hover li a:hover {
+        background-color: #009900;
+        color: white !important;
+        transition: all 100ms ease-in-out;
     }
-}
-
-#sidenav a:hover {
-    color: white !important;
-}
-
-.nav-tabs>li>a:hover {
-    cursor: pointer;
-}
-
-.nav-tabs>li.active>a:hover, .nav-tabs>li.active>a {
-    background-color: #609dd2 !important;
-}
-
-.nav-tabs>li.active>a {
-    color: white !important;
-}
-
-
-/*sibebar*/
-
-html, body {
-    height: 100%;
-}
-
-.wrapper, .row {
-    height: 100%;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-}
-
-.wrapper:before, .wrapper:after, .column:before, .column:after {
-    content: "";
-    display: table;
-}
-
-
-/* The side navigation menu */
-
-.sidenav {
-    height: 100%;
-    /* 100% Full-height */
-    width: 0;
-    /* 0 width - change this with JavaScript */
-    position: fixed;
-    /* Stay in place */
-    z-index: 1;
-    /* Stay on top */
-    top: 0;
-    left: 0;
-    background-color: #609dd2;
-    /* Black*/
-    overflow-x: hidden;
-    /* Disable horizontal scroll */
-    padding-top: 60px;
-    /* Place content 60px from the top */
-    transition: 0.5s;
-    /* 0.5 second transition effect to slide in the sidenav */
-}
-
-
-/* The navigation menu links */
-
-.sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 16px;
-    color: white;
-    display: block;
-    transition: 0.3s
-}
-
-
-/* When you mouse over the navigation links, change their color */
-
-.sidenav a:hover, .offcanvas a:focus {
-    color: #337ab7;
-}
-
-
-/* Position and style the close button (top right corner) */
-
-.sidenav .closebtn {
-    position: absolute;
-    top: 1px;
-    left: -16px;
-    font-size: 30px;
-    text-decoration: none;
-}
-
-.sidenav .pinbtn {
-    position: absolute;
-    top: -1px;
-    right: 20px;
-    font-size: 30px;
-    text-decoration: none;
-}
-
-
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-
-#main {
-    transition: all .5s;
-}
-
-
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-
-@media screen and (max-height: 450px) {
+    
+    .dropdown-menu>li>a {
+        white-space: normal !important;
+        word-break: break-word !important;
+    }
+    
+    .mobile-dropdown-menu {
+        top: 50px !important;
+    }
+    
+    @media (min-width: 768px) {
+        .navbar-collapse {
+            left: 25% !important;
+        }
+        .navbar_brand {
+            float: right;
+        }
+    }
+    
+    #sidenav a:hover {
+        color: white !important;
+    }
+    
+    .nav-tabs>li>a:hover {
+        cursor: pointer;
+    }
+    
+    .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a {
+        background-color: #609dd2 !important;
+    }
+    
+    .nav-tabs>li.active>a {
+        color: white !important;
+    }
+    /*sibebar*/
+    
+    body, html, .ng-scope, .container-fluid, .page-content {
+        height: 100%;
+        min-height: 100%;
+    }
+    /*.wrapper {
+        height: 100%;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    */
+    
+    .row {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    /*.wrapper:before, .wrapper:after, .column:before, .column:after {
+        content: "";
+        display: table;
+    }*/
+    /* The side navigation menu */
+    
     .sidenav {
-        padding-top: 15px;
+        height: 100%;
+        /* 100% Full-height */
+        width: 0;
+        /* 0 width - change this with JavaScript */
+        position: fixed;
+        /* Stay in place */
+        z-index: 999;
+        /* Stay on top */
+        top: 0;
+        left: 0;
+        background-color: rgba(51, 122, 183, 0.65);
+        /* Black*/
+        overflow-x: hidden;
+        /* Disable horizontal scroll */
+        padding-top: 60px;
+        /* Place content 60px from the top */
+        transition: 0.5s;
+        /* 0.5 second transition effect to slide in the sidenav */
     }
+    /* The navigation menu links */
+    
     .sidenav a {
-        font-size: 18px;
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 16px;
+        color: white;
+        display: block;
+        transition: 0.3s
     }
-}
-
-.side-nav-btn {
-    font-size: 30px !important;
-    cursor: pointer;
-    position: absolute;
-    top: 10px;
-    left: 16px;
-    text-decoration: none !important;
-    color: white !important;
-}
-
-.fa-icon {
-    font-size: 36px !important;
-}
-
-a {
-    text-decoration: none !important;
-}
-
-
-/*nav {
+    /* When you mouse over the navigation links, change their color */
+    
+    .sidenav a:hover, .offcanvas a:focus {
+        color: #009900;
+    }
+    /* Position and style the close button (top right corner) */
+    
+    .sidenav .closebtn {
+        position: absolute;
+        top: 2px;
+        left: -16px;
+        font-size: 30px;
+        text-decoration: none;
+    }
+    
+    .closebtn:hover {
+        color: white !important;
+    }
+    
+    .sidenav .pinbtn {
+        position: absolute;
+        top: -1px;
+        right: 20px;
+        font-size: 30px;
+        text-decoration: none;
+    }
+    
+    .pinbtn:hover {
+        color: white !important;
+    }
+    /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+    
+    #main {
+        transition: all .5s;
+    }
+    /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+    
+    @media screen and (max-height: 450px) {
+        .sidenav {
+            padding-top: 15px;
+        }
+        .sidenav a {
+            font-size: 18px;
+        }
+    }
+    
+    .side-nav-btn {
+        font-size: 30px !important;
+        cursor: pointer;
+        position: absolute;
+        top: 10px;
+        left: 16px;
+        text-decoration: none !important;
+        color: white !important;
+    }
+    
+    .fa-icon {
+        font-size: 36px !important;
+    }
+    
+    a {
+        text-decoration: none !important;
+        color: #009900 !important;
+    }
+    /*nav {
   background: #e6f9ff !important;
 }*/
-
-.navbar-default {
-    background-color: #337ab7 !important;
-}
-
-.nav>li>a:focus, .nav>li>a:hover, .nav>li>a {
-    background-color: #337ab7 !important;
-    color: white !important;
-}
-
-.nav-dropdown .dropdown-menu {
-    position: relative !important;
-}
-.usernav-dropdown .dropdown-menu {
-    position: absolute !important;
-}
-@media screen and (max-width: 320px) {
-    #my-location div div, #reset-location div div {
-        font-size: 11px !important;
-        line-height: 33px !important;
+    
+    .navbar-default {
+        background-color: #009900 !important;
     }
-    #reset-location {
-        left: 128px !important;
+    
+    .nav>li>a:focus, .nav>li>a:hover, .nav>li>a {
+        background-color: rgba(0, 153, 0, 0.48) !important;
+        color: white !important;
     }
-}
-
-#my-location, #reset-location {
-    padding-top: 10px;
-}
+    
+    .nav-stacked>li>a {
+        color: #009900 !important;
+        background-color: white !important;
+    }
+    
+    .nav-stacked li.active a {
+        color: white !important;
+        background-color: #009900 !important;
+    }
+    
+    .nav-stacked {
+        border-right: 1px solid #009900;
+        border-left: 1px solid #009900;
+    }
+    
+    .nav-dropdown .dropdown-menu {
+        position: relative !important;
+    }
+    
+    .usernav-dropdown .dropdown-menu {
+        position: absolute !important;
+    }
+    
+    @media screen and (max-width: 767px) {
+        #my-location div div, #reset-location div div {
+            font-size: 11px !important;
+            line-height: 33px !important;
+        }
+        #reset-location {
+            left: 132px !important;
+        }
+    }
+    
+    #my-location, #reset-location {
+        padding-top: 10px;
+    }
+    
+    .action-bar {
+        width: 100% !important;
+        padding: 15px;
+        display: inline-flex !important;
+        border-bottom: 3px solid #009900 !important;
+    }
+    
+    @media (min-width: 769px) {
+        .data-entry-panel {
+            position: absolute !important;
+            z-index: 998 !important;
+        }
+        #add-form {
+            top: 200px;
+        }
+    }
+    
+    @media (max-width: 500px) {
+        form div div {
+            padding: 0 !important;
+        }
+        hr {
+            display: none;
+        }
+    }
+    
+    a {
+        cursor: pointer !important;
+    }
+    /*carousel*/
+    
+    .center {
+        text-align: center;
+    }
+    
+    .bgimage {
+        text-align: right;
+        color: white;
+        background-size: cover;
+        height: 100%;
+        background-position: center center;
+    }
+    
+    ul[rn-carousel] {
+        max-width: 100%;
+        height: 400px;
+        margin: 0 auto;
+    }
+    
+    .carousel5 li {
+        width: 100%;
+        height: 100%;
+        font-size: 30px;
+        background-color: #ccc;
+    }
+    
+    .carousel-demo {
+        margin-top: 20px;
+        display: inline-block;
+        text-align: center;
+    }
+    
+    .carousel-demo-fullscreen {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .carousel-demo-fullscreen ul[rn-carousel] {
+        width: 100%;
+        height: 100%;
+    }
+    
+    input.tiny {
+        width: 50px;
+        text-align: center;
+    }
+    
+    .carousel-demo ul[rn-carousel-transition="hexagon"] {
+        margin-left: 100px;
+    }
+    
+    .custom-indicator span {
+        transition: all 0.3s ease-in;
+    }
+    
+    .custom-indicator span.active {
+        color: yellow !important;
+    }
+    
+    .shadow:hover {
+        box-shadow: 0px 0px 12px 10px rgba(211, 211, 211, 1);
+        -moz-box-shadow: 0px 0px 12px 10px rgba(211, 211, 211, 1);
+        -webkit-box-shadow: 0px 0px 12px 10px rgba(211, 211, 211, 1);
+    }
+    
+    .rn-carousel-control.rn-carousel-control-next:before {
+        font-size: 36px !important;
+        font-family: FontAwesome;
+        content: '\f138' !important;
+        padding-right: 5px;
+        color: azure;
+    }
+    
+    .rn-carousel-control.rn-carousel-control-prev:before {
+        font-size: 36px !important;
+        font-family: FontAwesome;
+        content: '\f137' !important;
+        padding-left: 5px;
+        color: azure;
+    }
+    
+    #image-container-edit .rn-carousel-controls .rn-carousel-control-prev, #image-container-edit .rn-carousel-controls .rn-carousel-control-next {
+        top: 72% !important;
+    }
+    
+    .rn-carousel-control {
+        opacity: 0 !important;
+    }
+    
+    .rn-carousel-control:hover {
+        opacity: 1 !important;
+    }
+    
+    div.rn-carousel-indicator span.active {
+        color: #009900 !important;
+    }
+    
+    div.rn-carousel-indicator span {
+        font-size: 1.5em !important;
+    }
+    
+    .hidden {
+        visibility: hidden;
+    }
+    
+    a {
+        cursor: pointer !important;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        color: #009900 !important;
+    }
+    
+    h1 {
+        text-align: center !important;
+        padding: 10px !important;
+        text-transform: uppercase !important;
+        font-size: 30px !important;
+    }
+    
+    label {
+        font-size: 1.2em;
+        color: rgba(51, 122, 183, 0.8) !important;
+    }
+    
+    strong {
+        font-size: 1.5em;
+    }
+    
+    .name {
+        color: green !important;
+    }
+    
+    .parallax-garden {
+        /* The image used */
+        background-image: url('./../../img/garden.jpg');
+        /* Full height */
+        height: 100%;
+        /* Create the parallax scrolling effect */
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover
+    }
+    
+    .parallax-background {
+        background-color: rgba(255, 255, 255, 0.8) !important;
+    }
+    
+    img.center {
+        display: block !important;
+        margin: 0 auto !important;
+    }
+    
+    @media only screen and (min-width: 992px) {
+        .scrollup {
+            width: 40px;
+            height: 40px;
+            padding: 10px;
+            text-align: center;
+            background: #009902;
+            font-weight: bold;
+            text-decoration: none;
+            position: fixed;
+            bottom: 75px;
+            right: 40px;
+            display: none;
+        }
+        .scrollup i {
+            color: white;
+        }
+        .scrollup:hover {
+            background: #337ab7;
+        }
+    }
+    
+    md-tabs md-tabs-wrapper {
+        background-color: white !important;
+    }
+    
+    .btn-primary {
+        background-color: #009900 !important;
+        border-color: #00b300 !important;
+    }

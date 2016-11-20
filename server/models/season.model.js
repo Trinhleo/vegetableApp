@@ -21,10 +21,6 @@ var SeasonSchema = new Schema({
         ref: 'Garden',
         require: true
     },
-    imgUrl: {
-        type: String,
-        default: 'http://localhost:3000/img/seasons/no-images.png'
-    },
     status: {
         type: Number,
         default: 0
@@ -45,14 +41,13 @@ var SeasonSchema = new Schema({
         default: 0,
         max: 10000
     },
-    fertilizer1Date: {
-        type: Date
-    },
-    fertilizer2Date: {
-        type: Date
-    },
-    wateringHistory: [{
-        type: Date
+    fertilizering: [{
+        type: Schema.ObjectId,
+        ref: 'Fertilizering'
+    }],
+    watering: [{
+        type: Schema.ObjectId,
+        ref: 'Watering'
     }],
     quantity: {
         type: Number,

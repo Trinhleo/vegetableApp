@@ -35,7 +35,7 @@ var GardenSchema = new Schema({
     },
     imgUrl: {
         type: String,
-        default: '/img/gardens/no-images.png'
+        default: '/img/garden/no-image.svg'
     },
     created: {
         type: Date,

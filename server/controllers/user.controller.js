@@ -1,4 +1,8 @@
 var userDao = require('./../dao/user.dao');
+var myIp = require('ip').address();
+var myHost = require('./../config/server').HOST;
+var port = require('./../config/server').PORT;
+var urlPrefix = ('//').concat(myHost).concat(':').concat(port);
 module.exports = {
     me: getMyUserInfo,
     userInfo: getUserInfo,
@@ -21,6 +25,7 @@ function getMyUserInfo(req, res) {
             displayName: result.displayName,
             email: result.email,
             creationDate: result.creationDate,
+            profileImageURLFull: urlPrefix.concat(result.profileImageURL),
             profileImageURL: result.profileImageURL
         };
         res.status(200).send(userInfo);
@@ -42,6 +47,7 @@ function getUserInfo(req, res) {
             _id: result._id,
             displayName: result.displayName,
             creationDate: result.creationDate,
+            profileImageURLFull: urlPrefix.concat(result.profileImageURL),
             profileImageURL: result.profileImageURL
         };
         res.status(200).send(userInfo);
@@ -75,7 +81,10 @@ function changePictureProfile(req, res) {
             return res.status(400).send();
         }
         console.log("change avatar", result);
-        res.status(200).send({ profileImageURL: req.profileImageURL });
+        res.status(200).send({
+            profileImageURL: req.profileImageURL,
+            profileImageURLFull: urlPrefix.concat(result.profileImageURL),
+        });
 
     });
     //     });

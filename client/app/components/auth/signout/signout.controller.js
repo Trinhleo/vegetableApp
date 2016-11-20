@@ -14,7 +14,7 @@
             delete $rootScope.isAdmin;
             $state.go('index.product');
         }, function (err) {
-            $rootScope.alert = err.data.message;
+            
         });
     }
 })();

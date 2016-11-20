@@ -38,11 +38,12 @@
 
                     // Set the latitude and longitude equal to the HTML5 coordinates
                     var coords = { lat: data.coords.latitude, long: data.coords.longitude };
-
-                    var position = new google.maps.LatLng(coords.lat, coords.long);
-                    $timeout(function () {
-                        map.panTo(position);
-                    }, 250);
+                    if ($rootScope.isMapLoad) {
+                        var position = new google.maps.LatLng(coords.lat, coords.long);
+                        $timeout(function () {
+                            map.panTo(position);
+                        }, 250);
+                    }
                 });
             }
 
@@ -53,29 +54,32 @@
             //         map.panTo(position);
             //     }
             // });
+            function marker() {
+                if (scope.gardens && scope.gardens.length > 0) {
+                    setMarker(scope.gardens);
+                    // try {
+                    //  
+                    //     var position = [lastEvent.location[1], lastEvent.location[0]];
+                    // } catch (err) {
+                    //     return;
+                    // }
+                    var lastEvent = scope.gardens[scope.gardens.length - 1];
+                    try {
+                        position = new google.maps.LatLng(lastEvent.location[1], lastEvent.location[0]);
+                    } catch (e) {
+                        position = new google.maps.LatLng(lastEvent.latitude, lastEvent.longitude);
+                    };
+                    map.panTo(position);
+                    scope.initPosition = position;
+                } else {
+                    clearMarkers();
+                    getMyLocation();
+                };
+            }
 
             scope.$watch('gardens', function (gardens) {
                 $timeout(function () {
-                    if (scope.gardens.length > 0) {
-                        setMarker(scope.gardens);
-                        // try {
-                        //  
-                        //     var position = [lastEvent.location[1], lastEvent.location[0]];
-                        // } catch (err) {
-                        //     return;
-                        // }
-                        var lastEvent = scope.gardens[scope.gardens.length - 1];
-                        try {
-                            position = new google.maps.LatLng(lastEvent.location[1], lastEvent.location[0]);
-                        } catch (e) {
-                            position = new google.maps.LatLng(lastEvent.latitude, lastEvent.longitude);
-                        };
-                        map.panTo(position);
-                        scope.initPosition = position;
-                    } else {
-                        clearMarkers();
-                        getMyLocation();
-                    };
+                    marker();
                 }, 200);
             }, true);
 
@@ -137,20 +141,12 @@
                 if (map === void 0) {
                     var selectedLat = scope.initLat || 10.8121052;
                     var selectedLong = scope.initLong || 106.7120805;
-                    // var navHeight =  $('.nav').css('height');
-                    var height = window.innerHeight;
-
-                    window.addEventListener('load', function () {
-                        height = window.innerHeight;
-                    });
-
-                    $('#map_canvas').css({ height: height });
 
                     var mapCanvas = document.getElementById('map_canvas');
 
                     var mapOptions = {
                         center: new google.maps.LatLng(selectedLat, selectedLong),
-                        zoom: 10,
+                        zoom: 14,
                         minZoom: 3,
                         mapTypeId: google.maps.MapTypeId.ROADMAP
                     };
@@ -161,14 +157,14 @@
                     // constructor passing in this DIV.
                     var centerControlDiv = document.createElement('div');
                     var centerControl = new controlMap(centerControlDiv, 0, 'Vị trí khởi tạo', map);
-
+                    centerControlDiv.setAttribute("id", "reset-location");
                     centerControlDiv.index = 1;
                     map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
 
                     var rightControlDiv = document.createElement('div');
 
                     var rightControl = new controlMap(rightControlDiv, 1, 'Vị trí của tôi', map);
-
+                    rightControlDiv.setAttribute("id", "my-location");
                     centerControlDiv.index = 2;
                     map.controls[google.maps.ControlPosition.TOP_RIGHT].push(rightControlDiv);
 
@@ -317,7 +313,7 @@
                     }
                 };
 
-
+                marker();
             };
 
             function toggleBounce() {
@@ -340,7 +336,7 @@
                         position = new google.maps.LatLng(evt.latitude, evt.longitude);
                     };
                     // var newLatlng = new google.maps.LatLng(evt.location[1], evt.location[0]);
-                    image = evt.imgUrl;
+                    image = evt.imgUrlFull;
                     name = evt.name;
                     var lastOverlay;
                     var lastIW;
@@ -354,21 +350,20 @@
                     // var startDate = $filter('date')(evt.startTime, 'medium', '+070');
                     // var endTime = $filter('date')(evt.endTime, 'medium', '+070')
                     var description = evt.description;
-                    var eventHostId = evt.userHost;
-                    var hostProfileLink = '#/users/' + evt.userHost._id;
+                    var eventHostId = evt.user._id;
+                    var hostUserLink = '#/users/' + evt.user._id;
                     var detailsLink = '#/gardens/' + evt._id;
                     var editLink = detailsLink.concat('/edit');
                     var address = evt.address
                     var contentString = '<div id="iw-container"><div class="iw-title"> <a style="color:#f5f5f5" href="' + detailsLink + '">' + name + '</a></div>'
                         + '<div class="iw-content">'
                         + '</strong></h5>'
-                        + '<h5>Start Time: <strong style="color: red">' + startTime + '</strong></h5>'
-                        + '<h5>End Time: <strong style="color: red">' + endTime + '</strong></h5>'
-                        + '<h5>Address: <strong>' + address + '</strong></h5>'
-                        // + '<a href="' + detailsLink + '"><button class="btn btn-info">Event Details</button></a><br><br>'
-                        // + '<img style="height:200px; width:400px" src="' + evt.imgUrl + '" />'
+                        // + '<h5>Start Time: <strong style="color: red">' + startTime + '</strong></h5>'
+                        // + '<h5>End Time: <strong style="color: red">' + endTime + '</strong></h5>'
+                        + '<h5>Địa chỉ: <strong>' + address + '</strong></h5>'
+                        + '<h5>Diện tích: <strong>' + evt.area + '<small> m<sup>2</sup></small>'
                         + '<hr>'
-                        + '<h5>Hosted by:<a href="' + hostProfileLink + '"> <img style="height:36px; width:36px; border-radius:50%" src="' + evt.userHost.profileImageURL + '" /> <strong style ="color: #000099">' + evt.userHost.firstName + ' ' + evt.userHost.lastName
+                        + '<h5>Chủ vườn:<a href="' + hostUserLink + '"> <img style="height:36px; width:36px; border-radius:50%" src="' + evt.userHostProfileImageURL + '" /> <strong style ="color: #000099">' + evt.user.displayName
                         + '</a></div>'
                         + '</strong></h5>'
                         + '<div class="iw-bottom-gradient"></div>'
@@ -434,9 +429,9 @@
                         infowindow.open(map, overlay);
                         lastinfoWindow = infowindow;
 
-                        window.setTimeout(function () {
-                            map.panTo(overlay.getPosition());
-                        }, 500);
+                        // window.setTimeout(function () {
+                        //     map.panTo(overlay.getPosition());
+                        // }, 500);
 
                     });
                     markers.push(overlay);

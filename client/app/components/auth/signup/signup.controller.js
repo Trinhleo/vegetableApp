@@ -2,9 +2,9 @@
     angular.module('app.signup')
         .controller('SignupController', SignupController);
 
-    SignupController.$inject = ['AuthService', '$state', '$timeout', '$rootScope', '$localStorage'];
+    SignupController.$inject = ['AuthService', '$state', '$timeout', '$rootScope', '$localStorage','toastr'];
 
-    function SignupController(AuthService, $state, $rootScope, $localStorage) {
+    function SignupController(AuthService, $state, $rootScope, $localStorage,toátr) {
         var vm = this;
 
         vm.signup = signup;
@@ -21,9 +21,10 @@
                 $rootScope.alert = "Sign up success! please sign in!"
                 delete $localStorage.user;
                 delete $localStorage.token;
+                 toastr.success('Đăng ký thành công','Thành công')
                 $state.go('index.signin');
             }, function (err) {
-                vm.alert = err.data.message;
+                toastr.error('Không thể đăng ký','Lỗi đăng ký')
             });
         }
     }

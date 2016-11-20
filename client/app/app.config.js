@@ -2,9 +2,9 @@
     "use strict";
     angular.module('app.config', [])
         .constant('appConfigs', {
-            baseUrl: 'http://127.0.0.1:',
+            baseUrl:'http://127.0.0.1:',
             port: 3000,
-            baseApiUrl: '/api/',
+            baseApiUrl: '/api/'
         })
         .constant('uiDatetimePickerConfig', {
             dateFormat: 'yyyy-MM-dd HH:mm',

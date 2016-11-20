@@ -28,7 +28,7 @@ var ProductionItemSchema = new Schema({
     },
     imgUrl: {
         type: String,
-        default: 'http://localhost:3000/img/production-item/no-images.png'
+        default: '/img/production-item/no-image.svg'
     }
 });
 

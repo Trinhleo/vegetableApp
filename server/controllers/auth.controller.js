@@ -1,6 +1,10 @@
 var userDao = require('./../dao/user.dao');
 var cryptoPasswordUtil = require('./../util/crypto-password.util');
 var jwt = require('./../util/jwt.util');
+var myIp = require('ip').address();
+var myHost = require('./../config/server').HOST;
+var port = require('./../config/server').PORT;
+var urlPrefix = ('//').concat(myHost).concat(':').concat(port);
 
 module.exports = {
     signup: signup,
@@ -36,8 +40,10 @@ function signin(req, res) {
                 roles: result.roles,
                 email: result.email,
                 createtionDate: result.createtionDate,
-                profileImageURL: result.profileImageURL
+                profileImageURL: result.profileImageURL,
+                profileImageURLFull: urlPrefix.concat(result.profileImageURL)
             };
+            console.log(token_info);
             var token = jwt.signToken(token_info);
             res.status(200).send({
                 userInfo: token_info,
@@ -89,7 +95,9 @@ function signup(req, res) {
                 lastName: result.lastName,
                 displayName: result.displayName,
                 email: result.email,
-                createtionDate: result.createtionDate
+                createtionDate: result.createtionDate,
+                profileImageURL: result.profileImageURL,
+                profileImageURLFull: urlPrefix.concat(result.profileImageURL)
             };
             res.status(200).send(userInfoToSend);
         });

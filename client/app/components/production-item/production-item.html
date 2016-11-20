@@ -3,7 +3,7 @@
         <h1>Đối tượng sản xuất</h1>
     </div>
     <div style="margin: 20px">
-        <button class="btn btn-primary glyphicon glyphicon-plus" data-toggle="tooltip" title="Thêm đối tượng mới" class="btn btn-primary"
+        <button ng-show="$root.userInfo" class="btn btn-primary glyphicon glyphicon-plus" data-toggle="tooltip" title="Thêm đối tượng mới" class="btn btn-primary"
             data-ui-sref="index.production-item-add">
         </button>
     </div>
@@ -18,7 +18,7 @@
                 <small class="list-group-item-text">
       <span>Tạo lúc: {{productionItem.created | date:'short'}}</span>
   </small>
-                <div class="img_container"><img alt="" class="img-responsive" ng-src="{{productionItem.imgUrl}}" /></div>
+                <div class="img_container"><img alt="" class="img-responsive" ng-src="{{productionItem.imgUrlFull}}" /></div>
             </a>
         </md-card>
     </div>

@@ -1,79 +1,81 @@
-<div class="row">
-	<!-- sidebar -->
-	<div id="mySidenav" class="sidenav">
-		<a href="javascript:void(0)" class="closebtn fa fa-bars" data-toggle="tooltip" title="Đóng Menu" ng-click="vm.closeNav()"></a>
-		<a href="javascript:void(0)" class="pinbtn fa fa-thumb-tack hidden-xs" style="{{vm.isMenuPin?'transform: rotate(90deg); top:-5px;':''}}"
-			data-toggle="tooltip" title="{{vm.isMenuPin?'Bỏ ghim Menu':'Ghim Menu'
+<!-- sidebar -->
+<div id="mySidenav" class="sidenav">
+	<a href="javascript:void(0)" class="closebtn fa fa-bars" data-toggle="tooltip" title="Đóng Menu" ng-click="vm.closeNav()"></a>
+	<a href="javascript:void(0)" class="pinbtn fa fa-thumb-tack hidden-xs" style="{{vm.isMenuPin?'transform: rotate(90deg); top:-13px;':''}}"
+		data-toggle="tooltip" title="{{vm.isMenuPin?'Bỏ ghim Menu':'Ghim Menu'
 		}}" ng-click="vm.pinMenu()"></a>
-		<ul class="nav">
-			<li class="nav-dropdown">
-				<a ui-sref="index.dashboard" ui-sref-active="active" class="dropbtn">TRANG CHỦ</a>
-			</li>
-			<li class="nav-dropdown"><a ui-sref="index.product" ui-sref-active="active" class="">SẢN PHẨM</a>
-			</li>
-			<li class="nav-dropdown" dropdown>
-				<a style="cursor: pointer;" dropdown-toggle>VƯỜN RAU
+	<ul class="nav" style="margin-top:-10px">
+		<li class="nav-dropdown">
+			<a ui-sref="index.product" ui-sref-active="active" class="dropbtn">TRANG CHỦ</a>
+		</li>
+		<li class="nav-dropdown"><a ui-sref="index.product" ui-sref-active="active" class="">SẢN PHẨM</a>
+		</li>
+		<li class="nav-dropdown" ui-sref-active="active">
+			<a ui-sref="index.garden" style="cursor: pointer;" dropdown-toggle>VƯỜN RAU</a>
+		</li>
+		<li class="nav-dropdown" dropdown ng-if="$root.userInfo">
+			<a style="cursor: pointer;" dropdown-toggle>QUẢN LÝ SẢN XUẤT
 				 <b class="caret" style="border-top:8px dashed"></b>
 				</a>
-				<ul class="dropdown-menu" role="menu">
-					<li><a ui-sref="index.garden" ui-sref-active="active">Danh sách vườn</a></li>
-					<li><a ui-sref="index.garden-add" ui-sref-active="active">Thêm vườn mới</a></li>
-				</ul>
-			</li>
-			<li class="nav-dropdown" dropdown ng-if="$root.isAdmin">
-				<a style="cursor: pointer;" dropdown-toggle>QUẢN TRỊ VIÊN
+			<ul class="dropdown-menu" role="menu">
+				<li><a ui-sref="index.garden" ui-sref-active="active">Danh sách vườn</a></li>
+				<li><a ui-sref="index.garden-add" ui-sref-active="active">Thêm vườn mới</a></li>
+				<li><a ui-sref="index.season-th" ui-sref-active="active">Tổng hợp mùa vụ</a></li>
+			</ul>
+		</li>
+		<li class="nav-dropdown" dropdown ng-if="$root.isAdmin">
+			<a style="cursor: pointer;" dropdown-toggle>QUẢN TRỊ VIÊN
 					<b class="caret" style="border-top:8px dashed"></b>
 				</a>
-				<ul class="dropdown-menu" role="menu">
-					<li><a ui-sref="index.production-item" ui-sref-active="active">Đối tượng sản xuất</a></li>
-					<li><a ui-sref="index.device-node" ui-sref-active="active">Thiết bị</a></li>
-					<li><a ui-sref="index.approved" ui-sref-active="active">Danh sách đăng ký vườn</a></li>
-					<li><a ui-sref="index.users" ui-sref-active="active">Quản lý người dùng</a></li>
-				</ul>
+			<ul class="dropdown-menu" role="menu">
+				<li><a ui-sref="index.production-item" ui-sref-active="active">Đối tượng sản xuất</a></li>
+				<li><a ui-sref="index.device-node" ui-sref-active="active">Thiết bị</a></li>
+				<li><a ui-sref="index.approved" ui-sref-active="active">Danh sách đăng ký vườn</a></li>
+				<li><a ui-sref="index.users" ui-sref-active="active">Quản lý người dùng</a></li>
+			</ul>
+		</li>
+		<li class="nav-dropdown"><a ui-sref="index.dashboard" ui-sref-active="active" class="dropbtn">THỐNG KÊ</a>
+			<li class="nav-dropdown"><a ui-sref="index.contact" ui-sref-active="active" class="dropbtn">LIÊN HỆ</a>
 			</li>
-			<li class="dropdown"><a href="#" ui-sref-active="active" class="dropbtn">LIÊN HỆ</a>
+	</ul>
+</div>
+<!-- /sidebar -->
+<div id="main">
+	<a class="side-nav-btn fa fa-bars" data-toggle="tooltip" title="Open Side Menu" ng-click="vm.openNav()"></a>
+	<nav class="nav navbar-default" role="navigation">
+		<ul class="nav col-lg-3 col-md-3 col-sm-6 col-xs-10 pull-right" ng-hide="$root.userInfo" style="display:inline-flex">
+			<li ui-sref-active="active">
+				<a ui-sref="index.signup">Đăng ký</a>
+			</li>
+			<li class="divider-vertical"></li>
+			<li ui-sref-active="active">
+				<a ui-sref="index.signin">Đăng nhập</a>
 			</li>
 		</ul>
-	</div>
-	<!-- /sidebar -->
-	<div class="row" id="main">
-		<a class="side-nav-btn fa fa-bars" data-toggle="tooltip" title="Open Side Menu" ng-click="vm.openNav()"></a>
-		<nav class="nav navbar-default" role="navigation">
-			<ul class="nav col-lg-3 col-md-3 col-sm-4 col-xs-8 pull-right" ng-hide="$root.userInfo">
-				<li ui-sref-active="active">
-					<a ui-sref="index.signup">Đăng ký</a>
-				</li>
-				<li class="divider-vertical"></li>
-				<li ui-sref-active="active">
-					<a ui-sref="index.signin">Đăng nhập</a>
-				</li>
-			</ul>
-			<ul class="nav col-lg-3 col-md-3 col-sm-4 col-xs-10 pull-right" ng-if="$root.userInfo">
-				<li class="usernav-dropdown" dropdown style="width:50%">
-					<a class="dropdown-toggle user-header-dropdown-toggle" dropdown-toggle role="button">
-						<img ng-src="{{$root.userInfo.profileImageURL}}" alt="{{$root.userInfo.displayName}}" class="header-profile-image" />
-						<span ng-bind="$root.userInfo.displayName"></span> <b class="caret"></b>
-					</a>
-					<ul class="dropdown-menu" role="menu">
-						<li ui-sref-active="active">
-							<a ui-sref="index.me">Thông tin cá nhân</a>
-						</li>
-						<li ui-sref-active="active">
-							<a ui-sref="index.settings.profile">Sửa thông tin cá nhân</a>
-						</li>
-						<li ui-sref-active="active">
-							<a ui-sref="index.settings.picture">Thay đổi ảnh đại diện</a>
-						</li>
-						<li class="divider"></li>
-						<li>
-							<a ui-sref="index.signout">Đăng xuất</a>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</nav>
-		<div class="row">
-			<div ui-view="" class="page-content app-content-body"></div>
-		</div>
-	</div>
+		<ul class="nav col-lg-3 col-md-3 col-sm-6 col-xs-10 pull-right" ng-if="$root.userInfo">
+			<li class="usernav-dropdown" dropdown style="width:50%">
+				<a class="dropdown-toggle user-header-dropdown-toggle" dropdown-toggle role="button">
+					<img ng-src="{{$root.userInfo.profileImageURLFull}}" alt="{{$root.userInfo.displayName}}" class="header-profile-image" />
+					<span ng-bind="$root.userInfo.displayName"></span> <b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu" role="menu">
+					<li ui-sref-active="active">
+						<a ui-sref="index.me">Thông tin cá nhân</a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="index.settings.profile">Sửa thông tin cá nhân</a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="index.settings.picture">Thay đổi ảnh đại diện</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a ui-sref="index.signout">Đăng xuất</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+	<div ui-view="" class="page-content"></div>
+	<a class="scrollup"><i class="fa fa-angle-up"></i></a>
 </div>

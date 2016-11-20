@@ -1,1 +1,13 @@
-<section>season</section>
+<section>
+    <div class="action-bar">
+        <a class="fa-icon fa fa-list" href="#/gardens/{{vm.gardenId}}/seasons" data-toggle="tooltip" title="Danh sách mùa vụ"></a>
+        <a ng-if="$root.garden && $root.garden.isOwner" style="margin-left:5px" class="fa-icon fa fa-plus-square" ui-sref="index.season.add"
+            data-toggle="tooltip" title="Thêm mùa vụ"></a>
+        <a ng-if="$root.season && $root.season.isOwner" style="margin-left:5px" ng-if="$root.seasonId" class="fa-icon fa fa-edit"
+            ui-sref="index.seasons.edit({ seasonId: vm.seasonId})" data-toggle="tooltip" title="Chỉnh sửa mùa vụ"></a>
+        <a ng-if="$root.season && $root.season.isOwner" style="margin-left:5px" ng-if="$root.seasonId" class="fa-icon fa fa-tasks"
+            ui-sref="index.season.task({ seasonId: vm.seasonId})" data-toggle="tooltip" title="Danh sách tác vụ"></a>
+        <label style="margin-left:50px;font-size:2em" class="text-right">{{'Quản lý mùa vụ vườn rau: ' + $root.garden.name}}</label>
+    </div>
+    <div ui-view></div>
+</section>

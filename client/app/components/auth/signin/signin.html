@@ -6,18 +6,15 @@
 		<form novalidate>
 			<div class="form-group ">
 				<label for="name ">Tên đăng nhập:</label>
-				<input type="text" ng-model="vm.user.username " class="form-control " id="username " placeholder="Enter username ">
+				<input type="text" ng-model="vm.user.username " class="form-control " id="username " placeholder="Nhập tên đăng nhập">
 			</div>
 			<div class="form-group ">
 				<label for="password ">Mật khẩu:</label>
-				<input type="password" ng-model="vm.user.password " class="form-control " id="password " placeholder="Enter password ">
+				<input type="password" ng-model="vm.user.password " class="form-control " id="password " placeholder="Nhập mật khẩu">
 			</div>
 			<div class="text-center">
 				<button type="submit" class="btn btn-primary" ng-click="vm.signin();" data-ng-disabled="vm.user.username === '' || vm.user.password === ''">Đăng nhập</button>
 				<a ui-sref="index.signup">Đăng ký</a>
-				<div>
-					{{vm.alert}}
-				</div>
 			</div>
 		</form>
 	</div>

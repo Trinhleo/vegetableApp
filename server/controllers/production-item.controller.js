@@ -1,4 +1,9 @@
 var productionItemDao = require('./../dao/production-item.dao');
+var myIp = require('ip').address();
+var myHost = require('./../config/server').HOST;
+var port = require('./../config/server').PORT;
+var urlPrefix = ('//').concat(myHost).concat(':').concat(port);
+var _ = require('lodash');
 module.exports = {
     listAllProductionItems: listAllProductionItems,
     getProductionItem: getProductionItem,
@@ -13,7 +18,11 @@ function listAllProductionItems(req, res) {
         if (err) {
             return res.status(500).send(err);
         }
-        res.status(200).send(result);
+        var pi = result;
+        _.forEach(pi, function (p) {
+            p._doc.imgUrlFull = urlPrefix.concat(p.imgUrl);
+        });
+        res.status(200).send(pi);
     }
 }
 
@@ -32,7 +41,9 @@ function getProductionItem(req, res) {
         if (err) {
             return res.status(400).send(err);
         }
-        res.status(200).send(result);
+        var pi = result;
+        pi._doc.imgUrlFull = urlPrefix.concat(pi.imgUrl);
+        res.status(200).send(pi);
     }
 }
 

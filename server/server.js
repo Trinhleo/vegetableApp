@@ -11,6 +11,7 @@ var serveStatic = require('serve-static');
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 var favicon = require('serve-favicon');
+var myIp = require('ip');
 // var socketConfig = require('./config/socket');
 var morgan = require('morgan');
 // =======================
@@ -32,7 +33,10 @@ app.use(bodyParser.json());
 // app.use(methodOverride())
 app.use(errorHandler.errorHandler());
 app.use(allowCrossDomain);
-
+app.get('/rest/getenv', function (req, res) {
+    var env = process.env.ENV_VARIABLE || myIp.address();
+    res.json({ result: env });
+});
 //service static files
 app.use('/', express.static(path.resolve('./public')));
 // console.log(path.resolve('./uploads'));
@@ -44,4 +48,4 @@ routes(app);
 // socketIoConfig(app);
 // use morgan to log requests to the console
 server.listen(port);
-console.log('Server starting http://localhost:' + port);
+console.log('Server starting ' + myIp.address() + ':' + port);

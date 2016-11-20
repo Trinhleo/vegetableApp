@@ -1,30 +1,32 @@
 <section>
-    <div class="row action-bar">
-        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style="margin-top:10px;margin-bottom:10px">
-            <button ui-sref="index.garden-add" class="btn btn-primary glyphicon glyphicon-plus" data-toggle="tooltip" title="Tạo vườn"></button>
-        </div>
-        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12" style="padding-left: 5px; padding-right:5px">
-            <ul class="nav nav-tabs pull-right">
-                <li ng-class="{ active:vm.type === 0}"> <a ng-click="vm.getEventsLocation(0)">Tất cả vườn rau</a>
-                </li>
-                <li ng-class="{ active:vm.type === 1}" ng-show="$root.userInfo"><a ng-click="vm.getEventsLocation(1)">Vườn rau của tôi</a>
-                </li>
-                <li ng-class="{ active:vm.type === 2}" ng-show="$root.userInfo"><a ng-click="vm.getEventsLocation(2)">Vườn rau yêu thích</a>
-                </li>
-                <!--<li ng-class="{ active: vm.isActive('/events/add')}"><a ui-sref="index.add">Add new event</a></li>-->
-            </ul>
-        </div>
+    <div class="action-bar">
+        <a ng-show="$root.userInfo" ui-sref="index.garden-add" class="fa-icon fa fa-plus-square" data-toggle="tooltip" title="Tạo vườn"></a>
     </div>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <md-tabs md-dynamic-height md-border-bottom>
+    <div class="row" style="padding-left: 5px; padding-right:5px; margin-top:5px">
+        <ul class="nav nav-tabs pull-right">
+            <li ng-class="{ active:vm.type === 0}"> <a ng-click="vm.getEventsLocation(0)">Tất cả vườn rau</a>
+            </li>
+            <li ng-class="{ active:vm.type === 1}" ng-show="$root.userInfo"><a ng-click="vm.getEventsLocation(1)">Vườn rau của tôi</a>
+            </li>
+            <li ng-class="{ active:vm.type === 2}" ng-show="$root.userInfo"><a ng-click="vm.getEventsLocation(2)">Vườn rau yêu thích</a>
+            </li>
+            <!--<li ng-class="{ active: vm.isActive('/events/add')}"><a ui-sref="index.add">Add new event</a></li>-->
+        </ul>
+    </div>
+    <div class="parallax-garden col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+        <md-tabs md-dynamic-height md-border-bottom style="border-top: 3px solid lightgrey">
             <md-tab label="Danh sách vườn rau">
                 <!--<md-input-container>
                     <input class="form-control col-md-4" type="text" ng-model="vm.search" placeholder="Tìm kiếm" ng-change="vm.figureOutItemsToDisplay()"
                     />
                 </md-input-container>-->
                 <md-divider style="margin-bottom:30px;"></md-divider>
-                <div class="list-group">
-                    <md-card data-ng-repeat="garden in vm.gardens" data-ui-sref="index.garden-details ({ gardenId: garden._id }) " class="list-group-item">
+                <div class="alert alert-warning text-center" data-ng-if="vm.gardens&&vm.gardens.length===0">
+                    Chưa có vườn, hãy <a data-ui-sref="index.garden-add">tạo một vườn</a>
+                </div>
+                <div class="list-group col-lg-offset-4 col-md-offset-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <md-card style="cursor: pointer" data-ng-repeat="garden in vm.gardens" data-ui-sref="index.garden-details ({ gardenId: garden._id }) "
+                        class="list-group-item">
                         <div class="alert alert-danger" ng-show="!garden.approved">
                             <strong>Chưa được duyệt!</strong>
                         </div>
@@ -39,24 +41,21 @@
     <span data-ng-if="!garden.user">Người dùng đã bị xóa</span>
   </small>
                         <h4 class="list-group-item-heading" data-ng-bind="garden.name"></h4>
-                        <div class="img_container"><img alt="" class="img-responsive text-center" ng-src="//localhost:3000{{garden.imgUrl}}" /></div>
+                        <div class="img_container"><img alt="" class="img-responsive text-center" ng-src="{{garden.imgUrlFull}}" /></div>
                     </md-card>
-                </div>
-                <div class="alert alert-warning text-center" data-ng-if="vm.gardens.$resolved && !vm.gardens.length">
-                    Chưa có vườn, hãy <a data-ui-sref="gardens.create">tạo một vườn</a>
                 </div>
                 <!--<pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage"
                 ng-change="vm.pageChanged()">
             </pagination>-->
             </md-tab>
-            <md-tab label="Vị trí bản đồ">
+            <md-tab label="Vị trí bản đồ" ng-click="vm.setMapSize();">
                 <!--<md-input-container>
                     <input class="form-control col-md-4" type="text" ng-model="vm.search2" placeholder="Tìm kiếm" ng-change="vm.figureOutItemsToDisplay2()"
                     />
                 </md-input-container>-->
                 <!--<md-divider style="margin-bottom:30px;"></md-divider>-->
 
-                <my-map id="map_canvas" events="vm.events" my-id="vm.myId"></my-map>
+                <my-map id="map_canvas" gardens="vm.gardens" my-id="vm.myId" ng-if="vm.gardens"></my-map>
             </md-tab>
         </md-tabs>
     </div>

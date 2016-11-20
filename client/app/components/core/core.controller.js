@@ -16,22 +16,39 @@
         // $rootScope.userInfo = $localStorage.userInfo;
         // vm.newNotifications = [];
         vm.bage = 0;
-
+        $('.parallax-garden').height($(window).height());
         // navigation
         vm.openNav = openNav;
         vm.closeNav = closeNav;
-        vm.isOpenSideBar = true;
-        vm.isMenuPin = true;
+        vm.isOpenSideBar = false;
+        vm.isMenuPin = false;
         vm.pinMenu = pinMenu;
-        loadNewNotificatons();
-        openNav();
-
-
+        // loadNewNotificatons();
+        // openNav();
         // Collapsing the menu after navigation
         $scope.$on('$stateChangeSuccess', function () {
             if (vm.isOpenSideBar && !vm.isMenuPin) {
                 closeNav();
             }
+        });
+
+        $(document).ready(function () {
+
+            //Check to see if the window is top if not then display button
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('.scrollup').fadeIn();
+                } else {
+                    $('.scrollup').fadeOut();
+                }
+            });
+
+            //Click event to scroll to top
+            $('.scrollup').click(function () {
+                $('html, body').animate({ scrollTop: 0 }, 800);
+                // return false;
+            });
+
         });
 
         function openNav() {

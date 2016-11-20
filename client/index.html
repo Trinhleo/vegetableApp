@@ -14,18 +14,25 @@
 	<link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
 	<link rel="stylesheet" href="bower_components/angular-material-data-table/dist/md-data-table.min.css">
 	<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+	<link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css" />
 	<!--directives-->
 	<link rel="stylesheet" href="app/shared/directives/map/map.directive.css" />
-	<link rel="stylesheet" href="app/shared/directives/chat/chat.directive.css" />
-	<link rel="stylesheet" href="app/shared/directives/slider/slider.directive.css" />
+	<!--<link rel="stylesheet" href="app/shared/directives/chat/chat.directive.css" />
+	<link rel="stylesheet" href="app/shared/directives/slider/slider.directive.css" />-->
 
 </head>
 
-<body class="ng-cloak">
-	<div class="wrapper" ui-view>
+<body>
+	<div ui-view>
 </body>
 <!--vendor-->
 <!--<script async defer src="https://maps.googleapis.com/maps/api/js"></script>-->
+<!--<script src="http://ipv4.myexternalip.com/json?callback=DisplayIP"></script>
+<script type="text/javascript">
+    function DisplayIP(response) {
+      $root.ip = response.ip.string();
+    }
+</script>-->
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="node_modules/moment/moment.js"></script>
 <script src="node_modules/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
@@ -41,10 +48,11 @@
 <script src="node_modules/socket.io-client/socket.io.js"></script>
 <script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
 <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
-<script src="bower_components/angular-material/angular-material.min.js"></script>
+<script src="bower_components/angular-material/angular-material.js"></script>
 <script src="bower_components/angular-aria/angular-aria.min.js"></script>
 <script src="bower_components/angular-messages/angular-messages.min.js"></script>
 <script src="bower_components/angular-material-data-table/dist/md-data-table.min.js"> </script>
+<script src="bower_components/jquery-ui/jquery-ui.min.js"> </script>
 <!--app-->
 <script src="app/app.module.js"></script>
 <script src="app/app.config.js"></script>
@@ -60,6 +68,8 @@
 <script src="app/shared/services/garden.service.js"></script>
 <script src="app/shared/services/production-item.service.js"></script>
 <script src="app/shared/services/device-node.service.js"></script>
+<script src="app/shared/services/season.service.js"></script>
+<script src="app/shared/services/task.service.js"></script>
 
 <!--core-->
 <script src="app/components/core/core.module.js"></script>
@@ -88,10 +98,10 @@
 <script src="app/components/user/settings/user-setting.router.js"></script>
 <script src="app/components/user/settings/user-setting.controller.js"></script>
 <script src="app/components/user/settings/change-profile-picture.controller.js"></script>
-<!--<script src="app/components/gallery/gallery.module.js"></script>
+<script src="app/components/gallery/gallery.module.js"></script>
 <script src="app/components/gallery/gallery.router.js"></script>
-<script src="app/components/gallery/gallery.controller.js"></script>-->
-<!--<script src="app/components/gallery/upload-image.controller.js"></script>-->
+<script src="app/components/gallery/gallery.controller.js"></script>
+<script src="app/components/gallery/upload-image.controller.js"></script>
 <!--<script src="app/components/chat/chat.module.js"></script>
 <script src="app/components/chat/chat.router.js"></script>
 <script src="app/components/chat/chat.controller.js"></script>-->
@@ -99,8 +109,8 @@
 <!--directives-->
 <script src="app/shared/directives/map/map.directive.js"></script>
 <script src="app/shared/directives/upload/upload.directive.js"></script>
-<script src="app/shared/directives/chat/chat.directive.js"></script>
-<script src="app/shared/directives/slider/slider.directive.js"></script>
+<!--<script src="app/shared/directives/chat/chat.directive.js"></script>
+<script src="app/shared/directives/slider/slider.directive.js"></script>-->
 <!--events
 <script src="app/components/events/events.module.js"></script>
 <script src="app/components/events/events.router.js"></script>
@@ -123,6 +133,8 @@
 <script src="app/components/season/season-add.controller.js"></script>
 <script src="app/components/season/season-edit.controller.js"></script>
 <script src="app/components/season/season-details.controller.js"></script>
+<script src="app/components/season/season-list.controller.js"></script>
+<script src="app/components/season/season-task.controller.js"></script>
 <!--product-->
 <script src="app/components/product/product.module.js"></script>
 <script src="app/components/product/product.router.js"></script>

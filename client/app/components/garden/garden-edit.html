@@ -1,0 +1,103 @@
+<section>
+    <div class="action-bar">
+        <a ui-sref="index.garden" class="fa-icon fa fa-list" data-toggle="tooltip" title="List garden"></a>
+    </div>
+    <article>
+        <div class="panel panel-default col-lg-4 col-md-4 col-sm-12 col-xs-12 no-padding data-entry-panel" id="edit-form">
+            <!-- Panel Title -->
+            <div class="panel-heading">
+                <h1 class="panel-title text-center">Chỉnh sửa vườn<span class="glyphicon glyphicon-map-marker"></span></h1>
+            </div>
+            <!-- Panel Body -->
+            <div class="panel-body ">
+                <!-- Creates Form (novalidate disables HTML validation, Angular will control) -->
+                <!-- Creates Form (novalidate disables HTML validation, Angular will control) -->
+                <form name="addForm" novalidate>
+
+                    <!-- Text Boxes and Other User Inputs. Note ng-model binds the values to Angular $scope -->
+                    <div class="form-group">
+                        <label for="name">Tên vườn <span class="badge"></span></label>
+                        <input type="text" class="form-control" id="name" placeholder="Nhập tên vườn" ng-model="vm.formData.name" required>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="padding-left:0;">
+                            <label for="latitude ">Vĩ độ</label>
+                            <input type="text" class="form-control" id="latitude" ng-model="vm.formData.latitude" readonly required>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="padding-right:0;">
+                            <label for="longitude ">Kinh độ</label>
+                            <input type="text" class="form-control" id="longitude" ng-model="vm.formData.longitude" readonly required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Địa chỉ</label>
+                        <input type="text" class="form-control" id="address" ng-model="vm.formData.address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="area">Diện tích canh tác m<sup>2</sup></label>
+                        <input type="number" min=0 max=10000000 class="form-control" id="area" ng-model="vm.formData.area" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Chọn loại rau canh tác</label>
+                    </div>
+                    <div layout="row" layout-wrap flex>
+                        <div flex-xs flex="50" ng-if="true">
+                            <md-checkbox aria-label="Chọn Tất Cả" ng-checked="vm.isChecked()" md-indeterminate="vm.isIndeterminate()" ng-click="vm.toggleAll()">
+                                <span ng-if="vm.isChecked()">Bỏ </span>Chọn Tất Cả
+                            </md-checkbox>
+                        </div>
+                        <div class="choose-vegetable" flex="100" ng-repeat="item in vm.productionItem" ng-if="vm.contentLoad">
+                            <md-checkbox ng-checked="vm.exists(item)" ng-click="vm.toggle(item)">
+                                {{item.name}}
+                            </md-checkbox>
+                        </div>
+                        <!--<div>
+                            <label class="control-label">Thêm loại rau mới</label>
+                            <input type="text" class="form-control" id="area" ng-model="vm.newProductionItem" />
+                        </div>-->
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Chọn loại thiết bị</label>
+                        <select class="form-control" id="dvn-select" ng-model="vm.formData.deviceNode._id"  ng-options="dvn._id as dvn.name for dvn in vm.deviceNode"
+                            required>
+                            <!--<option value="vm.formData.deviceNode._id" selected="vm.formData.deviceNode._id">{{vm.formData.deviceNode.name}}</option>-->
+                
+                     </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Mô tả</label>
+                        <textarea type="text" class="form-control" id="description" placeholder="Nhập mô tả" ng-model="vm.formData.description">
+							</textarea>
+                    </div>
+                    <!--<div class="form-group text-center">
+                        <img ng-src="{{vm.imageURL}}" alt="" class="img-thumbnail" style="max-height:200px; max-width: 200px">
+                    </div>-->
+                    <!--<div class="form-group">
+                    <label for="gardenImage">Ảnh đại diện</label>
+                    <span class="btn btn-default btn-file te">Choose an image<input type="file" nv-file-select uploader="vm.uploader"></span>
+                </div>-->
+                    <!-- Submit button. Note that its tied to createUser() function from addCtrl. Also note ng-disabled logic which prgardens early submits.  -->
+                    <button type="submit" class="btn btn-danger btn-block" ng-click="vm.updateGarden()" ng-disabled="addForm.$invalid">Cập nhật</button>
+                    <!--<div ng-show="vm.success">{{vm.success}}</div>
+                <div ng-show="vm.error">{{vm.error}}</div>-->
+                </form>
+            </div>
+            <div id="image-container-edit" ng-show="vm.gardenImages" class="row" style="margin-top:10px">
+                <!--<slider images="vm.gardenImages"></slider>-->
+                <ul rn-carousel rn-carousel-index="vm.carouselIndex" rn-carousel-controls rn-carousel-auto-slide rn-carousel-pause-on-hover
+                    rn-carousel-buffered class="carousel shadow" ng-if="vm.gardenImages">
+                    <li ng-repeat="slide in vm.gardenImages track by slide._id" ng-class="'id-' + slide._id">
+                        <div ng-style="{'background-image': 'url(' + slide.imgUrl + ')'}" class="bgimage">
+                            #{{vm.gardenImages.indexOf(slide)+1 }}
+                        </div>
+                    </li>
+                </ul>
+                <div rn-carousel-indicators rn-carousel-index="vm.carouselIndex" ng-if="vm.gardenImages&&vm.gardenImages.length > 1" slides="vm.gardenImages"></div>
+                <!--<div rn-carousel-indicators rn-carousel-index=5 ng-if="vm.gardenImages&&vm.gardenImages.length > 1" slides="vm.gardenImages"></div>-->
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 pull-right no-padding">
+            <my-map id="map_canvas" gardens="vm.gardens" editable="true"></my-map>
+        </div>
+    </article>
+</section>

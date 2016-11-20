@@ -1,0 +1,135 @@
+<section>
+    <div class="action-bar">
+        <div ng-show="vm.isMyGarden">
+            <a class="fa-icon fa fa-edit" data-toggle="tooltip" title="Chỉnh sửa vườn" ng-click="vm.gotoEdit();"></a>
+            &nbsp;&nbsp;
+            <a class="fa-icon fa fa-trash" data-toggle="tooltip" title="Xóa vườn" ng-click="vm.deleteGarden();"></a>
+        </div>
+        <div ng-show="!vm.isMyGarden">
+            <button class="btn btn-primary fa {{vm.isLiked?'fa-thumbs-up':'fa-thumbs-o-up'}}" ng-click="vm.likegardens();"> {{vm.isLiked?'Bỏ Thích':'Thích'}}</button>
+        </div>
+        <div style="padding-left:15px">
+            <span class="alert alert-danger" ng-show="!vm.garden.approved">
+                <strong>Chưa được duyệt! </strong>
+                <a data-toggle="tooltip" title="Duyệt" data-ng-click="vm.approve();" ng-if="$root.isAdmin">
+                    <i class="fa fa-remove"></i></a>
+                </span>
+            <span class="alert alert-success" ng-show="vm.garden.approved"> <strong>Đã được duyệt! </strong>
+            <a data-toggle="tooltip" title="Bỏ duyệt" ng-click="vm.approve()" ng-if="$root.isAdmin"><i class="fa fa-check-square-o"></i> </a> 
+      </span>
+        </div>
+        <div ng-show="vm.isMyGarden" style="margin-left:15px"><a style="color:white !important" href="#/gardens/{{vm.garden._id}}/seasons" class="btn btn-primary">Quản lý mùa vụ</a></div>
+    </div>
+    <article>
+        <div class="parallax-garden full-page " id="garden-infomation">
+            <div class="parallax-background" style="padding-top:100px;">
+                <!--<div class="clear-fix parallax-background" style="height:100px"></div>-->
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 parallax-background" id="info" style="padding-bottom:100px">
+                    <div class="row no-padding">
+                        <img alt="" class="parallax-background img-responsive center" ng-src="{{vm.garden.imgUrlFull}}" style="height: 320px;border-radius: 1%;border: 5px solid #009900;"
+                        />
+                    </div>
+                    <!--<div class="row clear-fix" style="height:50px"></div>-->
+                    <div class="parallax-background">
+                        <h1 class="title-lv1">Thông tin vườn rau</h1>
+                        <md-card ng-if="vm.garden" class="shadow col-lg-offset-3 col-md-offset-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <h2>{{vm.garden.name}}</h1>
+                                <div>
+                                    <label>Địa chỉ: </label>
+                                    <strong style="color: #337ab7">{{vm.garden.address}}</strong>
+                                </div>
+                                <div>
+                                    <label>Diện tích: </label>
+                                    <strong style="color: #337ab7">{{vm.garden.area}} m<sup>2</sup></strong>
+                                </div>
+                                <div>
+                                    <label>Mô tả: </label>
+                                    <strong>{{vm.garden.description}}</strong>
+                                </div>
+                                <div>
+                                    <label ng-if="vm.garden.user._id!==$root.userInfo._id">Chủ vườn: </label>
+                                    <a ng-if="vm.garden.user._id!==$root.userInfo._id" href="#/users/{{vm.garden.user._id}}"><span style="color: #337ab7">{{vm.garden.user.displayName}}</span>
+				<img alt="" ng-src="{{vm.garden.user.profileImageURLFull}}" style="height: 36px;width:36px; border-radius: 50%;" />
+				</a>
+                                </div>
+                        </md-card>
+                    </div>
+                </div>
+                <div class="shadow col-lg-6 col-md-6 col-sm-6 col-xs-12 no-padding parallax-background" style="padding-bottom:100px">
+                    <my-map id="map_canvas" gardens="vm.gardens" current-location="vm.initLocation"></my-map>
+                </div>
+            </div>
+        </div>
+        <!--<div class="row clear-fix parallax-garden" style="height:50%"></div>-->
+        <div class="parallax-garden full-page" id="device-node">
+            <div class="row parallax-background" style="padding-bottom: 20px">
+                <h1 class="text-center title-lv1 ">Thiết bị sử dụng</h1>
+                <md-card ng-if="vm.garden" class="shadow col-lg-offset-3 col-md-offset-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <a href="#/device-nodes/{{vm.garden.deviceNode._id}}">
+                        <div>
+                            <!--<label>Tên: </label>-->
+                            <strong class="name">{{vm.garden.deviceNode.name}}</strong>
+                        </div>
+                        <div>
+                            <label>Mô tả: </label>
+                            <strong>{{vm.garden.deviceNode.description}}</strong>
+                        </div>
+                    </a>
+                </md-card>
+            </div>
+        </div>
+        <div class="parallax-garden full-page" id="production-item">
+            <!--<div id="effect" class="row effects clearfix">
+                <div class="img col-sm-4 col-lg-3 col-md-3 col-xs-12">
+                    <img src="img/img.jpg" class="img-responsive" alt="">
+                    <div class="overlay">
+                        <div class="overlay-text">House of Cards</div>
+                        <div class="overlay-dash col-lg-offset-5 col-md-offset-5 col-sm-offset-5 col-xs-offset-5" style="width:15%"></div>
+                        <div class="overlay-search-icon"><i class="fa fa-search"></i></div>
+                    </div>
+                </div>
+            </div>-->
+            <div class="row parallax-background" style="padding-bottom: 20px">
+                <h1 class="text-center title-lv1 ">Đối tượng sản xuất</h1>
+                <md-card ng-if="vm.garden" ng-repeat="productionItem in vm.garden.productionItem" class="shadow col-lg-offset-3 col-md-offset-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <a href="#/production-items/{{productionItem._id}}">
+                        <div class="col-col-lg-3 col-md-3 col-sm-3 col-xs-12 no-padding">
+                            <img alt="" ng-src="{{productionItem.imgUrlFull}}" style="height: 100px;width:100px; border-radius: 50%;" />
+                        </div>
+                        <div class="col-col-lg-6 col-md-6 col-sm-6 col-xs-12" style="padding-top:5px">
+                            <div>
+                                <!--<label></label>-->
+                                <strong class="name">{{productionItem.name}}</strong>
+                            </div>
+                            <div>
+                                <label>Mô tả:</label>
+                                <strong>{{productionItem.description}}</strong>
+                            </div>
+                        </div>
+                    </a>
+                </md-card>
+            </div>
+        </div>
+        <div class="row parallax-garden full-page" id="garden-image">
+            <div id="image-container" class="parallax-background">
+                <h1 class="text-center title-lv1 ">Hình ảnh hoạt động</h1>
+                <!--<slider images="vm.gardenImages"></slider>-->
+                <ul rn-carousel rn-carousel-index="vm.carouselIndex" rn-carousel-controls rn-carousel-auto-slide rn-carousel-pause-on-hover
+                    rn-carousel-buffered class="carousel shadow" ng-if="vm.gardenImages">
+                    <li ng-repeat="slide in vm.gardenImages track by slide._id" ng-class="'id-' + slide._id">
+                        <div ng-style="{'background-image': 'url(' + slide.imgUrlFull + ')'}" class="bgimage">
+                            #{{vm.gardenImages.indexOf(slide)+1 }}
+                        </div>
+                    </li>
+                </ul>
+                <div rn-carousel-indicators rn-carousel-index="vm.carouselIndex" ng-if="vm.gardenImages&&vm.gardenImages.length > 1" slides="vm.gardenImages"></div>
+            </div>
+            <div class="clear-fix" style="height:50px"></div>
+        </div>
+    </article>
+    <!--<div class="parallax-garden"></div>-->
+    <div id="dialog-confirm" title="Bạn có muốn xóa vườn này không?" class="hidden">
+        <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Vườn này sẽ bị xóa vĩnh viễn,
+            bạn đã chắn chắn xóa?</p>
+    </div>
+</section>

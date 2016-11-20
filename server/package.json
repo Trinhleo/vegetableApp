@@ -1,5 +1,5 @@
 {
-  "name": "image-gallery",
+  "name": "fresh-vegetable",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -10,6 +10,7 @@
     "express": "^4.13.4",
     "fs-extra": "^0.30.0",
     "ibmiotf": "^0.2.25",
+    "ip": "^1.1.4",
     "jwt-simple": "^0.5.0",
     "lodash": "^4.16.3",
     "method-override": "^2.3.6",
