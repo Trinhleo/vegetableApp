@@ -8,32 +8,75 @@
       </a>
     </div> -->
     <div class="col-md-4">
-      <md-input-container>
+      <!--<md-input-container>
         <input class="form-control" type="text" ng-model="vm.search" placeholder="Tìm kiếm" ng-change="vm.figureOutItemsToDisplay()"
         />
-      </md-input-container>
+      </md-input-container>-->
     </div>
   </div>
-  <div class="col-md-12" style="padding:0">
+  <!--<div class="col-md-12" style="padding:5%px">
     <div class="list-group">
-      <a data-ng-repeat="season in vm.pagedItems" ng-click="vm.gotoView(season._id);" class="list-group-item">
-        <span class="alert alert-danger" ng-show="vm.season.status===2">Đã kết thúc</span>
-        <span class="alert alert-success" ng-show="vm.season.status===1">Đang diễn ra</span>
-        <span class="alert alert-warning" ng-show="vm.season.status===0">Chưa bắt đầu</span>
-        </span>
-        <small>
-    Tạo lúc
-    <span data-ng-bind="season.created | date:'short'"></span>
-  </small>
-        <h4 data-ng-bind="season.garden.name"></h4>
-        <h4 data-ng-bind="season.name"></h4>
-      </a>
-    </div>
-    <pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage"
-      ng-change="vm.pageChanged()"></pagination>
-    <div class="alert alert-warning text-center" data-ng-if="vm.season.$resolved && !vm.season.length">
-      Không có dữ liệu!</a>
-    </div>
+      <md-card style="margin-top:5%;background-color: #337ab7" data-ng-repeat="season in vm.seasons">
+        <a ui-sref="index.season.details({seasonId:season._id})" class="list-group-item">
+          <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12" style="display: inline-flex">
+            <div>
+              <label>Trạng thái</label>
+
+            </div>
+            <div>
+              <label>Tên mùa vụ: </label>
+              <strong data-ng-bind="season.name"></strong>
+            </div>
+            <div>
+              <label>Tạo lúc</label><span data-ng-bind="season.created | date:'short'"></span>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <div>
+              <label>Đối tượng sản xuất: </label>
+              <strong>{{season.productionItem.name}}</strong>
+            </div>
+            <div>
+              <img ng-src="{{season.productionItemUrl}}" class="img-responsive" />
+            </div>
+          </div>
+        </a>
+      </md-card>-->
+  <md-table-container>
+    <table md-table md-progress="promise">
+      <thead md-head md-order="'name'" md-on-reorder="vm.seasons">
+        <tr md-row>
+          <th md-column md-order-by="nameToLower"><strong>Tên mùa vụ</strong></th>
+          <th md-column md-numeric md-order-by="season.status"><strong>Trạng thái</strong></th>
+          <th md-column md-numeric><strong>Ngày tạo</strong></th>
+          <th md-column md-numeric><strong>Đối tượng sản xuất</strong></th>
+        </tr>
+      </thead>
+      <tbody md-body>
+        <tr md-row md-select="seasons" md-select-id="name" data-toggle="tooltip" title="Chi tiết mùa vụ" md-auto-select ui-sref="index.season.details({seasonId:season._id})"
+          style="cursor:pointer" ng-repeat="season in vm.seasons">
+          <td md-cell><strong>{{season.name}}</strong></td>
+          <td md-cell> <strong class="alert alert-danger" ng-show="season.status===2">Đã kết thúc</strong>
+            <strong class="alert alert-success" ng-show="season.status===1">Đang diễn ra</strong>
+            <strong class="alert alert-warning" ng-show="season.status===0">Chưa bắt đầu</strong></td>
+          <td md-cell><strong>{{season.created | date:'short'}}</strong></td>
+          <td md-cell>
+            <strong>{{season.productionItem.name}}</strong>
+          </td>
+          <td md-cell>
+            <img data-toggle="tooltip" title="{{season.productionItem.name}}" alt="{{season.productionItem.name}}" ng-src="{{season.productionItemUrl}}"
+              class="img-responsive center" width="128px" height="46px" style="margin-right: 0 !important" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </md-table-container>
+  </div>
+  <!--<pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage"
+      ng-change="vm.pageChanged()"></pagination>-->
+  <div class="alert alert-warning text-center" data-ng-if="!vm.seasons.length">
+    Không có dữ liệu!</a>
+  </div>
   </div>
   <!--</form>-->
 </section>

@@ -30,7 +30,7 @@
             $http.get(apiUrl + '/my-seasons').then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {
-                deferred.reject(err);
+                deferred.reject(err.data);
             });
             return deferred.promise;
         };
@@ -40,7 +40,7 @@
             $http.get(apiUrl).then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {
-                deferred.reject(err);
+                deferred.reject(err.data);
             });
             return deferred.promise;
         };
@@ -50,7 +50,7 @@
             $http.get(apiUrl + '/' + id).then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {
-                deferred.reject(err);
+                deferred.reject(err.data);
             });
             return deferred.promise;
         };
@@ -60,7 +60,7 @@
             $http.post(apiUrl, data).then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {
-                deferred.reject(err);
+                deferred.reject(err.data);
             });
             return deferred.promise;
         };
@@ -71,7 +71,7 @@
             $http.put(apiUrl + '/' + id, data).then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {
-                deferred.reject(err);
+                deferred.reject(err.data);
             });
             return deferred.promise;
         };
@@ -81,7 +81,7 @@
             $http.delete(apiUrl + '/' + id).then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {
-                deferred.reject(err);
+                deferred.reject(err.data);
             });
             return deferred.promise;
         };

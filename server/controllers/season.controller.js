@@ -1,5 +1,9 @@
 var seasonDao = require('./../dao/season.dao');
-var gardenDao = require('./../dao/garden.dao');
+var gardenDao = require('./../dao/garden.dao'); var myIp = require('ip').address() || '127.0.0.1';
+var myHost = require('./../config/server').HOST;
+var port = require('./../config/server').PORT;
+var urlPrefix = ('//').concat(myHost).concat(':').concat(port);
+var _ = require('lodash');
 module.exports = {
     listAllSeasons: listAllSeasons,
     listAllSeasonsOfGarden: listAllSeasonsOfGarden,
@@ -16,6 +20,10 @@ function listAllSeasons(req, res) {
         if (err) {
             return res.status(500).send(err);
         }
+        _.forEach(result, function (gd) {
+            var g = gd;
+            g._doc.productionItemUrl = urlPrefix.concat(g.productionItem.imgUrl);
+        });
         res.status(200).send(result);
     }
 }
@@ -35,6 +43,10 @@ function listAllSeasonsOfGarden(req, res) {
         if (err) {
             return res.status(500).send(err);
         }
+        _.forEach(result, function (gd) {
+            var g = gd;
+            g._doc.productionItemUrl = urlPrefix.concat(g.productionItem.imgUrl);
+        });
         res.status(200).send(result);
     }
 }
@@ -49,7 +61,7 @@ function listMySeasons(req, res) {
 }
 
 function getSeason(req, res) {
-    var userId = req.decoded._id;
+    var userId = req.decoded ? req.decoded._id : '';
     var seasonId = req.params.seasonId;
     if (!seasonId) {
         return res.status(400).send({
@@ -57,7 +69,6 @@ function getSeason(req, res) {
             errMsg: "Không tìm thấy!"
         });
     }
-
     seasonDao.readSeasonById(seasonId, cb);
 
     function cb(err, result) {
@@ -70,8 +81,9 @@ function getSeason(req, res) {
                 errMsg: "Không tìm thấy!"
             });
         }
-        result_doc.isOwner = userId.toString() === result.user.toString() ? true : false
-        result_doc.isAdmin = req.decoded.role[0] === 'admin' ? true : false;
+        result._doc.productionItemUrl = urlPrefix.concat(result.productionItem.imgUrl);
+        // result._doc.isOwner = userId.toString() === result.user.toString() ? true : false
+        // result._doc.isAdmin = req.decoded.role[0] === 'admin' ? true : false;
         res.status(200).send(result);
     }
 }
@@ -84,21 +96,38 @@ function createSeason(req, res) {
             errMsg: "Lỗi nhập liệu"
         });
     }
-    var seasonInfo = {
-        user: req.decoded._id,
-        name: req.body.name,
-        garden: req.body.garden,
-        productionItem: req.body.productionItem,
-        startDate: req.body.startDate,
-        endDate: req.body.endDate,
-        seedQuantity: req.body.seedQuantity
-    };
-    seasonDao.createSeason(seasonInfo, cb);
-    function cb(err, result) {
+    gardenDao.readGardenById(req.body.garden, callback);
+    function callback(err, result) {
         if (err) {
-            return res.status(400).send(err);
+            return res.status(500).send({ errCode: 0, errMsg: 'Lỗi hệ thống' });
+        };
+        if (null === result) {
+            return res.status(500).send({ errCode: 1, errMsg: 'Vườn không tồn tại' })
+        };
+
+        if (result.approved === false) {
+            return res.status(403).send({ errCode: 1, errMsg: 'Vườn chưa dược duyệt' })
+        };
+
+        console.log('approved', res.approved);
+
+        var seasonInfo = {
+            user: req.decoded._id,
+            name: req.body.name,
+            garden: req.body.garden,
+            productionItem: req.body.productionItem,
+            startDate: req.body.startDate,
+            endDate: req.body.endDate,
+            seedQuantity: req.body.seedQuantity
+        };
+
+        seasonDao.createSeason(seasonInfo, cb);
+        function cb(err, result) {
+            if (err) {
+                return res.status(400).send(err);
+            }
+            res.status(200).send(result);
         }
-        res.status(200).send(result);
     }
 }
 

@@ -39,7 +39,7 @@
             $http.get(apiUrl + '/approved').then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {
-                deferred.reject(err);
+                deferred.reject(err.data);
             });
             return deferred.promise;
         };
@@ -49,7 +49,7 @@
             $http.get(apiUrl + '/my-gardens').then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {
-                deferred.reject(err);
+                deferred.reject(err.data);
             });
             return deferred.promise;
         };
@@ -68,7 +68,7 @@
             $http.get(apiUrl + '/' + id).then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {
-                deferred.reject(err);
+                deferred.reject(err.data);
             });
             return deferred.promise;
         };
@@ -78,7 +78,7 @@
             $http.post(apiUrl, data).then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {
-                deferred.reject(err);
+                deferred.reject(err.data);
             });
             return deferred.promise;
         };
@@ -89,7 +89,7 @@
             $http.put(apiUrl + '/' + id, data).then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {
-                deferred.reject(err);
+                deferred.reject(err.data);
             });
             return deferred.promise;
         };
@@ -99,7 +99,7 @@
             $http.delete(apiUrl + '/' + id).then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {
-                deferred.reject(err);
+                deferred.reject(err.data);
             });
             return deferred.promise;
         };
@@ -109,7 +109,7 @@
             $http.get(apiUrl + '/' + id + '/images').then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {
-                deferred.reject(err);
+                deferred.reject(err.data);
             });
             return deferred.promise;
         };
@@ -122,7 +122,7 @@
             $http.post(apiUrl + '/my-favorite-Gardens', evtInfo).then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {
-                deferred.reject(err);
+                deferred.reject(err.data);
             });
             return deferred.promise;
 
@@ -133,7 +133,7 @@
             $http.delete(apiUrl + '/my-favorite-Gardens/' + GardenId).then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {
-                deferred.reject(err);
+                deferred.reject(err.data);
             });
             return deferred.promise;
 
@@ -144,7 +144,7 @@
             $http.get(apiUrl + '/my-favorite-Gardens/' + GardenId).then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {
-                deferred.reject(err);
+                deferred.reject(err.data);
             });
             return deferred.promise;
         };
@@ -154,7 +154,7 @@
             $http.get(apiUrl + '/my-favorite-Gardens').then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {
-                deferred.reject(err);
+                deferred.reject(err.data);
             });
             return deferred.promise;
         };
@@ -164,7 +164,7 @@
             $http.get(apiUrl + '/' + gardenId + '/approve').then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {
-                deferred.reject(err);
+                deferred.reject(err.data);
             });
             return deferred.promise;
 
@@ -175,7 +175,7 @@
             $http.get(apiUrl + '/' + gardenId + '/un-approve').then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {
-                deferred.reject(err);
+                deferred.reject(err.data);
             });
             return deferred.promise;
 

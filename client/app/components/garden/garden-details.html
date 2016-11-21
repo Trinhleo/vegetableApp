@@ -5,9 +5,9 @@
             &nbsp;&nbsp;
             <a class="fa-icon fa fa-trash" data-toggle="tooltip" title="Xóa vườn" ng-click="vm.deleteGarden();"></a>
         </div>
-        <div ng-show="!vm.isMyGarden">
+        <!--<div ng-show="!vm.isMyGarden">
             <button class="btn btn-primary fa {{vm.isLiked?'fa-thumbs-up':'fa-thumbs-o-up'}}" ng-click="vm.likegardens();"> {{vm.isLiked?'Bỏ Thích':'Thích'}}</button>
-        </div>
+        </div>-->
         <div style="padding-left:15px">
             <span class="alert alert-danger" ng-show="!vm.garden.approved">
                 <strong>Chưa được duyệt! </strong></span>
@@ -17,7 +17,7 @@
                 <i class="fa fa-check">Duyệt</i></a>
             <a ng-show="vm.garden.approved" data-toggle="tooltip" title="Bỏ duyệt" ng-click="vm.unApprove()" ng-if="$root.isAdmin"><i class="fa fa-remove">Bỏ duyệt</i> </a>
         </div>
-        <div ng-show="vm.isMyGarden$$vm.garden.approved" style="margin-left:15px"><a style="color:white !important" href="#/gardens/{{vm.garden._id}}/seasons" class="btn btn-primary">Quản lý mùa vụ</a></div>
+        <div ng-show="vm.isMyGarden&&vm.garden.approved" style="margin-left:15px"><a style="color:white !important" href="#/gardens/{{vm.garden._id}}/seasons" class="btn btn-primary">Quản lý mùa vụ</a></div>
     </div>
     <article>
         <div class="parallax-garden full-page " id="garden-infomation">

@@ -12,8 +12,8 @@ module.exports = {
     deleteSeason: deleteSeason
 };
 
-function listSeasons(query,callback) {
-    Season.find(query, function (err, result) {
+function listSeasons(query, callback) {
+    Season.find(query).sort('-created').populate('garden').populate('productionItem').exec(function (err, result) {
         if (err) {
             return callback(err, null);
         }
@@ -22,7 +22,7 @@ function listSeasons(query,callback) {
 }
 
 function readSeasonById(id, callback) {
-    Season.findById(id, function (err, result) {
+    Season.findById(id).sort('-created').populate('garden').populate('productionItem').exec(function (err, result) {
         if (err) {
             return callback(err, null);
         }
@@ -30,15 +30,14 @@ function readSeasonById(id, callback) {
     });
 }
 
-function readSeason(season, callback) {
-    Season.findOne({
-        name: season.name
-    }, function (err, result) {
-        if (err) {
-            return callback(err, null);
-        }
-        callback(null, result);
-    });
+function readSeason(query, callback) {
+    Season.findOne(
+        query).populate('garden').populate('productionItem').exec(function (err, result) {
+            if (err) {
+                return callback(err, null);
+            }
+            callback(null, result);
+        });
 }
 
 function createSeason(creditial, callback) {

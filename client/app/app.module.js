@@ -40,6 +40,7 @@
                     && toState.name != "index.season-th") {
                     if (!$localStorage.token && !$localStorage.user) {
                         event.preventDefault();
+                        $state.go('index.signout')
                         $state.go('index.signin')
                         storePreviousState(toState, toParams);
                     }

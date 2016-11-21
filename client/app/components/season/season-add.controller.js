@@ -1,8 +1,8 @@
 (function () {
     angular.module('app.season')
         .controller('AddSeasonController', AddSeasonController);
-    AddSeasonController.$inject = ['toastr', 'SeasonService', 'GardenService', '$rootScope', '$stateParams', '$filter', '$localStorage', '$q', '$log', '$timeout'];
-    function AddSeasonController(toastr, SeasonService, GardenService, $rootScope, $stateParams, $filter, $localStorage, $q, $log, $timeout) {
+    AddSeasonController.$inject = ['$state', 'toastr', 'SeasonService', 'GardenService', '$rootScope', '$stateParams', '$filter', '$localStorage', '$q', '$log', '$timeout'];
+    function AddSeasonController($state, toastr, SeasonService, GardenService, $rootScope, $stateParams, $filter, $localStorage, $q, $log, $timeout) {
         var vm = this;
         vm.gardenId = $stateParams.gardenId;
         vm.garden = $rootScope.garden || {};
@@ -94,9 +94,25 @@
             SeasonService.createSeason(vm.season).then(
                 function (res) {
                     toastr.success('Tạo mùa vụ thành công!', 'Thành công');
+                    vm.selectedItem = {};
+                    vm.season = {
+                        name: '',
+                        seedQuantity: '',
+                        startDate: '',
+                        endDate: ''
+                    }
+                    $state.go('index.season.details', {
+                        seasonId: res._id
+                    })
                 },
                 function (err) {
-                    toastr.error(err.errMsg, 'Lỗi');
+                    var msg = '';
+                    if (err.code === 11000) {
+                        msg = 'Tên vườn bị trùng'
+                    } else {
+                        msg = 'Lỗi hệ thống';
+                    }
+                    toastr.error(msg, 'Lỗi');
                 });
         }
     };

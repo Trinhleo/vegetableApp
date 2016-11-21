@@ -18,12 +18,13 @@
         vm.contentLoad = false;
         vm.updateGarden = updateGarden;
         vm.vegetableCategory = [];
+        vm.formChange = false;
         getGarden();
         setMapSize();
         $(window).resize(function () {
             setMapSize();
         });
-    
+
         $rootScope.$on("clicked", function () {
 
             // Run the gservice functions associated with identifying coordinates
@@ -120,6 +121,7 @@
             else {
                 vm.selected.push(item._id)
             }
+            vm.formChange = true;
         };
 
         function getProductionItemCategory(vegetable) {
@@ -147,6 +149,7 @@
                 vm.selected = vm.vegetableCategory.slice(0);
                 console.log(vm.selected);
             }
+            vm.formChange = true;
         };
     };
 })();

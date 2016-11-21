@@ -1,0 +1,47 @@
+<section>
+    <h1>Tạo mùa vụ mới</h1>
+    <form name="seasonForm" class="form-horizontal" ng-submit="vm.save(vm.form.seasonForm.$valid)" novalidate>
+        <fieldset class="col-md-offset-3 col-md-6 col-md-offset-3">
+            <div class="form-group" show-errors>
+                <label class="control-label" for="name">Tên mùa vụ</label>
+                <input name="name" type="text" ng-change="vm.formChange=true" ng-model="vm.season.name" id="name" class="form-control" placeholder="Tên mùa vụ" required>
+                <div ng-messages="vm.form.gardenForm.name.$error" role="alert">
+                    <p class="help-block error-text" ng-message="required">Tên mùa vụ là bắt buộc.</p>
+                </div>
+            </div>
+            <div class="form-group" show-errors>
+                <label class="control-label" for="seedQuantity">Số lượng giống:</label>
+                <input name="seedQuantity" ng-change="vm.formChange=true" type="number" ng-model="vm.season.seedQuantity" id="seedQuantity" class="form-control" ng-required
+                    min="0" max="100000">
+                <div ng-messages="vm.form.gardenForm.name.$error" role="alert">
+                    <p class="help-block error-text" ng-message="required">Số lượng giống là bắt buộc.</p>
+                    <p class="help-block error-text" ng-message="min">Không được nhập số âm.</p>
+                    <p class="help-block error-text" ng-message="max">Chỉ được nhập tối đa là 100000.</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="statdate">Ngày bắt đầu</label>
+                <md-datepicker name="startdate" ng-change="vm.formChange=true" ng-model="vm.season.startDate" md-placeholder="Chọn ngày bắt đầu" md-min-date="vm.dateNow"
+                    md-max-date="vm.season.endDate" md-open-on-focus required>
+                </md-datepicker>
+                <!-- <span ng-show="vm.season._id">{{vm.season.startDate| date:'short'}}</span> -->
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="statdate">Ngày kết thúc (dự kiến)</label>
+                <md-datepicker name="enddate" ng-change="vm.formChange=true" ng-model="vm.season.endDate" md-placeholder="Chọn ngày kết thúc" md-min-date="vm.season.startDate"
+                    md-open-on-focus required>
+                </md-datepicker>
+                <!-- <span ng-show="vm.season._id">{{vm.season.endDate| date:'short'}}</span> -->
+            </div>
+
+            <div class="form-group">
+                <button ng-click="vm.updateSeason()" type="submit" class="btn btn-primary" ng-disabled="seasonForm.name.$invalid||seasonForm.startdate.$invalid||seasonForm.enddate.$invalid || seasonForm.seedQuantity.$invalid||vseasonForm.enddate.$invalid||!vm.formChange">
+  Cập nhật
+</button>
+            </div>
+            <div ng-show="vm.error" class="text-danger">
+                <strong ng-bind="vm.error"></strong>
+            </div>
+        </fieldset>
+    </form>
+</section>
