@@ -1,4 +1,10 @@
 <section>
+  <div class="action-bar">
+    <a class="fa-icon fa fa-list" href="#/gardens/{{vm.gardenId}}/seasons" data-toggle="tooltip" title="Danh sách mùa vụ"></a>
+    <a ng-if="vm.garden.isOwner" style="margin-left:5px" class="fa-icon fa fa-plus-square" ui-sref="index.season.add"
+      data-toggle="tooltip" title="Thêm mùa vụ"></a>
+    <label style="margin-left:50px;font-size:2em" class="text-right">{{'Quản lý mùa vụ vườn rau: ' + $root.garden.name}}</label>
+  </div>
   <div class="page-header">
     <h1>Danh sách mùa vụ</h1>
     <!-- <div class="col-md-4" style="margin-top: 20px">
@@ -14,34 +20,6 @@
       </md-input-container>-->
     </div>
   </div>
-  <!--<div class="col-md-12" style="padding:5%px">
-    <div class="list-group">
-      <md-card style="margin-top:5%;background-color: #337ab7" data-ng-repeat="season in vm.seasons">
-        <a ui-sref="index.season.details({seasonId:season._id})" class="list-group-item">
-          <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12" style="display: inline-flex">
-            <div>
-              <label>Trạng thái</label>
-
-            </div>
-            <div>
-              <label>Tên mùa vụ: </label>
-              <strong data-ng-bind="season.name"></strong>
-            </div>
-            <div>
-              <label>Tạo lúc</label><span data-ng-bind="season.created | date:'short'"></span>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-            <div>
-              <label>Đối tượng sản xuất: </label>
-              <strong>{{season.productionItem.name}}</strong>
-            </div>
-            <div>
-              <img ng-src="{{season.productionItemUrl}}" class="img-responsive" />
-            </div>
-          </div>
-        </a>
-      </md-card>-->
   <md-table-container>
     <table md-table md-progress="promise">
       <thead md-head md-order="'name'" md-on-reorder="vm.seasons">
@@ -50,22 +28,31 @@
           <th md-column md-numeric md-order-by="season.status"><strong>Trạng thái</strong></th>
           <th md-column md-numeric><strong>Ngày tạo</strong></th>
           <th md-column md-numeric><strong>Đối tượng sản xuất</strong></th>
+          <th md-column md-numeric><strong>Tác vụ</strong></th>
         </tr>
       </thead>
       <tbody md-body>
-        <tr md-row md-select="seasons" md-select-id="name" data-toggle="tooltip" title="Chi tiết mùa vụ" md-auto-select ui-sref="index.season.details({seasonId:season._id})"
-          style="cursor:pointer" ng-repeat="season in vm.seasons">
+        <tr md-row md-select="seasons" md-select-id="name" md-auto-select ng-repeat="season in vm.seasons">
           <td md-cell><strong>{{season.name}}</strong></td>
           <td md-cell> <strong class="alert alert-danger" ng-show="season.status===2">Đã kết thúc</strong>
             <strong class="alert alert-success" ng-show="season.status===1">Đang diễn ra</strong>
             <strong class="alert alert-warning" ng-show="season.status===0">Chưa bắt đầu</strong></td>
           <td md-cell><strong>{{season.created | date:'short'}}</strong></td>
           <td md-cell>
-            <strong>{{season.productionItem.name}}</strong>
-          </td>
-          <td md-cell>
+            <strong style="padding-right:20px">{{season.productionItem.name}}</strong>
             <img data-toggle="tooltip" title="{{season.productionItem.name}}" alt="{{season.productionItem.name}}" ng-src="{{season.productionItemUrl}}"
               class="img-responsive center" width="128px" height="46px" style="margin-right: 0 !important" />
+          </td>
+          <td md-cell>
+            <div>
+              <div class=" col-md-12">
+                <a data-toggle="tooltip" title="Chi tiết mùa vụ" ui-sref="index.season.details({seasonId:season._id})"><i class="fa-icon fa fa-eye"></i></a>                &nbsp;&nbsp;
+                <a data-ng-if="vm.garden.isOwner" data-toggle="tooltip" title="Chỉnh sửa mùa vụ" data-ui-sref="index.season.edit({ seasonId: season._id })">
+                  <i class="fa-icon fa fa-edit"></i></a>
+                &nbsp;&nbsp;
+                <a data-ng-if="vm.garden.isOwner" data-toggle="tooltip" title="Xóa mùa vụ" data-ng-click="vm.remove(season)"><i class="fa-icon fa fa-trash"></i></a>
+              </div>
+            </div>
           </td>
         </tr>
       </tbody>

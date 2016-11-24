@@ -4,9 +4,25 @@
     EditSeasonController.$inject = ['SeasonService', '$stateParams', '$state', '$rootScope', 'toastr'];
     function EditSeasonController(SeasonService, $stateParams, $state, $rootScope, toastr) {
         vm = this;
+        vm.gardenId = $stateParams.gardenId;
+        vm.garden = $rootScope.garden || {};
         vm.season = {};
         vm.formChange = false;
         vm.updateSeason = updateSeason;
+        if ($.isEmptyObject(vm.garden)) {
+            GardenService.getGarden(vm.gardenId).then(
+                function (res) {
+                    vm.garden = res;
+                    vm.garden.isOwner = $localStorage.userInfo && $localStorage.userInfo._id === res.user._id ? true : false;
+                    $rootScope.garden = vm.garden;
+                    console.log(vm.garden.isOwner);
+                },
+                function (err) {
+                    toatr.error(err.errMsg, 'Lỗi')
+                }
+            )
+        }
+        
         loadSeason();
         function loadSeason() {
             SeasonService.getSeason($stateParams.seasonId).then(

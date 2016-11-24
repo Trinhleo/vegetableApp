@@ -8,7 +8,7 @@ module.exports = {
 };
 
 function listAllDeviceNodes(req, res) {
-    DeviceNodeDao.listAllDeviceNodes(cb);
+    DeviceNodeDao.listAllDeviceNodes({ isDeleted: false }, cb);
     function cb(err, result) {
         if (err) {
             return res.status(500).send(err);
@@ -26,7 +26,7 @@ function getDeviceNode(req, res) {
         });
     }
 
-    DeviceNodeDao.readDeviceNodeById(deviceNodeId, cb);
+    DeviceNodeDao.readDeviceNode({ _id: deviceNodeId, isDeleted: false }, cb);
 
     function cb(err, result) {
         if (err) {
@@ -46,7 +46,7 @@ function createDeviceNode(req, res) {
     }
     var dvnInfo = {
         name: req.body.name,
-        description: req.body.description|| ''
+        description: req.body.description || ''
     };
     DeviceNodeDao.createDeviceNode(dvnInfo, cb);
     function cb(err, result) {
@@ -73,7 +73,7 @@ function updateDeviceNode(req, res) {
         });
     }
 
-    DeviceNodeDao.updateDeviceNode  (DeviceNodeId, dvnInfo, cb);
+    DeviceNodeDao.updateDeviceNode(DeviceNodeId, dvnInfo, cb);
     function cb(err, result) {
         if (err) {
             return res.status(400).send(err);
@@ -99,7 +99,7 @@ function deleteDeviceNode(req, res) {
     }
 
 
-    DeviceNodeDao.deleteDeviceNode(DeviceNodeId, cb);
+    DeviceNodeDao.updateDeviceNode(DeviceNodeId, { isDeleted: true, deleteDate: new Date() }, cb);
 
     function cb(err, result) {
         if (err) {

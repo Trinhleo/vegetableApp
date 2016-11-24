@@ -23,7 +23,7 @@ function listAllGardens(query, callback) {
 }
 
 function listAllGardensByUserId(userId, callback) {
-    Garden.find({ user: userId }).sort('-created').populate('user', 'displayName profileImageURL').populate('productionItem').populate('deviceNode', 'name description').exec(function (err, result) {
+    Garden.find({ user: userId, isDelete: false }).sort('-created').populate('user', 'displayName profileImageURL').populate('productionItem').populate('deviceNode', 'name description').exec(function (err, result) {
         if (err) {
             return callback(err, null);
         }
@@ -44,7 +44,7 @@ function readGarden(garden, callback) {
     Garden.findOne({
         _id: garden._id,
         user: garden.user
-    }, function (err, result) {
+    }).populate('user', 'displayName profileImageURL').exec(function (err, result) {
         if (err) {
             return callback(err, null);
         }

@@ -3,6 +3,7 @@ var gardenDao = require('./../dao/garden.dao'); var myIp = require('ip').address
 var myHost = require('./../config/server').HOST;
 var port = require('./../config/server').PORT;
 var urlPrefix = ('//').concat(myHost).concat(':').concat(port);
+var cron = require('node-cron');
 var _ = require('lodash');
 module.exports = {
     listAllSeasons: listAllSeasons,
@@ -14,8 +15,48 @@ module.exports = {
     deleteSeason: deleteSeason
 };
 
+// cron.schedule('* * * * *', function () {
+//     Season.find().sort('-created').populate('garden', 'name').exec(function (err, seasons) {
+//         if (err) {
+//             ;
+//         } else {
+
+//             // for (var ss in seasons) {
+//             //     console.log(seasons[ss]);
+//             // }
+//         }
+//     });
+
+// });
+// check status realtime;
+// setInterval(realtime, 1000);
+// function realtime() {
+//     var sse = [];
+//     seasonDao.listSeasons({ status: { $lt: 2 }, isDeleted: false })
+//     Season.find().sort('-created').populate('garden', 'name').exec(function (err, seasons) {
+//         if (err) {
+//             ;
+//         } else {
+//             var ss = seasons;
+//             for (var i in ss) {
+//                 var dateNow = new Date();
+//                 if (ss[i].startDate <= dateNow && ss[i].endDate > dateNow) {
+//                     ss[i].status = 1;
+//                     ss[i].save();
+//                 } else if (ss[i].endDate <= dateNow) {
+//                     var season = ss[i];
+//                     var seadQ = season.seedQuantity
+//                     season.status = 2;
+//                     season.quantity = _.random(seadQ / 2, seadQ);
+//                     season.save();
+//                 }
+//             }
+//         }
+//     });
+// };
+
 function listAllSeasons(req, res) {
-    seasonDao.listSeasons({}, cb);
+    seasonDao.listSeasons({ isDeleted: false }, cb);
     function cb(err, result) {
         if (err) {
             return res.status(500).send(err);
@@ -37,7 +78,8 @@ function listAllSeasonsOfGarden(req, res) {
         });
     };
     seasonDao.listSeasons({
-        garden: gardenId
+        garden: gardenId,
+        isDeleted: false
     }, cb);
     function cb(err, result) {
         if (err) {
@@ -51,7 +93,7 @@ function listAllSeasonsOfGarden(req, res) {
     }
 }
 function listMySeasons(req, res) {
-    seasonDao.listSeasons({ user: req.decoded._id }, cb);
+    seasonDao.listSeasons({ user: req.decoded._id, isDeleted: false }, cb);
     function cb(err, result) {
         if (err) {
             return res.status(500).send(err);
@@ -90,6 +132,8 @@ function getSeason(req, res) {
 
 
 function createSeason(req, res) {
+    var userId = req.decoded._id;
+
     if (!req.body.name || !req.body.garden || !req.body.productionItem || req.body.seedQuantity < 0) {
         return res.status(500).send({
             errCode: 0,
@@ -106,8 +150,12 @@ function createSeason(req, res) {
         };
 
         if (result.approved === false) {
-            return res.status(403).send({ errCode: 1, errMsg: 'Vườn chưa dược duyệt' })
+            return res.status(400).send({ errCode: 1, errMsg: 'Vườn chưa dược duyệt' })
         };
+
+        if (result.user._id.toString() !== userId) {
+            return res.status(400).send({ errCode: 1, errMsg: 'Bạn không phải là chủ vườn    ' })
+        }
 
         console.log('approved', res.approved);
 
@@ -116,8 +164,8 @@ function createSeason(req, res) {
             name: req.body.name,
             garden: req.body.garden,
             productionItem: req.body.productionItem,
-            startDate: req.body.startDate,
-            endDate: req.body.endDate,
+            startDate: req.body.startDate || '',
+            endDate: req.body.endDate || '',
             seedQuantity: req.body.seedQuantity
         };
 
@@ -166,6 +214,7 @@ function updateSeason(req, res) {
 
 function deleteSeason(req, res) {
     var seasonId = req.params.seasonId;
+    var userId = req.decoded._id;
     if (!seasonId) {
         return res.status(400).send({
             errCode: 0,
@@ -174,16 +223,16 @@ function deleteSeason(req, res) {
     }
 
     seasonDao.readSeason({
-        _id: gardenId,
+        _id: seasonId,
         user: userId
     }, function (err, result) {
-        if (err || null === result) {
+        if (err || !result) {
             return res.status(400).send({
                 errCode: 1,
                 errMsg: "Bạn không phải là chủ mùa vụ!"
             });
         }
-        SeasonDao.deleteSeason(seasonId, cb);
+        seasonDao.updateSeason(seasonId, { isDeleted: true, deleteDate: new Date() });
 
         function cb(err, result) {
             if (err) {

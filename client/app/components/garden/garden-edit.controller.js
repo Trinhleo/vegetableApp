@@ -47,6 +47,22 @@
             var height = $('#edit-form').height();
             $('#map_canvas').height(height);
         }
+
+        $(document).ready(function () {
+            $("#production-item-select").select2({
+                placeholder: "Chọn những loại rau canh tác",
+                allowClear: true,
+                language: 'vi'
+            });
+            $('#production-item-select').on('change', function () {
+                $timeout(function () {
+                    vm.formData.productionItem = $('#production-item-select').val()
+                   console.log(vm.formData.productionItem);
+                    vm.formChange = true;
+                });
+            })
+        })
+
         function getGarden() {
             GardenService.getGarden($stateParams.gardenId).then(
                 function (res) {
@@ -99,7 +115,6 @@
         };
 
         function updateGarden() {
-            vm.formData.productionItem = vm.selected;
             GardenService.updateGarden(vm.formData).then(
                 function (res) {
                     toastr.success("Cập nhật vườn thành công", "Thành công");

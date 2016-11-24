@@ -55,6 +55,19 @@
         vm.openCalendar = openCalendar;
         vm.isOpen = false;
         setMapSize();
+
+        $(document).ready(function () {
+            $("#pi-select").select2({
+                placeholder: "Chọn những loại rau canh tác",
+                allowClear: true,
+                language: 'vi'
+            });
+            $('#pi-select').on('change', function () {
+                $timeout(function () {
+                    vm.formData.productionItem = $("#pi-select").val()
+                });
+            })
+        })
         $(window).resize(function () {
             setMapSize();
         });
@@ -148,7 +161,7 @@
                 location: [vm.formData.longitude, vm.formData.latitude],
                 description: vm.formData.description,
                 address: vm.formData.address,
-                productionItem: vm.selected,
+                productionItem: vm.formData.productionItem,
                 deviceNode: vm.formData.deviceNode,
                 area: vm.formData.area
             };
@@ -176,39 +189,6 @@
         };
 
 
-
-        // function startDateOnSetTime() {
-        //     $scope.$broadcast('start-date-changed');
-        // }
-
-        // function endDateOnSetTime() {
-        //     $scope.$broadcast('end-date-changed');
-        // }
-
-        // function startDateBeforeRender($dates) {
-        //     if (vm.formData.endTime) {
-        //         var activeDate = moment(vm.formData.endTime);
-
-        //         $dates.filter(function (date) {
-        //             return date.localDateValue() >= activeDate.valueOf()
-        //         }).forEach(function (date) {
-        //             date.selectable = false;
-        //         })
-        //     }
-        // }
-
-        // function endDateBeforeRender($view, $dates) {
-        //     if (vm.formData.startTime) {
-        //         var activeDate = moment(vm.formData.startTime).subtract(1, $view).add(1, 'minute');
-
-        //         $dates.filter(function (date) {
-        //             return date.localDateValue() <= activeDate.valueOf()
-        //         }).forEach(function (date) {
-        //             date.selectable = false;
-        //         })
-        //     };
-        // };
-        // Called after the user selected a new picture file
         function onAfterAddingFile(fileItem) {
             if ($window.FileReader) {
                 var fileReader = new FileReader();

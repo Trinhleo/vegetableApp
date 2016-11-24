@@ -31,8 +31,7 @@ function readSeasonById(id, callback) {
 }
 
 function readSeason(query, callback) {
-    Season.findOne(
-        query).populate('garden').populate('productionItem').exec(function (err, result) {
+    Season.findOne(query).populate('garden').populate('productionItem').exec(function (err, result) {
             if (err) {
                 return callback(err, null);
             }

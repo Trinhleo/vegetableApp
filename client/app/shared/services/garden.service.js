@@ -20,9 +20,10 @@
             removeFavoriteGarden: removeFavoriteGarden,
             checkFavoriteGarden: checkFavoriteGarden,
             myFavoriteGardens: myFavoriteGardens,
-            approve,
-            unApprove
-        };
+            loadGardensUnApproved: loadGardensUnApproved,
+            approve: approve,
+            unApprove: unApprove
+        }
 
 
         function loadGardens() {
@@ -158,6 +159,15 @@
             });
             return deferred.promise;
         };
+        function loadGardensUnApproved(){
+             var deferred = $q.defer();
+            $http.get(apiUrl + '/un-approved').then(function (res) {
+                deferred.resolve(res.data);
+            }, function (err) {
+                deferred.reject(err.data);
+            });
+            return deferred.promise;
+        }
 
         function approve(gardenId) {
             var deferred = $q.defer();

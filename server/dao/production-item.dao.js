@@ -12,8 +12,8 @@ module.exports = {
     deleteProductionItem: deleteProductionItem
 };
 
-function listAllProductionItems(callback) {
-    ProductionItem.find({}, function (err, result) {
+function listAllProductionItems(query,callback) {
+    ProductionItem.find(query, function (err, result) {
         if (err) {
             return callback(err, null);
         }
@@ -30,10 +30,8 @@ function readProductionItemById(id, callback) {
     });
 }
 
-function readProductionItem(productionItem, callback) {
-    ProductionItem.findOne({
-        name: productionItem.name
-    }, function (err, result) {
+function readProductionItem(query, callback) {
+    ProductionItem.findOne(query, function (err, result) {
         if (err) {
             return callback(err, null);
         }

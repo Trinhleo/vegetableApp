@@ -1,0 +1,80 @@
+<section>
+    <div class="page-header">
+        <h1>Quản lý đăng ký vườn rau</h1>
+        <!-- <div class="col-md-4" style="margin-top: 20px">
+      <a data-toggle="tooltip" title="Tạo mùa vụ mới" class="btn btn-primary"
+         data-ui-sref="unApprovedGardenss.create">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+    </div> -->
+        <div class="col-md-4">
+            <!--<md-input-container>
+        <input class="form-control" type="text" ng-model="vm.search" placeholder="Tìm kiếm" ng-change="vm.figureOutItemsToDisplay()"
+        />
+      </md-input-container>-->
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div>
+            <h2>Danh sách vườn chưa duyệt</h2>
+        </div>
+        <md-table-container>
+            <table md-table md-progress="promise">
+                <thead md-head md-order="'name'" md-on-reorder="vm.unApprovedGardens">
+                    <tr md-row>
+                        <th md-column md-order-by="nameToLower"><strong>Tên vườn</strong></th>
+                        <th md-column md-numeric><strong>Ngày tạo</strong></th>
+                        <th md-column md-numeric><strong>Tác vụ</strong></th>
+                    </tr>
+                </thead>
+                <tbody md-body>
+                    <tr md-row md-select="garden" md-select-id="name" md-auto-select ng-repeat="garden in vm.unApprovedGardens">
+                        <td md-cell><strong>{{garden.name}}</strong></td>
+                        <td md-cell><strong>{{garden.created | date:'short'}}</strong></td>
+                        <td md-cell>
+                            <div>
+                                <div class=" col-md-12">
+                                    <a data-toggle="tooltip" title="Chi tiết vườn" ui-sref="index.garden-details({gardenId:garden._id})"><i class="fa-icon fa fa-eye"></i></a>
+                                    <a data-toggle="tooltip" title="Duyệt vườn" data-ng-click="vm.approve(garden._id)"><i class="fa-icon fa fa-check"></i></a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div>
+            <h2>Danh sách vườn đã duyệt</h2>
+        </div>
+        <md-table-container>
+            <table md-table md-progress="promise">
+                <thead md-head md-order="'name'" md-on-reorder="vm.approvedGardens">
+                    <tr md-row>
+                        <th md-column md-order-by="nameToLower"><strong>Tên vườn</strong></th>
+                        <th md-column md-numeric><strong>Ngày tạo</strong></th>
+                        <th md-column md-numeric><strong>Tác vụ</strong></th>
+                    </tr>
+                </thead>
+                <tbody md-body>
+                    <tr md-row md-select="garden" md-select-id="name" md-auto-select ng-repeat="garden in vm.approvedGardens">
+                        <td md-cell><strong>{{garden.name}}</strong></td>
+                        <td md-cell><strong>{{garden.created | date:'short'}}</strong></td>
+                        <td md-cell>
+                            <div>
+                                <div class=" col-md-12">
+                                    <a data-toggle="tooltip" title="Chi tiết vườn" ui-sref="index.garden-details({gardenId:garden._id})"><i class="fa-icon fa fa-eye"></i></a>
+                                    <a data-toggle="tooltip" title="Bỏ duyệt vườn" data-ng-click="vm.unApprove(garden._id)"><i class="fa-icon fa fa-remove"></i></a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+    </div>
+    <!--<pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage"
+      ng-change="vm.pageChanged()"></pagination>-->
+    <!--</form>-->
+</section>

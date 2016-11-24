@@ -13,7 +13,7 @@ module.exports = {
 };
 
 function listAllProductionItems(req, res) {
-    productionItemDao.listAllProductionItems(cb);
+    productionItemDao.listAllProductionItems({ isDeleted: false }, cb);
     function cb(err, result) {
         if (err) {
             return res.status(500).send(err);
@@ -35,11 +35,17 @@ function getProductionItem(req, res) {
         });
     }
 
-    productionItemDao.readProductionItemById(productionItemId, cb);
+    productionItemDao.readProductionItem({ _id: productionItemId, isDeleted: false }, cb);
 
     function cb(err, result) {
         if (err) {
             return res.status(400).send(err);
+        }
+        if (null === result) {
+            return res.status(400).send({
+                errCode: 0,
+                errMsg: "Không tìm thấy!"
+            });
         }
         var pi = result;
         pi._doc.imgUrlFull = urlPrefix.concat(pi.imgUrl);
@@ -110,7 +116,7 @@ function deleteProductionItem(req, res) {
     }
 
 
-    productionItemDao.deleteProductionItem(productionItemId, cb);
+    productionItemDao.updateProductionItem(productionItemId, { isDeleted: true, deleteDate: new Date }, cb);
 
     function cb(err, result) {
         if (err) {

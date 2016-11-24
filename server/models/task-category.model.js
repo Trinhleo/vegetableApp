@@ -2,15 +2,13 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-/**
- * Vegetablecat Schema
- */
-var ProductionItemSchema = new Schema({
+var TaskCategorySchema = new Schema({
     name: {
         type: String,
         default: '',
         trim: true,
-        unique: true
+        unique: true,
+        require: true
     },
     description: {
         type: String,
@@ -20,24 +18,21 @@ var ProductionItemSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    isDeleted: {
-        type: Boolean,
-        default: false
-    },
-    deleteDate: {
-        type: Date
-    },
     isEdited: {
-        type: Boolean,
-        default: false
+        type: Date,
     },
-    editDate: {
+    isDeleted: {
         type: Date
     },
     imgUrl: {
         type: String,
         default: '/img/production-item/no-image.svg'
+    },
+    type: {
+        type: Number,
+        require: true
     }
 });
 
-mongoose.model('ProductionItem', ProductionItemSchema);
+TaskCategorySchema.index({ "name": 1, "type": 1 }, { unique: true });
+mongoose.model('TaskCategory', TaskCategorySchema);

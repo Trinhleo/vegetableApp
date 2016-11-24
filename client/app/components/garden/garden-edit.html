@@ -42,23 +42,8 @@
                             required>
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Chọn loại rau canh tác</label>
-                    </div>
-                    <div layout="row" layout-wrap flex>
-                        <div flex-xs flex="50" ng-if="true">
-                            <md-checkbox aria-label="Chọn Tất Cả" ng-checked="vm.isChecked()" md-indeterminate="vm.isIndeterminate()" ng-click="vm.toggleAll()">
-                                <span ng-if="vm.isChecked()">Bỏ </span>Chọn Tất Cả
-                            </md-checkbox>
-                        </div>
-                        <div class="choose-vegetable" flex="100" ng-repeat="item in vm.productionItem" ng-if="vm.contentLoad">
-                            <md-checkbox ng-checked="vm.exists(item)" ng-click="vm.toggle(item)">
-                                {{item.name}}
-                            </md-checkbox>
-                        </div>
-                        <!--<div>
-                            <label class="control-label">Thêm loại rau mới</label>
-                            <input type="text" class="form-control" id="area" ng-model="vm.newProductionItem" />
-                        </div>-->
+                        <label class="control-label">Chọn loại rau canh tác:</label>
+                        <select id="production-item-select" lang="vi" class="production-items" multiple="multiple" ng-model="vm.formData.productionItem" ng-options="pi as pi.name for pi in vm.productionItem track by pi._id"></select>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Chọn loại thiết bị</label>

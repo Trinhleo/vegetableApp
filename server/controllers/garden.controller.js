@@ -6,6 +6,7 @@ var urlPrefix = ('//').concat(myHost).concat(':').concat(port);
 var _ = require('lodash');
 module.exports = {
     listAllGardens: listAllGardens,
+    listAllGardensUnApproved: listAllGardensUnApproved,
     listAllGardensApproved: listAllGardensApproved,
     listMyGardens: listMyGardens,
     listAllGardensOfUser: listAllGardensOfUser,
@@ -18,7 +19,28 @@ module.exports = {
 };
 
 function listAllGardens(req, res) {
-    gardenDao.listAllGardens({}, cb);
+    gardenDao.listAllGardens({ isDeleted: false }, cb);
+    function cb(err, result) {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        var gardens = result;
+        _.forEach(gardens, function (gd) {
+            var g = gd;
+            if (req.decoded && (g.user._id.toString() === req.decoded._id.toString())) {
+                g.isOwner = true;
+            }
+            g._doc.imgUrlFull = urlPrefix.concat(g.imgUrl);
+            g._doc.userHostProfileImageURL = urlPrefix.concat(gd.user.profileImageURL);
+            _.forEach(gd.productionItem, function (pi) {
+                pi._doc.imgUrlFull = urlPrefix.concat(pi.imgUrl);
+            });
+        });
+        res.status(200).send(gardens);
+    }
+}
+function listAllGardensUnApproved(req, res) {
+    gardenDao.listAllGardens({ isDeleted: false, approved: false }, cb);
     function cb(err, result) {
         if (err) {
             return res.status(500).send(err);
@@ -39,7 +61,7 @@ function listAllGardens(req, res) {
     }
 }
 function listAllGardensApproved(req, res) {
-    gardenDao.listAllGardens({ approved: true }, cb);
+    gardenDao.listAllGardens({ isDeleted: false, approved: true }, cb);
     function cb(err, result) {
         if (err) {
             return res.status(500).send(err);
@@ -63,7 +85,7 @@ function listAllGardensApproved(req, res) {
 
 function listMyGardens(req, res) {
     var userId = req.decoded._id;
-    gardenDao.listAllGardens({ user: userId }, cb);
+    gardenDao.listAllGardens({ isDeleted: false, user: userId }, cb);
     function cb(err, result) {
         if (err) {
             return res.status(500).send(err);
@@ -89,7 +111,7 @@ function listAllGardensOfUser(req, res) {
         });
     }
     userId = req.params.userId;
-    gardenDao.listAllGardensByUserId(userId, cb);
+    gardenDao.listAllGardens({ user: userId, isDeleted: false }, cb);
     function cb(err, result) {
         if (err) {
             return res.status(500).send(err);
@@ -215,7 +237,8 @@ function deleteGarden(req, res) {
                 errMsg: "Bạn không phải là chủ vườn!"
             });
         }
-        gardenDao.deleteGarden(gardenId, cb);
+        dateNow = new Date();
+        gardenDao.updateGarden(gardenId, { isDeleted: true, deleteDate: dateNow }, cb);
         function cb(err, result) {
             if (err) {
                 return res.status(400).send(err);

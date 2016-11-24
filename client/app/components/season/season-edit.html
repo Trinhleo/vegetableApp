@@ -1,18 +1,25 @@
 <section>
-    <h1>Tạo mùa vụ mới</h1>
+    <div class="action-bar">
+        <a class="fa-icon fa fa-list" href="#/gardens/{{vm.gardenId}}/seasons" data-toggle="tooltip" title="Danh sách mùa vụ"></a>
+        <a ng-if="vm.garden.isOwner" style="margin-left:5px" class="fa-icon fa fa-plus-square" ui-sref="index.season.add" data-toggle="tooltip"
+            title="Thêm mùa vụ"></a>
+        <label style="margin-left:50px;font-size:2em" class="text-right">{{'Quản lý mùa vụ vườn rau: ' + $root.garden.name}}</label>
+    </div>
+    <h1>Chỉnh sửa mùa vụ</h1>
     <form name="seasonForm" class="form-horizontal" ng-submit="vm.save(vm.form.seasonForm.$valid)" novalidate>
         <fieldset class="col-md-offset-3 col-md-6 col-md-offset-3">
             <div class="form-group" show-errors>
                 <label class="control-label" for="name">Tên mùa vụ</label>
-                <input name="name" type="text" ng-change="vm.formChange=true" ng-model="vm.season.name" id="name" class="form-control" placeholder="Tên mùa vụ" required>
+                <input name="name" type="text" ng-change="vm.formChange=true" ng-model="vm.season.name" id="name" class="form-control" placeholder="Tên mùa vụ"
+                    required>
                 <div ng-messages="vm.form.gardenForm.name.$error" role="alert">
                     <p class="help-block error-text" ng-message="required">Tên mùa vụ là bắt buộc.</p>
                 </div>
             </div>
             <div class="form-group" show-errors>
                 <label class="control-label" for="seedQuantity">Số lượng giống:</label>
-                <input name="seedQuantity" ng-change="vm.formChange=true" type="number" ng-model="vm.season.seedQuantity" id="seedQuantity" class="form-control" ng-required
-                    min="0" max="100000">
+                <input name="seedQuantity" ng-change="vm.formChange=true" type="number" ng-model="vm.season.seedQuantity" id="seedQuantity"
+                    class="form-control" ng-required min="0" max="100000">
                 <div ng-messages="vm.form.gardenForm.name.$error" role="alert">
                     <p class="help-block error-text" ng-message="required">Số lượng giống là bắt buộc.</p>
                     <p class="help-block error-text" ng-message="min">Không được nhập số âm.</p>
@@ -21,15 +28,15 @@
             </div>
             <div class="form-group">
                 <label class="control-label" for="statdate">Ngày bắt đầu</label>
-                <md-datepicker name="startdate" ng-change="vm.formChange=true" ng-model="vm.season.startDate" md-placeholder="Chọn ngày bắt đầu" md-min-date="vm.dateNow"
-                    md-max-date="vm.season.endDate" md-open-on-focus required>
+                <md-datepicker name="startdate" ng-change="vm.formChange=true" ng-model="vm.season.startDate" md-placeholder="Chọn ngày bắt đầu"
+                    md-min-date="vm.dateNow" md-max-date="vm.season.endDate" md-open-on-focus required>
                 </md-datepicker>
                 <!-- <span ng-show="vm.season._id">{{vm.season.startDate| date:'short'}}</span> -->
             </div>
             <div class="form-group">
                 <label class="control-label" for="statdate">Ngày kết thúc (dự kiến)</label>
-                <md-datepicker name="enddate" ng-change="vm.formChange=true" ng-model="vm.season.endDate" md-placeholder="Chọn ngày kết thúc" md-min-date="vm.season.startDate"
-                    md-open-on-focus required>
+                <md-datepicker name="enddate" ng-change="vm.formChange=true" ng-model="vm.season.endDate" md-placeholder="Chọn ngày kết thúc"
+                    md-min-date="vm.season.startDate" md-open-on-focus required>
                 </md-datepicker>
                 <!-- <span ng-show="vm.season._id">{{vm.season.endDate| date:'short'}}</span> -->
             </div>

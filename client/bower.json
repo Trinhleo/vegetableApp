@@ -34,7 +34,8 @@
     "angular-messages": "^1.5.8",
     "angular-material-data-table": "^0.10.9",
     "ng-ip-address": "^1.1.10",
-    "jquery-ui": "^1.12.1"
+    "jquery-ui": "^1.12.1",
+    "select2": "^4.0.3"
   },
   "overrides": {
     "font-awesome": {

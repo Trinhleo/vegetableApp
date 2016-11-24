@@ -19,45 +19,30 @@
 
                     <!-- Text Boxes and Other User Inputs. Note ng-model binds the values to Angular $scope -->
                     <div class="form-group">
-                        <label for="name">Tên vườn <span class="badge"></span></label>
+                        <label for="name">Tên vườn: <span class="require">(*)</span></label>
                         <input type="text" class="form-control" id="name" placeholder="Nhập tên vườn" ng-model="vm.formData.name" required>
                     </div>
                     <div class="form-group">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="padding-left:0;">
-                            <label for="latitude ">Vĩ độ</label>
+                            <label for="latitude ">Vĩ độ: <span class="require">(*)</span> </label>
                             <input type="text" class="form-control" id="latitude" ng-model="vm.formData.latitude" readonly required>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="padding-right:0;">
-                            <label for="longitude ">Kinh độ</label>
+                            <label for="longitude ">Kinh độ: <span class="require">(*)</span></label>
                             <input type="text" class="form-control" id="longitude" ng-model="vm.formData.longitude" readonly required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="address">Địa chỉ</label>
+                        <label for="address">Địa chỉ: <span class="require">(*)</span></label>
                         <input type="text" class="form-control" id="address" ng-model="vm.formData.address" required>
                     </div>
                     <div class="form-group">
-                        <label for="area">Diện tích canh tác m<sup>2</sup></label>
+                        <label for="area">Diện tích canh tác (m<sup>2</sup>): <span class="require">(*)</span></label>
                         <input type="number" min=0 max=10000000 class="form-control" id="area" ng-model="vm.formData.area" required>
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Chọn loại rau canh tác</label>
-                    </div>
-                    <div layout="row" layout-wrap flex>
-                        <div flex-xs flex="50" ng-if="vm.productionItem&&vm.productionItem">
-                            <md-checkbox aria-label="Chọn Tất Cả" ng-checked="vm.isChecked()" md-indeterminate="vm.isIndeterminate()" ng-click="vm.toggleAll()">
-                                <span ng-if="vm.isChecked()">Bỏ </span>Chọn Tất Cả
-                            </md-checkbox>
-                        </div>
-                        <div class="choose-vegetable" flex="100" ng-repeat="item in vm.productionItem">
-                            <md-checkbox ng-checked="vm.exists(item)" ng-click="vm.toggle(item)">
-                                {{item.name}}
-                            </md-checkbox>
-                        </div>
-                        <!--<div>
-                            <label class="control-label">Thêm loại rau mới</label>
-                            <input type="text" class="form-control" id="area" ng-model="vm.newProductionItem" />
-                        </div>-->
+                        <label class="control-label">Chọn loại rau canh tác:</label>
+                        <select id="pi-select" lang="vi" class="production-items" multiple="multiple" ng-model="vm.BC" ng-options="pi as pi.name for pi in vm.productionItem track by pi._id"></select>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Chọn loại thiết bị</label>
@@ -66,18 +51,7 @@
                         <option value="" selected="selected">--Hãy chọn một thiết bị--</option>
                      </select>
                     </div>
-                    <!--<div layout="row" layout-wrap flex>
-                    <div flex-xs flex="50" ng-if="true">
-                        <md-checkbox aria-label="Chọn Tất Cả" ng-checked="vm.isChecked()" md-indeterminate="vm.isIndeterminate()" ng-click="vm.toggleAll()">
-                            <span ng-if="vm.isChecked()">Bỏ </span>Chọn Tất Cả
-                        </md-checkbox>
-                    </div>
-                    <div class="choose-vegetable" flex="100" ng-repeat="item in vm.deviceNode" ng-if="true">
-                        <md-checkbox ng-checked="vm.exists(item, vm.selected)" ng-click="vm.toggle(item,vm.selected)">
-                            {{item.name}}
-                        </md-checkbox>
-                    </div>
-                </div>-->
+
                     <div class="form-group">
                         <label for="description">Mô tả</label>
                         <textarea type="text" class="form-control" id="description" placeholder="Nhập mô tả" ng-model="vm.formData.description">

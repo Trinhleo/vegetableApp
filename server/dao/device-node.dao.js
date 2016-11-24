@@ -12,8 +12,8 @@ module.exports = {
     deleteDeviceNode: deleteDeviceNode
 };
 
-function listAllDeviceNodes(callback) {
-    DeviceNode.find({}, function (err, result) {
+function listAllDeviceNodes(query,callback) {
+    DeviceNode.find(query, function (err, result) {
         if (err) {
             return callback(err, null);
         }
@@ -30,10 +30,8 @@ function readDeviceNodeById(id, callback) {
     });
 }
 
-function readDeviceNode(dvn, callback) {
-    DeviceNode.findOne({
-        name: dvn.name
-    }, function (err, result) {
+function readDeviceNode(query, callback) {
+    DeviceNode.findOne(query, function (err, result) {
         if (err) {
             return callback(err, null);
         }

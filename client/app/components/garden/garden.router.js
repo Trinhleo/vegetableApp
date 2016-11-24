@@ -28,6 +28,12 @@
                 controller: 'DetailsGardenController',
                 controllerAs: 'vm'
             })
+            .state('index.register-garden-manage', {
+                url: "/register-garden-manage",
+                templateUrl: 'app/components/garden/approve-garden.html',
+                controller: 'ApproveGardenController',
+                controllerAs: 'vm'
+            });
 
 
     }

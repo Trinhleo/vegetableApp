@@ -5,6 +5,8 @@ var gulp = require('gulp'),
     less = require('gulp-less'),
     path = require('path'),
     angularFilesort = require('gulp-angular-filesort');
+var rename = require('gulp-rename');
+var wiredep = require('wiredep').stream;
 
 
 gulp.task('connect', function () {
@@ -15,17 +17,20 @@ gulp.task('connect', function () {
     });
 });
 
-gulp.task('index', function () {
-    var target = gulp.src('./index.html'),
-        srcBower = gulp.src(bowerFiles(), {read: false}),
-        srcCss = gulp.src(['./app/**/*.css'], {read: false}),
-        srcAngular = gulp.src(['./app/**/*.js']).pipe(angularFilesort());
-        
+gulp.task('inject', function () {
+    gulp.src('./index.template.html')
+        .pipe(inject(gulp.src(['./app/**/*.js', './app/**/**/*.js', './app/**/**/**/*.js', './app/**/*.css', './app/**/**/*.css', './app/**/**/**/*.css'], {
+            read: false
+        }), {
+                relative: true
+            }))
+        .pipe(wiredep({
+            optional: 'configuration',
+            goes: 'here'
+        }))
+        .pipe(rename('index.html'))
+        .pipe(gulp.dest('.'));
 
-    return target.pipe(inject(srcBower, {name: 'bower', relative: true}))
-        .pipe(inject(srcCss, {relative: true}))
-        .pipe(inject(srcAngular, {relative: true}))
-        .pipe(gulp.dest('.'))
 });
 
 gulp.task('less', function () {
