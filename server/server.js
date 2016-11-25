@@ -33,10 +33,7 @@ app.use(bodyParser.json());
 // app.use(methodOverride())
 app.use(errorHandler.errorHandler());
 app.use(allowCrossDomain);
-app.get('/rest/getenv', function (req, res) {
-    var env = process.env.ENV_VARIABLE || myIp.address();
-    res.json({ result: env });
-});
+app.use(express.favicon());
 //service static files
 app.use('/', express.static(path.resolve('./public')));
 // console.log(path.resolve('./uploads'));
