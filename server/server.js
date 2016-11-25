@@ -33,7 +33,6 @@ app.use(bodyParser.json());
 // app.use(methodOverride())
 app.use(errorHandler.errorHandler());
 app.use(allowCrossDomain);
-app.use(express.favicon());
 //service static files
 app.use('/', express.static(path.resolve('./public')));
 // console.log(path.resolve('./uploads'));
