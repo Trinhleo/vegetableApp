@@ -1,19 +1,19 @@
-var TaskCategoryDao = require('./../dao/production-item.dao');
+var TaskCategoryDao = require('./../dao/task-category.dao');
 var myIp = require('ip').address();
 var myHost = require('./../config/server').HOST;
 var port = require('./../config/server').PORT;
 var urlPrefix = ('//').concat(myHost).concat(':').concat(port);
 var _ = require('lodash');
 module.exports = {
-    listAllTaskCategorys: listAllTaskCategorys,
+    listTaskCategories: listTaskCategories,
     getTaskCategory: getTaskCategory,
     createTaskCategory: createTaskCategory,
     updateTaskCategory: updateTaskCategory,
     deleteTaskCategory: deleteTaskCategory
 };
 
-function listAllTaskCategorys(req, res) {
-    TaskCategoryDao.listAllTaskCategorys({ isDeleted: false }, cb);
+function listTaskCategories(req, res) {
+    TaskCategoryDao.listTaskCategories({ isDeleted: false }, cb);
     function cb(err, result) {
         if (err) {
             return res.status(500).send(err);
@@ -27,15 +27,15 @@ function listAllTaskCategorys(req, res) {
 }
 
 function getTaskCategory(req, res) {
-    var TaskCategoryId = req.params.TaskCategoryId;
-    if (!TaskCategoryId) {
+    var taskCategoryId = req.params.taskCategoryId;
+    if (!taskCategoryId) {
         return res.status(400).send({
             errCode: 0,
             errMsg: "Không tìm thấy!"
         });
     }
 
-    TaskCategoryDao.readTaskCategory({ _id: TaskCategoryId, isDeleted: false }, cb);
+    TaskCategoryDao.readTaskCategory({ _id: taskCategoryId, isDeleted: false }, cb);
 
     function cb(err, result) {
         if (err) {
@@ -55,7 +55,7 @@ function getTaskCategory(req, res) {
 
 
 function createTaskCategory(req, res) {
-    if (!req.body.name) {
+    if (!req.body.name || !Number.isInteger(req.body.type) || req.body.type < 0) {
         return res.status(500).send({
             errCode: 0,
             errMsg: "Lỗi nhập liệu"
@@ -63,7 +63,8 @@ function createTaskCategory(req, res) {
     }
     var piInfo = {
         name: req.body.name,
-        description: req.body.description || ""
+        description: req.body.description || "",
+        type: req.body.type,
     };
     TaskCategoryDao.createTaskCategory(piInfo, cb);
     function cb(err, result) {
@@ -75,7 +76,7 @@ function createTaskCategory(req, res) {
 }
 
 function updateTaskCategory(req, res) {
-    var productionsItemId = req.params.TaskCategoryId;
+    var taskCategoryId = req.params.taskCategoryId;
     var piInfo = req.body
     if (req.decoded.roles[0].toString() !== 'admin') {
         return status(403).send({
@@ -83,14 +84,14 @@ function updateTaskCategory(req, res) {
             errMsg: "Bạn không có quyền quản trị"
         });
     }
-    if (!productionsItemId) {
+    if (!taskCategoryId) {
         return res.status(400).send({
             errCode: 0,
             errMsg: "Không tìm thấy!"
         });
     }
 
-    TaskCategoryDao.updateTaskCategory(productionsItemId, piInfo, cb);
+    TaskCategoryDao.updateTaskCategory(taskCategoryId, piInfo, cb);
     function cb(err, result) {
         if (err) {
             return res.status(400).send(err);
@@ -101,14 +102,14 @@ function updateTaskCategory(req, res) {
 }
 
 function deleteTaskCategory(req, res) {
-    var TaskCategoryId = req.params.TaskCategoryId;
+    var taskCategoryId = req.params.taskCategoryId;
     if (req.decoded.roles[0].toString() !== 'admin') {
         return status(403).send({
             errCode: 1,
             errMsg: "Bạn không có quyền quản trị"
         });
     }
-    if (!TaskCategoryId) {
+    if (!taskCategoryId) {
         return res.status(400).send({
             errCode: 0,
             errMsg: "Không tìm thấy!"
@@ -116,7 +117,7 @@ function deleteTaskCategory(req, res) {
     }
 
 
-    TaskCategoryDao.updateTaskCategory(TaskCategoryId, { isDeleted: true, deleteDate: new Date }, cb);
+    TaskCategoryDao.updateTaskCategory(taskCategoryId, { isDeleted: true, deleteDate: new Date }, cb);
 
     function cb(err, result) {
         if (err) {

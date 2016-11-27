@@ -4,7 +4,7 @@ require('../models/task-category.model.js');
 var TaskCategory = mongoose.model('TaskCategory');
 
 module.exports = {
-    listTaskCategorys: listTaskCategorys,
+    listTaskCategories: listTaskCategories,
     readTaskCategoryById: readTaskCategoryById,
     readTaskCategory: readTaskCategory,
     createTaskCategory: createTaskCategory,
@@ -12,8 +12,8 @@ module.exports = {
     deleteTaskCategory: deleteTaskCategory
 };
 
-function listTaskCategorys(query, callback) {
-    TaskCategory.find(query).sort('-created').populate('garden').populate('productionItem').exec(function (err, result) {
+function listTaskCategories(query, callback) {
+    TaskCategory.find(query).sort('-created').exec(function (err, result) {
         if (err) {
             return callback(err, null);
         }
@@ -22,7 +22,7 @@ function listTaskCategorys(query, callback) {
 }
 
 function readTaskCategoryById(id, callback) {
-    TaskCategory.findById(id).sort('-created').populate('garden').populate('productionItem').exec(function (err, result) {
+    TaskCategory.findById(id).sort('-created').exec(function (err, result) {
         if (err) {
             return callback(err, null);
         }
@@ -31,7 +31,7 @@ function readTaskCategoryById(id, callback) {
 }
 
 function readTaskCategory(query, callback) {
-    TaskCategory.findOne(query).populate('garden').populate('productionItem').exec(function (err, result) {
+    TaskCategory.findOne(query).exec(function (err, result) {
         if (err) {
             return callback(err, null);
         }
@@ -40,9 +40,8 @@ function readTaskCategory(query, callback) {
 }
 
 function createTaskCategory(info, callback) {
-    var TaskCategory = new TaskCategory(info);
-
-    TaskCategory.save(function (err, result) {
+    var taskCategory = new TaskCategory(info);
+    taskCategory.save(function (err, result) {
         if (err) {
             return callback(err, null);
         }

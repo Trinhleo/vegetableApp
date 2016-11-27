@@ -11,7 +11,6 @@
             'ngStorage',
             'ngFileUpload',
             'angularFileUpload',
-            'ui.bootstrap.datetimepicker',
             'geolocation',
             'md.data.table',
             'app.config',
@@ -28,7 +27,8 @@
             'app.season',
             'app.product',
             'app.production-item',
-            'app.device-node'
+            'app.device-node',
+            'app.task-category'
         ])
         .run(function ($rootScope, $state, $localStorage) {
             // Check authentication before changing state

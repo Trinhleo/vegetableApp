@@ -18,21 +18,30 @@ var TaskCategorySchema = new Schema({
         type: Date,
         default: Date.now
     },
-    isEdited: {
-        type: Date,
-    },
     isDeleted: {
+        type: Boolean,
+        default: false
+    },
+    deleteDate: {
+        type: Date
+    },
+    isEdited: {
+        type: Boolean,
+        default: false
+    },
+    editDate: {
         type: Date
     },
     imgUrl: {
         type: String,
-        default: '/img/production-item/no-image.svg'
+        default: '/img/task-category/no-image.svg'
     },
     type: {
         type: Number,
-        require: true
+        require: true,
+        unique: true
     }
 });
 
-TaskCategorySchema.index({ "name": 1, "type": 1 }, { unique: true });
+    TaskCategorySchema.index({ "name": 1, "type": 1 }, { unique: true });
 mongoose.model('TaskCategory', TaskCategorySchema);

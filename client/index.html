@@ -9,7 +9,6 @@
 	<meta content="text/html; charset=utf-8" http-equiv="content-type">
 	<link rel="stylesheet" href="app/components/core/core.css">
 	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="node_modules/angular-bootstrap-datetimepicker/src/css/datetimepicker.css" />
 	<link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.min.css">
 	<link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
 	<link rel="stylesheet" href="bower_components/angular-material-data-table/dist/md-data-table.min.css">
@@ -18,26 +17,14 @@
 	<link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css" />
 	<!--directives-->
 	<link rel="stylesheet" href="app/shared/directives/map/map.directive.css" />
-	<!--<link rel="stylesheet" href="app/shared/directives/chat/chat.directive.css" />
-	<link rel="stylesheet" href="app/shared/directives/slider/slider.directive.css" />-->
 
 </head>
 
 <body>
 	<div ui-view>
 </body>
-<!--vendor-->
-<!--<script async defer src="https://maps.googleapis.com/maps/api/js"></script>-->
-<!--<script src="http://ipv4.myexternalip.com/json?callback=DisplayIP"></script>
-<script type="text/javascript">
-    function DisplayIP(response) {
-      $root.ip = response.ip.string();
-    }
-</script>-->
-<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular/angular.js"></script>
 <script src="node_modules/moment/moment.js"></script>
-<script src="node_modules/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
-<script src="node_modules/angular-bootstrap-datetimepicker/src/js/datetimepicker.templates.js"></script>
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
@@ -54,110 +41,98 @@
 <script src="bower_components/angular-messages/angular-messages.min.js"></script>
 <script src="bower_components/angular-material-data-table/dist/md-data-table.min.js"> </script>
 <script src="bower_components/jquery-ui/jquery-ui.min.js"> </script>
-<script src="bower_components/select2/dist/js/select2.min.js"> </script> C:\Users\hongo\OneDrive\DoAnTotNghiep\VegetableApp\client\bower_components\select2\dist\js\select2.min.js
+<script src="bower_components/select2/dist/js/select2.min.js"> </script>
 <!--app-->
+<!-- inject:js -->
 <script src="app/app.module.js"></script>
 <script src="app/app.config.js"></script>
 <script src="app/app.router.js"></script>
-<!--services-->
-<script src="app/shared/services/services.module.js"></script>
-<script src="app/shared/services/auth.service.js"></script>
-<script src="app/shared/services/user.service.js"></script>
-<script src="app/shared/services/gallery.service.js"></script>
-<script src="app/shared/services/event.service.js"></script>
-<script src="app/shared/services/follow.service.js"></script>
-<script src="app/shared/services/notification.service.js"></script>
-<script src="app/shared/services/garden.service.js"></script>
-<script src="app/shared/services/production-item.service.js"></script>
-<script src="app/shared/services/device-node.service.js"></script>
-<script src="app/shared/services/season.service.js"></script>
-<script src="app/shared/services/task.service.js"></script>
-
-<!--core-->
 <script src="app/components/core/core.module.js"></script>
-<script src="app/components/core/core.router.js"></script>
-<script src="app/components/core/core.controller.js"></script>
-<!--dashboard-->
 <script src="app/components/dashboard/dashboard.module.js"></script>
-<script src="app/components/dashboard/dashboard.router.js"></script>
-<script src="app/components/dashboard/dashboard.controller.js"></script>
-<!--auth-->
-<script src="app/components/auth/signup/signup.module.js"></script>
-<script src="app/components/auth/signup/signup.router.js"></script>
-<script src="app/components/auth/signup/signup.controller.js"></script>
-<script src="app/components/auth/signin/signin.module.js"></script>
-<script src="app/components/auth/signin/signin.router.js"></script>
-<script src="app/components/auth/signin/signin.controller.js"></script>
-<script src="app/components/auth/signout/signout.module.js"></script>
-<script src="app/components/auth/signout/signout.router.js"></script>
-<script src="app/components/auth/signout/signout.controller.js"></script>
-
-<!--user-->
-<script src="app/components/user/user.module.js"></script>
-<script src="app/components/user/user.router.js"></script>
-<script src="app/components/user/user.controller.js"></script>
-<script src="app/components/user/settings/user-setting.module.js"></script>
-<script src="app/components/user/settings/user-setting.router.js"></script>
-<script src="app/components/user/settings/user-setting.controller.js"></script>
-<script src="app/components/user/settings/change-profile-picture.controller.js"></script>
+<script src="app/components/device-node/device-node.module.js"></script>
 <script src="app/components/gallery/gallery.module.js"></script>
-<script src="app/components/gallery/gallery.router.js"></script>
+<script src="app/components/garden/garden.module.js"></script>
+<script src="app/components/product/product.module.js"></script>
+<script src="app/components/production-item/production-item.module.js"></script>
+<script src="app/components/season/season.module.js"></script>
+<script src="app/components/task/task.module.js"></script>
+<script src="app/components/task-category/task-category.module.js"></script>
+<script src="app/components/user/user.module.js"></script>
+<script src="app/components/auth/signin/signin.module.js"></script>
+<script src="app/components/auth/signout/signout.module.js"></script>
+<script src="app/components/auth/signup/signup.module.js"></script>
+<script src="app/components/user/settings/user-setting.module.js"></script>
+<script src="app/components/core/core.controller.js"></script>
+<script src="app/components/dashboard/dashboard.controller.js"></script>
+<script src="app/components/device-node/device-node-add.controller.js"></script>
+<script src="app/components/device-node/device-node-details.controller.js"></script>
+<script src="app/components/device-node/device-node-edit.controller.js"></script>
+<script src="app/components/device-node/device-node.controller.js"></script>
 <script src="app/components/gallery/gallery.controller.js"></script>
 <script src="app/components/gallery/upload-image.controller.js"></script>
-<!--<script src="app/components/chat/chat.module.js"></script>
-<script src="app/components/chat/chat.router.js"></script>
-<script src="app/components/chat/chat.controller.js"></script>-->
-
-<!--directives-->
-<script src="app/shared/directives/map/map.directive.js"></script>
-<script src="app/shared/directives/upload/upload.directive.js"></script>
-<!--<script src="app/shared/directives/chat/chat.directive.js"></script>
-<script src="app/shared/directives/slider/slider.directive.js"></script>-->
-<!--events
-<script src="app/components/events/events.module.js"></script>
-<script src="app/components/events/events.router.js"></script>
-<script src="app/components/events/events.controller.js"></script>
-<script src="app/components/events/event-details.controller.js"></script>
-<script src="app/components/events/manage/add-event.controller.js"></script>
-<script src="app/components/events/manage/edit-event.controller.js"></script>-->
-<!--garden-->
-<script src="app/components/garden/garden.module.js"></script>
-<script src="app/components/garden/garden.router.js"></script>
-<script src="app/components/garden/garden.controller.js"></script>
-<script src="app/components/garden/garden-add.controller.js"></script>
-<script src="app/components/garden/garden-edit.controller.js"></script>
-<script src="app/components/garden/garden-details.controller.js"></script>
 <script src="app/components/garden/approve-garden.controller.js"></script>
-
-<!--season-->
-<script src="app/components/season/season.module.js"></script>
-<script src="app/components/season/season.router.js"></script>
-<script src="app/components/season/season.controller.js"></script>
+<script src="app/components/garden/garden-add.controller.js"></script>
+<script src="app/components/garden/garden-details.controller.js"></script>
+<script src="app/components/garden/garden-edit.controller.js"></script>
+<script src="app/components/garden/garden.controller.js"></script>
+<script src="app/components/product/product-details.controller.js"></script>
+<script src="app/components/product/product.controller.js"></script>
+<script src="app/components/production-item/production-item-add.controller.js"></script>
+<script src="app/components/production-item/production-item-details.controller.js"></script>
+<script src="app/components/production-item/production-item-edit.controller.js"></script>
+<script src="app/components/production-item/production-item.controller.js"></script>
 <script src="app/components/season/season-add.controller.js"></script>
-<script src="app/components/season/season-edit.controller.js"></script>
 <script src="app/components/season/season-details.controller.js"></script>
+<script src="app/components/season/season-edit.controller.js"></script>
 <script src="app/components/season/season-list.controller.js"></script>
 <script src="app/components/season/season-task.controller.js"></script>
-<!--product-->
-<script src="app/components/product/product.module.js"></script>
-<script src="app/components/product/product.router.js"></script>
-<script src="app/components/product/product.controller.js"></script>
-<script src="app/components/product/product-details.controller.js"></script>
-
-
-<!--production item-->
-<script src="app/components/production-item/production-item.module.js"></script>
-<script src="app/components/production-item/production-item.router.js"></script>
-<script src="app/components/production-item/production-item.controller.js"></script>
-<script src="app/components/production-item/production-item-add.controller.js"></script>
-<script src="app/components/production-item/production-item-edit.controller.js"></script>
-<script src="app/components/production-item/production-item-details.controller.js"></script>
-<!--device-node-->
-<script src="app/components/device-node/device-node.module.js"></script>
+<script src="app/components/season/season.controller.js"></script>
+<script src="app/components/task/task-add.controller.js"></script>
+<script src="app/components/task/task-details.controller.js"></script>
+<script src="app/components/task/task-edit.controller.js"></script>
+<script src="app/components/task/task.controller.js"></script>
+<script src="app/components/task-category/task-category-add.controller.js"></script>
+<script src="app/components/task-category/task-category-details.controller.js"></script>
+<script src="app/components/task-category/task-category-edit.controller.js"></script>
+<script src="app/components/task-category/task-category.controller.js"></script>
+<script src="app/components/user/user.controller.js"></script>
+<script src="app/components/auth/signin/signin.controller.js"></script>
+<script src="app/components/auth/signout/signout.controller.js"></script>
+<script src="app/components/auth/signup/signup.controller.js"></script>
+<script src="app/components/user/settings/change-profile-picture.controller.js"></script>
+<script src="app/components/user/settings/user-setting.controller.js"></script>
+<script src="app/components/user/admin/user-manage.controller.js"></script>
+<script src="app/components/core/core.router.js"></script>
+<script src="app/components/dashboard/dashboard.router.js"></script>
 <script src="app/components/device-node/device-node.router.js"></script>
-<script src="app/components/device-node/device-node.controller.js"></script>
-<script src="app/components/device-node/device-node-add.controller.js"></script>
-<script src="app/components/device-node/device-node-edit.controller.js"></script>
-<script src="app/components/device-node/device-node-details.controller.js"></script>
-
+<script src="app/components/gallery/gallery.router.js"></script>
+<script src="app/components/garden/garden.router.js"></script>
+<script src="app/components/product/product.router.js"></script>
+<script src="app/components/production-item/production-item.router.js"></script>
+<script src="app/components/season/season.router.js"></script>
+<script src="app/components/task/task.router.js"></script>
+<script src="app/components/task-category/task-category.router.js"></script>
+<script src="app/components/user/user.router.js"></script>
+<script src="app/components/auth/signin/signin.router.js"></script>
+<script src="app/components/auth/signout/signout.router.js"></script>
+<script src="app/components/auth/signup/signup.router.js"></script>
+<script src="app/components/user/settings/user-setting.router.js"></script>
+<script src="app/shared/services/services.module.js"></script>
+<script src="app/shared/services/admin.service.js"></script>
+<script src="app/shared/services/auth.service.js"></script>
+<script src="app/shared/services/chat.service.js"></script>
+<script src="app/shared/services/device-node.service.js"></script>
+<script src="app/shared/services/event.service.js"></script>
+<script src="app/shared/services/follow.service.js"></script>
+<script src="app/shared/services/gallery.service.js"></script>
+<script src="app/shared/services/garden.service.js"></script>
+<script src="app/shared/services/notification.service.js"></script>
+<script src="app/shared/services/production-item.service.js"></script>
+<script src="app/shared/services/season.service.js"></script>
+<script src="app/shared/services/task-category.service.js"></script>
+<script src="app/shared/services/task.service.js"></script>
+<script src="app/shared/services/user.service.js"></script>
+<script src="app/shared/directives/map/map.directive.js"></script>
+<script src="app/shared/directives/upload/upload.directive.js"></script>
+<!-- endinject -->
 </html>

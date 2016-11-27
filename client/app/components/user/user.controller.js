@@ -2,9 +2,9 @@
     angular.module('app.user')
         .controller('UserController', UserController);
 
-    UserController.$inject = ['$rootScope', 'UserService', 'FollowService', 'GalleryService', 'EventService', '$state', 'appConfigs', '$localStorage'];
+    UserController.$inject = ['$rootScope', 'UserService', 'FollowService', 'GalleryService', '$state', 'appConfigs', '$localStorage'];
 
-    function UserController($rootScope, UserService, FollowService, GalleryService, EventService, $state, appConfigs, $localStorage) {
+    function UserController($rootScope, UserService, FollowService, GalleryService, $state, appConfigs, $localStorage) {
         var vm = this;
         vm.userInfo = "";
         vm.userId = $state.params.userId;
@@ -16,11 +16,9 @@
         if (!vm.isMe) {
             getUserInfo();
             getImages(vm.userId);
-            getEvents(vm.userId);
         } else {
             getMyUserInfo();
             getImages($localStorage.userInfo._id);
-            getMyEvents();
         };
 
         checkMyFollows();
@@ -60,26 +58,6 @@
                 $rootScope.alert = err.data.message;
                 $state.go('signin');
             });
-        };
-
-        function getEvents(userId) {
-            UserService.loadEventsByUserId(userId)
-                .then(function (res) {
-                    vm.events = res;
-                }, function (err) {
-                    $rootScope.alert = err.data.message;
-                    $state.go('index.events');
-                });
-        };
-
-        function getMyEvents() {
-            EventService.loadMyEvents()
-                .then(function (res) {
-                    vm.events = res;
-                }, function (err) {
-                    $rootScope.alert = err.data.message;
-                    $state.go('index.events');
-                });
         };
 
         function doFollow() {

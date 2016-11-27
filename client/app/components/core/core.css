@@ -150,7 +150,7 @@
             /* Stay on top */
             top: 0;
             left: 0;
-            background-color: rgba(51, 122, 183, 0.65);
+            background-color: #009900;
             /* Black*/
             overflow-x: hidden;
             /* Disable horizontal scroll */
@@ -231,7 +231,7 @@
         
         a {
             text-decoration: none !important;
-            color: #009900 !important;
+            /*color: #009900 !important;*/
         }
         /*nav {
     background: #e6f9ff !important;
