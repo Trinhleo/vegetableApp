@@ -23,7 +23,7 @@
 <body>
 	<div ui-view>
 </body>
-<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular/angular.min.js"></script>
 <script src="node_modules/moment/moment.js"></script>
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -42,6 +42,8 @@
 <script src="bower_components/angular-material-data-table/dist/md-data-table.min.js"> </script>
 <script src="bower_components/jquery-ui/jquery-ui.min.js"> </script>
 <script src="bower_components/select2/dist/js/select2.min.js"> </script>
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
 <!--app-->
 <!-- inject:js -->
 <script src="app/app.module.js"></script>
@@ -58,8 +60,8 @@
 <script src="app/components/task/task.module.js"></script>
 <script src="app/components/task-category/task-category.module.js"></script>
 <script src="app/components/user/user.module.js"></script>
-<script src="app/components/auth/signin/signin.module.js"></script>
 <script src="app/components/auth/signout/signout.module.js"></script>
+<script src="app/components/auth/signin/signin.module.js"></script>
 <script src="app/components/auth/signup/signup.module.js"></script>
 <script src="app/components/user/settings/user-setting.module.js"></script>
 <script src="app/components/core/core.controller.js"></script>
@@ -96,12 +98,12 @@
 <script src="app/components/task-category/task-category-edit.controller.js"></script>
 <script src="app/components/task-category/task-category.controller.js"></script>
 <script src="app/components/user/user.controller.js"></script>
-<script src="app/components/auth/signin/signin.controller.js"></script>
 <script src="app/components/auth/signout/signout.controller.js"></script>
+<script src="app/components/auth/signin/signin.controller.js"></script>
 <script src="app/components/auth/signup/signup.controller.js"></script>
+<script src="app/components/user/admin/user-manage.controller.js"></script>
 <script src="app/components/user/settings/change-profile-picture.controller.js"></script>
 <script src="app/components/user/settings/user-setting.controller.js"></script>
-<script src="app/components/user/admin/user-manage.controller.js"></script>
 <script src="app/components/core/core.router.js"></script>
 <script src="app/components/dashboard/dashboard.router.js"></script>
 <script src="app/components/device-node/device-node.router.js"></script>
@@ -113,8 +115,8 @@
 <script src="app/components/task/task.router.js"></script>
 <script src="app/components/task-category/task-category.router.js"></script>
 <script src="app/components/user/user.router.js"></script>
-<script src="app/components/auth/signin/signin.router.js"></script>
 <script src="app/components/auth/signout/signout.router.js"></script>
+<script src="app/components/auth/signin/signin.router.js"></script>
 <script src="app/components/auth/signup/signup.router.js"></script>
 <script src="app/components/user/settings/user-setting.router.js"></script>
 <script src="app/shared/services/services.module.js"></script>
@@ -135,4 +137,5 @@
 <script src="app/shared/directives/map/map.directive.js"></script>
 <script src="app/shared/directives/upload/upload.directive.js"></script>
 <!-- endinject -->
+
 </html>

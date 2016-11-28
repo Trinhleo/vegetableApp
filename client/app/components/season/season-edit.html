@@ -1,8 +1,10 @@
 <section>
     <div class="action-bar">
         <a class="fa-icon fa fa-list" href="#/gardens/{{vm.gardenId}}/seasons" data-toggle="tooltip" title="Danh sách mùa vụ"></a>
+        &nbsp;&nbsp;
         <a ng-if="vm.garden.isOwner" style="margin-left:5px" class="fa-icon fa fa-plus-square" ui-sref="index.season.add" data-toggle="tooltip"
             title="Thêm mùa vụ"></a>
+              &nbsp;&nbsp;
         <label style="margin-left:50px;font-size:2em" class="text-right">{{'Quản lý mùa vụ vườn rau: ' + $root.garden.name}}</label>
     </div>
     <h1>Chỉnh sửa mùa vụ</h1>
@@ -44,6 +46,9 @@
             <div class="form-group">
                 <button ng-click="vm.updateSeason()" type="submit" class="btn btn-primary" ng-disabled="seasonForm.name.$invalid||seasonForm.startdate.$invalid||seasonForm.enddate.$invalid || seasonForm.seedQuantity.$invalid||vseasonForm.enddate.$invalid||!vm.formChange">
   Cập nhật
+</button>
+ <button ng-click="vm.goBack()"  class="btn btn-default">
+  Hủy
 </button>
             </div>
             <div ng-show="vm.error" class="text-danger">

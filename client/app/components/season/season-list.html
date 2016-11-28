@@ -1,6 +1,5 @@
 <section>
   <div class="action-bar">
-    <a class="fa-icon fa fa-list" href="#/gardens/{{vm.gardenId}}/seasons" data-toggle="tooltip" title="Danh sách mùa vụ"></a>
     <a ng-if="vm.garden.isOwner" style="margin-left:5px" class="fa-icon fa fa-plus-square" ui-sref="index.season.add"
       data-toggle="tooltip" title="Thêm mùa vụ"></a>
     <label style="margin-left:50px;font-size:2em" class="text-right">{{'Quản lý mùa vụ vườn rau: ' + $root.garden.name}}</label>

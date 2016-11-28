@@ -1,14 +1,15 @@
 (function () {
     angular.module('app.season')
         .controller('EditSeasonController', EditSeasonController);
-    EditSeasonController.$inject = ['SeasonService', '$stateParams', '$state', '$rootScope', 'toastr'];
-    function EditSeasonController(SeasonService, $stateParams, $state, $rootScope, toastr) {
+    EditSeasonController.$inject = ['SeasonService', 'GardenService', '$stateParams', '$state', '$rootScope', 'toastr'];
+    function EditSeasonController(SeasonService, GardenService, $stateParams, $state, $rootScope, toastr) {
         vm = this;
         vm.gardenId = $stateParams.gardenId;
         vm.garden = $rootScope.garden || {};
         vm.season = {};
         vm.formChange = false;
         vm.updateSeason = updateSeason;
+        vm.goBack = goBack;
         if ($.isEmptyObject(vm.garden)) {
             GardenService.getGarden(vm.gardenId).then(
                 function (res) {
@@ -22,7 +23,7 @@
                 }
             )
         }
-        
+
         loadSeason();
         function loadSeason() {
             SeasonService.getSeason($stateParams.seasonId).then(
@@ -54,6 +55,11 @@
                     toastr.error(err.errMsg, "Lỗi");
                 }
             )
+        }
+        function goBack() {
+            $state.go('index.season.details', {
+                seasonId: $state.seasonId
+            })
         }
 
     };

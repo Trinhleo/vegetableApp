@@ -1,15 +1,20 @@
 <section>
     <div class="action-bar">
         <a class="fa-icon fa fa-list" href="#/gardens/{{vm.gardenId}}/seasons" data-toggle="tooltip" title="Danh sách mùa vụ"></a>
+        &nbsp;&nbsp;
         <a ng-if="vm.garden.isOwner" style="margin-left:5px" class="fa-icon fa fa-plus-square" ui-sref="index.season.add" data-toggle="tooltip"
             title="Thêm mùa vụ"></a>
+        &nbsp;&nbsp;
         <a ng-if="vm.season && vm.garden.isOwner" style="margin-left:5px" ng-if="$root.seasonId" class="fa-icon fa fa-edit" ui-sref="index.season.edit({ seasonId: $root.seasonId})"
             data-toggle="tooltip" title="Chỉnh sửa mùa vụ"></a>
-        <a ng-if="vm.season && vm.garden.isOwner"  style="margin-left:5px" data-ng-click="vm.remove()"><i class="fa-icon fa fa-trash"></i></a>
+        &nbsp;&nbsp;
+        <a ng-if="vm.season && vm.garden.isOwner" style="margin-left:5px" data-ng-click="vm.remove()"><i class="fa-icon fa fa-trash"></i></a>
+        <!--<a ng-if="vm.season && $root.garden.isOwner" style="margin-left:5px" ng-if="$root.seasonId" class="fa-icon fa fa-tasks" ui-sref="index.season.task({ seasonId: vm.seasonId})"
+            data-toggle="tooltip" title="Danh sách tác vụ"></a>-->
+        &nbsp;&nbsp;
         <a ng-if="vm.season && $root.garden.isOwner" style="margin-left:5px" ng-if="$root.seasonId" class="fa-icon fa fa-tasks" ui-sref="index.season.task({ seasonId: vm.seasonId})"
-            data-toggle="tooltip" title="Danh sách tác vụ"></a>
-              <a ng-if="vm.season && $root.garden.isOwner" style="margin-left:5px" ng-if="$root.seasonId" class="fa-icon fa fa-tasks" ui-sref="index.season.task({ seasonId: vm.seasonId})"
             data-toggle="tooltip" title="Chăm sóc vườn rau"></a>
+        &nbsp;&nbsp;
         <label style="margin-left:50px;font-size:2em" class="text-right">{{'Quản lý mùa vụ vườn rau: ' + $root.garden.name}}</label>
     </div>
     <div class="page-header col-md-12">
@@ -22,13 +27,13 @@
     <div class="col-md-12 ">
         <h2><span style="color:#337ab7">Đối tượng sản xuất:</span> {{vm.season.productionItem.name}}</h2>
         <div class="img_container"><img alt="" class="img-responsive text-center" ng-src="{{vm.season.vegetable.imgUrl}}" /></div>
-        <h3><span style="color:#337ab7">Ngày bắt đầu: </span>{{vm.season.startDate| date:'short'}} <br>
+        <!--<h3><span style="color:#337ab7">Ngày bắt đầu: </span>{{vm.season.startDate| date:'short'}} <br>
             <span style="color:#337ab7">Ngày kết thúc:<em ng-hide="vm.season.status===2">(Dự kiến)</em></span>{{vm.season.endDate|
             date:'short'}}
-        </h3><br>
-        <div><span class="alert alert-danger" ng-show="vm.season.status===2">Đã kết thúc</span>
-            <span class="alert alert-success" ng-show="vm.season.status===1">Đang diễn ra</span>
-            <span class="alert alert-warning" ng-show="vm.season.status===0">Chưa bắt đầu</span></div>
+        </h3><br>-->
+        <div><span class="alert-danger" ng-show="vm.season.status===2">Đã kết thúc</span>
+            <span class="alert-success" ng-show="vm.season.status===1">Đang diễn ra</span>
+            <span class="alert-warning" ng-show="vm.season.status===0">Chưa bắt đầu</span></div>
         <br>
         <!-- <small>
     <em class="text-muted">
@@ -37,24 +42,9 @@
     </em>
   </small> -->
         <md-divider></md-divider>
-        <h2>Lịch sử tưới nước :</h2>
-        <md-table-container ng-if="vm.season.watering">
-            <table md-table style="color:#5d9842;">
-                <thead md-head md-order="" md-on-reorder="">
-                    <tr md-row>
-                        <th md-column style="color:#5d9842;"><span>Thời gian</span></th>
-                    </tr>
-                </thead>
-                <tbody md-body>
-                    <tr md-row ng-repeat="water in vm.season.watering" ng-show="vm.season.wateringHistory">
-                        <td md-cell style="color:#5d9842;">{{water}}</td>
-                        <!--<td md-cell style="color:#5d9842;">{{item.quantity}}</td>-->
-                    </tr>
-                </tbody>
-            </table>
-            <!--<pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage"
-                ng-change="vm.pageChanged()"></pagination>-->
-        </md-table-container>
-        <span ng-if="!vm.season.wateringList" class="alert alert-warning text-center">Không có dữ liệu!</span>
+        <h2>Biểu đồ :</h2>
+        {{vm.chartData}}
+        <div id="container" style="height: 400px; min-width: 310px"></div>
+        <span ng-if="!vm.season.wateringList" class="alert-warning text-center">Không có dữ liệu!</span>
     </div>
 </section>

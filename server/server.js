@@ -12,7 +12,7 @@ var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 var favicon = require('serve-favicon');
 var myIp = require('ip');
-// var socketConfig = require('./config/socket');
+var nodeDeviceConfig = require('./socket/config/device-node.config');
 var morgan = require('morgan');
 // =======================
 // configuration =========
@@ -38,6 +38,7 @@ app.use('/', express.static(path.resolve('./public')));
 // console.log(path.resolve('./uploads'));
 //socket io
 // socketConfig(io, app);
+nodeDeviceConfig(io);
 //register routes
 routes(app);
 // register socket io
