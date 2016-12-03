@@ -1,6 +1,6 @@
 
 var mongoose = require('mongoose');
-require('../models/Task.model.js');
+require('../models/task.model.js');
 var Task = mongoose.model('Task');
 
 module.exports = {
@@ -13,7 +13,7 @@ module.exports = {
 };
 
 function listTasks(query, callback) {
-    Task.find(query).sort('-created').populate('garden').populate('productionItem').exec(function (err, result) {
+    Task.find(query).sort('-created').populate('season').exec(function (err, result) {
         if (err) {
             return callback(err, null);
         }
@@ -22,7 +22,7 @@ function listTasks(query, callback) {
 }
 
 function readTaskById(id, callback) {
-    Task.findById(id).sort('-created').populate('garden').populate('productionItem').exec(function (err, result) {
+    Task.findById(id).sort('-created').populate('season').exec(function (err, result) {
         if (err) {
             return callback(err, null);
         }
@@ -31,7 +31,7 @@ function readTaskById(id, callback) {
 }
 
 function readTask(query, callback) {
-    Task.findOne(query).populate('garden').populate('productionItem').exec(function (err, result) {
+    Task.findOne(query).populate('season').exec(function (err, result) {
         if (err) {
             return callback(err, null);
         }

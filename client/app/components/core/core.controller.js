@@ -1,21 +1,21 @@
 (function () {
     angular.module('app.core')
         .controller('CoreController', CoreController);
-    CoreController.$inject = ['$state', '$location', '$rootScope', '$localStorage', '$timeout', 'toastr', '$filter', 'NotificationService', '$scope']
-    function CoreController($state, $location, $rootScope, $localStorage, $timeout, toastr, $filter, NotificationService, $scope) {
+    CoreController.$inject = ['$state', '$location', '$rootScope', '$localStorage', '$timeout', 'toastr', '$filter', 'NotificationService', 'AuthService', '$scope']
+    function CoreController($state, $location, $rootScope, $localStorage, $timeout, toastr, $filter, NotificationService, AuthService, $scope) {
         var vm = this;
         $rootScope.userInfo = $localStorage.userInfo;
         $rootScope.isAdmin = $localStorage.userInfo && $localStorage.userInfo.roles[0] === 'admin' ? true : false;
         var socket = io.connect('http://localhost:3000/notification');
         vm.isActive = function (viewLocation) {
-            return viewLocation === $location.path();
+            return $location.path().indexOf(viewLocation) !==-1;
         };
         // ======CONFIGURE NOTIFICATION========
         vm.notifications = [];
         vm.readNotification = readNotification;
         // $rootScope.userInfo = $localStorage.userInfo;
         // vm.newNotifications = [];
-        vm.bage = 0;
+        // vm.bage = 0;
         $('.parallax-garden').height($(window).height());
         // navigation
         vm.openNav = openNav;
@@ -23,8 +23,14 @@
         vm.isOpenSideBar = false;
         vm.isMenuPin = false;
         vm.pinMenu = pinMenu;
+        vm.signin = signin;
+        vm.user = {
+            username: "",
+            password: ""
+        };
         // loadNewNotificatons();
-        // openNav();
+        openNav();
+        pinMenu();
         // Collapsing the menu after navigation
         $scope.$on('$stateChangeSuccess', function () {
             if (vm.isOpenSideBar && !vm.isMenuPin) {
@@ -50,6 +56,27 @@
             });
 
         });
+
+
+
+        function signin() {
+            AuthService.signin(vm.user).then(function (res) {
+
+                $localStorage.token = res.access_token;
+                $localStorage.user = res.name;
+                $localStorage.userInfo = res.userInfo;
+                $rootScope.userInfo = $localStorage.userInfo;
+                $rootScope.isAdmin = $localStorage.userInfo.roles[0] === 'admin' ? true : false;
+                // $('#modal-signin').removeClass('in');
+                $('#close-button').click();
+                $state.go(!$state.previous.state.abstract ? $state.previous.state : 'index.product')
+                // console.log(err)
+                // vm.alert = err.data.message || err.message;
+
+            }, function (err) {
+                toastr.error('Tên đăng nhập hoặc mật khẩu sai', 'Lỗi đăng nhập');
+            });
+        };
 
         function openNav() {
             document.getElementById("mySidenav").style.width = "250px";

@@ -15,7 +15,10 @@
         <a ng-if="vm.season && $root.garden.isOwner" style="margin-left:5px" ng-if="$root.seasonId" class="fa-icon fa fa-tasks" ui-sref="index.season.task({ seasonId: vm.seasonId})"
             data-toggle="tooltip" title="Chăm sóc vườn rau"></a>
         &nbsp;&nbsp;
+        <a class="fa-icon fa fa-plus" title="Thêm tác vụ" data-toggle="modal"
+            data-target="#modal-add-task"></a>
         <label style="margin-left:50px;font-size:2em" class="text-right">{{'Quản lý mùa vụ vườn rau: ' + $root.garden.name}}</label>
+
     </div>
     <div class="page-header col-md-12">
         <div class="col-md-12">
@@ -42,9 +45,32 @@
     </em>
   </small> -->
         <md-divider></md-divider>
-        <h2>Biểu đồ :</h2>
-        {{vm.chartData}}
+        Tác vụ chăm sóc vườn:
+        <div>
+            <div pro-table="vm.taskOption"></div>
+        </div>
+        <md-divider></md-divider>
         <div id="container" style="height: 400px; min-width: 310px"></div>
-        <span ng-if="!vm.season.wateringList" class="alert-warning text-center">Không có dữ liệu!</span>
+        <h2>Biểu đồ :</h2>
+        <div id="container2" style="height: 400px; min-width: 310px"></div>
+        <!--<span ng-if="!vm.season.wateringList" class="alert-warning text-center">Không có dữ liệu!</span>-->
+    </div>
+    <div id="modal-add-task" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Thêm tác vụ</h3>
+                </div>
+                <div class="student-search-box">
+                    <label style="vertical-align: middle" class="text-left vertical-middle ">Tìm kiếm</label>
+                    <input id="searchInput" class="form-control" ng-change="vm.searchStudents();" type="text" placeholder="Nhập tìm kiếm"
+                        ng-model="vm.searchTextStudent" />
+                </div>
+                <div pro-table="vm.studentsOption" class="pro-table table-responsive"></div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-success">Xác nhận</button>
+                </div>
+            </div>
+        </div>
     </div>
 </section>

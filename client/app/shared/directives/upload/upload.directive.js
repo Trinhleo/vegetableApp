@@ -11,11 +11,10 @@
             scope: {
                 url: '=url',
                 doUpload: '=upload',
-                event: '=event'
+                data: '=dataUpload'
             }
         };
         function linkFn(scope, element, attrs) {
-            var upload = doUpload;
             scope.uploadFiles = function (files, errFiles) {
                 scope.files = files;
                 scope.errFiles = errFiles;
@@ -36,20 +35,18 @@
 
             scope.$watch('doUpload', function (doUpload) {
                 $timeout(function () {
-                    if (doUpload && scope.event && scope.url) {
-                        upload(scope.files, scope.url, scope.event);
+                    if (doUpload && scope.data && scope.url) {
+                        upload(scope.files, scope.url, scope.data);
                     }
                 });
             });
 
-            function doUpload(files, url, eventId) {
+            function upload(files, url, data) {
                 angular.forEach(files, function (file) {
+                    data.myfile = file;
                     file.upload = Upload.upload({
                         url: url,
-                        data: {
-                            myfile: file,
-                            event: eventId
-                        }
+                        data: data
                     });
 
                     file.upload.then(function (response) {

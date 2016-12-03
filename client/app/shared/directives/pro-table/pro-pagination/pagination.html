@@ -1,0 +1,21 @@
+<div class="row pro-pagination">
+    <div class="col-md-6 text-left">
+        <div class="pagination-panel ng-binding">{{'Page'|translate}}
+            <button class="floating-box btn btn-default btn-sm" ng-click="vm.leftPageFunction()" ng-enable="vm.currentPage > 0"><i class="fa fa-angle-left"></i></button>
+            <input type="text" ng-model="vm.inputPage" ng-change="vm.inputPageChange()" class="floating-box pagination-panel-input form-control input-mini input-inline input-sm text-center">
+            <button class="floating-box btn btn-default btn-sm" ng-click="vm.rightPageFunction()" ng-enable="vm.currentPage < vm.totalPage"><i class="fa fa-angle-right"></i></button>
+            <span class="floating-box">{{'of'|translate}} {{vm.totalPage}} {{'Page'|translate}} </span>
+            <span>| {{'View'|translate}} <select class="floating-box form-control input-xsmall input-sm input-inline" id="select" ng-model="vm.amountRecord" ng-options="item for item in vm.amountRecordArray"
+                ng-change="vm.changeAmount(vm.amountRecord)"> </select>&nbsp; {{'Records'|translate}}</span>
+        </div>
+    </div>
+    <div class="col-md-6 text-right">
+        <div class="pagination-panel">
+            <ul class="pagination pagination-sm man">
+                <li><a class="btn btn-default" ng-click="vm.leftPageFunction()">&laquo;</a></li>
+                <li ng-repeat="i in _.range(vm.proPagination.totalPage)" ng-class="vm.activeItem[i]"><a class="btn btn-info" ng-click="vm.setPage(i)">{{i+1}}</a></li>
+                <li><a class="btn btn-default" ng-click="vm.rightPageFunction()">&raquo;</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -40,6 +40,16 @@
             });
             return deferred.promise;
         };
+        function getImagesByGardenId(gardenId) {
+            var deferred = $q.defer();
+
+            $http.get(apiUrl + '/' + gardenId + '/images').then(function (res) {
+                deferred.resolve(res.data);
+            }, function (err) {
+                deferred.reject(err);
+            });
+            return deferred.promise;
+        };
 
         function getOneImage(id) {
             var deferred = $q.defer();

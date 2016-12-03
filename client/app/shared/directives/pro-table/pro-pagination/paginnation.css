@@ -1,0 +1,11 @@
+.pro-pagination .floating-box {
+    display: inline-block;
+}
+
+.pagination li.active a {
+    color: #FFFFFF;
+    background: #39b3d7 !important;
+    z-index: 2;
+    cursor: default;
+    border-color: #39b3d7 !important;
+}

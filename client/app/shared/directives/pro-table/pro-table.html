@@ -1,0 +1,17 @@
+<div class="col-md-12" id="pro_table">
+    <div ng-show="vm.option.body.contentList.length !== 0" class="pro-table">
+        <table style="margin-top: 15px; border-top: none; overflow-x:scroll;" class="table table-responsive table-striped table-bordered table-advanced">
+            <thead pro-header="vm.option.header">
+
+            </thead>
+            <tbody pro-body="vm.option.body">
+
+            </tbody>
+        </table>
+        <div ng-if="vm.option.pagination !== undefined" pro-pagination="vm.option.pagination"></div>
+    </div>
+    <div ng-if="vm.option.body.contentList.length === 0" class="note note-success" style="margin-top: 20px">
+        <h4 class="box-heading">{{'Notification'|translate }}</h4>
+        <p>{{vm.option.message|translate }}</p>
+    </div>
+</div>

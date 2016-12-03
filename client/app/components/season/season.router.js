@@ -9,7 +9,6 @@
                 templateUrl: 'app/components/season/season.html',
                 controller: 'SeasonController',
                 controllerAs: 'vm',
-                abstract: true
             })
             .state('index.season.list', {
                 url: "/seasons",
@@ -33,7 +32,30 @@
                 url: "/seasons/:seasonId",
                 templateUrl: 'app/components/season/season-details.html',
                 controller: 'DetailsSeasonController',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                resolve: {
+                    seasonDetails: function (SeasonService, $stateParams, $rootScope) {
+                        return SeasonService.getSeason($stateParams.seasonId).then(
+                            function (res) {
+                                $rootScope.seasonId = $stateParams.seasonId
+                                return res;
+                            },
+                            function (err) {
+                                return toastr.error(err, 'Lỗi');
+                            }
+                        )
+                    },
+                    taskCats: function (TaskCategoryService) {
+                        return TaskCategoryService.listAllTaskCategories().then(function (res) {
+                            return res;
+                        })
+                    },
+                    tasks: function (SeasonService,$stateParams) {
+                        return SeasonService.listTasks($stateParams.seasonId).then(function (res) {
+                            return res;
+                        })
+                    }
+                }
             })
             .state('index.season.task', {
                 url: "/seasons/:seasonId/tasks",

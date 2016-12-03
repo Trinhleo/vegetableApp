@@ -29,31 +29,20 @@ module.exports = {
 
 // });
 // check status realtime;
-// setInterval(realtime, 1000);
-// function realtime() {
-//     var sse = [];
-//     seasonDao.listSeasons({ status: { $lt: 2 }, isDeleted: false })
-//     Season.find().sort('-created').populate('garden', 'name').exec(function (err, seasons) {
-//         if (err) {
-//             ;
-//         } else {
-//             var ss = seasons;
-//             for (var i in ss) {
-//                 var dateNow = new Date();
-//                 if (ss[i].startDate <= dateNow && ss[i].endDate > dateNow) {
-//                     ss[i].status = 1;
-//                     ss[i].save();
-//                 } else if (ss[i].endDate <= dateNow) {
-//                     var season = ss[i];
-//                     var seadQ = season.seedQuantity
-//                     season.status = 2;
-//                     season.quantity = _.random(seadQ / 2, seadQ);
-//                     season.save();
-//                 }
-//             }
-//         }
-//     });
-// };
+setInterval(realtime, 1000);
+function realtime() {
+    checkStartDate();
+}
+
+function checkStartDate() {
+    seasonDao.updateSeasonByQuery({
+        status: 0, isDeleted: false, startDate: { $lt: new Date() }
+    }, { status: 1 }, cb);
+    function cb(err, res) {
+        console.log('bắt đầu thành công', res)
+        console.log('bắt đầu không thành công',err);
+    }
+};
 
 function listAllSeasons(req, res) {
     seasonDao.listSeasons({ isDeleted: false }, cb);

@@ -7,7 +7,15 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta content="text/html; charset=utf-8" http-equiv="content-type">
+	<!--<link rel="stylesheet" href="app/components/core/core.css">-->
+	<!-- inject:css -->
 	<link rel="stylesheet" href="app/components/core/core.css">
+	<link rel="stylesheet" href="app/components/garden/garden.css">
+	<link rel="stylesheet" href="app/shared/directives/map/map.directive.css">
+	<link rel="stylesheet" href="app/shared/directives/pro-table/pro-header/pro-header.css">
+	<link rel="stylesheet" href="app/shared/directives/pro-table/pro-body/pro-body.css">
+	<link rel="stylesheet" href="app/shared/directives/pro-table/pro-pagination/paginnation.css">
+	<!-- endinject -->
 	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.min.css">
 	<link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
@@ -16,7 +24,7 @@
 	<link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css" />
 	<link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css" />
 	<!--directives-->
-	<link rel="stylesheet" href="app/shared/directives/map/map.directive.css" />
+	<!--<link rel="stylesheet" href="app/shared/directives/map/map.directive.css" />-->
 
 </head>
 
@@ -101,9 +109,9 @@
 <script src="app/components/auth/signout/signout.controller.js"></script>
 <script src="app/components/auth/signin/signin.controller.js"></script>
 <script src="app/components/auth/signup/signup.controller.js"></script>
-<script src="app/components/user/admin/user-manage.controller.js"></script>
 <script src="app/components/user/settings/change-profile-picture.controller.js"></script>
 <script src="app/components/user/settings/user-setting.controller.js"></script>
+<script src="app/components/user/admin/user-manage.controller.js"></script>
 <script src="app/components/core/core.router.js"></script>
 <script src="app/components/dashboard/dashboard.router.js"></script>
 <script src="app/components/device-node/device-node.router.js"></script>
@@ -121,6 +129,7 @@
 <script src="app/components/user/settings/user-setting.router.js"></script>
 <script src="app/shared/services/services.module.js"></script>
 <script src="app/shared/services/admin.service.js"></script>
+<script src="app/shared/services/anchor-smooth-scroll.service.js"></script>
 <script src="app/shared/services/auth.service.js"></script>
 <script src="app/shared/services/chat.service.js"></script>
 <script src="app/shared/services/device-node.service.js"></script>
@@ -135,7 +144,11 @@
 <script src="app/shared/services/task.service.js"></script>
 <script src="app/shared/services/user.service.js"></script>
 <script src="app/shared/directives/map/map.directive.js"></script>
+<script src="app/shared/directives/pro-table/pro-table.directive.js"></script>
 <script src="app/shared/directives/upload/upload.directive.js"></script>
+<script src="app/shared/directives/pro-table/pro-header/pro-header.directive.js"></script>
+<script src="app/shared/directives/pro-table/pro-body/pro-body.directive.js"></script>
+<script src="app/shared/directives/pro-table/pro-pagination/pagination.directive.js"></script>
 <!-- endinject -->
 
 </html>

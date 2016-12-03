@@ -43,5 +43,5 @@ var TaskCategorySchema = new Schema({
     }
 });
 
-    TaskCategorySchema.index({ "name": 1, "type": 1 }, { unique: true });
+TaskCategorySchema.index({ "name": 1, "type": 1 }, { unique: true });
 mongoose.model('TaskCategory', TaskCategorySchema);

@@ -15,13 +15,13 @@
         vm.doFollow = doFollow;
         if (!vm.isMe) {
             getUserInfo();
-            getImages(vm.userId);
+            // getImages(vm.userId);
         } else {
             getMyUserInfo();
-            getImages($localStorage.userInfo._id);
+            // getImages($localStorage.userInfo._id);
         };
 
-        checkMyFollows();
+        // checkMyFollows();
 
         function checkMyFollows() {
             FollowService.checkFollow({userFollowId: vm.userId})

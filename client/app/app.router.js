@@ -14,7 +14,7 @@
 
     httpInterceptor.$inject = ['$q', '$location', '$localStorage'];
 
-    function httpInterceptor($q, $location, $localStorage) {
+    function httpInterceptor($q, $location, $localStorage, toastr) {
         return {
             request: function (_config) {
                 // if (_config.url.indexOf('.html') === -1 && _config.url.indexOf('http') === -1) {
@@ -31,7 +31,8 @@
 
                     delete $localStorage.token;
                     delete $localStorage.user;
-                    $location.path('/signin');
+                    toastr.error('Không tìm thấy trang', 'Lỗi');
+                    $location.path('/');
                     return $q.reject(rejection);
                 } else {
                     return $q.reject(rejection);

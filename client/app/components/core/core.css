@@ -1,6 +1,7 @@
-        *{
+        * {
             font-family: 'Segoe UI', sans-serif
         }
+        
         .title-lv1 {
             color: white !important;
             background-color: #009900 !important;
@@ -150,7 +151,7 @@
             /* Stay on top */
             top: 0;
             left: 0;
-            background-color: #009900;
+            background-color: rgba(0, 153, 0, 0.8);
             /* Black*/
             overflow-x: hidden;
             /* Disable horizontal scroll */
@@ -167,7 +168,8 @@
             font-size: 16px;
             color: white;
             display: block;
-            transition: 0.3s
+            transition: 0.3s;
+            font-weight: bold;
         }
         /* When you mouse over the navigation links, change their color */
         
@@ -227,6 +229,7 @@
         
         .fa-icon {
             font-size: 36px !important;
+            color: #009900 !important;
         }
         
         a {
@@ -501,6 +504,11 @@
         .require {
             color: red;
         }
-       .select2 {
-           width: 100% !important;
-       }
+        
+        .select2 {
+            width: 100% !important;
+        }
+        li.active{
+            background-color: white !important;
+            color: #009900 !important;
+        }

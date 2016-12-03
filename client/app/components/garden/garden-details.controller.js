@@ -2,15 +2,16 @@
     angular.module('app.garden')
         .controller('DetailsGardenController', DetailsGardenController);
 
-    DetailsGardenController.$inject = ['$state', '$localStorage', '$rootScope', '$scope', 'GardenService', '$stateParams', 'FileUploader', 'appConfigs', '$window', '$timeout', 'toastr'];
+    DetailsGardenController.$inject = ['anchorSmoothScroll','$location','$state', '$localStorage', '$rootScope', '$scope', 'GardenService', '$stateParams', 'FileUploader', 'appConfigs', '$window', '$timeout', 'toastr'];
 
-    function DetailsGardenController($state, $localStorage, $rootScope, $scope, GardenService, $stateParams, FileUploader, appConfigs, $window, $timeout, toastr) {
+    function DetailsGardenController(anchorSmoothScroll,$location,$state, $localStorage, $rootScope, $scope, GardenService, $stateParams, FileUploader, appConfigs, $window, $timeout, toastr) {
         var vm = this;
         // vm.room = {};
         vm.gardenImages = [];
         vm.gardens = [];
         vm.garden = {};
         vm.gotoEdit = gotoEdit;
+        vm.gotoSeasons = gotoSeasons;
         vm.deleteGarden = deleteGarden;
         // vm.likeGardens = likeGardens;
         vm.isMyGarden = false;
@@ -19,6 +20,7 @@
         vm.carouselIndex = 0;
         vm.approve = approve;
         vm.unApprove = unApprove;
+        vm.gotoElement = gotoElement;
         // vm.socket = io.connect('http://localhost:3000/chat');
 
         // checkFav();
@@ -78,6 +80,7 @@
             );
         };
 
+
         // GardenService.getGardenImages($stateParams.gardenId).then(
         //     function (res) {
         //         var evt = res;
@@ -88,6 +91,12 @@
         //         $state.go('index.gardens');
         //     }
         // );
+        function gotoElement(elementId) {
+             anchorSmoothScroll.scrollTo(elementId);
+        }
+        function gotoSeasons(){
+            window.location.href = '#/gardens/'+ $stateParams.gardenId +'/seasons';
+        }
 
         function gotoEdit() {
             $state.go('index.garden-edit', {

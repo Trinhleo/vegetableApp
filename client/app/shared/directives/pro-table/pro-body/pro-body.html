@@ -1,0 +1,15 @@
+<tr class="action-for-row" ng-if="vm.actionForRow !== undefined && vm.contentList.lengtd !== 0" ng-repeat="content in vm.contentList track by $index">
+    <td>{{$index + 1}}</td>
+    <td ng-repeat="(key, value) in vm.titleList" ng-click="vm.actionForRow(key)" ng-bind-html="content[key]"></td>
+    <td class="colorAction" ng-if="vm.actionList.lengtd !== 0 && vm.actionList.lengtd !== undefined">
+        <button type="button" data-ng-repeat="action in vm.actionList track by $index" ng-click="vm.methodList[$index](content)" class="{{action.color}}"> {{action.title|translate}}</button>
+    </td>
+</tr>
+<tr ng-if="vm.actionForRow === undefined && vm.contentList.lengtd !== 0" ng-repeat="content in vm.contentList track by $index">
+    <td>{{$index + 1}}</td>
+    <td data-ng-repeat="(key, value) in vm.titleList" ng-bind-html="content[key]"></td>
+    <td ng-if="vm.actionList.length !==0 && vm.actionList.length !== undefined" style="text-align: center">
+        <button type="button " ng-repeat="action in vm.actionList track by $index " data-toggle="tooltip" title="{{action.title|translate}}"
+            class="{{action.color}} btn-action" ng-click="vm.methodList[$index](content) "></button>
+    </td>
+</tr>

@@ -11,4 +11,6 @@ module.exports = function (app) {
     app.use('/api/production-items', require('./production-item.routes.js')());
     app.use('/api/device-nodes', require('./device-node.routes.js')());
     app.use('/api/task-categories', require('./task-category.routes.js')());
+    // app.use('/api/task', require('./task.routes.js')());
+
 };

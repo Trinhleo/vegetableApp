@@ -13,6 +13,7 @@
             createSeason: createSeason,
             updateSeason: updateSeason,
             deleteSeason: deleteSeason,
+            listTasks: listTasks
         };
 
         // function loadSeasonsOfGarden() {
@@ -46,13 +47,14 @@
         };
 
         function getSeason(id) {
-            var deferred = $q.defer();
-            $http.get(apiUrl + '/' + id).then(function (res) {
-                deferred.resolve(res.data);
+            // var deferred = $q.defer();
+            return $http.get(apiUrl + '/' + id).then(function (res) {
+                // deferred.resolve(res.data);
+                return res.data;
             }, function (err) {
-                deferred.reject(err.data);
+                // deferred.reject(err.data);
             });
-            return deferred.promise;
+            // return deferred.promise;
         };
 
         function createSeason(data) {
@@ -85,5 +87,13 @@
             });
             return deferred.promise;
         };
+
+        function listTasks(id) {
+            return $http.get(apiUrl + '/' + id + '/tasks').then(function (res) {
+                return res.data;
+            }, function (err) {
+                return err.data;
+            });
+        }
     };
 })();

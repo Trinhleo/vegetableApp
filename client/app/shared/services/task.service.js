@@ -9,6 +9,7 @@
         return {
             loadTasks: loadTasks,
             loadMyTasks: loadMyTasks,
+            // listAllTaskById: listAllTaskById,
             getTask: getTask,
             createTask: createTask,
             updateTask: updateTask,
@@ -16,24 +17,32 @@
         };
 
         function loadMyTasks() {
-            var deferred = $q.defer();
-            $http.get(apiUrl + '/my-tasks').then(function (res) {
-                deferred.resolve(res.data);
+            // var deferred = $q.defer();
+            return $http.get(apiUrl + '/my-tasks').then(function (res) {
+                return res.data;
             }, function (err) {
-                deferred.reject(err);
+                return err.data;
             });
-            return deferred.promise;
         };
 
         function loadTasks() {
-            var deferred = $q.defer();
-            $http.get(apiUrl).then(function (res) {
-                deferred.resolve(res.data);
+            // var deferred = $q.defer();
+            return $http.get(apiUrl + '/tasks').then(function (res) {
+                return res.data;
             }, function (err) {
-                deferred.reject(err);
+                return err.data;
             });
-            return deferred.promise;
         };
+
+        // function listAllTaskById() {
+        //     // var deferred = $q.defer();
+        //     return $http.get(apiUrl + '/tasks').then(function (res) {
+        //         return res.data;
+        //     }, function (err) {
+        //         return err.data;
+        //     });
+        // };
+
 
         function getTask(id) {
             var deferred = $q.defer();

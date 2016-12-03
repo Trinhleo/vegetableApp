@@ -1,0 +1,23 @@
+<section>
+    <div class="page-header">
+        <h1 data-ng-bind="vm.taskCategory.name"></h1>
+    </div>
+    <div style="margin: 20px">
+        <button data-toggle="tooltip" title="Danh sách đối tượng sản xuất" class="btn btn-primary glyphicon glyphicon-th-list"
+            data-ui-sref="index.production-item">
+        </button>
+    </div>
+    <div class="pull-right">
+        <button class="btn btn-primary glyphicon glyphicon-edit" data-ui-sref="index.task-category-edit({ taskCategoryId: vm.taskCategory._id })">
+        </button>
+        <button class="btn btn-primary glyphicon glyphicon-trash" data-ng-click="vm.remove()">
+        </button>
+    </div>
+    <small>
+    <em class="text-muted">
+      Tạo lúc
+      <span data-ng-bind="vm.taskCategory.created | date:'short'"></span>
+    </em>
+  </small>
+    <div class="img_container"><img alt="" class="img-responsive text-center" ng-src="{{vm.taskCategory.imgUrlFull}}" /></div>
+</section>

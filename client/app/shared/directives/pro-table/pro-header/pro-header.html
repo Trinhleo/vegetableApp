@@ -1,0 +1,15 @@
+<div class="pro-header">
+    <tr>
+        <th style="width: 3%">#</th>
+        <th style="font-weight: bold !important" ng-repeat="(key, value) in vm.titleList track by $index" ng-click="vm.checkSortType(key)" ng-init="style = {'width': vm.widthColumn[$index]}"
+            ng-style="style">
+            <span>{{value|translate}} </span>
+            <span ng-if="vm.sortAction != undefined" class="sortHeader">
+                <i ng-model="vm.ascentFlag[key]" ng-hide="vm.ascentFlag[key]" class="fa fa-sort-asc  pull-right"></i>
+                <i ng-model="vm.ascentFlag[key]" ng-show="vm.ascentFlag[key]" class="fa fa-sort-desc pull-right"></i>
+            </span>
+        </th>
+
+        <th style="font-weight: bold !important; width: 15%" ng-if="vm.actionHeader">{{'Action'|translate}}</th>
+    </tr>
+</div>

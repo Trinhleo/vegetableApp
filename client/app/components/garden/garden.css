@@ -1,0 +1,27 @@
+.anchor {
+    position: fixed !important;
+    z-index: 99999;
+    left: 0;
+    top: 40%;
+}
+
+.anchor span {
+    font-size: 16px;
+}
+
+.anchor span:focus{
+      background: lightgray !important;
+}
+.anchor span.badge {
+    font-size: 16px;
+    background: white !important;
+    color: #009900 !important;
+    padding: 7px 70px !important;
+    margin-bottom: 1px;
+    cursor: pointer;
+}
+@media (max-width: 500px){
+    .anchor {
+        display: none !important;
+    }
+}

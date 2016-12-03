@@ -19,7 +19,7 @@ gulp.task('connect', function () {
 
 gulp.task('inject', function () {
     gulp.src('./index.template.html')
-        .pipe(inject(gulp.src(['./app/**/*.css', './app/**/**/*.css', './app/**/**/**/*.css','./app/app.module.js','./app/app.config.js','./app/app.router.js','./app/components/**/*.module.js','./app/components/**/*.controller.js','./app/components/**/*.router.js','./app/components/**/**/*.module.js','./app/components/**/**/*.controller.js','./app/components/**/**/*.router.js','./app/shared/**/*.module.js','./app/shared/**/*.service.js','./app/shared/**/*.directive.js'], {
+        .pipe(inject(gulp.src(['./app/**/*.css', './app/**/**/*.css', './app/**/**/**/*.css','./app/app.module.js','./app/app.config.js','./app/app.router.js','./app/components/**/*.module.js','./app/components/**/*.controller.js','./app/components/**/*.router.js','./app/components/**/**/*.module.js','./app/components/**/**/*.controller.js','./app/components/**/**/*.router.js','./app/shared/**/*.module.js','./app/shared/**/*.service.js','./app/shared/**/*.directive.js','./app/shared/**/**/*.directive.js'], {
             read: false
         }), {
                 relative: true

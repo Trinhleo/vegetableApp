@@ -52,7 +52,7 @@ module.exports = function (io) {
         historyDao.listAllHistory({ isDeleted: false }, cb)
         function cb(err, res) {
             if (res) {
-                socket.emit('deviceNodeData', res);
+                socket.emit('loadHistorydeviceNodeData', res);
             }
         }
         eventEmitter.on('dataChange', function (data) {

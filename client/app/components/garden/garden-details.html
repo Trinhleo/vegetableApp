@@ -4,22 +4,29 @@
             <a class="fa-icon fa fa-edit" data-toggle="tooltip" title="Chỉnh sửa vườn" ng-click="vm.gotoEdit();"></a>
             &nbsp;&nbsp;
             <a class="fa-icon fa fa-trash" data-toggle="tooltip" title="Xóa vườn" ng-click="vm.deleteGarden();"></a>
-              &nbsp;&nbsp;
-            <a href="#/gardens/{{vm.garden._id}}/seasons" class="fa-icon fa fa-line-chart" data-toggle="tooltip" title="Quản lý mùa vụ"></a>
+            &nbsp;&nbsp;
+            <a class="fa-icon fa fa-line-chart" data-toggle="tooltip" title="Quản lý mùa vụ" ng-click="vm.gotoSeasons()"></a>
+           &nbsp;&nbsp;
+            <a class="fa-icon fa fa-upload" data-toggle="modal" data-target="#modal-upload" title="Thêm hình ảnh hoạt động"></a>
         </div>
         <!--<div ng-show="!vm.isMyGarden">
             <button class="btn btn-primary fa {{vm.isLiked?'fa-thumbs-up':'fa-thumbs-o-up'}}" ng-click="vm.likegardens();"> {{vm.isLiked?'Bỏ Thích':'Thích'}}</button>
         </div>-->
         <div style="padding-left:15px">
-            <span class="alert-danger" ng-show="!vm.garden.approved">
+            <span class="badge alert-danger" ng-show="!vm.garden.approved">
                 <strong>Chưa được duyệt! </strong></span>
-            <span class="alert-success" ng-show="vm.garden.approved"> <strong>Đã được duyệt! </strong>
+            <span class="badge alert-success" ng-show="vm.garden.approved"> <strong>Đã được duyệt! </strong>
                 </span>
-            <a ng-show="!vm.garden.approved" data-toggle="tooltip" title="Duyệt" data-ng-click="vm.approve();" ng-if="$root.isAdmin">
+            <!--<a ng-show="!vm.garden.approved" data-toggle="tooltip" title="Duyệt" data-ng-click="vm.approve();" ng-if="$root.isAdmin">
                 <i style="font-size: 1.5em" class="fa-icon fa fa-check">Duyệt</i></a>
-            <a ng-show="vm.garden.approved" data-toggle="tooltip" title="Bỏ duyệt" ng-click="vm.unApprove()" ng-if="$root.isAdmin"><i class="fa fa-remove" style="font-size: 2em">Bỏ duyệt</i> </a>
+            <a ng-show="vm.garden.approved" data-toggle="tooltip" title="Bỏ duyệt" ng-click="vm.unApprove()" ng-if="$root.isAdmin"><i class="fa fa-remove" style="font-size: 2em">Bỏ duyệt</i> </a>-->
         </div>
-
+    </div>
+    <div class="anchor col-lg-4 col-md-4 col-sm-6 col-xs-12 pull-right">
+        <span class="badge" ng-click="vm.gotoElement('garden-infomation')">Thông tin</span><br>
+        <span class="badge" ng-click="vm.gotoElement('device-node')">Thiết bị</span><br>
+        <span class="badge" ng-click="vm.gotoElement('production-item')">Đối tượng</span><br>
+        <span class="badge" ng-click="vm.gotoElement('garden-image')">Hình ảnh</span>
     </div>
     <article>
         <div class="parallax-garden full-page " id="garden-infomation">
@@ -114,7 +121,7 @@
         <div class="row parallax-garden full-page" id="garden-image">
             <div id="image-container" class="parallax-background">
                 <h1 class="text-center title-lv1 ">Hình ảnh hoạt động</h1>
-                <!--<slider images="vm.gardenImages"></slider>-->
+                <a class="fa-icon fa fa-upload" data-toggle="modal" data-target="#modal-upload" title="Thêm hình ảnh hoạt động"></a>
                 <ul rn-carousel rn-carousel-index="vm.carouselIndex" rn-carousel-controls rn-carousel-auto-slide rn-carousel-pause-on-hover
                     rn-carousel-buffered class="carousel shadow" ng-if="vm.gardenImages">
                     <li ng-repeat="slide in vm.gardenImages track by slide._id" ng-class="'id-' + slide._id">
@@ -132,5 +139,21 @@
     <div id="dialog-confirm" title="Bạn có muốn xóa vườn này không?" class="hidden">
         <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Vườn này sẽ bị xóa vĩnh viễn,
             bạn đã chắn chắn xóa?</p>
+    </div>
+    <div id="modal-upload" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Thêm hình ảnh hoạt động</h3>
+                </div>
+                <hr>
+                <div class="modal-body">
+                    <image-uploader url="vm.url" data-upload="vm.dataUpload"></image-uploader>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-success">Xác nhận</button>
+                </div>
+            </div>
+        </div>
     </div>
 </section>

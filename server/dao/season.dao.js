@@ -9,6 +9,7 @@ module.exports = {
     readSeason: readSeason,
     createSeason: createSeason,
     updateSeason: updateSeason,
+    updateSeasonByQuery: updateSeasonByQuery,
     deleteSeason: deleteSeason
 };
 
@@ -32,11 +33,11 @@ function readSeasonById(id, callback) {
 
 function readSeason(query, callback) {
     Season.findOne(query).populate('garden').populate('productionItem').exec(function (err, result) {
-            if (err) {
-                return callback(err, null);
-            }
-            callback(null, result);
-        });
+        if (err) {
+            return callback(err, null);
+        }
+        callback(null, result);
+    });
 }
 
 function createSeason(creditial, callback) {
@@ -54,6 +55,16 @@ function createSeason(creditial, callback) {
 function updateSeason(seasonId, info, callback) {
 
     Season.findByIdAndUpdate(seasonId, info, function (err, result) {
+        if (err) {
+            return callback(err, null);
+        }
+        callback(null, true);
+    });
+}
+
+function updateSeasonByQuery(query, info, callback) {
+
+    Season.update(query, info, function (err, result) {
         if (err) {
             return callback(err, null);
         }

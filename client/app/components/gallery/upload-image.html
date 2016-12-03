@@ -1,22 +1,7 @@
 <section class="row">
 	<div class="col-xs-offset-1 col-xs-10 col-md-offset-3 col-md-4">
 		<form class="form-horizontal" novalidate>
-			<fieldset>
-				<div class="form-group text-center">
-					<img ng-src="{{vm.imageURL}}" alt="" class="img-thumbnail ">
-				</div>
-				<div class="text-center form-group" ng-hide="vm.uploader.queue.length">
-					<span class="btn btn-default btn-file">
-              Choose an image<input type="file" nv-file-select uploader="vm.uploader">
-          </span>
-				</div>
-				<div class="text-center form-group" ng-show="vm.uploader.queue.length">
-					<button class="btn btn-primary" ng-click="vm.uploadProfilePicture();">Upload</button>
-					<button class="btn btn-default" ng-click="vm.cancelUpload();">Hủy</button>
-				</div>
-			</fieldset>
-            <div ng-show="vm.success">{{vm.success}}</div>
-            <div ng-show="vm.error">{{vm.error}}</div>
+			<image-uploader url="vm.url" data-upload="vm.dataUpload"></image-uploader>
 		</form>
 	</div>
 </section>

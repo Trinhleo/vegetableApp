@@ -16,19 +16,14 @@ var Task = new Schema({
         type: Date,
         default: Date.now
     },
-    garden: {
+    season: {
         type: Schema.ObjectId,
-        ref: 'Garden',
+        ref: 'Season',
         require: true
     },
     status: {
         type: Number,
         default: 0
-    },
-    productionItem: {
-        type: Schema.ObjectId,
-        ref: 'ProductionItem',
-        require: true
     },
     startDate: {
         type: Date
@@ -68,5 +63,5 @@ var Task = new Schema({
         type: Date
     }
 });
-Task.index({ "name": 1}, { unique: true });
-mongoose.model('Season', Task);
+Task.index({ "name": 1 }, { unique: true });
+mongoose.model('Task', Task);
