@@ -11,9 +11,10 @@
 	<!-- inject:css -->
 	<link rel="stylesheet" href="app/components/core/core.css">
 	<link rel="stylesheet" href="app/components/garden/garden.css">
+	<link rel="stylesheet" href="app/components/season/season.css">
 	<link rel="stylesheet" href="app/shared/directives/map/map.directive.css">
-	<link rel="stylesheet" href="app/shared/directives/pro-table/pro-header/pro-header.css">
 	<link rel="stylesheet" href="app/shared/directives/pro-table/pro-body/pro-body.css">
+	<link rel="stylesheet" href="app/shared/directives/pro-table/pro-header/pro-header.css">
 	<link rel="stylesheet" href="app/shared/directives/pro-table/pro-pagination/paginnation.css">
 	<!-- endinject -->
 	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -23,7 +24,8 @@
 	<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
 	<link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css" />
 	<link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css" />
-	<!--directives-->
+	<link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
+		<!--directives-->
 	<!--<link rel="stylesheet" href="app/shared/directives/map/map.directive.css" />-->
 
 </head>
@@ -52,6 +54,8 @@
 <script src="bower_components/select2/dist/js/select2.min.js"> </script>
 <script src="https://code.highcharts.com/stock/highstock.js"></script>
 <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+<script src="bower_components/moment/min/moment.min.js"></script>
+<script src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 <!--app-->
 <!-- inject:js -->
 <script src="app/app.module.js"></script>
@@ -68,8 +72,8 @@
 <script src="app/components/task/task.module.js"></script>
 <script src="app/components/task-category/task-category.module.js"></script>
 <script src="app/components/user/user.module.js"></script>
-<script src="app/components/auth/signout/signout.module.js"></script>
 <script src="app/components/auth/signin/signin.module.js"></script>
+<script src="app/components/auth/signout/signout.module.js"></script>
 <script src="app/components/auth/signup/signup.module.js"></script>
 <script src="app/components/user/settings/user-setting.module.js"></script>
 <script src="app/components/core/core.controller.js"></script>
@@ -106,12 +110,12 @@
 <script src="app/components/task-category/task-category-edit.controller.js"></script>
 <script src="app/components/task-category/task-category.controller.js"></script>
 <script src="app/components/user/user.controller.js"></script>
-<script src="app/components/auth/signout/signout.controller.js"></script>
 <script src="app/components/auth/signin/signin.controller.js"></script>
+<script src="app/components/auth/signout/signout.controller.js"></script>
 <script src="app/components/auth/signup/signup.controller.js"></script>
+<script src="app/components/user/admin/user-manage.controller.js"></script>
 <script src="app/components/user/settings/change-profile-picture.controller.js"></script>
 <script src="app/components/user/settings/user-setting.controller.js"></script>
-<script src="app/components/user/admin/user-manage.controller.js"></script>
 <script src="app/components/core/core.router.js"></script>
 <script src="app/components/dashboard/dashboard.router.js"></script>
 <script src="app/components/device-node/device-node.router.js"></script>
@@ -123,8 +127,8 @@
 <script src="app/components/task/task.router.js"></script>
 <script src="app/components/task-category/task-category.router.js"></script>
 <script src="app/components/user/user.router.js"></script>
-<script src="app/components/auth/signout/signout.router.js"></script>
 <script src="app/components/auth/signin/signin.router.js"></script>
+<script src="app/components/auth/signout/signout.router.js"></script>
 <script src="app/components/auth/signup/signup.router.js"></script>
 <script src="app/components/user/settings/user-setting.router.js"></script>
 <script src="app/shared/services/services.module.js"></script>
@@ -143,11 +147,12 @@
 <script src="app/shared/services/task-category.service.js"></script>
 <script src="app/shared/services/task.service.js"></script>
 <script src="app/shared/services/user.service.js"></script>
+<script src="app/shared/services/my-enter.directive.js"></script>
 <script src="app/shared/directives/map/map.directive.js"></script>
 <script src="app/shared/directives/pro-table/pro-table.directive.js"></script>
 <script src="app/shared/directives/upload/upload.directive.js"></script>
-<script src="app/shared/directives/pro-table/pro-header/pro-header.directive.js"></script>
 <script src="app/shared/directives/pro-table/pro-body/pro-body.directive.js"></script>
+<script src="app/shared/directives/pro-table/pro-header/pro-header.directive.js"></script>
 <script src="app/shared/directives/pro-table/pro-pagination/pagination.directive.js"></script>
 <!-- endinject -->
 

@@ -35,7 +35,8 @@
     "angular-material-data-table": "^0.10.9",
     "ng-ip-address": "^1.1.10",
     "jquery-ui": "^1.12.1",
-    "select2": "^4.0.3"
+    "select2": "^4.0.3",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.43"
   },
   "overrides": {
     "font-awesome": {

@@ -15,7 +15,7 @@
             <!--<li ng-class="{ active: vm.isActive('/events/add')}"><a ui-sref="index.add">Add new event</a></li>-->
         </ul>
     </div>
-    <div class="parallax-garden col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
         <md-tabs md-dynamic-height md-border-bottom style="border-top: 3px solid lightgrey">
             <md-tab label="Danh sách vườn rau">
                 <!--<md-input-container>
@@ -26,8 +26,8 @@
                 <!--<div class="alert alert-warning text-center" data-ng-if="vm.gardens&&vm.gardens.length===0">
                     Chưa có vườn, hãy <a data-ui-sref="index.garden-add">tạo một vườn</a>
                 </div>-->
-                <div class="list-group row parralax" >
-                    <md-card class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style="cursor: pointer; margin-left:6% ; margin-bottom: 6%" data-ng-repeat="garden in vm.gardens" data-ui-sref="index.garden-details ({ gardenId: garden._id }) "
+                <div class="list-group row" >
+                    <md-card class="shadow col-lg-3 col-md-3 col-sm-3 col-xs-12" style="cursor: pointer; margin-left:5% ; margin-bottom: 5%; background-color:lightgrey " data-ng-repeat="garden in vm.gardens" data-ui-sref="index.garden-details ({ gardenId: garden._id }) "
                         class="list-group-item">
                         <div class="alert alert-danger" ng-show="!garden.approved">
                             <strong>Chưa được duyệt!</strong>
@@ -60,6 +60,5 @@
                 <my-map id="map_canvas" gardens="vm.gardens" my-id="vm.myId" ng-if="vm.gardens"></my-map>
             </md-tab>
         </md-tabs>
-        <div class="full-page parralax"></div>
     </div>
 </section>

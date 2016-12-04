@@ -109,10 +109,10 @@ function listAllTasksOfSeason(req, res) {
         if (err) {
             return res.status(500).send(err);
         }
-        _.forEach(result, function (gd) {
-            var g = gd;
-            g._doc.productionItemUrl = urlPrefix.concat(g.productionItem.imgUrl);
-        });
+        // _.forEach(result, function (gd) {
+        //     var g = gd;
+        //     g._doc.productionItemUrl = urlPrefix.concat(g.productionItem.imgUrl);
+        // });
         res.status(200).send(result);
     }
 }
@@ -157,49 +157,27 @@ function getTask(req, res) {
 
 function createTask(req, res) {
     var userId = req.decoded._id;
+   
 
-    if (!req.body.name || !req.body.garden || !req.body.productionItem || req.body.seedQuantity < 0) {
+    if (!req.body.type || !req.body.date || !req.body.season) {
         return res.status(500).send({
             errCode: 0,
             errMsg: "Lỗi nhập liệu"
         });
     }
-    gardenDao.readGardenById(req.body.garden, callback);
-    function callback(err, result) {
+    var taskInfo = {
+        user: userId,
+        season: req.body.season,
+        type: req.body.type,
+        date: req.body.date
+    };
+
+    taskDao.createTask(taskInfo, cb);
+    function cb(err, result) {
         if (err) {
-            return res.status(500).send({ errCode: 0, errMsg: 'Lỗi hệ thống' });
-        };
-        if (null === result) {
-            return res.status(500).send({ errCode: 1, errMsg: 'Vườn không tồn tại' })
-        };
-
-        if (result.approved === false) {
-            return res.status(400).send({ errCode: 1, errMsg: 'Vườn chưa dược duyệt' })
-        };
-
-        if (result.user._id.toString() !== userId) {
-            return res.status(400).send({ errCode: 1, errMsg: 'Bạn không phải là chủ vườn    ' })
+            return res.status(400).send(err);
         }
-
-        console.log('approved', res.approved);
-
-        var taskInfo = {
-            user: req.decoded._id,
-            name: req.body.name,
-            garden: req.body.garden,
-            productionItem: req.body.productionItem,
-            startDate: req.body.startDate || '',
-            endDate: req.body.endDate || '',
-            seedQuantity: req.body.seedQuantity
-        };
-
-        taskDao.createTask(taskInfo, cb);
-        function cb(err, result) {
-            if (err) {
-                return res.status(400).send(err);
-            }
-            res.status(200).send(result);
-        }
+        res.status(200).send(result);
     }
 }
 

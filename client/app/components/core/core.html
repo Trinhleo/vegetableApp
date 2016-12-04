@@ -88,20 +88,22 @@
 					</button>
 					<h3>Đăng nhập</h3>
 				</div>
-				<form novalidate>
-					<div class="form-group ">
-						<label for="name ">Tên đăng nhập:</label>
-						<input type="text" ng-model="vm.user.username " class="form-control " id="username " placeholder="Nhập tên đăng nhập">
-					</div>
-					<div class="form-group ">
-						<label for="password ">Mật khẩu:</label>
-						<input type="password" ng-model="vm.user.password " class="form-control " id="password " placeholder="Nhập mật khẩu">
-					</div>
-				</form>
+				<div class="modal-body">
+					<form novalidate>
+						<div class="form-group ">
+							<label for="name ">Tên đăng nhập:</label>
+							<input type="text" ng-model="vm.user.username" my-enter="vm.signin()" class="form-control " id="username " placeholder="Nhập tên đăng nhập">
+						</div>
+						<div class="form-group ">
+							<label for="password ">Mật khẩu:</label>
+							<input type="password" my-enter="vm.signin()" ng-model="vm.user.password " class="form-control " id="password " placeholder="Nhập mật khẩu">
+						</div>
+					</form>
+				</div>
 				<div class="modal-footer">
 					<!--<button type="button" data-dismiss="modal" class="btn btn-success">Xác nhận</button>-->
 					<div class="text-center">
-						<button type="submit" class="btn btn-primary" ng-click="vm.signin();" data-ng-disabled="vm.user.username === '' || vm.user.password === ''">Đăng nhập</button>
+						<button type="submit" class="btn btn-primary"  ng-click="vm.signin();" data-ng-disabled="vm.user.username === '' || vm.user.password === ''">Đăng nhập</button>
 						<a ui-sref="index.signup" data-dismiss="modal">Đăng ký</a>
 					</div>
 				</div>

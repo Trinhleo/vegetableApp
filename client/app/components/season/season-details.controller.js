@@ -1,20 +1,23 @@
 (function () {
     angular.module('app.season')
         .controller('DetailsSeasonController', DetailsSeasonController);
-    DetailsSeasonController.$inject = ['SeasonService', 'seasonDetails', 'taskCats', 'tasks', 'GardenService', '$stateParams', '$state', 'toastr', '$timeout', '$rootScope', '$localStorage'];
-    function DetailsSeasonController(SeasonService, seasonDetails, taskCats, tasks, GardenService, $stateParams, $state, toastr, $timeout, $rootScope, $localStorage) {
+    DetailsSeasonController.$inject = ['$scope', 'SeasonService', 'TaskService', 'seasonDetails', 'taskCats', 'tasks', 'GardenService', '$stateParams', '$state', 'toastr', '$timeout', '$rootScope', '$localStorage'];
+    function DetailsSeasonController($scope, SeasonService, TaskService, seasonDetails, taskCats, tasks, GardenService, $stateParams, $state, toastr, $timeout, $rootScope, $localStorage) {
         vm = this;
         vm.gardenId = $stateParams.gardenId;
         vm.season = seasonDetails;
         vm.taskCats = taskCats;
         vm.tasks = tasks;
-        vm.addedTasks= []
+        vm.task = {};
+        vm.task.type = taskCats[0]._id;
+        vm.addedTasks = []
         vm.garden = $rootScope.garden || {};
         vm.remove = remove;
         vm.chartData = [];
         vm.temp = [];
         vm.hud = [];
         vm.time = [];
+        vm.addTask = addTask;
         var chart;
         var chart2;
         vm.socket = io.connect('http://localhost:3000/device-node');
@@ -162,87 +165,41 @@
                 yAxis: 1
             }]
         });
-        //chart 2
-        // Create a timer
-        // var start = +new Date();
+        $(document).ready(function () {
+            $('#taskDate').datetimepicker({ format: 'DD/MM/YYYY hh:mm A' });
+            $('#taskDate input').click(function (event) {
+                $('#taskDate').data("DateTimePicker").show();
+            });
+            $('#taskDate').on('dp.change', function (e) {
+                $timeout(function () {
+                    vm.task.date = e.date;
+                });
+            });
+            // $(function () {
+            //     $(".form-validate").validate({
+            //         // Specify validation rules
+            //         rules: {
+            //             taskDate: "required",
+            //         },
+            //         // Specify validation error messages
+            //         messages: {
+            //             taskDate: {
+            //                 required: 'Vui lòng chọn thời gian.'
+            //             }
+            //         },
+            //         errorPlacement: function (error, element) {
+            //             if (element.attr("name") === "startTime") {
+            //                 error.insertAfter("#taskDatestartTime");
+            //                 error.addClass("col-md-9 col-sm-12 col-xs-12 pull-right")
+            //             } else {
+            //                 error.insertAfter(element);
+            //             }
 
-        // // Create the chart
+            //         }
+            //     });
+            // });
 
-        // $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=large-dataset.json&callback=?', function (data) {
-
-        //     // Create a timer
-        //     var start = +new Date();
-
-        //     // Create the chart
-        //     Highcharts.stockChart('container2', {
-        //         chart: {
-        //             events: {
-        //                 load: function () {
-        //                     this.setTitle(null, {
-        //                         text: 'Built chart in ' + (new Date() - start) + 'ms'
-        //                     });
-        //                 }
-        //             },
-        //             zoomType: 'x'
-        //         },
-
-        //         rangeSelector: {
-
-        //             buttons: [{
-        //                 type: 'day',
-        //                 count: 3,
-        //                 text: '3d'
-        //             }, {
-        //                 type: 'week',
-        //                 count: 1,
-        //                 text: '1w'
-        //             }, {
-        //                 type: 'month',
-        //                 count: 1,
-        //                 text: '1m'
-        //             }, {
-        //                 type: 'month',
-        //                 count: 6,
-        //                 text: '6m'
-        //             }, {
-        //                 type: 'year',
-        //                 count: 1,
-        //                 text: '1y'
-        //             }, {
-        //                 type: 'all',
-        //                 text: 'All'
-        //             }],
-        //             selected: 3
-        //         },
-
-        //         yAxis: {
-        //             title: {
-        //                 text: 'Temperature (°C)'
-        //             }
-        //         },
-
-        //         title: {
-        //             text: 'Hourly temperatures in Vik i Sogn, Norway, 2009-2015'
-        //         },
-
-        //         subtitle: {
-        //             text: 'Built chart in ...' // dummy text to reserve space for dynamic subtitle
-        //         },
-
-        //         series: [{
-        //             name: 'Temperature',
-        //             data: data.data,
-        //             pointStart: data.pointStart,
-        //             pointInterval: data.pointInterval,
-        //             tooltip: {
-        //                 valueDecimals: 1,
-        //                 valueSuffix: '°C'
-        //             }
-        //         }]
-
-        //     });
-        // });
-
+        });
 
         if ($.isEmptyObject(vm.garden)) {
             GardenService.getGarden(vm.gardenId).then(
@@ -256,6 +213,22 @@
                     toastr.error(err, 'Lỗi')
                 }
             )
+        }
+        function addTask() {
+            if (vm.task.date && vm.task.date !== '') {
+                vm.task.season = $stateParams.seasonId;
+                TaskService.createTask(vm.task).then(
+                    function (res) {
+                        vm.task.date = '';
+                        $('#taskDate').data("DateTimePicker").date('');
+                        toastr.success('Thêm tác vụ thành công!', 'Thành công!');
+                        $('#close-button').click();
+                    },
+                    function (err) {
+                        toastr.error('Thêm tác vụ thất bại!', 'Thất bại!');
+                    }
+                );
+            }
         }
         function remove(season) {
             $(function () {

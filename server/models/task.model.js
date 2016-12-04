@@ -1,13 +1,6 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 var Task = new Schema({
-    name: {
-        type: String,
-        default: '',
-        required: true,
-        trim: true,
-        unique: true
-    },
     user: {
         type: Schema.ObjectId,
         ref: 'User'
@@ -25,28 +18,13 @@ var Task = new Schema({
         type: Number,
         default: 0
     },
-    startDate: {
-        type: Date
+    date: {
+        type: Date,
+        required: true
     },
-    endDate: {
-        type: Date
-    },
-    seedQuantity: {
-        type: Number,
-        default: 0,
-        max: 10000
-    },
-    fertilizering: [{
+    type: {
         type: Schema.ObjectId,
-        ref: 'Fertilizering'
-    }],
-    watering: [{
-        type: Schema.ObjectId,
-        ref: 'Watering'
-    }],
-    quantity: {
-        type: Number,
-        default: 0
+        required: true
     },
     isDeleted: {
         type: Boolean,
@@ -63,5 +41,4 @@ var Task = new Schema({
         type: Date
     }
 });
-Task.index({ "name": 1 }, { unique: true });
 mongoose.model('Task', Task);
