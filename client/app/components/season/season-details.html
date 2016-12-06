@@ -20,31 +20,28 @@
 
     </div>
     <div class="page-header col-md-12">
-        <div class="col-md-12">
-            <h2> Vườn rau: {{vm.season.garden.name}}</h2>
-            <h2> Mùa vụ : {{vm.season.name}}</h2>
-        </div>
-    </div>
-    </div>
-    <div class="col-md-12 ">
-        <h2><span style="color:#337ab7">Đối tượng sản xuất:</span> {{vm.season.productionItem.name}}</h2>
-        <div class="img_container"><img alt="" class="img-responsive text-center" ng-src="{{vm.season.vegetable.imgUrl}}" /></div>
-        <!--<h3><span style="color:#337ab7">Ngày bắt đầu: </span>{{vm.season.startDate| date:'short'}} <br>
-            <span style="color:#337ab7">Ngày kết thúc:<em ng-hide="vm.season.status===2">(Dự kiến)</em></span>{{vm.season.endDate|
-            date:'short'}}
-        </h3><br>-->
-        <div><span class="alert-danger" ng-show="vm.season.status===2">Đã kết thúc</span>
-            <span class="alert-success" ng-show="vm.season.status===1">Đang diễn ra</span>
-            <span class="alert-warning" ng-show="vm.season.status===0">Chưa bắt đầu</span></div>
-        <br>
-        <!-- <small>
-    <em class="text-muted">
+        <md-card class="col-md-offset-3 col-md-6 shadow">
+            <h2> <span style="color:#337ab7">Vườn rau:</span> {{vm.season.garden.name}}</h2>
+            <h2> <span style="color:#337ab7">Mùa vụ :</span> {{vm.season.name}}</h2>
+            <h2><span style="color:#337ab7">Đối tượng sản xuất:</span> {{vm.season.productionItem.name}}</h2>
+            <h2><span style="color:#337ab7">Ngày bắt đầu:</span> {{vm.season.startDate | date : 'dd/MM/yyyy'}}</h2>
+            <h2><span style="color:#337ab7">Ngày thu hoạch:</span> {{vm.season.endDate| date : 'dd/MM/yyyy'}} <span class="alert-warning"
+                    ng-if="vm.season.status < 2">(Dự kiến)</span></h2>
+            <h2><span style="color:#337ab7">Trạng thái:</span><span class="alert-danger" ng-show="vm.season.status===2">Đã kết thúc</span>
+                <span class="alert-success" ng-show="vm.season.status===1">Đang diễn ra</span>
+                <span class="alert-warning" ng-show="vm.season.status===0">Chưa bắt đầu</span>
+            </h2>
+            <h2>
+                <em class="text-muted">
      Đã tạo lúc
       <span data-ng-bind="vm.season.created | date:'short'"></span>
     </em>
-  </small> -->
-        <md-divider></md-divider>
-        Tác vụ chăm sóc vườn:
+            </h2>
+        </md-card>
+    </div>
+    <md-divider></md-divider>
+    <div class="col-md-12 ">
+        <!--Tác vụ chăm sóc vườn:-->
         <div>
             <!--<div pro-table="vm.taskOption"></div>-->
         </div>
