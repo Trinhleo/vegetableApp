@@ -3,7 +3,7 @@
         <a ng-show="$root.userInfo" ui-sref="index.garden-add" class="fa-icon fa fa-plus-square" data-toggle="tooltip" title="Tạo vườn"></a>
     </div>
     <div class="row" style="padding-left: 5px; padding-right:5px; margin-top:5px">
-        <ul class="nav nav-tabs pull-right">
+        <ul class="nav nav-tabs pull-right" ng-if="$root.userInfo">
             <li ng-class="{ active:vm.type === 0}" ng-show="$root.isAdmin"><a ng-click="vm.loadGardens(0)">Tất cả vườn</a>
             </li>
             <li ng-class="{ active:vm.type === 1}"> <a ng-click="vm.loadGardens(1)">Vườn đã cấp phép</a>

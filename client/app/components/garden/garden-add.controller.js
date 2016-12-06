@@ -46,13 +46,6 @@
         vm.uploader.onErrorItem = onErrorItem;
         vm.uploadGardenImage = uploadGardenImage;
         vm.cancelUpload = cancelUpload;
-        vm.toggle = toggle;
-        vm.exists = exists;
-        vm.isIndeterminate = isIndeterminate;
-        vm.isChecked = isChecked;
-        vm.toggleAll = toggleAll;
-        vm.selected = [];
-        vm.openCalendar = openCalendar;
         vm.isOpen = false;
         setMapSize();
 
@@ -181,9 +174,14 @@
                     getGardensLocation();
                     // vm.uploadgardenImage();
                     vm.gardenId = res._id;
+                    $state.go('index.garden');
                     toastr.success('Tạo vườn thành công!', 'Thành công!')
                 }, function (err) {
-                    toastr.error(err.errMsg, 'Lỗi');
+                    if (err.code === 11000) {
+                        toastr.error('Tên vườn đã được sử dụng', 'Lỗi');
+                    } else {
+                        toastr.error(err.errMsg, 'Lỗi');    
+                    }
                 });
 
         };
@@ -249,44 +247,6 @@
         // Cancel the upload process
         function cancelUpload() {
             vm.uploader.clearQueue();
-        };
-
-
-        function toggle(item) {
-            var idx = vm.selected.indexOf(item._id);
-            if (idx > -1) {
-                vm.selected.splice(idx, 1);
-            }
-            else {
-                vm.selected.push(item._id)
-            }
-            console.log(vm.selected);
-        };
-        function getProductionItemCategory(vegetable) {
-            for (var x in vegetable) {
-                vm.vegetableCategory.push(vegetable[x]._id);
-            }
-        }
-        //check bõ handle
-        function exists(item) {
-            return vm.selected.indexOf(item._id) > -1;
-        };
-
-        function isIndeterminate() {
-            return (vm.selected.length !== 0 &&
-                vm.selected.length !== vm.vegetableCategory.length);
-        };
-        function isChecked() {
-            return vm.selected.length === vm.vegetableCategory.length;
-        }
-        function toggleAll() {
-            if (vm.selected.length === vm.vegetableCategory.length) {
-                vm.selected = [];
-                console.log(vm.selected);
-            } else if (vm.selected.length === 0 || vm.selected.length > 0) {
-                vm.selected = vm.vegetableCategory.slice(0);
-                console.log(vm.selected);
-            }
         };
     };
 })();

@@ -77,7 +77,7 @@
         function approve(gardenId) {
             GardenService.approve(gardenId).then(
                 function (res) {
-                    toastr.success('Duyệt thành công!', 'Thành công');
+                    toastr.success('Tác vụ thành công!', 'Thành công');
                     loadGardensUnApproved();
                     loadGardensApproved();
                 },

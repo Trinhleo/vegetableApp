@@ -3,7 +3,7 @@
         .controller('DetailsSeasonController', DetailsSeasonController);
     DetailsSeasonController.$inject = ['$scope', 'SeasonService', 'TaskService', 'seasonDetails', 'taskCats', 'tasks', 'GardenService', '$stateParams', '$state', 'toastr', '$timeout', '$rootScope', '$localStorage'];
     function DetailsSeasonController($scope, SeasonService, TaskService, seasonDetails, taskCats, tasks, GardenService, $stateParams, $state, toastr, $timeout, $rootScope, $localStorage) {
-        vm = this;
+        var vm = this;
         vm.gardenId = $stateParams.gardenId;
         vm.season = seasonDetails;
         vm.taskCats = taskCats;
@@ -165,6 +165,125 @@
                 yAxis: 1
             }]
         });
+        chart2 = Highcharts.stockChart('container', {
+            chart: {
+                events: {
+                    load: function () {
+
+                        var series1 = chart1.series[0];
+                        var series2 = chart1.series[1];
+                        var x1 = (new Date()).getTime();
+                        var y1 = data.temperature;
+                        var y2 = data.humidity
+                        series1.addPoint([x1, y1], true, true);
+                        series2.addPoint([x1, y2], true, true);
+                    }
+                }
+            },
+
+            // rangeSelector: {
+            //     buttons: [{
+            //         count: 1,
+            //         type: 'minute',
+            //         text: '1M'
+            //     }, {
+            //         count: 5,
+            //         type: 'minute',
+            //         text: '5M'
+            //     }, {
+            //         type: 'all',
+            //         text: 'All'
+            //     }],
+            //     inputEnabled: false,
+            //     selected: 0
+            // },
+
+            exporting: {
+                enabled: false
+            },
+
+            title: {
+                text: 'Điều kiện môi trường'
+            },
+            xAxis: {
+                type: 'datetime',
+                tickPixelInterval: 150,
+                maxZoom: 20 * 1000
+            },
+            yAxis: [{ // Primary yAxis
+                labels: {
+                    format: '{value}°C',
+                    style: {
+                        color: Highcharts.getOptions().colors[2]
+                    }
+                },
+                title: {
+                    text: 'Nhiệt độ',
+                    style: {
+                        color: Highcharts.getOptions().colors[2]
+                    }
+                },
+                opposite: false
+
+            }, { // Secondary yAxis
+                labels: {
+                    format: '{value}%',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+                },
+                title: {
+                    text: 'Độ ẩm',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+                },
+                opposite: true
+            }],
+            series: [{
+                name: 'Nhiệt độ',
+                yAxis: 0,
+                tooltip: {
+                    valueSuffix: ' °C'
+                },
+                data: (function () {
+                    // generate some points to render before real samples arrive from feed
+                    var data = [],
+                        time = (new Date()).getTime(),
+                        i;
+                    // 20 samples, starting 19 ms ago up to present time when feed starts plotting
+                    for (i = -19; i <= 0; i++) {
+                        data.push({
+                            x: time + (i * 1000),
+                            y: 0
+                        });
+                    }
+                    return data;
+                })()
+            },
+            {
+                name: 'Độ ẩm',
+                tooltip: {
+                    valueSuffix: ' %'
+                },
+                data: (function () {
+                    // generate some points to render before real samples arrive from feed
+                    var data = [],
+                        time = (new Date()).getTime(),
+                        i;
+                    // 20 samples, starting 19 ms ago up to present time when feed starts plotting
+                    for (i = -19; i <= 0; i++) {
+                        data.push({
+                            x: time + (i * 1000),
+                            y: 0
+                        });
+                    }
+                    return data;
+                })(),
+                yAxis: 1
+            }]
+        });
+
         $(document).ready(function () {
             $('#taskDate').datetimepicker({ format: 'DD/MM/YYYY hh:mm A' });
             $('#taskDate input').click(function (event) {
@@ -175,30 +294,6 @@
                     vm.task.date = e.date;
                 });
             });
-            // $(function () {
-            //     $(".form-validate").validate({
-            //         // Specify validation rules
-            //         rules: {
-            //             taskDate: "required",
-            //         },
-            //         // Specify validation error messages
-            //         messages: {
-            //             taskDate: {
-            //                 required: 'Vui lòng chọn thời gian.'
-            //             }
-            //         },
-            //         errorPlacement: function (error, element) {
-            //             if (element.attr("name") === "startTime") {
-            //                 error.insertAfter("#taskDatestartTime");
-            //                 error.addClass("col-md-9 col-sm-12 col-xs-12 pull-right")
-            //             } else {
-            //                 error.insertAfter(element);
-            //             }
-
-            //         }
-            //     });
-            // });
-
         });
 
         if ($.isEmptyObject(vm.garden)) {

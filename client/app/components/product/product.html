@@ -1,1 +1,53 @@
-<section>product</section>
+<section>
+    <div class="page-header">
+        <h1 style="text-align:left !important">Thông tin sản phẩm:<span style="color:green"> {{vm.products[0].productionItem.name}}</span></h1>
+    </div>
+    <div class="img_container"><img alt="" class="img-responsive text-center center" ng-src="{{vm.products[0].productionItemUrl}}" /></div>
+    <md-input-container>
+        <input class="form-control" type="text" ng-model="vm.search" placeholder="Tìm kiếm" ng-change="vm.figureOutItemsToDisplay()"
+        />
+    </md-input-container>
+    <h3>Danh sách mùa vụ sản xuất:</h3>
+    <md-table-container>
+        <table md-table class="product-table">
+            <thead md-head md-order="" md-on-reorder="">
+                <tr md-row>
+                    <th md-column md-order-by="">
+                        <h4>Tên vườn</h4>
+                    </th>
+                    <th md-column md-order-by="">
+                        <h4>Tên mùa vụ</h4>
+                    </th>
+                    <th md-column md-order-by="">
+                        <h4>Địa chỉ</h4>
+                    </th>
+                    <th md-column md-order-by="">
+                        <h4>Ngày bắt đầu</h4>
+                    </th>
+                    <th md-column md-order-by="">
+                        <h4>Ngày thu hoạch</h4>
+                    </th>
+                    <th md-column md-numeric md-order-by="">
+                        <h4>Số lượng giống</span>
+                    </th>
+                    <th md-column md-numeric md-order-by="">
+                        <h4>Sản lượng</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody md-body>
+                <tr md-row ng-repeat="item in vm.pagedItems" ng-show="vm.products">
+                    <td md-cell><a data-toggle="tooltip" title="Xem chi tiết vườn" ui-sref="index.garden-details({gardenId: item.garden._id})">{{item.garden.name}}</a></td>
+                    <td md-cell><a data-toggle="tooltip" title="Xem chi tiết mùa vụ" ui-sref="index.season.details({gardenId: item.garden._id,seasonId: item._id})">{{item.name}}</a></td>
+                    <td md-cell>{{item.garden.address}}</td>
+                    <td md-cell>{{item.startDate|date:'dd/MM/yyyy'}}</td>
+                    <td md-cell>{{item.endDate|date:'dd/MM/yyyy'}} <span ng-if="item.status === 1" class="alert-warning">Dự kiến</span></td>
+                    <td md-cell>{{item.seedQuantity}}</td>
+                    <td md-cell>{{item.quantity}} <span ng-if="item.status === 1" class="alert-warning">Dự kiến</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage"
+            ng-change="vm.pageChanged()"></pagination>
+    </md-table-container>
+</section>

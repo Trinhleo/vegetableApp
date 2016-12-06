@@ -1,0 +1,31 @@
+<section>
+    <div class="page-header col-md-12">
+        <h1>Danh sách sản phẩm</h1>
+    </div>
+    <div>
+        <md-input-container>
+            <input class="form-control col-md-4" type="text" ng-model="vm.search" placeholder="Tìm kiếm" ng-change="vm.figureOutItemsToDisplay()"
+            />
+        </md-input-container>
+        <md-divider style="margin-bottom:30px;"></md-divider>
+        <div>
+            <pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage"
+                ng-change="vm.pageChanged()">
+            </pagination>
+        </div>
+        <md-card class="shadow col-lg-3 col-md-3 col-sm-3 col-xs-12" style="cursor: pointer; margin-left:5% ; margin-bottom: 5%; background-color:lightgrey "
+            data-ng-repeat="product in vm.pagedItems" layout-align="center center">
+            <a data-ui-sref="index.product-ingroup({ groupId: product._id })">
+                <h4 style="color:green" class="text-center">{{product.productionItem.name}}</h4>
+                <small class="list-group-item-text">
+    <h4 class="text-center">Số vườn canh tác: {{product.count}}</h4>
+  </small>
+                <div class="img_container"><img alt="" class="img-responsive" ng-src="{{product.imgUrlFull}}" /></div>
+            </a>
+        </md-card>
+
+        <div class="alert alert-warning text-center" data-ng-if="vm.product.$resolved && !vm.product.length">
+            Không có dữ liệu!
+        </div>
+    </div>
+</section>

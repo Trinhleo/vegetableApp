@@ -29,13 +29,6 @@ var ImageSchema = new Schema({
     },
     deleteDate: {
         type: Date
-    },
-    isEdited: {
-        type: Boolean,
-        default: false
-    },
-    editDate: {
-        type: Date
     }
 });
 module.exports = mongoose.model('Image', ImageSchema);

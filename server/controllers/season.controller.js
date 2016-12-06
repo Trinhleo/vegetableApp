@@ -1,5 +1,7 @@
 var seasonDao = require('./../dao/season.dao');
-var gardenDao = require('./../dao/garden.dao'); var myIp = require('ip').address() || '127.0.0.1';
+var gardenDao = require('./../dao/garden.dao');
+var taskDao = require('../dao/task.dao');
+var myIp = require('ip').address() || '127.0.0.1';
 var myHost = require('./../config/server').HOST;
 var port = require('./../config/server').PORT;
 var urlPrefix = ('//').concat(myHost).concat(':').concat(port);
@@ -32,6 +34,10 @@ module.exports = {
 setInterval(realtime, 1000);
 function realtime() {
     checkStartDate();
+    checkEndDate();
+    checkEditedStartDate();
+    checkEditedEndDate();
+    checkTask();
 }
 
 function checkStartDate() {
@@ -40,9 +46,46 @@ function checkStartDate() {
     }, { status: 1 }, cb);
     function cb(err, res) {
         console.log('bắt đầu thành công', res)
-        console.log('bắt đầu không thành công',err);
+        console.log('bắt đầu không thành công', err);
     }
 };
+
+function checkEndDate() {
+    seasonDao.updateSeasonByQuery({
+        status: 1, isDeleted: false, endDate: { $lt: new Date() }
+    }, { status: 2 }, cb);
+    function cb(err, res) {
+        console.log('bắt đầu thành công', res)
+        console.log('bắt đầu không thành công', err);
+    }
+}
+function checkEditedStartDate() {
+
+    seasonDao.updateSeasonByQuery({
+        status: { $gt: 0 }, isDeleted: false, startDate: { $gt: new Date() }
+    }, { status: 0 }, cb);
+    function cb(err, res) {
+        console.log('bắt đầu thành công', res)
+        console.log('bắt đầu không thành công', err);
+    };
+}
+function checkEditedEndDate() {
+
+    seasonDao.updateSeasonByQuery({
+        status: 2, isDeleted: false, endDate: { $gt: new Date() }, startDate: { $lt: new Date() }
+    }, { status: 1 }, cb);
+    function cb(err, res) {
+        console.log('bắt đầu thành công', res)
+        console.log('bắt đầu không thành công', err);
+    };
+}
+function checkTask() {
+    taskDao.updateTaskByQuery({ isDeleted: false, status: 0, date: { $lt: new Date() } }, { status: 1 }, cb);
+    function cb(err, res) {
+        console.log('thực hiện tác vụ thành công', res)
+        console.log('Thực hiện tác vụ không thành công', err);
+    }
+}
 
 function listAllSeasons(req, res) {
     seasonDao.listSeasons({ isDeleted: false }, cb);

@@ -28,16 +28,10 @@ var DeviceNodeSchema = new Schema({
     deleteDate: {
         type: Date
     },
-    isEdited: {
-        type: Boolean,
-        default: false
-    },
-    editDate: {
-        type: Date
-    },
     description: {
         type: String,
         default: ''
     }
 });
+DeviceNodeSchema.index({ "name": 1}, { unique: true });
 mongoose.model('DeviceNode', DeviceNodeSchema);

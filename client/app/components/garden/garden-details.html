@@ -1,6 +1,6 @@
 <section>
     <div class="action-bar">
-        <div ng-show="vm.isMyGarden">
+        <div ng-show="vm.isMyGarden&&vm.garden.approved">
             <a class="fa-icon fa fa-edit" data-toggle="tooltip" title="Chỉnh sửa vườn" ng-click="vm.gotoEdit();"></a>
             &nbsp;&nbsp;
             <a class="fa-icon fa fa-trash" data-toggle="tooltip" title="Xóa vườn" ng-click="vm.deleteGarden();"></a>

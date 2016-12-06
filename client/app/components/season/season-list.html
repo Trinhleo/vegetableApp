@@ -1,17 +1,11 @@
 <section>
   <div class="action-bar">
-    <a ng-if="vm.garden.isOwner" style="margin-left:5px" class="fa-icon fa fa-plus-square" ui-sref="index.season.add"
-      data-toggle="tooltip" title="Thêm mùa vụ"></a>
+    <a ng-if="vm.garden.isOwner" style="margin-left:5px" class="fa-icon fa fa-plus-square" ui-sref="index.season.add" data-toggle="tooltip"
+      title="Thêm mùa vụ"></a>
     <label style="margin-left:50px;font-size:2em" class="text-right">{{'Quản lý mùa vụ vườn rau: ' + $root.garden.name}}</label>
   </div>
   <div class="page-header">
     <h1>Danh sách mùa vụ</h1>
-    <!-- <div class="col-md-4" style="margin-top: 20px">
-      <a data-toggle="tooltip" title="Tạo mùa vụ mới" class="btn btn-primary"
-         data-ui-sref="seasons.create">
-        <i class="glyphicon glyphicon-plus"></i>
-      </a>
-    </div> -->
     <div class="col-md-4">
       <!--<md-input-container>
         <input class="form-control" type="text" ng-model="vm.search" placeholder="Tìm kiếm" ng-change="vm.figureOutItemsToDisplay()"
@@ -57,12 +51,10 @@
       </tbody>
     </table>
   </md-table-container>
-  </div>
   <!--<pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage"
       ng-change="vm.pageChanged()"></pagination>-->
   <div class="alert alert-warning text-center" data-ng-if="!vm.seasons.length">
     Không có dữ liệu!</a>
-  </div>
   </div>
   <!--</form>-->
 </section>

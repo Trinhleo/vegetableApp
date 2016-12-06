@@ -1,110 +1,44 @@
 var productDao = require('./../dao/product.dao');
+var seasonDao = require('../dao/season.dao');
+var myIp = require('ip').address() || '127.0.0.1';
+var myHost = require('./../config/server').HOST;
+var port = require('./../config/server').PORT;
+var urlPrefix = ('//').concat(myHost).concat(':').concat(port);
+var _ = require('lodash');
 module.exports = {
     listAllProducts: listAllProducts,
-    getProduct: getProduct,
-    createProduct: createProduct,
-    updateProduct: updateProduct,
-    deleteProduct: deleteProduct
+    listAllProductsByGroupId: listAllProductsByGroupId,
 };
 
 function listAllProducts(req, res) {
     productDao.listAllProducts(cb);
     function cb(err, result) {
         if (err) {
-            return res.status(500).send(err);
+            return res.status(400).send(err);
         }
-        res.status(200).send(result);
+        var pi = result;
+        _.forEach(pi, function (p) {
+            p.imgUrlFull = urlPrefix.concat(p.productionItem.imgUrl);
+        });
+        res.status(200).send(pi);
     }
-}
-
-function getProduct(req, res) {
-    var productId = req.params.productId;
-    if (!productId) {
+};
+function listAllProductsByGroupId(req, res) {
+    var groupId = req.params.groupId;
+    if (!groupId) {
         return res.status(400).send({
-            errCode: 0,
-            errMsg: "Không tìm thấy!"
+            errMsg: "Không tìm thấy"
         });
     }
-
-    productDao.readProductById(productId, cb);
-
+    seasonDao.listSeasons({ productionItem: groupId, isDeleted: false }, cb);
     function cb(err, result) {
         if (err) {
             return res.status(400).send(err);
         }
+        _.forEach(result, function (gd) {
+            var g = gd;
+            g._doc.productionItemUrl = urlPrefix.concat(g.productionItem.imgUrl);
+        });
         res.status(200).send(result);
     }
-}
-
-
-function createProduct(req, res) {
-    if (!req.body.name) {
-        return res.status(500).send({
-            errCode: 0,
-            errMsg: "Lỗi nhập liệu"
-        });
-    }
-    var pInfo = {
-        name: req.body.name
-    };
-    productDao.createSeason(pInfo, cb);
-    function cb(err, result) {
-        if (err) {
-            return res.status(400).send(err);
-        }
-        res.status(200).send(result);
-    }
-}
-
-function updateProduct(req, res) {
-    var productId = req.params.productId;
-    var pInfo = req.body
-    if (req.decoded.roles[0].toString() !== 'admin') {
-        return status(403).send({
-            errCode: 1,
-            errMsg: "Bạn không có quyền quản trị"
-        });
-    }
-    if (!productId) {
-        return res.status(400).send({
-            errCode: 0,
-            errMsg: "Không tìm thấy!"
-        });
-    }
-
-    productDao.updateProductId(productId, piInfo, cb);
-    function cb(err, result) {
-        if (err) {
-            return res.status(400).send(err);
-        }
-
-        res.status(200).send(result);
-    }
-}
-
-function deleteProduct(req, res) {
-    var productId = req.params.productId;
-    if (req.decoded.roles[0].toString() !== 'admin') {
-        return status(403).send({
-            errCode: 1,
-            errMsg: "Bạn không có quyền quản trị"
-        });
-    }
-    if (!productId) {
-        return res.status(400).send({
-            errCode: 0,
-            errMsg: "Không tìm thấy!"
-        });
-    }
-
-
-    productDao.deleteproduct(productId, cb);
-
-    function cb(err, result) {
-        if (err) {
-            return res.status(400).send(err);
-        }
-
-        res.status(200).send(result);
-    }
-}
+};

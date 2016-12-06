@@ -27,17 +27,10 @@ var ProductionItemSchema = new Schema({
     deleteDate: {
         type: Date
     },
-    isEdited: {
-        type: Boolean,
-        default: false
-    },
-    editDate: {
-        type: Date
-    },
     imgUrl: {
         type: String,
         default: '/img/production-item/no-image.svg'
     }
 });
-
+ProductionItemSchema.index({ "name": 1}, { unique: true });
 mongoose.model('ProductionItem', ProductionItemSchema);

@@ -41,14 +41,6 @@ var SeasonSchema = new Schema({
         default: 0,
         max: 10000
     },
-    fertilizering: [{
-        type: Schema.ObjectId,
-        ref: 'Fertilizering'
-    }],
-    watering: [{
-        type: Schema.ObjectId,
-        ref: 'Watering'
-    }],
     quantity: {
         type: Number,
         default: 0
@@ -58,13 +50,6 @@ var SeasonSchema = new Schema({
         default: false
     },
     deleteDate: {
-        type: Date
-    },
-    isEdited: {
-        type: Boolean,
-        default: false
-    },
-    editDate: {
         type: Date
     }
 });

@@ -9,6 +9,7 @@ module.exports = {
     readTask: readTask,
     createTask: createTask,
     updateTask: updateTask,
+    updateTaskByQuery: updateTaskByQuery,
     deleteTask: deleteTask
 };
 
@@ -54,6 +55,15 @@ function createTask(creditial, callback) {
 function updateTask(taskId, info, callback) {
 
     Task.findByIdAndUpdate(taskId, info, function (err, result) {
+        if (err) {
+            return callback(err, null);
+        }
+        callback(null, true);
+    });
+}
+function updateTaskByQuery(query, info, callback) {
+
+    Task.update(query, info, function (err, result) {
         if (err) {
             return callback(err, null);
         }

@@ -30,13 +30,6 @@ var SeasonSchema = new Schema({
     },
     deleteDate: {
         type: Date
-    },
-    isEdited: {
-        type: Boolean,
-        default: false
-    },
-    editDate: {
-        type: Date
     }
 });
-mongoose.model('Season', SeasonSchema);
+mongoose.model('Product', SeasonSchema);

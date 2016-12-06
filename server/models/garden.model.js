@@ -60,18 +60,11 @@ var GardenSchema = new Schema({
     deleteDate: {
         type: Date
     },
-    isEdited: {
-        type: Boolean,
-        default: false
-    },
-    editDate: {
-        type: Date
-    },
     description: {
         type: String,
         default: ''
     }
 });
-
+GardenSchema.index({ "name": 1}, { unique: true });
 GardenSchema.index({ location: '2dsphere' });
 mongoose.model('Garden', GardenSchema);

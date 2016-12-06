@@ -9,7 +9,6 @@
                     scope.$apply(function () {
                         scope.$eval(attrs.myEnter);
                     });
-
                     event.preventDefault();
                 }
 

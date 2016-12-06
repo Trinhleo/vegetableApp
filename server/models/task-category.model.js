@@ -25,13 +25,6 @@ var TaskCategorySchema = new Schema({
     deleteDate: {
         type: Date
     },
-    isEdited: {
-        type: Boolean,
-        default: false
-    },
-    editDate: {
-        type: Date
-    },
     imgUrl: {
         type: String,
         default: '/img/task-category/no-image.svg'
