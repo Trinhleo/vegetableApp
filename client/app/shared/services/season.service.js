@@ -95,5 +95,19 @@
                 return err.data;
             });
         }
+        function listTasksDone(id) {
+            return $http.get(apiUrl + '/' + id + '/tasks/done').then(function (res) {
+                return res.data;
+            }, function (err) {
+                return err.data;
+            });
+        }
+        function listTasksUnDone(id) {
+            return $http.get(apiUrl + '/' + id + '/tasks/undone').then(function (res) {
+                return res.data;
+            }, function (err) {
+                return err.data;
+            });
+        }
     };
 })();

@@ -9,52 +9,14 @@ module.exports = {
     listAllTasks: listAllTasks,
     // listAllTasksOfGarden: listAllTasksOfGarden,
     listAllTasksOfSeason: listAllTasksOfSeason,
+    listAllTasksOfSeasonDone: listAllTasksOfSeasonDone,
+    listAllTasksOfSeasonUnDone: listAllTasksOfSeasonUnDone,
     listMyTasks: listMyTasks,
     getTask: getTask,
     createTask: createTask,
     updateTask: updateTask,
     deleteTask: deleteTask
 };
-
-// cron.schedule('* * * * *', function () {
-//     Task.find().sort('-created').populate('garden', 'name').exec(function (err, Tasks) {
-//         if (err) {
-//             ;
-//         } else {
-
-//             // for (var ss in Tasks) {
-//             //     console.log(Tasks[ss]);
-//             // }
-//         }
-//     });
-
-// });
-// check status realtime;
-// setInterval(realtime, 1000);
-// function realtime() {
-//     var sse = [];
-//     TaskDao.listTasks({ status: { $lt: 2 }, isDeleted: false })
-//     Task.find().sort('-created').populate('garden', 'name').exec(function (err, Tasks) {
-//         if (err) {
-//             ;
-//         } else {
-//             var ss = Tasks;
-//             for (var i in ss) {
-//                 var dateNow = new Date();
-//                 if (ss[i].startDate <= dateNow && ss[i].endDate > dateNow) {
-//                     ss[i].status = 1;
-//                     ss[i].save();
-//                 } else if (ss[i].endDate <= dateNow) {
-//                     var Task = ss[i];
-//                     var seadQ = Task.seedQuantity
-//                     Task.status = 2;
-//                     Task.quantity = _.random(seadQ / 2, seadQ);
-//                     Task.save();
-//                 }
-//             }
-//         }
-//     });
-// };
 
 function listAllTasks(req, res) {
     taskDao.listTasks({ isDeleted: false }, cb);
@@ -70,29 +32,6 @@ function listAllTasks(req, res) {
     }
 }
 
-// function listAllTasksOfGarden(req, res) {
-//     var gardenId = req.params.gardenId;
-//     if (!gardenId) {
-//         return res.status(400).send({
-//             errCode: 0,
-//             errMsg: "Không tìm thấy!"
-//         });
-//     };
-//     taskDao.listTasks({
-//         garden: gardenId,
-//         isDeleted: false
-//     }, cb);
-//     function cb(err, result) {
-//         if (err) {
-//             return res.status(500).send(err);
-//         }
-//         _.forEach(result, function (gd) {
-//             var g = gd;
-//             g._doc.productionItemUrl = urlPrefix.concat(g.productionItem.imgUrl);
-//         });
-//         res.status(200).send(result);
-//     }
-// }
 function listAllTasksOfSeason(req, res) {
     var seasonId = req.params.seasonId;
     if (!seasonId) {
@@ -104,6 +43,54 @@ function listAllTasksOfSeason(req, res) {
     taskDao.listTasks({
         season: seasonId,
         isDeleted: false
+    }, cb);
+    function cb(err, result) {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        // _.forEach(result, function (gd) {
+        //     var g = gd;
+        //     g._doc.productionItemUrl = urlPrefix.concat(g.productionItem.imgUrl);
+        // });
+        res.status(200).send(result);
+    }
+}
+function listAllTasksOfSeasonDone(req, res) {
+    var seasonId = req.params.seasonId;
+    if (!seasonId) {
+        return res.status(400).send({
+            errCode: 0,
+            errMsg: "Không tìm thấy!"
+        });
+    };
+    taskDao.listTasks({
+        season: seasonId,
+        isDeleted: false,
+        status: 1
+    }, cb);
+    function cb(err, result) {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        // _.forEach(result, function (gd) {
+        //     var g = gd;
+        //     g._doc.productionItemUrl = urlPrefix.concat(g.productionItem.imgUrl);
+        // });
+        res.status(200).send(result);
+    }
+}
+function listAllTasksOfSeasonUnDone(req, res) {
+    var seasonId = req.params.seasonId;
+    if (!seasonId) {
+        return res.status(400).send({
+            errCode: 0,
+            errMsg: "Không tìm thấy!"
+        });
+    };
+    taskDao.listTasks({
+        season: seasonId,
+        isDeleted: false,
+        status: 0
     }, cb);
     function cb(err, result) {
         if (err) {

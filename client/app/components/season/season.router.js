@@ -50,11 +50,21 @@
                             return res;
                         })
                     },
-                    tasks: function (SeasonService,$stateParams) {
+                    tasks: function (SeasonService, $stateParams) {
                         return SeasonService.listTasks($stateParams.seasonId).then(function (res) {
                             return res;
                         })
-                    }
+                    },
+                    // tasksDone: function (SeasonService, $stateParams) {
+                    //     return SeasonService.listTasksDone($stateParams.seasonId).then(function (res) {
+                    //         return res;
+                    //     })
+                    // },
+                    // tasksUndone: function (SeasonService, $stateParams) {
+                    //     return SeasonService.listTasksUnDone($stateParams.seasonId).then(function (res) {
+                    //         return res;
+                    //     })
+                    // }
                 }
             })
             .state('index.season.task', {

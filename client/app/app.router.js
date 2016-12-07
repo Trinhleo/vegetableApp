@@ -31,7 +31,6 @@
 
                     delete $localStorage.token;
                     delete $localStorage.user;
-                    toastr.error('Không tìm thấy trang', 'Lỗi');
                     $location.path('/');
                     return $q.reject(rejection);
                 } else {

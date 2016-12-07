@@ -64,7 +64,7 @@
                     <form class="form-validate" name="addTask">
                         <div class="form-group">
                             <label class="control-label" for="tag-type">Loại công việc: <span class="require">(*)</span></label>
-                            <select id="tag-type" required class="form-control" ng-model="vm.task.type" ng-options="type.id as type.name for type in vm.taskCats track by type.id"></select>
+                            <select id="tag-type" required class="form-control" ng-model="vm.task.type" ng-options="type._id as type.name for type in vm.taskCats track by type._id"></select>
                         </div>
                         <div class="form-group"><label for="inputContent" class="control-label">Chọn ngày thực hiện<span class='require'>*</span></label>
                             <div class="no-padding input-group date" id="taskDate" style="padding-left:15px;padding-right:15px">
