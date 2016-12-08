@@ -24,6 +24,7 @@ var Task = new Schema({
     },
     type: {
         type: Schema.ObjectId,
+        ref: 'TaskCategory',
         required: true
     },
     isDeleted: {

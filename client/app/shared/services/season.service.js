@@ -13,7 +13,9 @@
             createSeason: createSeason,
             updateSeason: updateSeason,
             deleteSeason: deleteSeason,
-            listTasks: listTasks
+            listTasks: listTasks,
+            listTasksDone: listTasksDone,
+            listTasksUnDone: listTasksUnDone
         };
 
         // function loadSeasonsOfGarden() {

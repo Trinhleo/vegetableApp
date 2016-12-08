@@ -14,7 +14,7 @@ module.exports = {
 };
 
 function listTasks(query, callback) {
-    Task.find(query).sort('-created').populate('season').exec(function (err, result) {
+    Task.find(query).sort('-created').populate('season').populate('type').exec(function (err, result) {
         if (err) {
             return callback(err, null);
         }
@@ -23,7 +23,7 @@ function listTasks(query, callback) {
 }
 
 function readTaskById(id, callback) {
-    Task.findById(id).sort('-created').populate('season').exec(function (err, result) {
+    Task.findById(id).sort('-created').populate('season').populate('type').exec(function (err, result) {
         if (err) {
             return callback(err, null);
         }

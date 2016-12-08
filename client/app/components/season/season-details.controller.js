@@ -1,15 +1,15 @@
 (function () {
     angular.module('app.season')
         .controller('DetailsSeasonController', DetailsSeasonController);
-    DetailsSeasonController.$inject = ['$scope', 'SeasonService', 'TaskService', 'seasonDetails', 'taskCats', 'tasks','GardenService', '$stateParams', '$state', 'toastr', '$timeout', '$rootScope', '$localStorage'];
+    DetailsSeasonController.$inject = ['$scope', 'SeasonService', 'TaskService', 'seasonDetails', 'taskCats', 'tasks', 'GardenService', '$stateParams', '$state', 'toastr', '$timeout', '$rootScope', '$localStorage'];
     function DetailsSeasonController($scope, SeasonService, TaskService, seasonDetails, taskCats, tasks, GardenService, $stateParams, $state, toastr, $timeout, $rootScope, $localStorage) {
         var vm = this;
         vm.gardenId = $stateParams.gardenId;
         vm.season = seasonDetails;
         vm.taskCats = taskCats;
         vm.tasks = tasks;
-        // vm.tasksDone = tasksDone;
-        // vm.tasksUndone = tasksUndone;
+        vm.tasksDone = [];
+        vm.tasksUndone = [];
         vm.task = {};
         vm.task.type = taskCats[0]._id;
         vm.addedTasks = []
@@ -20,8 +20,97 @@
         vm.hud = [];
         vm.time = [];
         vm.addTask = addTask;
+        vm.dataChart2 = [];
         var chart;
         var chart2;
+        loadChart();
+        function loadChart() {
+            SeasonService.listTasksDone($stateParams.seasonId).then(function (res) {
+                vm.tasksDone = res;
+                var data = [];
+                angular.forEach(vm.tasksDone, function (task) {
+                    data.push({
+                        x: new Date(task.date),
+                        title: task.type.name,
+                        text: task.type.name
+                    })
+                });
+                // Create the chart
+                Highcharts.stockChart('container', {
+                    lang: {
+                        months: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12']
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    rangeSelector: {
+                        selected: 0
+                    },
+
+                    title: {
+                        text: 'Lịch sử tác vụ sản xuất'
+                    },
+
+                    tooltip: {
+                        style: {
+                            width: '200px'
+                        },
+                        valueDecimals: 4,
+                        shared: true
+                    },
+
+                    yAxis: {
+                        title: {
+                            text: ''
+                        }
+                    },
+
+                    series: [{
+                        name: '',
+                        data: [],
+                        id: 'dataseries'
+
+                        // the event marker flags
+                    }, {
+                        type: 'flags',
+                        // data: [{
+                        //     x: Date.UTC(2015, 5, 8),
+                        //     title: 'C',
+                        //     text: 'Stocks fall on Greece, rate concerns; US dollar dips'
+                        // }, {
+                        //     x: Date.UTC(2015, 5, 12),
+                        //     title: 'D',
+                        //     text: 'Zimbabwe ditches \'worthless\' currency for the US dollar '
+                        // }, {
+                        //     x: Date.UTC(2015, 5, 19),
+                        //     title: 'E',
+                        //     text: 'US Dollar Declines Over the Week on Rate Timeline'
+                        // }, {
+                        //     x: Date.UTC(2015, 5, 26),
+                        //     title: 'F',
+                        //     text: 'Greek Negotiations Take Sharp Turn for Worse, US Dollar set to Rally '
+                        // }, {
+                        //     x: Date.UTC(2015, 5, 29),
+                        //     title: 'G',
+                        //     text: 'Euro records stunning reversal against dollar'
+                        // }, {
+                        //     x: Date.UTC(2015, 5, 30),
+                        //     title: 'H',
+                        //     text: 'Surging US dollar curbs global IT spend'
+                        // }],
+                        data: data,
+                        onSeries: 'dataseries',
+                        shape: 'circlepin',
+                        width: 16
+                    }]
+                });
+            })
+        };
+
+        SeasonService.listTasksUnDone($stateParams.seasonId).then(function (res) {
+            vm.tastsUndone = res;
+        });
+
         vm.socket = io.connect('http://localhost:3000/device-node');
         vm.socket.on('loadHistorydeviceNodeData', function (data) {
             angular.forEach(data, function (d) {
@@ -39,6 +128,9 @@
 
         // Create the chart
         chart1 = Highcharts.stockChart('container2', {
+            credits: {
+                enabled: false
+            },
             chart: {
                 events: {
                     load: function () {
@@ -64,24 +156,22 @@
                     }
                 }
             },
-
-            // rangeSelector: {
-            //     buttons: [{
-            //         count: 1,
-            //         type: 'minute',
-            //         text: '1M'
-            //     }, {
-            //         count: 5,
-            //         type: 'minute',
-            //         text: '5M'
-            //     }, {
-            //         type: 'all',
-            //         text: 'All'
-            //     }],
-            //     inputEnabled: false,
-            //     selected: 0
-            // },
-
+            rangeSelector: {
+                buttons: [{
+                    count: 1,
+                    type: 'minute',
+                    text: '1M'
+                }, {
+                    count: 5,
+                    type: 'minute',
+                    text: '5M'
+                }, {
+                    type: 'all',
+                    text: 'All'
+                }],
+                inputEnabled: false,
+                selected: 0
+            },
             exporting: {
                 enabled: false
             },
@@ -168,73 +258,10 @@
             }]
         });
         // chart2 = Highcharts.stockChart('container', {
-        $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=usdeur.json&callback=?', function (data) {
+        // $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=usdeur.json&callback=?', function (data) {
 
-            // Create the chart
-            chart2 = Highcharts.stockChart('container', {
+        // Create the chart
 
-
-                rangeSelector: {
-                    selected: 0
-                },
-
-                title: {
-                    text: 'Lịch sử tác vụ'
-                },
-
-                tooltip: {
-                    style: {
-                        width: '200px'
-                    },
-                    valueDecimals: 4,
-                    shared: true
-                },
-
-                    yAxis: {
-                        title: {
-                            text: 'Exchange rate'
-                        }
-                    },
-
-                series: [{
-                    name: 'USD to EUR',
-                    data: data,
-                    id: 'dataseries'
-
-                    // the event marker flags
-                }, {
-                    type: 'flags',
-                    data: [{
-                        x: Date.UTC(2015, 5, 8),
-                        title: 'C',
-                        text: 'Stocks fall on Greece, rate concerns; US dollar dips'
-                    }, {
-                        x: Date.UTC(2015, 5, 12),
-                        title: 'D',
-                        text: 'Zimbabwe ditches \'worthless\' currency for the US dollar '
-                    }, {
-                        x: Date.UTC(2015, 5, 19),
-                        title: 'E',
-                        text: 'US Dollar Declines Over the Week on Rate Timeline'
-                    }, {
-                        x: Date.UTC(2015, 5, 26),
-                        title: 'F',
-                        text: 'Greek Negotiations Take Sharp Turn for Worse, US Dollar set to Rally '
-                    }, {
-                        x: Date.UTC(2015, 5, 29),
-                        title: 'G',
-                        text: 'Euro records stunning reversal against dollar'
-                    }, {
-                        x: Date.UTC(2015, 5, 30),
-                        title: 'H',
-                        text: 'Surging US dollar curbs global IT spend'
-                    }],
-                    onSeries: 'dataseries',
-                    shape: 'circlepin',
-                    width: 16
-                }]
-            });
-        });
         $(document).ready(function () {
             $('#taskDate').datetimepicker({ format: 'DD/MM/YYYY hh:mm A' });
             $('#taskDate input').click(function (event) {
@@ -268,6 +295,7 @@
                         // $('#taskDate').data("DateTimePicker").date('');
                         toastr.success('Thêm tác vụ thành công!', 'Thành công!');
                         $('#close-button').click();
+                        loadChart();
                     },
                     function (err) {
                         toastr.error('Thêm tác vụ thất bại!', 'Thất bại!');
