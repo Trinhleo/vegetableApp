@@ -11,7 +11,7 @@
             scope: {
                 url: '=url',
                 doUpload: '=upload',
-                data: '=dataUpload'
+                data: '=data'
             }
         };
         function linkFn(scope, element, attrs) {

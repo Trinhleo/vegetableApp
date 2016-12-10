@@ -13,5 +13,6 @@ module.exports = function (app) {
     app.use('/api/task-categories', require('./task-category.routes.js')());
     app.use('/api/tasks', require('./task.routes.js')());
     app.use('/api/products', require('./product.routes.js')());
+    app.use('/api/gallery', require('./gallery.routes.js')());
 
 };

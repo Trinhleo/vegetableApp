@@ -37,7 +37,8 @@
     "jquery-ui": "^1.12.1",
     "select2": "^4.0.3",
     "eonasdan-bootstrap-datetimepicker": "^4.17.43",
-    "ui.bootstrap": "^2.3.0"
+    "ui.bootstrap": "^2.3.0",
+    "angular-carousel": "^1.0.1"
   },
   "overrides": {
     "font-awesome": {

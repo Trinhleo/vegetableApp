@@ -2,9 +2,9 @@
     angular.module('app.garden')
         .controller('DetailsGardenController', DetailsGardenController);
 
-    DetailsGardenController.$inject = ['anchorSmoothScroll','$location','$state', '$localStorage', '$rootScope', '$scope', 'GardenService', '$stateParams', 'FileUploader', 'appConfigs', '$window', '$timeout', 'toastr'];
+    DetailsGardenController.$inject = ['anchorSmoothScroll', '$location', '$state', '$localStorage', '$rootScope', '$scope', 'GardenService', 'GalleryService', '$stateParams', 'FileUploader', 'appConfigs', '$window', '$timeout', 'toastr'];
 
-    function DetailsGardenController(anchorSmoothScroll,$location,$state, $localStorage, $rootScope, $scope, GardenService, $stateParams, FileUploader, appConfigs, $window, $timeout, toastr) {
+    function DetailsGardenController(anchorSmoothScroll, $location, $state, $localStorage, $rootScope, $scope, GardenService, GalleryService, $stateParams, FileUploader, appConfigs, $window, $timeout, toastr) {
         var vm = this;
         // vm.room = {};
         vm.gardenImages = [];
@@ -22,8 +22,14 @@
         vm.unApprove = unApprove;
         vm.gotoElement = gotoElement;
         // vm.socket = io.connect('http://localhost:3000/chat');
-
+        vm.url = appConfigs.baseUrl.concat(appConfigs.port).concat(appConfigs.baseApiUrl).concat('gallery/images')
         // checkFav();
+        vm.dataUpload = {
+            gardenId: $stateParams.gardenId
+        };
+        vm.uploadImage = uploadImage;
+        vm.imageActive = imageActive
+        vm.upload = false;
         vpw = $(window).width();
         vph = $(window).height();
 
@@ -81,21 +87,24 @@
         };
 
 
-        // GardenService.getGardenImages($stateParams.gardenId).then(
-        //     function (res) {
-        //         var evt = res;
-        //         vm.gardenImages = evt;
-        //         vm.carouselIndex = vm.gardenImages.length / 2;
-        //     },
-        //     function (err) {
-        //         $state.go('index.gardens');
-        //     }
-        // );
-        function gotoElement(elementId) {
-             anchorSmoothScroll.scrollTo(elementId);
+        GardenService.getGardenImages($stateParams.gardenId).then(
+            function (res) {
+                var evt = res;
+                vm.gardenImages = evt;
+                vm.carouselIndex = vm.gardenImages.length / 2;
+            },
+            function (err) {
+                $state.go('index.gardens');
+            }
+        );
+        function imageActive(index){
+            return index === 0;
         }
-        function gotoSeasons(){
-            window.location.href = '#/gardens/'+ $stateParams.gardenId +'/seasons';
+        function gotoElement(elementId) {
+            anchorSmoothScroll.scrollTo(elementId);
+        }
+        function gotoSeasons() {
+            window.location.href = '#/gardens/' + $stateParams.gardenId + '/seasons';
         }
 
         function gotoEdit() {
@@ -183,6 +192,9 @@
                     toastr.error(err.errMsg, 'Lỗi');
                 }
             )
+        }
+        function uploadImage() {
+            vm.upload = true;
         }
     };
 })();

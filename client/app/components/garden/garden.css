@@ -9,9 +9,15 @@
     font-size: 16px;
 }
 
-.anchor span:focus{
-      background: lightgray !important;
+.anchor span:focus {
+    background: lightgray !important;
 }
+
+.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+    width: 70%;
+    margin: auto;
+}
+
 .anchor span.badge {
     font-size: 16px;
     background: white !important;
@@ -20,7 +26,8 @@
     margin-bottom: 1px;
     cursor: pointer;
 }
-@media (max-width: 500px){
+
+@media (max-width: 500px) {
     .anchor {
         display: none !important;
     }

@@ -6,7 +6,7 @@
             <a class="fa-icon fa fa-trash" data-toggle="tooltip" title="Xóa vườn" ng-click="vm.deleteGarden();"></a>
             &nbsp;&nbsp;
             <a class="fa-icon fa fa-line-chart" data-toggle="tooltip" title="Quản lý mùa vụ" ng-click="vm.gotoSeasons()"></a>
-           &nbsp;&nbsp;
+            &nbsp;&nbsp;
             <a class="fa-icon fa fa-upload" data-toggle="modal" data-target="#modal-upload" title="Thêm hình ảnh hoạt động"></a>
         </div>
         <!--<div ng-show="!vm.isMyGarden">
@@ -122,17 +122,41 @@
             <div id="image-container" class="parallax-background">
                 <h1 class="text-center title-lv1 ">Hình ảnh hoạt động</h1>
                 <a class="fa-icon fa fa-upload" data-toggle="modal" data-target="#modal-upload" title="Thêm hình ảnh hoạt động"></a>
-                <ul rn-carousel rn-carousel-index="vm.carouselIndex" rn-carousel-controls rn-carousel-auto-slide rn-carousel-pause-on-hover
+                <div id="myCarousel" class="carousel slide" data-ride="carousel"  style="height: 50%">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-ng-repeat="img in vm.gardenImages" data-slide-to="{{$index}}" class="{{vm.imageActive($index)?'active':''}}"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item {{vm.imageActive($index)?'active':''}}" data-ng-repeat="img in vm.gardenImages">
+                            <img class="img-responsive" ng-src="{{img.imgUrl}}"  height:"500px">
+                        </div>
+                    </div>
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+            <!--<ul rn-carousel rn-carousel-index="vm.carouselIndex" rn-carousel-controls rn-carousel-auto-slide rn-carousel-pause-on-hover
                     rn-carousel-buffered class="carousel shadow" ng-if="vm.gardenImages">
                     <li ng-repeat="slide in vm.gardenImages track by slide._id" ng-class="'id-' + slide._id">
-                        <div ng-style="{'background-image': 'url(' + slide.imgUrlFull + ')'}" class="bgimage">
+                        <div ng-style="{'background-image': 'url(' + slide.imgUrl + ')'}" class="bgimage">
                             #{{vm.gardenImages.indexOf(slide)+1 }}
                         </div>
                     </li>
                 </ul>
-                <div rn-carousel-indicators rn-carousel-index="vm.carouselIndex" ng-if="vm.gardenImages&&vm.gardenImages.length > 1" slides="vm.gardenImages"></div>
-            </div>
-            <div class="clear-fix" style="height:50px"></div>
+                <div rn-carousel-indicators rn-carousel-index="vm.carouselIndex" ng-if="vm.gardenImages&&vm.gardenImages.length > 1" slides="vm.gardenImages"></div>-->
+        </div>
+
+        <div class="clear-fix" style="height:50px"></div>
         </div>
     </article>
     <!--<div class="parallax-garden"></div>-->
@@ -148,10 +172,11 @@
                 </div>
                 <hr>
                 <div class="modal-body">
-                    <image-uploader url="vm.url" data-upload="vm.dataUpload"></image-uploader>
+                    <image-uploader url="vm.url" upload="vm.upload" data="vm.dataUpload"></image-uploader>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-success">Xác nhận</button>
+                    <button type="button" ng-click="vm.uploadImage()" class="btn btn-success">Tải lên</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-success">Thoát</button>
                 </div>
             </div>
         </div>

@@ -15,7 +15,7 @@ const maxImgFileSize = 1024 * 1024;
 
 module.exports = {
     getAllImages: getAllImages,
-    getAllImagesBygardenId: getAllImagesBygardenId,
+    getAllImagesByGardenId: getAllImagesByGardenId,
     getAllImagesByUserId: getAllImagesByUserId,
     createImage: createImage,
     updateImage: updateImage,
@@ -39,7 +39,7 @@ function getAllImages(req, res) {
 };
 
 function getAllImagesByGardenId(req, res) {
-    var gardenId = req.params.id;
+    var gardenId = req.params.gardenId;
     galleryDao.listImages({
         garden: gardenId,
         isDeleted: false
@@ -111,7 +111,7 @@ function createImage(req, res) {
             var image = {
                 user: id,
                 name: req.body.name,
-                garden: req.body.garden,
+                garden: req.body.gardenId,
                 imgUrl: imgUrl + "/" + req.file.filename
             };
             if (gardenId) {
