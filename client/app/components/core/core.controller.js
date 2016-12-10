@@ -8,7 +8,7 @@
         $rootScope.isAdmin = $localStorage.userInfo && $localStorage.userInfo.roles[0] === 'admin' ? true : false;
         var socket = io.connect('http://localhost:3000/notification');
         vm.isActive = function (viewLocation) {
-            return $location.path().indexOf(viewLocation) !==-1;
+            return $location.path().indexOf(viewLocation) !== -1;
         };
         // ======CONFIGURE NOTIFICATION========
         vm.notifications = [];
@@ -30,16 +30,24 @@
         };
         // loadNewNotificatons();
         openNav();
-        pinMenu();
+        // pinMenu();
         // Collapsing the menu after navigation
-        $scope.$on('$stateChangeSuccess', function () {
-            if (vm.isOpenSideBar && !vm.isMenuPin) {
-                closeNav();
-            }
-        });
+        // $scope.$on('$stateChangeSuccess', function () {
+        //     if (vm.isOpenSideBar && !vm.isMenuPin) {
+        //         closeNav();
+        //     }
+        // });
+
 
         $(document).ready(function () {
-
+            $(window).resize(function () {
+                var mainWidth = $(window).width();
+                if (vm.isOpenSideBar) {
+                    $('#main').width(mainWidth - 250);
+                } else {
+                    $('#main').width(mainWidth);
+                }
+            })
             //Check to see if the window is top if not then display button
             $(window).scroll(function () {
                 if ($(this).scrollTop() > 100) {
@@ -83,21 +91,16 @@
             // document.getElementById("main").style.marginLeft = "250px";
 
             vm.isOpenSideBar = true;
-            if (vm.isMenuPin) {
-                var mainWidth = $('#main').width();
-                $('#main').width(mainWidth - 250);
-                $('#main').addClass('pull-right');
-            }
+            var mainWidth = $(window).width();
+            $('#main').width(mainWidth - 250);
+            $('#main').addClass('pull-right');
         }
 
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
             var mainWidth = $('#main').width();
-            if (vm.isMenuPin) {
-                var mainWidth = $('#main').width();
-                $('#main').width(mainWidth + 250);
-                $('#main').removeClass('pull-right');
-            }
+            $('#main').width(mainWidth + 250);
+            $('#main').removeClass('pull-right');
             vm.isOpenSideBar = false;
         }
 

@@ -46,7 +46,7 @@ function updateUser(req, res) {
             errMsg: "Không tìm thấy!"
         });
     }
-    userDao.updateuser(userId, userInfo, cb);
+    userDao.updateUser(userId, userInfo, cb);
     function cb(err, result) {
         if (err) {
             return res.status(400).send(err);

@@ -3,6 +3,12 @@
     z-index: 99999;
     left: 0;
     top: 40%;
+    opacity: 0.5;
+
+}
+
+.anchor:hover {
+    opacity: 1 !important;
 }
 
 .anchor span {
@@ -18,7 +24,7 @@
     margin: auto;
 }
 
-.anchor span.badge {
+.anchor span.badge:hover {
     font-size: 16px;
     background: white !important;
     color: #009900 !important;

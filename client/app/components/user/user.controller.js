@@ -10,21 +10,28 @@
         vm.userId = $state.params.userId;
         vm.isMe = vm.userId && (vm.userId === $localStorage.userInfo._id) || !vm.userId;
         vm.images = [];
-        vm.events = [];
+        vm.gardens = [];
         vm.isFollow = false;
         vm.doFollow = doFollow;
         if (!vm.isMe) {
             getUserInfo();
-            // getImages(vm.userId);
+            getImages(vm.userId);
+            getGardens(vm.userId);
         } else {
             getMyUserInfo();
-            // getImages($localStorage.userInfo._id);
+            getImages($localStorage.userInfo._id);
+            getGardens($localStorage.userInfo._id)
         };
 
         // checkMyFollows();
+        function getGardens(userId) {
+            UserService.loadGardensByUserId(userId).then(function (res) {
+                vm.gardens = res;
+            })
+        }
 
         function checkMyFollows() {
-            FollowService.checkFollow({userFollowId: vm.userId})
+            FollowService.checkFollow({ userFollowId: vm.userId })
                 .then(function (res) {
 
                     vm.isFollow = true;
@@ -55,10 +62,14 @@
             GalleryService.getImagesByUserId(userId).then(function (res) {
                 vm.images = res;
             }, function (err) {
-                $rootScope.alert = err.data.message;
-                $state.go('signin');
+                // $rootScope.alert = err.data.message;
+                // $state.go('signin');
             });
         };
+
+        function imageActive(index) {
+            return index === 0;
+        }
 
         function doFollow() {
             if (!vm.isFollow) {

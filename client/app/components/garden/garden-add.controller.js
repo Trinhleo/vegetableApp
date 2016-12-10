@@ -124,7 +124,7 @@
             ProductionItemService.listAllProductionItems().then(
                 function (res) {
                     vm.productionItem = res
-                    getProductionItemCategory(vm.productionItem);
+                    // getProductionItemCategory(vm.productionItem);
                 },
                 function (err) {
                     toastr.error(err, 'Lỗi');

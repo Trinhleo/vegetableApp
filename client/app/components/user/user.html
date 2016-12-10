@@ -6,12 +6,12 @@
 </style>
 <section>
 	<h1 class="title-lv1">Thông tin cá nhân</h1>
-	<button style="margin-left:15px" class="btn btn-primary" ng-show="!vm.isMe" ng-click="vm.doFollow()">{{vm.isFollow?'Unfollow':'Follow this user'}}</button>
+	<!--<button style="margin-left:15px" class="btn btn-primary" ng-show="!vm.isMe" ng-click="vm.doFollow()">{{vm.isFollow?'Unfollow':'Follow this user'}}</button>-->
 	<hr>
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
 		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 "><img alt="" class="img-responsive text-center" ng-src="{{vm.userInfo.profileImageURLFull}}" style="height: 200px;width:200px; border-radius: 5%;
     border: 5px solid #009900;" /><br>
-			<button class="col-md-offset-2 btn btn-primary" ui-sref="index.settings.picture" ng-show="vm.isMe">Change Avatar</button></div>
+			<button class="col-md-offset-2 btn btn-primary" ui-sref="index.settings.picture" ng-show="vm.isMe">Thay đổi ảnh đại diện</button></div>
 		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 middle">
 			<h4>Thông tin</h4>
 			<div>
@@ -24,21 +24,21 @@
 					<label>Email: </label><span> {{vm.userInfo.email}}</span></div>
 				<div ng-show="vm.isMe">
 					<label>Ngày tạo: </label><span> {{vm.userInfo.creationDate | date:'short'}}</span></div>
-				<button class="btn btn-primary glyphicon glyphicon-pencil" data-toggle="tooltip" title="Edit user profile" ui-sref="index.settings.profile"
+				<button class="btn btn-primary glyphicon glyphicon-pencil" data-toggle="tooltip" title="Chỉnh sửa thông tin cá nhân" ui-sref="index.settings.profile"
 					ng-show="vm.isMe"></button>
 			</div>
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 			<h4>Danh sách vườn rau:</h4>
-			<ul class="list-group" ng-repeat="event in vm.events">
-				<a href="#events/{{event._id}}">
+			<ul class="list-group" ng-repeat="garden in vm.gardens">
+				<a href="#gardens/{{garden._id}}">
 					<li class="list-group-item" style="display: inline-block" class="row">
 						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-							<img alt="" class="img-responsive text-center" ng-src="{{event.imgUrl}}" style="height: 100px;width:100px; border-radius: 50%;
+							<img alt="" class="img-responsive text-center" ng-src="{{garden.imgUrl}}" style="height: 100px;width:100px; border-radius: 50%;
     border: 2px solid #337ab7;" />
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-							<strong>{{event.name}}</strong>
+							<strong>{{garden.name}}</strong>
 						</div>
 					</li>
 				</a>
@@ -49,6 +49,27 @@
 
 	<div class="col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-12 col-lg-4 col-md-4 col-sm-4 col-xs-12 ">
 		<hr>
-		<slider images="vm.images"></slider>
+		<div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 50%">
+
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-ng-repeat="img in vm.gardenImages" data-slide-to="{{$index}}" class="{{vm.imageActive($index)?'active':''}}"></li>
+			</ol>
+
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner" role="listbox">
+				<div class="item {{vm.imageActive($index)?'active':''}}" data-ng-repeat="img in vm.images">
+					<img class="img-responsive" ng-src="{{img.imgUrl}}" height: "500px">
+				</div>
+			</div>
+			<!-- Left and right controls -->
+			<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
 	</div>
 </section>

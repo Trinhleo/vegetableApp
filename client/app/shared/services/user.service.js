@@ -9,7 +9,7 @@
             getMyUserInfo: getMyUserInfo,
             getUserInfo: getUserInfo,
             updateUserInfo: updateUserInfo,
-            loadEventsByUserId: loadEventsByUserId
+            loadGardensByUserId: loadGardensByUserId
         };
 
         function getMyUserInfo() {
@@ -42,9 +42,9 @@
             return deferred.promise;
         };
 
-        function loadEventsByUserId(userId) {
+        function loadGardensByUserId(userId) {
             var deferred = $q.defer();
-            $http.get(apiUrl + '/' + userId + '/events').then(function (res) {
+            $http.get(apiUrl + '/' + userId + '/gardens').then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {
                 deferred.reject(err);
@@ -60,7 +60,6 @@
                 deferred.reject(err);
             });
             return deferred.promise;
-
         };
     }
 })();

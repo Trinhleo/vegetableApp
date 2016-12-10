@@ -1,5 +1,5 @@
         * {
-            font-family: 'Segoe UI', sans-serif
+            font-family: 'OpenSans','Roboto', 'Lato',sans-serif
         }
         
         .title-lv1 {
@@ -122,6 +122,19 @@
         body, html, .ng-scope, .container-fluid, .page-content {
             height: 100%;
             min-height: 100%;
+            animation-name: drop;
+            animation-iteration-count: 1;
+            animation-timing-function: ease-in-out;
+            animation-duration: 0.6s;
+        }
+        
+        @keyframes drop{
+            0% {
+                transform: translateY(-100%);
+            }
+            100% {
+                transform: translateY(0);
+            }
         }
         /*.wrapper {
             height: 100%;
@@ -508,7 +521,8 @@
         .select2 {
             width: 100% !important;
         }
-        li.active{
+        
+        li.active {
             background-color: white !important;
             color: #009900 !important;
         }

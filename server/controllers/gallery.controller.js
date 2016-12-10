@@ -55,7 +55,7 @@ function getAllImagesByGardenId(req, res) {
 };
 
 function getAllImagesByUserId(req, res) {
-    var id = req.decoded._id;
+    var id = req.params.userId;
     galleryDao.listImages({
         user: id,
         isDeleted: false
@@ -64,7 +64,7 @@ function getAllImagesByUserId(req, res) {
             res.status(500).send('internal error!');
         } else {
             for (var x in result) {
-                result[x].imgUrl = req.protocol.concat(urlPrefix).concat(result[x].imgUrl);
+                result[x].imgUrl = urlPrefix.concat(result[x].imgUrl);
             };
             res.status(200).send(result);
         }
