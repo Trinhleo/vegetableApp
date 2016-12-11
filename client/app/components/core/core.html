@@ -19,10 +19,10 @@
 				</a>
 			<ul class="dropdown-menu" role="menu">
 				<li><a ui-sref="index.garden" ui-sref-active="active">Danh sách vườn</a></li>
-				<li><a ui-sref="index.garden-add" ui-sref-active="active">Thêm vườn mới</a></li>	
+				<li><a ui-sref="index.garden-add" ui-sref-active="active">Thêm vườn mới</a></li>
 			</ul>
 		</li>
-		<li class="nav-dropdown {{vm.isActive('/production')||vm.isActive('/device')?'active':''}}" dropdown ng-if="$root.isAdmin">
+		<li class="nav-dropdown {{vm.isActive('/production')||vm.isActive('/device')?'active':''||vm.isActive('/admin')?'active':''||vm.isActive('/register')?'active':''||vm.isActive('/task')?'active':''}}" dropdown ng-if="$root.isAdmin">
 			<a style="cursor: pointer;" dropdown-toggle>QUẢN TRỊ VIÊN
 					<b class="caret" style="border-top:8px dashed"></b>
 				</a>
@@ -35,8 +35,8 @@
 			</ul>
 		</li>
 		<li class="nav-dropdown"><a ui-sref="index.dashboard" ui-sref-active="active" class="dropbtn">THỐNG KÊ</a>
-			<li class="nav-dropdown"><a ui-sref="index.contact" ui-sref-active="active" class="dropbtn">LIÊN HỆ</a>
-			</li>
+			<!--<li class="nav-dropdown"><a ui-sref="index.contact" ui-sref-active="active" class="dropbtn">LIÊN HỆ</a>
+			</li>-->
 	</ul>
 </div>
 <!-- /sidebar -->
@@ -102,7 +102,7 @@
 				<div class="modal-footer">
 					<!--<button type="button" data-dismiss="modal" class="btn btn-success">Xác nhận</button>-->
 					<div class="text-center">
-						<button type="submit" class="btn btn-primary"  ng-click="vm.signin();" data-ng-disabled="vm.user.username === '' || vm.user.password === ''">Đăng nhập</button>
+						<button type="submit" class="btn btn-primary" ng-click="vm.signin();" data-ng-disabled="vm.user.username === '' || vm.user.password === ''">Đăng nhập</button>
 						<a ui-sref="index.signup" data-dismiss="modal">Đăng ký</a>
 					</div>
 				</div>
