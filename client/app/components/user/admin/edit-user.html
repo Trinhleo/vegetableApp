@@ -1,0 +1,32 @@
+<section class="row">
+    <div class="page-header">
+        <h1>Chỉnh sửa thông tin người dùng</h1>
+    </div>
+    <div style="margin: 20px">
+    </div>
+    <div class="col-xs-offset-1 col-xs-10 col-md-offset-4 col-md-4">
+        <form name="userForm">
+            <fieldset>
+                <div class="form-group" show-errors>
+                    <label for="firstName">Tên</label>
+                    <input type="text" id="firstName" name="firstName" class="form-control" ng-model="vm.userInfo.firstName" placeholder="Tên"
+                        required>
+                </div>
+                <div class="form-group" show-errors>
+                    <label for="lastName">Họ</label>
+                    <input type="text" id="lastName" name="lastName" class="form-control" ng-model="vm.userInfo.lastName" placeholder="Họ"
+                        required>
+                </div>
+                <div class="form-group" show-errors>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" ng-model="vm.userInfo.email" placeholder="Email" lowercase
+                        required>
+                </div>
+                <div class="text-center form-group">
+                    <button type="submit" ng-click="vm.updateUserInfo();" class="btn btn-primary">Lưu</button>
+                     <button type="submit" ng-click="vm.cancel();" class="btn btn-default">Thoát</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</section>

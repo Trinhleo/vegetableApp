@@ -2,14 +2,14 @@
 	<div class="col-xs-offset-1 col-xs-10 col-md-offset-4 col-md-4">
 		<form name="userForm">
 			<fieldset>
-				<div class="form-group" show-errors>
-					<label for="firstName">First Name</label>
-					<input type="text" id="firstName" name="firstName" class="form-control" ng-model="vm.userInfo.firstName" placeholder="First Name"
+				<div class="form-group">
+					<label for="firstName">Tên</label>
+					<input type="text" id="firstName" name="firstName" class="form-control" ng-model="vm.userInfo.firstName" placeholder="Tên"
 						required>
 				</div>
 				<div class="form-group" show-errors>
-					<label for="lastName">Last Name</label>
-					<input type="text" id="lastName" name="lastName" class="form-control" ng-model="vm.userInfo.lastName" placeholder="Last Name"
+					<label for="lastName">Họ</label>
+					<input type="text" id="lastName" name="lastName" class="form-control" ng-model="vm.userInfo.lastName" placeholder="Họ"
 						required>
 				</div>
 				<div class="form-group" show-errors>
@@ -18,10 +18,7 @@
 						required>
 				</div>
 				<div class="text-center form-group">
-					<button type="submit" ng-click="vm.updateUserInfo();" class="btn btn-primary">Save</button>
-				</div>
-				<div ng-show="$root.alert" class="text-center">
-					<strong>{{$root.alert}}</strong>
+					<button data-ng-disabled="!userForm.$valid" type="submit" ng-click="vm.updateUserInfo();" class="btn btn-primary">Save</button>
 				</div>
 			</fieldset>
 		</form>

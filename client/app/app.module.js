@@ -23,6 +23,7 @@
             'app.dashboard',
             'app.user',
             'app.user.setting',
+            'app.userManage',
             'app.garden',
             'app.season',
             'app.product',
@@ -37,7 +38,7 @@
                     && toState.name != "index.dashboard" && toState.name != "index.product" && toState.name != "index.garden"
                     && toState.name != "index.season" && toState.name != "index.garden-details"
                     && toState.name != "index.season.details" && toState.name != "index.season" && toState.name != "index.season.list"
-                    && toState.name != "index.season-th"  && toState.name != "index.product-ingroup") {
+                    && toState.name != "index.season-th" && toState.name != "index.product-ingroup") {
                     if (!$localStorage.token && !$localStorage.user) {
                         event.preventDefault();
                         delete $localStorage.user;
@@ -45,8 +46,8 @@
                         delete $localStorage.userInfo;
                         delete $rootScope.userInfo;
                         delete $rootScope.isAdmin;
-                        $state.go('index.signin')
                         storePreviousState(toState, toParams);
+                        $state.go('index.signin')
                     }
                 }
             });

@@ -25,14 +25,14 @@ function getUser(req, res) {
         });
     }
 
-    userDao.readuserById(userId, cb);
+    userDao.readUserById(userId, cb);
 
     function cb(err, result) {
         if (err) {
             return res.status(400).send(err);
         }
-        result.isOwner = userId.toString() === result.user.toString() ? true : false
-        result.isAdmin = req.decoded.role[0] === 'admin' ? true : false;
+        // result.isOwner = userId.toString() === result.user.toString() ? true : false
+        // result.isAdmin = req.decoded.role[0] === 'admin' ? true : false;
         res.status(200).send(result);
     }
 }

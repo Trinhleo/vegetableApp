@@ -13,6 +13,7 @@
         vm.gardens = [];
         vm.isFollow = false;
         vm.doFollow = doFollow;
+        vm.imageActive = imageActive
         if (!vm.isMe) {
             getUserInfo();
             getImages(vm.userId);

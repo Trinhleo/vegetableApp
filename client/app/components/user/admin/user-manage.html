@@ -1,0 +1,26 @@
+<section>
+    <div class="page-header col-md-12">
+        <h1>Danh sách người dùng</h1>
+    </div>
+    <div>
+        <md-input-container>
+            <input class="form-control col-md-4" type="text" ng-model="vm.search" placeholder="Tìm kiếm" ng-change="vm.figureOutItemsToDisplay()"
+            />
+        </md-input-container>
+        <md-divider style="margin-bottom:30px;"></md-divider>
+        <div>
+            <pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage"
+                ng-change="vm.pageChanged()">
+            </pagination>
+        </div>
+        <md-card class="shadow col-lg-3 col-md-3 col-sm-3 col-xs-12" style="cursor: pointer; margin-left:5% ; margin-bottom: 5%; background-color:lightgrey "
+            data-ng-repeat="user in vm.pagedItems" layout-align="center center">
+            <a data-ui-sref="index.user-details({ userId: user._id })">
+                <h4 style="color:green" class="text-center">{{user.displayName}}</h4>
+                <small class="list-group-item-text">
+               </small>
+                <div class="img_container"><img alt="" class="img-responsive" ng-src="//localhost:3000/{{user.profileImageURL}}" style="height: 400px !important"/></div>
+            </a>
+        </md-card>
+    </div>
+</section>

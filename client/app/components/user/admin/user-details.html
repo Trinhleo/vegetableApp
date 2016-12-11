@@ -1,0 +1,30 @@
+<section>
+    <div class="page-header">
+        <h1 data-ng-bind="vm.user.name"></h1>
+    </div>
+    <div style="margin: 20px">
+        <button data-toggle="tooltip" title="Danh sách đối tượng sản xuất" class="btn btn-primary glyphicon glyphicon-th-list" data-ui-sref="index.user-manage">
+        </button>
+    </div>
+    <div class="pull-right">
+        <button class="btn btn-primary glyphicon glyphicon-edit" title="Chỉnh sửa thông tin cá nhân" data-ui-sref="index.user-edit({ userId: vm.user._id })">
+        </button>
+        <button class="btn btn-primary glyphicon glyphicon-trash" data-ng-click="vm.remove()">
+        </button>
+    </div>
+    <div class="col-lg-offset-4 col-md-offset-4 col-sm-offser-4 col-lg-4 col-md-4 col-sm-4 col-xs-12 middle">
+        <h4>Thông tin</h4>
+        <div>
+            <div>
+                <label>Tên: </label><span> {{vm.user.firstName}} </span>
+            </div>
+            <div>
+                <label>Họ </label><span> {{vm.user.lastName}}</span></div>
+            <div>
+                <label>Email: </label><span> {{vm.user.email}}</span></div>
+            <div >
+                <label>Ngày tạo: </label><span> {{vm.user.creationDate | date:'short'}}</span></div>
+        </div>
+    </div>
+    <div class="img_container"><img alt="" class="img-responsive text-center" ng-src="{{vm.user.imgUrlFull}}" /></div>
+</section>

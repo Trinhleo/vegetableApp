@@ -131,17 +131,17 @@
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner" role="listbox">
                         <div class="item {{vm.imageActive($index)?'active':''}}" data-ng-repeat="img in vm.gardenImages">
-                            <img class="img-responsive" ng-src="{{img.imgUrl}}"  height:"500px">
+                            <img class="img-responsive" ng-src="{{img.imgUrl}}"  style="height: 600px !important">
                         </div>
                     </div>
                     <!-- Left and right controls -->
-                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                    <a class="left carousel-control" data-target="#myCarousel" role="button" ng-non-bindable data-slide="prev">
                         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
+                        <span class="sr-only">Trước đó</span>
                     </a>
-                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                    <a class="right carousel-control" data-target="#myCarousel" role="button" ng-non-bindable data-slide="next">
                         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
+                        <span class="sr-only">Kế tiếp</span>
                     </a>
                 </div>
             </div>

@@ -11,7 +11,6 @@
             updateUserInfo: updateUserInfo,
             loadGardensByUserId: loadGardensByUserId
         };
-
         function getMyUserInfo() {
             var deferred = $q.defer();
             $http.get(apiUrl + '/me').then(function (res) {
