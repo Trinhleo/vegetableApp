@@ -9,7 +9,8 @@
             getMyUserInfo: getMyUserInfo,
             getUserInfo: getUserInfo,
             updateUserInfo: updateUserInfo,
-            loadGardensByUserId: loadGardensByUserId
+            loadGardensByUserId: loadGardensByUserId,
+            changePassword: changePassword
         };
         function getMyUserInfo() {
             var deferred = $q.defer();
@@ -60,5 +61,15 @@
             });
             return deferred.promise;
         };
+
+        function changePassword(info) {
+            var deferred = $q.defer();
+            $http.post(apiUrl + '/me/change-password', info).then(function (res) {
+                deferred.resolve(res.data);
+            }, function (err) {
+                deferred.reject(err.data);
+            });
+            return deferred.promise;
+        }
     }
 })();

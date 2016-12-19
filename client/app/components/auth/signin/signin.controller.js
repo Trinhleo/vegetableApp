@@ -22,7 +22,7 @@
                 $rootScope.userInfo = $localStorage.userInfo;
                 $rootScope.isAdmin = $localStorage.userInfo.roles[0] === 'admin' ? true : false;
                 console.log($state.previous.state);
-                $state.go(!$state.previous.state.abstract ? $state.previous.state : 'index.product')
+                $state.go('index.product')
                 // console.log(err)
                 // vm.alert = err.data.message || err.message;
 

@@ -21,6 +21,12 @@
                 templateUrl: 'app/components/user/settings/change-profile-picture.html',
                 controller: 'ChangeProfilePictureController',
                 controllerAs: 'vm'
+            })
+            .state('index.settings.change_password', {
+                url: "/change-password",
+                templateUrl: 'app/components/user/settings/change-password.html',
+                controller: 'ChangePasswordController',
+                controllerAs: 'vm'
             });
     };
 })();

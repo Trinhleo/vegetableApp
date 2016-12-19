@@ -10,5 +10,7 @@ module.exports = function () {
     router.get('/:userId/gardens', authMiddlewares.authentication, gardenController.listAllGardensOfUser);
     router.put('/me', authMiddlewares.authentication, userController.updateProfile);
     router.post('/me/profile-picture', authMiddlewares.authentication, uploader.uploadSingle, userController.changePictureProfile);
+    router.post('/me/profile-picture', authMiddlewares.authentication, uploader.uploadSingle, userController.changePictureProfile);
+    router.post('/me/change-password', authMiddlewares.authentication, userController.changePassword);
     return router;
 };

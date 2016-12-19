@@ -77,7 +77,10 @@
                 $rootScope.isAdmin = $localStorage.userInfo.roles[0] === 'admin' ? true : false;
                 // $('#modal-signin').removeClass('in');
                 $('#close-button').click();
-                $state.go(!$state.previous.state.abstract ? $state.previous.state : 'index.product')
+                // $state.go(!$state.previous.state.abstract ? $state.previous.state : 'index.product');
+                $state.go('index.product');
+                vm.user.username = '';
+                vm.user.password = '';
                 // console.log(err)
                 // vm.alert = err.data.message || err.message;
 

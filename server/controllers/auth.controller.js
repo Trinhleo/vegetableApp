@@ -28,7 +28,7 @@ function signin(req, res) {
         if (err) {
             console.log(err);
             return res.status(500).send({
-                message: "internal error"
+                errMsg: "Lỗi hệ thống!"
             });
         }
         if (result && user.password === result.password) {
@@ -51,7 +51,7 @@ function signin(req, res) {
             });
         } else {
             res.status(400).send({
-                message: "tên đăng nhập hoặc mật khẩu sai!"
+                errMsg: "tên đăng nhập hoặc mật khẩu sai!"
             });
         }
     });
@@ -60,7 +60,7 @@ function signin(req, res) {
 function signup(req, res) {
     if (!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.username || !req.body.password) {
         return res.status(403).send({
-            message: "error input information!"
+            errMsg: "Lỗi nhập liệu!"
         });
     }
     var hashedpassword = cryptoPasswordUtil.cryptoPassword(req.body.password);
@@ -75,18 +75,20 @@ function signup(req, res) {
     userDao.readUser(userInfo, function (err, result) {
         if (err) {
             return res.status(500).send({
-                message: "internal error"
+                errMsg: "lỗi hệ thống"
             })
         };
         if (null !== result) {
-            return res.status(400).send("user is existed!");
+            return res.status(400).send({
+                errMsg: "Người dùng đã tồn tại!"
+            });
         }
 
         userDao.createUser(userInfo, function (err, result) {
             if (err) {
                 return res.status(400).send({
                     errorcode: err.code,
-                    errorms: err.errmsg
+                    errMsg: err.errmsg
                 });
             }
             var userInfoToSend = {

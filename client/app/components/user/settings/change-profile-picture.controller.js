@@ -2,9 +2,9 @@
     angular.module('app.user.setting')
         .controller('ChangeProfilePictureController', ChangeProfilePictureController);
 
-    ChangeProfilePictureController.$inject = ['$timeout', '$window', 'FileUploader', 'appConfigs', '$localStorage'];
+    ChangeProfilePictureController.$inject = ['$timeout', '$window', 'FileUploader', 'appConfigs', '$localStorage', 'toastr', '$state'];
 
-    function ChangeProfilePictureController($timeout, $window, FileUploader, appConfigs, $localStorage) {
+    function ChangeProfilePictureController($timeout, $window, FileUploader, appConfigs, $localStorage, toastr, $state) {
         vm = this;
         vm.user = $localStorage.userInfo;
         vm.imageURL = vm.user ? vm.user.profileImageURL : '';
@@ -49,10 +49,10 @@
         // Called after the user has successfully uploaded a new picture
         function onSuccessItem(fileItem, response, status, headers) {
             // Show success message
-            vm.success = true;
-            debugger;
+            toastr.success("Đổi ảnh đại diện thành công", "Thành công");
             $localStorage.userInfo.profileImageURL = response.profileImageURL;
             // Clear upload buttons
+            $state.go('index.me');
             vm.cancelUpload();
         };
 
@@ -62,7 +62,7 @@
             vm.cancelUpload();
 
             // Show error message
-            vm.error = response.message;
+            toastr.error(response.data.errMsg, "Lỗi");
         };
 
         // Change user profile picture

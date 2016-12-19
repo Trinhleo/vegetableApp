@@ -49,7 +49,7 @@
 			</li>
 			<li class="divider-vertical"></li>
 			<li ui-sref-active="active">
-				<a data-toggle="modal" data-target="#modal-signin">Đăng nhập</a>
+				<a id="sign_in" data-toggle="modal" data-target="#modal-signin">Đăng nhập</a>
 			</li>
 		</ul>
 		<ul class="nav col-lg-3 col-md-3 col-sm-6 col-xs-10 pull-right" ng-if="$root.userInfo">
@@ -64,6 +64,9 @@
 					</li>
 					<li ui-sref-active="active">
 						<a ui-sref="index.settings.profile">Sửa thông tin cá nhân</a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="index.settings.change_password">Đổi mật khẩu</a>
 					</li>
 					<li ui-sref-active="active">
 						<a ui-sref="index.settings.picture">Thay đổi ảnh đại diện</a>
@@ -103,7 +106,7 @@
 					<!--<button type="button" data-dismiss="modal" class="btn btn-success">Xác nhận</button>-->
 					<div class="text-center">
 						<button type="submit" class="btn btn-primary" ng-click="vm.signin();" data-ng-disabled="vm.user.username === '' || vm.user.password === ''">Đăng nhập</button>
-						<a ui-sref="index.signup" data-dismiss="modal">Đăng ký</a>
+						<a data-dismiss="modal">Hủy</a>
 					</div>
 				</div>
 			</div>
