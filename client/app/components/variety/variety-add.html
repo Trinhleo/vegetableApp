@@ -1,0 +1,41 @@
+<section>
+    <h2 style="text-align: center">Thêm giống</h2>
+<div class="">
+    <div class="container col-lg-9 col-md-9 col-sm-9 col-xs-12">
+        <form name="addForm" class="form-horizontal" role="form" novalidate>
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="name">Đối tượng sản xuất:</label>
+                <div class="col-sm-8">
+                    <select class="production_item" ng-model="vm.formData.productionItem" ng-options="pi._id as pi.name for pi in vm.productionItems track by pi._id">
+                    </select>
+                </div>
+                <!--<div ng-messages="addForm.name.$error" role="alert">
+                        <p class="help-block error-text" ng-message="required">Tên là bắt buộc.</p>
+                    </div>-->
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="name">Tên giống:</label>
+                <div class="col-sm-8">
+                    <input type="text" name="name" class="form-control" ng-model="vm.formData.name" id="name" placeholder="Nhập tên" required>
+                </div>
+                <!--<div ng-messages="addForm.name.$error" role="alert">
+                        <p class="help-block error-text" ng-message="required">Tên là bắt buộc.</p>
+                    </div>-->
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="description">Mô tả:</label>
+                <div class="col-sm-8">
+                    <textarea type="text" name="description" class="form-control" id="description" placeholder="Nhập mô tả" ng-model="vm.formData.description">
+							</textarea>
+                </div>
+            </div>
+            <div class="form-group ">
+                <div class="text-center">
+                    <button type="submit" ng-disabled="addForm.$invalid" class="btn btn-primary" ng-click="vm.addVariety();">Thêm</button>
+                    <button type="submit" class="btn btn-primary" ng-click="vm.cancel();">Hủy</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</section>

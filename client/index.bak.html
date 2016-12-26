@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+	<title>Fresh Vegetable </title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta content="text/html; charset=utf-8" http-equiv="content-type">
+	<link rel="stylesheet" href="app/components/core/core.css">
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.min.css">
+	<link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
+	<link rel="stylesheet" href="bower_components/angular-material-data-table/dist/md-data-table.min.css">
+	<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+	<link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css" />
+	<link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css" />
+	<!--directives-->
+	<link rel="stylesheet" href="app/shared/directives/map/map.directive.css" />
+
+</head>
+
+<body>
+	<div ui-view>
+</body>
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="node_modules/moment/moment.js"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/ngstorage/ngStorage.min.js"></script>
+<script src="bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
+<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="bower_components/angularjs-geolocation/dist/angularjs-geolocation.min.js"></script>
+<script src="node_modules/socket.io-client/socket.io.js"></script>
+<script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+<script src="bower_components/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
+<script src="bower_components/angular-material/angular-material.js"></script>
+<script src="bower_components/angular-aria/angular-aria.min.js"></script>
+<script src="bower_components/angular-messages/angular-messages.min.js"></script>
+<script src="bower_components/angular-material-data-table/dist/md-data-table.min.js"> </script>
+<script src="bower_components/jquery-ui/jquery-ui.min.js"> </script>
+<script src="bower_components/select2/dist/js/select2.min.js"> </script>
+<!--app-->
+<!-- inject:js -->
+<script src="app/app.module.js"></script>
+<script src="app/app.router.js"></script>
+<script src="app/components/core/core.module.js"></script>
+<script src="app/components/dashboard/dashboard.module.js"></script>
+<script src="app/components/device-node/device-node.module.js"></script>
+<script src="app/components/gallery/gallery.module.js"></script>
+<script src="app/components/garden/garden.module.js"></script>
+<script src="app/components/product/product.module.js"></script>
+<script src="app/components/production-item/production-item.module.js"></script>
+<script src="app/components/season/season.module.js"></script>
+<script src="app/components/task/task.module.js"></script>
+<script src="app/components/task-category/task-category.module.js"></script>
+<script src="app/components/user/user.module.js"></script>
+<script src="app/shared/services/services.module.js"></script>
+<script src="app/components/auth/signout/signout.module.js"></script>
+<script src="app/components/auth/signin/signin.module.js"></script>
+<script src="app/components/auth/signup/signup.module.js"></script>
+<script src="app/components/user/settings/user-setting.module.js"></script>
+<script src="app/components/core/core.controller.js"></script>
+<script src="app/components/dashboard/dashboard.controller.js"></script>
+<script src="app/components/device-node/device-node-add.controller.js"></script>
+<script src="app/components/device-node/device-node-details.controller.js"></script>
+<script src="app/components/device-node/device-node-edit.controller.js"></script>
+<script src="app/components/device-node/device-node.controller.js"></script>
+<script src="app/components/gallery/gallery.controller.js"></script>
+<script src="app/components/gallery/upload-image.controller.js"></script>
+<script src="app/components/garden/approve-garden.controller.js"></script>
+<script src="app/components/garden/garden-add.controller.js"></script>
+<script src="app/components/garden/garden-details.controller.js"></script>
+<script src="app/components/garden/garden-edit.controller.js"></script>
+<script src="app/components/garden/garden.controller.js"></script>
+<script src="app/components/product/product-details.controller.js"></script>
+<script src="app/components/product/product.controller.js"></script>
+<script src="app/components/production-item/production-item-add.controller.js"></script>
+<script src="app/components/production-item/production-item-details.controller.js"></script>
+<script src="app/components/production-item/production-item-edit.controller.js"></script>
+<script src="app/components/production-item/production-item.controller.js"></script>
+<script src="app/components/season/season-add.controller.js"></script>
+<script src="app/components/season/season-details.controller.js"></script>
+<script src="app/components/season/season-edit.controller.js"></script>
+<script src="app/components/season/season-list.controller.js"></script>
+<script src="app/components/season/season-task.controller.js"></script>
+<script src="app/components/season/season.controller.js"></script>
+<script src="app/components/task/task-add.controller.js"></script>
+<script src="app/components/task/task-details.controller.js"></script>
+<script src="app/components/task/task-edit.controller.js"></script>
+<script src="app/components/task/task.controller.js"></script>
+<script src="app/components/task-category/task-category-add.controller.js"></script>
+<script src="app/components/task-category/task-category-details.controller.js"></script>
+<script src="app/components/task-category/task-category-edit.controller.js"></script>
+<script src="app/components/task-category/task-category.controller.js"></script>
+<script src="app/components/user/user.controller.js"></script>
+<script src="app/components/auth/signout/signout.controller.js"></script>
+<script src="app/components/auth/signin/signin.controller.js"></script>
+<script src="app/components/auth/signup/signup.controller.js"></script>
+<script src="app/components/user/settings/change-profile-picture.controller.js"></script>
+<script src="app/components/user/settings/user-setting.controller.js"></script>
+<script src="app/components/user/admin/user-manage.controller.js"></script>
+<script src="app/components/core/core.router.js"></script>
+<script src="app/components/dashboard/dashboard.router.js"></script>
+<script src="app/components/device-node/device-node.router.js"></script>
+<script src="app/components/gallery/gallery.router.js"></script>
+<script src="app/components/garden/garden.router.js"></script>
+<script src="app/components/product/product.router.js"></script>
+<script src="app/components/production-item/production-item.router.js"></script>
+<script src="app/components/season/season.router.js"></script>
+<script src="app/components/task/task.router.js"></script>
+<script src="app/components/task-category/task-category.router.js"></script>
+<script src="app/components/user/user.router.js"></script>
+<script src="app/components/auth/signout/signout.router.js"></script>
+<script src="app/components/auth/signin/signin.router.js"></script>
+<script src="app/components/auth/signup/signup.router.js"></script>
+<script src="app/components/user/settings/user-setting.router.js"></script>
+<!-- endinject -->
+</html>

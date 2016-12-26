@@ -5,111 +5,115 @@
 		data-toggle="tooltip" title="{{vm.isMenuPin?'Bỏ ghim Menu':'Ghim Menu'
 		}}" ng-click="vm.pinMenu()"></a>-->
 	<ul class="nav" style="margin-top:-10px">
-		<li class="nav-dropdown">
-			<a ui-sref="index.product" class="dropbtn">TRANG CHỦ</a>
-		</li>
-		<li class="nav-dropdown {{vm.isActive('/products')?'active': ''}}"><a ui-sref="index.product" class="">SẢN PHẨM</a>
-		</li>
-		<li class="nav-dropdown" ui-sref-active="active" ng-if="!$root.userInfo">
-			<a ui-sref="index.garden" style="cursor: pointer;" dropdown-toggle>VƯỜN RAU</a>
-		</li>
-		<li class="nav-dropdown {{vm.isActive('/gardens')||vm.isActive('/seasons')?'active': ''}}" dropdown ng-if="$root.userInfo">
-			<a style="cursor: pointer;" dropdown-toggle>QUẢN LÝ SẢN XUẤT
-				 <b class="caret" style="border-top:8px dashed"></b>
-				</a>
-			<ul class="dropdown-menu" role="menu">
-				<li><a ui-sref="index.garden" ui-sref-active="active">Danh sách vườn</a></li>
-				<li><a ui-sref="index.garden-add" ui-sref-active="active">Thêm vườn mới</a></li>
-			</ul>
-		</li>
-		<li class="nav-dropdown {{vm.isActive('/production')||vm.isActive('/device')?'active':''||vm.isActive('/admin')?'active':''||vm.isActive('/register')?'active':''||vm.isActive('/task')?'active':''}}" dropdown ng-if="$root.isAdmin">
-			<a style="cursor: pointer;" dropdown-toggle>QUẢN TRỊ VIÊN
-					<b class="caret" style="border-top:8px dashed"></b>
-				</a>
-			<ul class="dropdown-menu" role="menu">
-				<li><a ui-sref="index.production-item" ui-sref-active="active">Đối tượng sản xuất</a></li>
-				<li><a ui-sref="index.device-node" ui-sref-active="active">Thiết bị</a></li>
-				<li><a ui-sref="index.task-category" ui-sref-active="active">Loại tác vụ</a></li>
-				<li><a ui-sref="index.register-garden-manage" ui-sref-active="active">Danh sách chờ duyệt vườn</a></li>
-				<li><a ui-sref="index.user-manage" ui-sref-active="active">Quản lý người dùng</a></li>
-			</ul>
-		</li>
-		<li class="nav-dropdown"><a ui-sref="index.dashboard" ui-sref-active="active" class="dropbtn">THỐNG KÊ</a>
-			<!--<li class="nav-dropdown"><a ui-sref="index.contact" ui-sref-active="active" class="dropbtn">LIÊN HỆ</a>
+<li class="nav-dropdown">
+	<a ui-sref="index.product" class="dropbtn">TRANG CHỦ</a>
+</li>
+<li class="nav-dropdown {{vm.isActive('/products')?'active': ''}}"><a ui-sref="index.product" class="">SẢN PHẨM</a>
+</li>
+<li class="nav-dropdown" ui-sref-active="active" ng-if="!$root.userInfo">
+	<a ui-sref="index.garden" style="cursor: pointer;" dropdown-toggle>VƯỜN RAU</a>
+</li>
+<li class="nav-dropdown {{vm.isActive('/gardens')||vm.isActive('/seasons')?'active': ''}}" dropdown ng-if="$root.userInfo">
+	<a style="cursor: pointer;" dropdown-toggle>QUẢN LÝ SẢN XUẤT
+<b class="caret" style="border-top:8px dashed"></b>
+</a>
+<ul class="dropdown-menu" role="menu">
+	<li><a ui-sref="index.garden" ui-sref-active="active">Danh sách vườn</a></li>
+	<li><a ui-sref="index.garden-add" ui-sref-active="active">Thêm vườn mới</a></li>
+</ul>
+</li>
+<li class="nav-dropdown {{vm.isActive('/production')||vm.isActive('/device')?'active':''||vm.isActive('/admin')?'active':''||vm.isActive('/register')?'active':''||vm.isActive('/task')?'active':''}}"
+	dropdown ng-if="$root.isAdmin">
+	<a style="cursor: pointer;" dropdown-toggle>QUẢN TRỊ VIÊN
+<b class="caret" style="border-top:8px dashed"></b>
+</a>
+<ul class="dropdown-menu" role="menu">
+	<li><a ui-sref="index.production-item" ui-sref-active="active">Đối tượng sản xuất</a></li>
+	<li><a ui-sref="index.device-node" ui-sref-active="active">Thiết bị sản xuất</a></li>
+	<li><a ui-sref="index.recipe" ui-sref-active="active">Công thức sản xuất</a></li>
+	<li><a ui-sref="index.fertilizer" ui-sref-active="active">Phân bón</a></li>
+	<li><a ui-sref="index.variety" ui-sref-active="active">Giống</a></li>
+	<li><a ui-sref="index.task-category" ui-sref-active="active">Loại tác vụ</a></li>
+	<li><a ui-sref="index.register-garden-manage" ui-sref-active="active">Danh sách chờ duyệt vườn</a></li>
+	<li><a ui-sref="index.user-manage" ui-sref-active="active">Quản lý người dùng</a></li>
+</ul>
+</li>
+<li class="nav-dropdown"><a ui-sref="index.dashboard" ui-sref-active="active" class="dropbtn">THỐNG KÊ</a>
+	<!--<li class="nav-dropdown"><a ui-sref="index.contact" ui-sref-active="active" class="dropbtn">LIÊN HỆ</a>
 			</li>-->
 	</ul>
-</div>
-<!-- /sidebar -->
-<div id="main">
-	<a class="side-nav-btn fa fa-bars" data-toggle="tooltip" title="Mở trình đơn bên cạnh" ng-click="vm.openNav()"></a>
-	<nav class="nav navbar-default" role="navigation">
-		<ul class="nav col-lg-3 col-md-3 col-sm-6 col-xs-10 pull-right" ng-hide="$root.userInfo" style="display:inline-flex">
-			<li ui-sref-active="active">
-				<a ui-sref="index.signup">Đăng ký</a>
-			</li>
-			<li class="divider-vertical"></li>
-			<li ui-sref-active="active">
-				<a id="sign_in" data-toggle="modal" data-target="#modal-signin">Đăng nhập</a>
-			</li>
-		</ul>
-		<ul class="nav col-lg-3 col-md-3 col-sm-6 col-xs-10 pull-right" ng-if="$root.userInfo">
-			<li class="usernav-dropdown" dropdown style="width:50%">
-				<a class="dropdown-toggle user-header-dropdown-toggle" dropdown-toggle role="button">
-					<img ng-src="{{$root.userInfo.profileImageURLFull}}" alt="{{$root.userInfo.displayName}}" class="header-profile-image" />
-					<span ng-bind="$root.userInfo.displayName"></span> <b class="caret"></b>
-				</a>
-				<ul class="dropdown-menu" role="menu">
-					<li ui-sref-active="active">
-						<a ui-sref="index.me">Thông tin cá nhân</a>
-					</li>
-					<li ui-sref-active="active">
-						<a ui-sref="index.settings.profile">Sửa thông tin cá nhân</a>
-					</li>
-					<li ui-sref-active="active">
-						<a ui-sref="index.settings.change_password">Đổi mật khẩu</a>
-					</li>
-					<li ui-sref-active="active">
-						<a ui-sref="index.settings.picture">Thay đổi ảnh đại diện</a>
-					</li>
-					<li class="divider"></li>
-					<li>
-						<a ui-sref="index.signout">Đăng xuất</a>
-					</li>
-				</ul>
-			</li>
-		</ul>
-	</nav>
-	<div ui-view="" class="page-content"></div>
-	<a class="scrollup"><i class="fa fa-angle-up"></i></a>
-	<div id="modal-signin" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button id="close-button" type="button" class="close" data-dismiss="modal" aria-label="Close">
+	</div>
+	<!-- /sidebar -->
+	<div id="main">
+		<a class="side-nav-btn fa fa-bars" data-toggle="tooltip" title="Mở trình đơn bên cạnh" ng-click="vm.openNav()"></a>
+		<nav class="nav navbar-default" role="navigation">
+			<ul class="nav col-lg-3 col-md-3 col-sm-6 col-xs-10 pull-right" ng-hide="$root.userInfo" style="display:inline-flex">
+<li ui-sref-active="active">
+	<a ui-sref="index.signup">Đăng ký</a>
+</li>
+<li class="divider-vertical"></li>
+<li ui-sref-active="active">
+	<a id="sign_in" data-toggle="modal" data-target="#modal-signin">Đăng nhập</a>
+</li>
+</ul>
+<ul class="nav col-lg-4 col-md-4 col-sm-6 col-xs-10 pull-right" ng-if="$root.userInfo">
+	<li class="usernav-dropdown" dropdown style="width:70%">
+<a class="dropdown-toggle user-header-dropdown-toggle" dropdown-toggle role="button">
+	<img ng-src="{{$root.userInfo.profileImageURLFull}}" alt="{{$root.userInfo.displayName}}" class="header-profile-image" />
+	<span ng-bind="$root.userInfo.displayName"></span> <b class="caret"></b>
+</a>
+<ul class="dropdown-menu" role="menu">
+	<li ui-sref-active="active">
+		<a ui-sref="index.me">Thông tin cá nhân</a>
+	</li>
+	<li ui-sref-active="active">
+		<a ui-sref="index.settings.profile">Sửa thông tin cá nhân</a>
+	</li>
+	<li ui-sref-active="active">
+		<a ui-sref="index.settings.change_password">Đổi mật khẩu</a>
+	</li>
+	<li ui-sref-active="active">
+		<a ui-sref="index.settings.picture">Thay đổi ảnh đại diện</a>
+	</li>
+	<li class="divider"></li>
+	<li>
+		<a ui-sref="index.signout">Đăng xuất</a>
+	</li>
+</ul>
+</li>
+</ul>
+</nav>
+<div ui-view="" class="page-content"></div>
+<a class="scrollup"><i class="fa fa-angle-up"></i></a>
+<div id="modal-signin" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button id="close-button" type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 					</button>
-					<h3>Đăng nhập</h3>
-				</div>
-				<div class="modal-body">
-					<form novalidate>
-						<div class="form-group ">
-							<label for="name ">Tên đăng nhập:</label>
-							<input type="text" ng-model="vm.user.username" my-enter="vm.signin()" class="form-control " id="username " placeholder="Nhập tên đăng nhập">
-						</div>
-						<div class="form-group ">
-							<label for="password ">Mật khẩu:</label>
-							<input type="password" my-enter="vm.signin()" ng-model="vm.user.password " class="form-control " id="password " placeholder="Nhập mật khẩu">
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<!--<button type="button" data-dismiss="modal" class="btn btn-success">Xác nhận</button>-->
-					<div class="text-center">
-						<button type="submit" class="btn btn-primary" ng-click="vm.signin();" data-ng-disabled="vm.user.username === '' || vm.user.password === ''">Đăng nhập</button>
-						<a data-dismiss="modal">Hủy</a>
+				<h3>Đăng nhập</h3>
+			</div>
+			<div class="modal-body">
+				<form novalidate>
+					<div class="form-group ">
+						<label for="name ">Tên đăng nhập:</label>
+						<input type="text" ng-model="vm.user.username" my-enter="vm.signin()" class="form-control " id="username " placeholder="Nhập tên đăng nhập">
 					</div>
+					<div class="form-group ">
+						<label for="password ">Mật khẩu:</label>
+						<input type="password" my-enter="vm.signin()" ng-model="vm.user.password " class="form-control " id="password " placeholder="Nhập mật khẩu">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<!--<button type="button" data-dismiss="modal" class="btn btn-success">Xác nhận</button>-->
+				<div class="text-center">
+					<button type="submit" class="btn btn-primary" ng-click="vm.signin();" data-ng-disabled="vm.user.username === '' || vm.user.password === ''">Đăng nhập</button>
+					<a data-dismiss="modal">Hủy</a>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 </div>

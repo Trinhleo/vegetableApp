@@ -29,7 +29,10 @@
             'app.product',
             'app.production-item',
             'app.device-node',
-            'app.task-category'
+            'app.task-category',
+            'app.recipe',
+            'app.fertilizer',
+            'app.variety'
         ])
         .run(function ($rootScope, $state, $localStorage) {
             // Check authentication before changing state

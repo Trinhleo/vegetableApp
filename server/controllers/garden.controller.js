@@ -27,11 +27,13 @@ function listAllGardens(req, res) {
         var gardens = result;
         _.forEach(gardens, function (gd) {
             var g = gd;
-            if (req.decoded && (g.user._id.toString() === req.decoded._id.toString())) {
+            if (req.decoded && g.user && (g.user._id.toString() === req.decoded._id.toString())) {
                 g.isOwner = true;
             }
             g._doc.imgUrlFull = urlPrefix.concat(g.imgUrl);
-            g._doc.userHostProfileImageURL = urlPrefix.concat(gd.user.profileImageURL);
+            if (g.user) {
+                g._doc.userHostProfileImageURL = urlPrefix.concat(gd.user.profileImageURL);
+            }
             _.forEach(gd.productionItem, function (pi) {
                 pi._doc.imgUrlFull = urlPrefix.concat(pi.imgUrl);
             });
@@ -48,7 +50,8 @@ function listAllGardensUnApproved(req, res) {
         var gardens = result;
         _.forEach(gardens, function (gd) {
             var g = gd;
-            if (req.decoded && (g.user._id.toString() === req.decoded._id.toString())) {
+            console.log(g.user._id);
+            if (req.decoded && g.user && (g.user._id.toString() === req.decoded._id.toString())) {
                 g.isOwner = true;
             }
             g._doc.imgUrlFull = urlPrefix.concat(g.imgUrl);
@@ -69,11 +72,11 @@ function listAllGardensApproved(req, res) {
         var gardens = result;
         _.forEach(gardens, function (gd) {
             var g = gd;
-            if (req.decoded && (g.user._id.toString() === req.decoded._id.toString())) {
+            if (req.decoded && g.user && (g.user._id.toString() === req.decoded._id.toString())) {
                 g.isOwner = true;
             }
             g._doc.imgUrlFull = urlPrefix.concat(g.imgUrl);
-            g._doc.userHostProfileImageURL = urlPrefix.concat(gd.user.profileImageURL);
+            // g._doc.userHostProfileImageURL = urlPrefix.concat(gd.user.profileImageURL);
             _.forEach(gd.productionItem, function (pi) {
                 pi._doc.imgUrlFull = urlPrefix.concat(pi.imgUrl);
             });
@@ -151,7 +154,7 @@ function getGarden(req, res) {
         }
         var garden = result;
         garden._doc.imgUrlFull = urlPrefix.concat(garden.imgUrl);
-        garden._doc.userHostProfileImageURL = urlPrefix.concat(result.user.profileImageURL);
+        // garden._doc.userHostProfileImageURL = urlPrefix.concat(result.user.profileImageURL);
         _.forEach(garden.productionItem, function (pi) {
             pi._doc.imgUrlFull = urlPrefix.concat(pi.imgUrl);
         });

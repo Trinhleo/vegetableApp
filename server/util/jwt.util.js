@@ -1,7 +1,7 @@
 'use strict';
 var jwt = require('jwt-simple'); // used to create, sign, and verify tokens
 const secretKey = "hnkt";
-var expires = Date.now() + 86400000; // expires in 24 hours
+var expires = Date.now() + 43200000; // expires in 12 hours
 
 module.exports = {
     signToken: sign,

@@ -30,6 +30,10 @@ var ProductionItemSchema = new Schema({
     imgUrl: {
         type: String,
         default: '/img/production-item/no-image.svg'
+    },
+    unitPrice:{
+        type: Number,
+        default: 0
     }
 });
 ProductionItemSchema.index({ "name": 1}, { unique: true });

@@ -1,0 +1,25 @@
+<section>
+    <div class="page-header">
+        <h1>Giống</h1>
+    </div>
+    <div style="margin: 20px">
+        <button ng-show="$root.userInfo" class="btn btn-primary glyphicon glyphicon-plus" data-toggle="tooltip" title="Thêm đối tượng mới" class="btn btn-primary"
+            data-ui-sref="index.variety-add">
+        </button>
+    </div>
+    <!--<md-input-container>
+        <input class="form-control col-md-4" type="text" ng-model="vm.search" placeholder="Tìm kiếm" ng-change="vm.figureOutItemsToDisplay()"
+        />
+    </md-input-container>-->
+    <div class="col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        <md-card data-ng-repeat="variety in vm.varieties" layout-align="center center">
+            <a data-ui-sref="index.variety-details({ varietyId: variety._id })">
+                <h4 style="color:green" class="text-center">{{variety.name}}</h4>
+                <small class="list-group-item-text">
+      <span>Tạo lúc: {{variety.created | date:'short'}}</span>
+  </small>
+                <div class="img_container"><img alt="" class="img-responsive" ng-src="{{variety.imgUrlFull}}" /></div>
+            </a>
+        </md-card>
+    </div>
+</section>

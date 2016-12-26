@@ -1,0 +1,23 @@
+<section>
+    <div class="page-header">
+        <h1 data-ng-bind="vm.variety.name"></h1>
+    </div>
+    <div style="margin: 20px">
+        <button data-toggle="tooltip" title="Danh sách giống" class="btn btn-primary glyphicon glyphicon-th-list"
+            data-ui-sref="index.variety">
+        </button>
+    </div>
+    <div class="pull-right">
+        <button class="btn btn-primary glyphicon glyphicon-edit" data-ui-sref="index.variety-edit({ varietyId: vm.variety._id })">
+        </button>
+        <button class="btn btn-primary glyphicon glyphicon-trash" data-ng-click="vm.remove()">
+        </button>
+    </div>
+    <small>
+    <em class="text-muted">
+      Tạo lúc
+      <span data-ng-bind="vm.variety.created | date:'short'"></span>
+    </em>
+  </small>
+    <div class="img_container"><img alt="" class="img-responsive text-center" ng-src="{{vm.variety.imgUrlFull}}" /></div>
+</section>

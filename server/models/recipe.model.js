@@ -14,11 +14,30 @@ var RecipeSchema = new Schema({
         type: String,
         default: ''
     },
+    productionItem: {
+        type: Schema.ObjectId,
+        ref: 'ProductionItem'
+    },
     wateringRate: {
         type: Number
     },
-    fertilizeringRate: {
-        type: Number
+    fertilizer: [{
+        name: {
+            type: Schema.ObjectId,
+            ref: 'Fertilizer'
+        },
+        quantity: {
+            type: Number,
+            default: 0
+        }
+    }],
+    time: {
+        type: Number,
+        default: 0
+    },
+    productRate: {
+        type: Number,
+        default: 0
     },
     created: {
         type: Date,
@@ -28,6 +47,10 @@ var RecipeSchema = new Schema({
         type: Date,
     },
     isDeleted: {
+        type: Boolean,
+        default: false
+    },
+    deleteDate: {
         type: Date
     }
 });

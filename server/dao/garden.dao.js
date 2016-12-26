@@ -14,7 +14,7 @@ module.exports = {
 };
 
 function listAllGardens(query, callback) {
-    Garden.find(query).sort('-created').populate('user', 'displayName profileImageURL').populate('productionItem').populate('deviceNode', 'name description').exec(function (err, result) {
+    Garden.find(query).sort('-created').populate('user', '_id displayName profileImageURL').populate('productionItem').populate('deviceNode', 'name description').exec(function (err, result) {
         if (err) {
             return callback(err, null);
         }
@@ -23,7 +23,7 @@ function listAllGardens(query, callback) {
 }
 
 function listAllGardensByUserId(userId, callback) {
-    Garden.find({ user: userId, isDelete: false }).sort('-created').populate('user', 'displayName profileImageURL').populate('productionItem').populate('deviceNode', 'name description').exec(function (err, result) {
+    Garden.find({ user: userId, isDelete: false }).sort('-created').populate('user', '_id displayName profileImageURL').populate('productionItem').populate('deviceNode', 'name description').exec(function (err, result) {
         if (err) {
             return callback(err, null);
         }

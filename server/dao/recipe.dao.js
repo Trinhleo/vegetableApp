@@ -1,6 +1,6 @@
 
 var mongoose = require('mongoose');
-require('../models/Recipe.model.js');
+require('../models/recipe.model.js');
 var Recipe = mongoose.model('Recipe');
 
 module.exports = {
@@ -40,9 +40,9 @@ function readRecipe(query, callback) {
 }
 
 function createRecipe(info, callback) {
-    var Recipe = new Recipe(info);
+    var recipe = new Recipe(info);
 
-    Recipe.save(function (err, result) {
+    recipe.save(function (err, result) {
         if (err) {
             return callback(err, null);
         }

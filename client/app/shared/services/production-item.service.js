@@ -10,7 +10,8 @@
             getProductionItem: getProductionItem,
             createProductionItem: createProductionItem,
             updateProductionItem: updateProductionItem,
-            deleteProductionItem: deleteProductionItem
+            deleteProductionItem: deleteProductionItem,
+            getVariety : getVariety
         };
 
         function listAllProductionItems() {
@@ -29,6 +30,16 @@
                 deferred.resolve(res.data);
             }, function (err) {
                 deferred.reject(err);
+            });
+            return deferred.promise;
+        };
+
+          function getVariety(piId) {
+            var deferred = $q.defer();
+            $http.get(apiUrl + '/' + piId + '/variety').then(function (res) {
+                deferred.resolve(res.data);
+            }, function (err) {
+                deferred.reject(err.data);
             });
             return deferred.promise;
         };

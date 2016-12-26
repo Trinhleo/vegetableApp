@@ -1,0 +1,30 @@
+<section>
+    <h2 style="text-align: center">Chỉnh sửa công thức sản xuất</h2>
+    <div class="">
+        <div class="container col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <form name="addForm" class="form-horizontal" role="form" novalidate>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="name">Tên:</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="name" class="form-control" ng-model="vm.formData.name" id="name" placeholder="Nhập tên" required>
+                    </div>
+                    <!--<div ng-messages="addForm.name.$error" role="alert">
+                        <p class="help-block error-text" ng-message="required">Tên là bắt buộc.</p>
+                    </div>-->
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="description">Mô tả:</label>
+                    <div class="col-sm-10">
+                        <textarea type="text" name="description" class="form-control" id="description" placeholder="Nhập mô tả" ng-model="vm.formData.description">
+							</textarea>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="text-center">
+                        <button type="submit" ng-disabled="addForm.$invalid" class="btn btn-primary" ng-click="vm.update();">Cập nhật</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

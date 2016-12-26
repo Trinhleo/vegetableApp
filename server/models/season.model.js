@@ -30,6 +30,14 @@ var SeasonSchema = new Schema({
         ref: 'ProductionItem',
         require: true
     },
+    recipe: {
+        type: Schema.ObjectId,
+        ref: 'Recipe'
+    },
+    variety: {
+        type: Schema.ObjectId,
+        ref: 'Variety'
+    },
     startDate: {
         type: Date
     },

@@ -14,9 +14,9 @@
 	<link rel="stylesheet" href="app/components/product/product.css">
 	<link rel="stylesheet" href="app/components/season/season.css">
 	<link rel="stylesheet" href="app/shared/directives/map/map.directive.css">
+	<link rel="stylesheet" href="app/shared/directives/pro-table/pro-pagination/paginnation.css">
 	<link rel="stylesheet" href="app/shared/directives/pro-table/pro-body/pro-body.css">
 	<link rel="stylesheet" href="app/shared/directives/pro-table/pro-header/pro-header.css">
-	<link rel="stylesheet" href="app/shared/directives/pro-table/pro-pagination/paginnation.css">
 	<!-- endinject -->
 	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.min.css">
@@ -69,16 +69,19 @@
 <script src="app/components/core/core.module.js"></script>
 <script src="app/components/dashboard/dashboard.module.js"></script>
 <script src="app/components/device-node/device-node.module.js"></script>
+<script src="app/components/fertilizer/fertilizer.module.js"></script>
 <script src="app/components/gallery/gallery.module.js"></script>
 <script src="app/components/garden/garden.module.js"></script>
 <script src="app/components/product/product.module.js"></script>
 <script src="app/components/production-item/production-item.module.js"></script>
+<script src="app/components/recipe/recipe.module.js"></script>
 <script src="app/components/season/season.module.js"></script>
 <script src="app/components/task/task.module.js"></script>
 <script src="app/components/task-category/task-category.module.js"></script>
 <script src="app/components/user/user.module.js"></script>
-<script src="app/components/auth/signin/signin.module.js"></script>
+<script src="app/components/variety/variety.module.js"></script>
 <script src="app/components/auth/signout/signout.module.js"></script>
+<script src="app/components/auth/signin/signin.module.js"></script>
 <script src="app/components/auth/signup/signup.module.js"></script>
 <script src="app/components/user/settings/user-setting.module.js"></script>
 <script src="app/components/user/admin/user-manage.module.js"></script>
@@ -89,6 +92,10 @@
 <script src="app/components/device-node/device-node-details.controller.js"></script>
 <script src="app/components/device-node/device-node-edit.controller.js"></script>
 <script src="app/components/device-node/device-node.controller.js"></script>
+<script src="app/components/fertilizer/fertilizer-add.controller.js"></script>
+<script src="app/components/fertilizer/fertilizer-details.controller.js"></script>
+<script src="app/components/fertilizer/fertilizer-edit.controller.js"></script>
+<script src="app/components/fertilizer/fertilizer.controller.js"></script>
 <script src="app/components/gallery/gallery.controller.js"></script>
 <script src="app/components/gallery/upload-image.controller.js"></script>
 <script src="app/components/garden/approve-garden.controller.js"></script>
@@ -102,6 +109,10 @@
 <script src="app/components/production-item/production-item-details.controller.js"></script>
 <script src="app/components/production-item/production-item-edit.controller.js"></script>
 <script src="app/components/production-item/production-item.controller.js"></script>
+<script src="app/components/recipe/recipe-add.controller.js"></script>
+<script src="app/components/recipe/recipe-details.controller.js"></script>
+<script src="app/components/recipe/recipe-edit.controller.js"></script>
+<script src="app/components/recipe/recipe.controller.js"></script>
 <script src="app/components/season/season-add.controller.js"></script>
 <script src="app/components/season/season-details.controller.js"></script>
 <script src="app/components/season/season-edit.controller.js"></script>
@@ -117,8 +128,12 @@
 <script src="app/components/task-category/task-category-edit.controller.js"></script>
 <script src="app/components/task-category/task-category.controller.js"></script>
 <script src="app/components/user/user.controller.js"></script>
-<script src="app/components/auth/signin/signin.controller.js"></script>
+<script src="app/components/variety/variety-add.controller.js"></script>
+<script src="app/components/variety/variety-details.controller.js"></script>
+<script src="app/components/variety/variety-edit.controller.js"></script>
+<script src="app/components/variety/variety.controller.js"></script>
 <script src="app/components/auth/signout/signout.controller.js"></script>
+<script src="app/components/auth/signin/signin.controller.js"></script>
 <script src="app/components/auth/signup/signup.controller.js"></script>
 <script src="app/components/user/settings/change-password.controller.js"></script>
 <script src="app/components/user/settings/change-profile-picture.controller.js"></script>
@@ -130,16 +145,19 @@
 <script src="app/components/core/core.router.js"></script>
 <script src="app/components/dashboard/dashboard.router.js"></script>
 <script src="app/components/device-node/device-node.router.js"></script>
+<script src="app/components/fertilizer/fertilizer.router.js"></script>
 <script src="app/components/gallery/gallery.router.js"></script>
 <script src="app/components/garden/garden.router.js"></script>
 <script src="app/components/product/product.router.js"></script>
 <script src="app/components/production-item/production-item.router.js"></script>
+<script src="app/components/recipe/recipe.router.js"></script>
 <script src="app/components/season/season.router.js"></script>
 <script src="app/components/task/task.router.js"></script>
 <script src="app/components/task-category/task-category.router.js"></script>
 <script src="app/components/user/user.router.js"></script>
-<script src="app/components/auth/signin/signin.router.js"></script>
+<script src="app/components/variety/variety.router.js"></script>
 <script src="app/components/auth/signout/signout.router.js"></script>
+<script src="app/components/auth/signin/signin.router.js"></script>
 <script src="app/components/auth/signup/signup.router.js"></script>
 <script src="app/components/user/settings/user-setting.router.js"></script>
 <script src="app/components/user/admin/user-manage.router.js"></script>
@@ -149,23 +167,27 @@
 <script src="app/shared/services/auth.service.js"></script>
 <script src="app/shared/services/chat.service.js"></script>
 <script src="app/shared/services/device-node.service.js"></script>
+<script src="app/shared/services/fertilizer.service.js"></script>
 <script src="app/shared/services/follow.service.js"></script>
 <script src="app/shared/services/gallery.service.js"></script>
 <script src="app/shared/services/garden.service.js"></script>
 <script src="app/shared/services/notification.service.js"></script>
+<script src="app/shared/services/price.service.js"></script>
 <script src="app/shared/services/product.service.js"></script>
 <script src="app/shared/services/production-item.service.js"></script>
+<script src="app/shared/services/recipe.service.js"></script>
 <script src="app/shared/services/season.service.js"></script>
 <script src="app/shared/services/task-category.service.js"></script>
 <script src="app/shared/services/task.service.js"></script>
 <script src="app/shared/services/user.service.js"></script>
+<script src="app/shared/services/variety.service.js"></script>
 <script src="app/shared/directives/map/map.directive.js"></script>
 <script src="app/shared/directives/my-enter/my-enter.directive.js"></script>
 <script src="app/shared/directives/pro-table/pro-table.directive.js"></script>
 <script src="app/shared/directives/upload/upload.directive.js"></script>
+<script src="app/shared/directives/pro-table/pro-pagination/pagination.directive.js"></script>
 <script src="app/shared/directives/pro-table/pro-body/pro-body.directive.js"></script>
 <script src="app/shared/directives/pro-table/pro-header/pro-header.directive.js"></script>
-<script src="app/shared/directives/pro-table/pro-pagination/pagination.directive.js"></script>
 <!-- endinject -->
 
 </html>
