@@ -23,7 +23,7 @@
         }
         loadSeasons();
         function loadSeasons() {
-            SeasonService.loadSeasons(vm.gardenId).then(
+            GardenService.loadSeasons(vm.gardenId).then(
                 function (res) {
                     vm.seasons = res;
                 },

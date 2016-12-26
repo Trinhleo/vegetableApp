@@ -7,7 +7,7 @@ module.exports = function () {
     router.get('/', productionItemController.listAllProductionItems);
     router.post('/', authMiddlewares.authentication, authMiddlewares.isAdmin, productionItemController.createProductionItem);
     router.get('/:productionItemId', productionItemController.getProductionItem);
-    router.get('/:productionItemId/variety', varietyController.);
+    router.get('/:productionItemId/variety', varietyController.listVarietiesByPid);
     router.put('/:productionItemId', authMiddlewares.authentication, authMiddlewares.isAdmin, productionItemController.updateProductionItem);
     router.delete('/:productionItemId', authMiddlewares.authentication, authMiddlewares.isAdmin, productionItemController.deleteProductionItem);
     return router;

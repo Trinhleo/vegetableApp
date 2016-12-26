@@ -1,8 +1,8 @@
 (function () {
     angular.module('app.season')
         .controller('AddSeasonController', AddSeasonController);
-    AddSeasonController.$inject = ['$state', 'toastr', 'SeasonService', 'GardenService', '$rootScope', '$stateParams', '$filter', '$localStorage', '$q', '$log', '$timeout'];
-    function AddSeasonController($state, toastr, SeasonService, GardenService, $rootScope, $stateParams, $filter, $localStorage, $q, $log, $timeout) {
+    AddSeasonController.$inject = ['$scope', '$state', 'toastr', 'SeasonService', 'GardenService', '$rootScope', '$stateParams', '$filter', '$localStorage', '$q', '$log', '$timeout'];
+    function AddSeasonController($scope, $state, toastr, SeasonService, GardenService, $rootScope, $stateParams, $filter, $localStorage, $q, $log, $timeout) {
         var vm = this;
         vm.gardenId = $stateParams.gardenId;
         vm.garden = $rootScope.garden || {};
@@ -19,6 +19,11 @@
         vm.season = {};
         vm.dateNow = new Date();
 
+        $scope.$watch(vm.season.productionItem, function (data) {
+            if(data){
+            vm.season.name = data + Date.now();
+            }
+        }, true)
         GardenService.getGarden(vm.gardenId).then(
             function (res) {
                 vm.garden = res;

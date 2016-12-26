@@ -7,6 +7,7 @@
         var apiUrl = appConfigs.baseUrl.concat(appConfigs.port).concat(appConfigs.baseApiUrl).concat("varieties");
         return {
             listAllVarieties: listAllVarieties,
+            listRecipe: listRecipe,
             getVariety: getVariety,
             createVariety: createVariety,
             updateVariety: updateVariety,
@@ -32,7 +33,17 @@
             });
             return deferred.promise;
         };
-        
+
+        function listRecipe(piId) {
+            var deferred = $q.defer();
+            $http.get(apiUrl + '/' + piId + '/recipe').then(function (res) {
+                deferred.resolve(res.data);
+            }, function (err) {
+                deferred.reject(err.data);
+            });
+            return deferred.promise;
+        };
+
 
         function createVariety(data) {
             var deferred = $q.defer();
@@ -55,7 +66,7 @@
         };
 
         function deleteVariety(piId) {
-             var deferred = $q.defer();
+            var deferred = $q.defer();
             $http.delete(apiUrl + '/' + piId).then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {

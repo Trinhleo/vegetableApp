@@ -1,6 +1,7 @@
 var VarietyDao = require('./../dao/variety.dao');
 module.exports = {
     listAllVarieties: listAllVarieties,
+    listVarietiesByPid: listVarietiesByPid,
     getVariety: getVariety,
     createVariety: createVariety,
     updateVariety: updateVariety,

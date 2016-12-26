@@ -14,9 +14,9 @@ var RecipeSchema = new Schema({
         type: String,
         default: ''
     },
-    productionItem: {
+   variety: {
         type: Schema.ObjectId,
-        ref: 'ProductionItem'
+        ref: 'Variety'
     },
     wateringRate: {
         type: Number

@@ -1,15 +1,24 @@
 var RecipeDao = require('./../dao/recipe.dao');
 module.exports = {
     listAllRecipes: listAllRecipes,
+    listRecipesByPid: listRecipesByPid,
     getRecipe: getRecipe,
     createRecipe: createRecipe,
     updateRecipe: updateRecipe,
-    deleteRecipe: deleteRecipe,
-    getRecipeByProductionItem: getRecipeByProductionItem
+    deleteRecipe: deleteRecipe
 };
 
 function listAllRecipes(req, res) {
     RecipeDao.listRecipes({ isDeleted: false }, cb);
+    function cb(err, result) {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.status(200).send(result);
+    }
+}
+function listRecipesByPid(req, res) {
+    RecipeDao.listRecipes({ variety: req.params.variety, isDeleted: false }, cb);
     function cb(err, result) {
         if (err) {
             return res.status(500).send(err);
@@ -36,24 +45,7 @@ function getRecipe(req, res) {
         res.status(200).send(result);
     }
 }
-function getRecipeByProductionItem(req, res) {
-    var pId = req.params.recipeId;
-    if (!RecipeId) {
-        return res.status(400).send({
-            errCode: 0,
-            errMsg: "Không tìm thấy!"
-        });
-    }
 
-    RecipeDao.readRecipe({ productionItem: pId, isDeleted: false }, cb);
-
-    function cb(err, result) {
-        if (err) {
-            return res.status(400).send(err);
-        }
-        res.status(200).send(result);
-    }
-}
 function createRecipe(req, res) {
     if (!req.body.name) {
         return res.status(500).send({
