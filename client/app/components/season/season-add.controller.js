@@ -1,8 +1,8 @@
 (function () {
     angular.module('app.season')
         .controller('AddSeasonController', AddSeasonController);
-    AddSeasonController.$inject = ['$scope', '$state', 'toastr', 'SeasonService', 'GardenService', '$rootScope', '$stateParams', '$filter', '$localStorage', '$q', '$log', '$timeout'];
-    function AddSeasonController($scope, $state, toastr, SeasonService, GardenService, $rootScope, $stateParams, $filter, $localStorage, $q, $log, $timeout) {
+    AddSeasonController.$inject = ['ProductionItemService', 'VarietyService', '$scope', '$state', 'toastr', 'SeasonService', 'GardenService', '$rootScope', '$stateParams', '$filter', '$localStorage', '$q', '$log', '$timeout'];
+    function AddSeasonController(ProductionItemService, VarietyService, $scope, $state, toastr, SeasonService, GardenService, $rootScope, $stateParams, $filter, $localStorage, $q, $log, $timeout) {
         var vm = this;
         vm.gardenId = $stateParams.gardenId;
         vm.garden = $rootScope.garden || {};
@@ -18,10 +18,49 @@
         vm.createSeason = createSeason;
         vm.season = {};
         vm.dateNow = new Date();
+        vm.recipes = [];
+        vm.varieties = [];
+        vm.getRecipes = getRecipes;
+        vm.getVarieties = getVarieties;
+        vm.cancel = cancel;
+        $(document).ready(function () {
+            $('#productionItem').select2({
+                placeholder: "Chọn đối tượng sản xuất",
+                allowClear: true,
+                language: 'vi'
+            });
+            $('#productionItem').on('change', function () {
+                $timeout(function () {
+                    vm.season.productionItem = $("#productionItem").val()
+                    vm.getVarieties(vm.season.productionItem);
+                });
+            });
+            $('#variety').select2({
+                placeholder: "Chọn giống",
+                allowClear: true,
+                language: 'vi'
+            });
+            $('#variety').on('change', function () {
+                $timeout(function () {
+                    vm.season.variety = $("#variety").val()
+                    vm.getRecipes(vm.season.variety);
+                });
+            });
+            $('#recipe').select2({
+                placeholder: "Chọn công thức sản xuất",
+                allowClear: true,
+                language: 'vi'
+            });
+            $('#recipe').on('change', function () {
+                $timeout(function () {
+                    vm.season.recipe = $("#recipe").val()
+                });
+            });
+        })
 
         $scope.$watch(vm.season.productionItem, function (data) {
-            if(data){
-            vm.season.name = data + Date.now();
+            if (data) {
+                vm.season.name = data + Date.now();
             }
         }, true)
         GardenService.getGarden(vm.gardenId).then(
@@ -32,6 +71,7 @@
                 vm.contentLoad = true;
                 $rootScope.garden = vm.garden;
                 console.log(vm.garden.isOwner);
+
             },
             function (err) {
 
@@ -47,6 +87,29 @@
          * Search for productionItems... use $timeout to simulate
          * remote dataservice call.
          */
+        function cancel() {
+            $state.go('index.season.list');
+        }
+        function getVarieties(piId) {
+            ProductionItemService.getVariety(piId).then(
+                function (res) {
+                    vm.varieties = res;
+                },
+                function (err) {
+                    toastr.error(err, 'Lỗi!')
+                })
+        }
+
+        function getRecipes(vaId) {
+            VarietyService.listRecipe(vaId).then(
+                function (res) {
+                    vm.recipes = res
+                },
+                function (err) {
+                    toastr.error(err, 'Lỗi!')
+                })
+        }
+
         function querySearch(query) {
             console.log(query)
             var results = query ? vm.productionItems.filter(createFilterFor(query)) : vm.productionItems;
@@ -94,7 +157,6 @@
 
         // tạo mùa vụ
         function createSeason() {
-            vm.season.productionItem = vm.selectedItem._id;
             vm.season.garden = vm.garden._id;
             SeasonService.createSeason(vm.season).then(
                 function (res) {
@@ -115,7 +177,7 @@
                     if (err.code === 11000) {
                         msg = 'Tên vườn bị trùng'
                     } else {
-                        msg = 'Lỗi hệ thống';
+                        msg = err.errMsg;
                     }
                     toastr.error(msg, 'Lỗi');
                 });

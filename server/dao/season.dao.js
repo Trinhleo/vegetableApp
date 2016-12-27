@@ -58,7 +58,7 @@ function updateSeason(seasonId, info, callback) {
         if (err) {
             return callback(err, null);
         }
-        callback(null, true);
+        callback(null, result);
     });
 }
 
@@ -66,17 +66,17 @@ function updateSeasonByQuery(query, info, callback) {
 
     Season.update(query, info, function (err, result) {
         if (err) {
-            return callback(err, null);
+            return callback(err);
         }
-        callback(null, true);
+        callback(null, result);
     });
 }
 
 function deleteSeason(seasonId, callback) {
     Season.findByIdAndRemove(seasonId, function (err, result) {
         if (err) {
-            return callback(err, null);
+            return callback(err);
         }
-        callback(null, true);
+        callback(null, result);
     });
 }

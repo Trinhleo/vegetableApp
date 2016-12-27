@@ -19,7 +19,7 @@ function listAllVarieties(req, res) {
 }
 
 function listVarietiesByPid(req, res) {
-    VarietyDao.listAllVarieties({ productionItem: req.params.productionId, isDeleted: false }, cb);
+    VarietyDao.listAllVarieties({ productionItem: req.params.productionItemId, isDeleted: false }, cb);
     function cb(err, result) {
         if (err) {
             return res.status(500).send(err);

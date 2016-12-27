@@ -14,19 +14,11 @@
                 <label class="control-label" for="name">Tên mùa vụ</label>
                 <input name="name" type="text" ng-change="vm.formChange=true" ng-model="vm.season.name" id="name" class="form-control" placeholder="Tên mùa vụ"
                     required>
-                <div ng-messages="vm.form.gardenForm.name.$error" role="alert">
-                    <p class="help-block error-text" ng-message="required">Tên mùa vụ là bắt buộc.</p>
-                </div>
             </div>
             <div class="form-group" show-errors>
                 <label class="control-label" for="seedQuantity">Số lượng giống:</label>
                 <input name="seedQuantity" ng-change="vm.formChange=true" type="number" ng-model="vm.season.seedQuantity" id="seedQuantity"
                     class="form-control" ng-required min="0" max="100000">
-                <div ng-messages="vm.form.gardenForm.name.$error" role="alert">
-                    <p class="help-block error-text" ng-message="required">Số lượng giống là bắt buộc.</p>
-                    <p class="help-block error-text" ng-message="min">Không được nhập số âm.</p>
-                    <p class="help-block error-text" ng-message="max">Chỉ được nhập tối đa là 100000.</p>
-                </div>
             </div>
             <div class="form-group">
                 <label class="control-label" for="statdate">Ngày bắt đầu</label>
@@ -50,9 +42,6 @@
  <button ng-click="vm.goBack()"  class="btn btn-default">
   Hủy
 </button>
-            </div>
-            <div ng-show="vm.error" class="text-danger">
-                <strong ng-bind="vm.error"></strong>
             </div>
         </fieldset>
     </form>

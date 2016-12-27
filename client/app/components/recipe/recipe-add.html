@@ -1,30 +1,140 @@
 <section>
     <h2 style="text-align: center">Thêm công thức sản xuất</h2>
-    <div class="">
-        <div class="container col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <form name="addForm" class="form-horizontal" role="form" novalidate>
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="name">Tên:</label>
-                    <div class="col-sm-10">
-                        <input type="text" name="name" class="form-control" ng-model="vm.formData.name" id="name" placeholder="Nhập tên" required>
-                    </div>
-                    <!--<div ng-messages="addForm.name.$error" role="alert">
+<div class="container row">
+    <form name="addForm" class="form-horizontal" role="form" novalidate>
+        <fieldset class="col-md-8">
+            <div class="form-group">
+                <label class="control-label col-lg-4 col-md-4 col-sm-4 col-xs-12" for="name">Tên: <span class="require">(*)</span></label>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <input type="text" name="name" class="form-control" ng-model="vm.formData.name" id="name" placeholder="Nhập tên" required>
+                </div>
+                <!--<div ng-messages="addForm.name.$error" role="alert">
                         <p class="help-block error-text" ng-message="required">Tên là bắt buộc.</p>
                     </div>-->
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="description">Mô tả:</label>
-                    <div class="col-sm-10">
-                        <textarea type="text" name="description" class="form-control" id="description" placeholder="Nhập mô tả" ng-model="vm.formData.description">
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-4 col-md-4 col-sm-4 col-xs-12" for="description">Mô tả:</label>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <textarea type="text" name="description" class="form-control" id="description" placeholder="Nhập mô tả" ng-model="vm.formData.description">
 							</textarea>
-                    </div>
                 </div>
-                <div class="form-group ">
-                    <div class="text-center">
-                        <button type="submit" ng-disabled="addForm.$invalid" class="btn btn-primary" ng-click="vm.addProductionItem();">Thêm</button>
-                    </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-4 col-md-4 col-sm-4 col-xs-12" for="variety">Giống: <span class="require">(*)</span></label>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <select name="variety" type="text" ng-model="vm.formData.variety" ng-options="v._id as v.name for v in vm.varieties track by v._id"
+                        id="variety" class="form-control" placeholder="Chọn phân bón" required>
+            </select>
                 </div>
-            </form>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-4 col-md-4 col-sm-4 col-xs-12" for="fertilizer">Phân bón: <span class="require">(*)</span></label>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <select name="fertilizer" multiple="multiple" type="text" ng-model="vm.formData.fertilizer" ng-options="f._id as f.name for f in vm.fertilizers track by f._id"
+                        id="fertilizer" class="form-control" placeholder="Chọn phân bón" required>
+            </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-4 col-md-4 col-sm-4 col-xs-12" for="wateringRate">Khối lượng nước tưới (m<sup>3</sup>/ngày): <span class="require">(*)</span></label>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <input type="number" min=0 name="wateringRate" class="form-control" ng-model="vm.formData.wateringRate" id="time" placeholder="Nhập thời gian canh tác"
+                        required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-4 col-md-4 col-sm-4 col-xs-12" for="time">Thời gian canh tác (ngày): <span class="require">(*)</span></label>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <input type="number" min=0 name="time" class="form-control" ng-model="vm.formData.time" id="time" placeholder="Nhập thời gian canh tác"
+                        required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-4 col-md-4 col-sm-4 col-xs-12" for="productRate">Năng suất (%): <span class="require">(*)</span></label>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <input type="number" min=0 name="productRate" class="form-control" ng-model="vm.formData.productRate" id="productRate" placeholder="Nhập năng suất canh tác"
+                        required>
+                </div>
+            </div>
+            <div class="form-group ">
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary" ng-click="vm.addRecipe();">Thêm</button>
+                    <button ng-click="vm.cancel()" class="btn btn-default">Hủy</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    <!--<label class="control-label col-lg-4 col-md-4 col-sm-4 col-xs-12" for="description">Danh sách phân bón:</label>
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+        <form class="form-horizontal" novalidate>
+            <div class="form-body">
+                <button type="button" class="btn btn-success fa fa-plus" title="Thêm phân bón" data-toggle="modal" data-target="#modal-choose-fertilizer"></button>
+            </div>
+            <div class="form-group">
+                <md-table-container>
+                    <table md-table md-progress="promise">
+                        <thead md-head md-order="'name'" md-on-reorder="vm.addedFertilizers">
+                            <tr md-row>
+                                <th md-column md-order-by="nameToLower"><strong>Tên</strong></th>
+                                <th md-column md-numeric><strong>Mô tả</strong></th>
+                                <th md-column md-numeric><strong>Khối lượng</strong></th>
+                                <th md-column md-numeric><strong>Tác vụ</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody md-body>
+                            <tr md-row md-select="fertilizer" md-select-id="name" md-auto-select data-ng-repeat="fertilizer in vm.addedFertilizers">
+                                <td md-cell><strong>{{fertilizer.name}}</strong></td>
+                                <td md-cell><strong>{{fertilizer.desciption}}</strong></td>
+                                <td md-cell><strong>{{fertilizer.quantity}}</strong></td>
+                                <td md-cell><button class="btn btn-alert fa fa-minus" data-ng-click="vm.removeFertilizer(fertilizer)"></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </md-table-container>
+                <div class="alert alert-warning text-center" data-ng-if="!vm.fertilizers.length">
+                    Không có dữ liệu!</a>
+                </div>-->
+    <!--</div>
+        </form>
+    </div>-->
+    <div id="modal-choose-fertilizer" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+        <div class="modal-dialog" style="width: 100%" >
+<div class="modal-content">
+    <div class="modal-header">
+        <h3>Chọn phân bón</h3>
+    </div>
+    <div class="modal-body">
+        <md-table-container>
+            <table md-table md-progress="promise">
+                <thead md-head md-order="'name'" md-on-reorder="vm.fertilizers">
+                    <tr md-row>
+                        <th md-column md-order-by="nameToLower"><strong>Tên</strong></th>
+                        <th md-column md-numeric><strong>Mô tả</strong></th>
+                        <th md-column md-numeric><strong>Khối lượng</strong></th>
+                        <th md-column md-numeric><strong>Tác vụ</strong></th>
+                    </tr>
+                </thead>
+                <tbody md-body>
+                    <tr md-row md-select="fertilizer" md-select-id="name" md-auto-select ng-repeat="fertilizer in vm.fertilizers track by $index">
+                        <td md-cell><strong>{{fertilizer.name}}</strong></td>
+                        <td md-cell><strong>{{fertilizer.desciption}}</strong></td>
+                        <td md-cell><strong><input type="number" class="form-control" data-ng-model="fertilizer.quantity"/></strong></td>
+                        <td md-cell><button class="btn btn-success fa fa-plus" data-ng-click="vm.addFertilizer(fertilizer)"></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+        <!--<pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage"
+      ng-change="vm.pageChanged()"></pagination>-->
+        <div class="alert alert-warning text-center" data-ng-if="!vm.fertilizers.length">
+            Không có dữ liệu!</a>
         </div>
     </div>
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-success">Thoát</button>
+    </div>
+</div>
+</div>
+</div>
+</div>
 </section>

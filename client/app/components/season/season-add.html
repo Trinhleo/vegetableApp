@@ -6,56 +6,34 @@
         <label style="margin-left:50px;font-size:2em" class="text-right">{{'Quản lý mùa vụ vườn rau: ' + $root.garden.name}}</label>
 </div>
 <h1>Tạo mùa vụ mới</h1>
-<form name="seasonForm" class="form-horizontal" ng-submit="vm.save(vm.form.seasonForm.$valid)" novalidate>
+<form name="seasonForm" class="form-horizontal" novalidate>
     <fieldset class="col-md-offset-3 col-md-6 col-md-offset-3">
-        <div class="form-group" ng-if="vm.garden">
-            <label class="control-label" for="vegetable">Đối tượng sản xuất:  <span class="require">(*)</span></label>
-            <md-autocomplete ng-disabled="vm.isDisabled" md-input-name="vegetable" md-no-cache="vm.noCache" md-selected-item="vm.selectedItem"
-                md-search-text-change="vm.searchTextChange(vm.searchText)" md-search-text="vm.searchText" md-selected-item-change="vm.selectedItemChange(item)"
-                md-items="item in vm.querySearch(vm.searchText)" md-item-text="item.name" md-min-length="0" placeholder="Chọn đối tượng sản xuất"
-                md-menu-class="autocomplete-custom-template">
-                <md-item-template>
-                    <span class="item-title">
-            <img width="46px" height="46px" ng-src="{{item.imgUrlFull}}"></img>
-            <span> {{item.name}} </span>
-                    </span>
-                    <span class="item-metadata">
-            <span class="item-metastat">
-              <strong>{{item.description}}</strong>
-            </span> </span>
-                </md-item-template>
-            </md-autocomplete>
-        </div>
         <div class="form-group" show-errors>
             <label class="control-label" for="name">Tên mùa vụ: <span class="require">(*)</span></label>
             <input name="name" type="text" ng-model="vm.season.name" id="name" class="form-control" placeholder="Tên mùa vụ" required>
-            <div ng-messages="vm.form.gardenForm.name.$error" role="alert">
-                <p class="help-block error-text" ng-message="required">Tên mùa vụ là bắt buộc.</p>
-            </div>
         </div>
-        <div class="form-group" show-errors>
+        <div class="form-group">
+            <label class="control-label" for="name">Đối tượng sản xuất: <span class="require">(*)</span></label>
+            <select name="productionItem" type="text" ng-model="vm.season.productionItem" ng-options="pi._id as pi.name for pi in vm.productionItems track by pi._id"
+                id="productionItem" class="form-control" placeholder="Chọn đối tượng sản xuất" required>
+            </select>
+        </div>
+        <div class="form-group">
             <label class="control-label" for="variety">Giống: <span class="require">(*)</span></label>
-            <input name="name" type="text" ng-model="vm.season.variety" id="variety" class="form-control" placeholder="Tên mùa vụ" required>
-            <div ng-messages="vm.form.gardenForm.name.$error" role="alert">
-                <p class="help-block error-text" ng-message="required">Giống là bắt buộc.</p>
-            </div>
+            <select name="variety" type="text" ng-model="vm.season.variety" ng-options="va._id as va.name for va in vm.varieties track by va._id"
+                id="variety" class="form-control" placeholder="Chọn giống" required>
+            </select>
         </div>
-        <div class="form-group" show-errors>
+        <div class="form-group">
             <label class="control-label" for="recipe">Công thức sản xuất: <span class="require">(*)</span></label>
-            <input name="name" type="text" ng-model="vm.season.recipe" id="recipe" class="form-control" placeholder="Tên mùa vụ" required>
-            <div ng-messages="vm.form.gardenForm.name.$error" role="alert">
-                <p class="help-block error-text" ng-message="required">Công thức sản xuất là bắt buộc.</p>
-            </div>
+            <select name="recipe" type="text" ng-model="vm.season.recipe" ng-options="re._id as re.name for re in vm.recipes track by re._id" id="recipe"
+                class="form-control" placeholder="Chọn công thức sản xuất">
+            </select>
         </div>
         <div class="form-group" show-errors>
             <label class="control-label" for="seedQuantity">Số lượng giống:  <span class="require">(*)</span></label>
             <input name="seedQuantity" type="number" ng-model="vm.season.seedQuantity" id="seedQuantity" class="form-control" ng-required
                 min="0" max="100000">
-            <div ng-messages="vm.form.gardenForm.name.$error" role="alert">
-                <p class="help-block error-text" ng-message="required">Số lượng giống là bắt buộc.</p>
-                <p class="help-block error-text" ng-message="min">Không được nhập số âm.</p>
-                <p class="help-block error-text" ng-message="max">Chỉ được nhập tối đa là 100000.</p>
-            </div>
         </div>
         <div class="form-group">
             <label class="control-label" for="statdate">Ngày bắt đầu </label>
@@ -71,17 +49,9 @@
             </md-datepicker>
             <!-- <span ng-show="vm.season._id">{{vm.season.endDate| date:'short'}}</span> -->
         </div>
-
         <div class="form-group">
-            <button ng-click="vm.createSeason()" type="submit" class="btn btn-primary" ng-disabled="seasonForm.name.$invalid||seasonForm.vegetable.$invalid || seasonForm.seedQuantity.$invalid||vseasonForm.enddate.$invalid||!vm.selectedItem">
-  Tạo
-</button>
-            <button ui-sref="index.season.list" type="submit" class="btn btn-default">
-  Hủy
-</button>
-        </div>
-        <div ng-show="vm.error" class="text-danger">
-            <strong ng-bind="vm.error"></strong>
+            <button ng-click="vm.createSeason();" class="btn btn-primary">Tạo</button>
+            <button ng-click="vm.cancel()" class="btn btn-default">Hủy</button>
         </div>
     </fieldset>
 </form>

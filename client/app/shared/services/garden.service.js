@@ -62,6 +62,7 @@
             }, function (err) {
                 deferred.reject(err.data);
             });
+            return deferred.promise;
         }
 
         function getGarden(id) {

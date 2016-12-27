@@ -14,7 +14,7 @@ var RecipeSchema = new Schema({
         type: String,
         default: ''
     },
-   variety: {
+    variety: {
         type: Schema.ObjectId,
         ref: 'Variety'
     },
@@ -22,14 +22,8 @@ var RecipeSchema = new Schema({
         type: Number
     },
     fertilizer: [{
-        name: {
-            type: Schema.ObjectId,
-            ref: 'Fertilizer'
-        },
-        quantity: {
-            type: Number,
-            default: 0
-        }
+        type: Schema.ObjectId,
+        ref: 'Fertilizer'
     }],
     time: {
         type: Number,

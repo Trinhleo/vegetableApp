@@ -10,6 +10,10 @@
         vm.formChange = false;
         vm.updateSeason = updateSeason;
         vm.goBack = goBack;
+        vm.recipes = [];
+        vm.varieties = [];
+        vm.getRecipes = getRecipes;
+        vm.getVarieties = getVarieties;
         if ($.isEmptyObject(vm.garden)) {
             GardenService.getGarden(vm.gardenId).then(
                 function (res) {
@@ -22,6 +26,24 @@
                     toatr.error(err.errMsg, 'Lỗi')
                 }
             )
+        } function getVarieties(piId) {
+            ProductionItemService.getVariety(piId).then(
+                function (res) {
+                    vm.varieties = res;
+                },
+                function (err) {
+                    toastr.error(err, 'Lỗi!')
+                })
+        }
+
+        function getRecipes(vaId) {
+            VarietyService.listRecipe(vaId).then(
+                function (res) {
+                    vm.recipes = res
+                },
+                function (err) {
+                    toastr.error(err, 'Lỗi!')
+                })
         }
 
         loadSeason();

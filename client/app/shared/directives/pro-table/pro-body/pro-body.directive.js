@@ -33,7 +33,9 @@
             $scope.$watch('proBody', function (value) {
                 option = value;
                 vm.contentList = option.contentList;
+                console.log(vm.contentList);
                 vm.titleList = option.titleList;
+                console.log(vm.titleList)
                 vm.actionList = option.actionList;
                 vm.message = option.message;
                 if (vm.actionList !== undefined) {

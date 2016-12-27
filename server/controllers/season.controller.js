@@ -191,17 +191,17 @@ function createSeason(req, res) {
 
         console.log('approved', res.approved);
 
-        var seasonInfo = {
-            user: req.decoded._id,
-            name: req.body.name,
-            garden: req.body.garden,
-            productionItem: req.body.productionItem,
-            startDate: req.body.startDate || '',
-            endDate: req.body.endDate || '',
-            seedQuantity: req.body.seedQuantity
-        };
+        // var seasonInfo = {
+        //     user: req.decoded._id,
+        //     name: req.body.name,
+        //     garden: req.body.garden,
+        //     productionItem: req.body.productionItem,
+        //     startDate: req.body.startDate || '',
+        //     endDate: req.body.endDate || '',
+        //     seedQuantity: req.body.seedQuantity
+        // };
 
-        seasonDao.createSeason(seasonInfo, cb);
+        seasonDao.createSeason(req.body, cb);
         function cb(err, result) {
             if (err) {
                 return res.status(400).send(err);
@@ -264,7 +264,7 @@ function deleteSeason(req, res) {
                 errMsg: "Bạn không phải là chủ mùa vụ!"
             });
         }
-        seasonDao.updateSeason(seasonId, { isDeleted: true, deleteDate: new Date() });
+        seasonDao.updateSeason(seasonId, { isDeleted: true, deleteDate: new Date() }, cb);
 
         function cb(err, result) {
             if (err) {

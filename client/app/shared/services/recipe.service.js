@@ -2,8 +2,8 @@
     angular.module('app.services')
         .factory('RecipeService', RecipeService);
 
-    RecipeService.$inject = ['$q', '$http', 'appConfigs', '$localStorage'];
-    function RecipeService($q, $http, appConfigs, $localStorage) {
+    RecipeService.$inject = ['$timeout', '$q', '$http', 'appConfigs', '$localStorage'];
+    function RecipeService($timeout, $q, $http, appConfigs, $localStorage) {
         var apiUrl = appConfigs.baseUrl.concat(appConfigs.port).concat(appConfigs.baseApiUrl).concat("recipes");
         return {
             listAllRecipes: listAllRecipes,
@@ -38,7 +38,7 @@
             $http.post(apiUrl + '/', data).then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {
-                deferred.reject(err);
+                deferred.reject(err.data);
             });
             return deferred.promise;
         }
@@ -54,7 +54,7 @@
         };
 
         function deleteRecipe(piId) {
-             var deferred = $q.defer();
+            var deferred = $q.defer();
             $http.delete(apiUrl + '/' + piId).then(function (res) {
                 deferred.resolve(res.data);
             }, function (err) {

@@ -20,7 +20,7 @@
                 allowClear: true,
                 language: 'vi'
             });
-            $('.production_item').on('change', function () {
+            $(".production_item").on('change', function () {
                 $timeout(function () {
                     vm.formData.productionItem = $(".production_item").val()
                 });

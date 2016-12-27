@@ -18,7 +18,7 @@ function listAllRecipes(req, res) {
     }
 }
 function listRecipesByPid(req, res) {
-    RecipeDao.listRecipes({ variety: req.params.variety, isDeleted: false }, cb);
+    RecipeDao.listRecipes({ variety: req.params.varietyId, isDeleted: false }, cb);
     function cb(err, result) {
         if (err) {
             return res.status(500).send(err);
@@ -29,7 +29,7 @@ function listRecipesByPid(req, res) {
 
 function getRecipe(req, res) {
     var recipeId = req.params.recipeId;
-    if (!RecipeId) {
+    if (!recipeId) {
         return res.status(400).send({
             errCode: 0,
             errMsg: "Không tìm thấy!"
@@ -55,7 +55,12 @@ function createRecipe(req, res) {
     }
     var dvnInfo = {
         name: req.body.name,
-        description: req.body.description || ''
+        description: req.body.description || '',
+        fertilizer: req.body.fertilizer || [],
+        time : req.body.time,
+        productRate: req.body.productRate,
+        variety: req.body.variety,
+        wateringRate: req.body.wateringRate,
     };
     RecipeDao.createRecipe(dvnInfo, cb);
     function cb(err, result) {
