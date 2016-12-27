@@ -11,6 +11,15 @@ var appClientConfig = {
 };
 var apiKey = 'a-42o0m3-wlsfrvc7mh';
 var appClient = new iotf.IotfApplication(appClientConfig);
+var nodemailer = require('nodemailer');
+var email_to = 'trinhhnk@student.ptithcm.edu.vn'
+var transporter = nodemailer.createTransport('SMTP', {
+    service: 'Gmail',
+    auth: {
+        user: 'hnkt2907@gmail.com',
+        pass: 'hnkt29071994'
+    }
+});
 module.exports = function (io) {
     var deviceNode = io.of('/device-node');
     var data;
@@ -31,7 +40,7 @@ module.exports = function (io) {
         var info = {
             apiKey: apiKey,
             temperature: data.temp,
-            humidity: data.hud
+            humidity: data.hud || 60
         }
         historyDao.createHistory(info, cb);
         function cb(err, res) {
@@ -57,9 +66,26 @@ module.exports = function (io) {
         }
         eventEmitter.on('dataChange', function (data) {
             var info = {
-                created : new Date(),
+                created: new Date(),
                 temperature: data.temp,
-                humidity: data.hud
+                humidity: data.hud || 60
+            }
+            if (data.temp >= 30) {
+                console.log(data.temp)
+                socket.emit('hightTemp', data.temp);
+                var mailOption = {
+                    from: 'Admin FreshVegetable <hnkt2907@gmail.com>',
+                    to: '<' + email_to + '>',
+                    subject: 'Thông báo tình trạng vườn rau',
+                    html: '<p>Xin chào!</p> <p>Nhiệt độ của vườn rau đang tăng cao. Nhiệt độ là:' + data.temp + '*C</p>'
+                };
+                transporter.sendMail(mailOption, function (err, info) {
+                    if (err) {
+                        socket.emit('sendMailError', err);
+                    } else {
+                        socket.emit('sendMailSuccess', email_to);
+                    }
+                });
             }
             socket.emit('deviceNodeData', info);
         });

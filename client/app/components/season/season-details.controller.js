@@ -94,6 +94,15 @@
             })
             vm.dataLoad = true;
         });
+        vm.socket.on('hightTemp', function (data) {
+            toastr.error('Nhiệt độ:' + data +'*C', 'Nhiệt độ cao!')
+        })
+        vm.socket.on('sendMailError', function (data) {
+            toastr.error(err, 'Lỗi khi gửi mail!');
+        });
+        vm.socket.on('sendMailSuccess', function (data) {
+            toastr.success('Một email thông báo tình trạng nhiệt độ đã được gửi thành công đến địa chỉ email ' + data, 'Gửi email thành công!');
+        })
 
         Highcharts.setOptions({
             global: {
