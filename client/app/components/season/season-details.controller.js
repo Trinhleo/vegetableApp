@@ -94,8 +94,24 @@
             })
             vm.dataLoad = true;
         });
-        vm.socket.on('hightTemp', function (data) {
-            toastr.error('Nhiệt độ:' + data +'*C', 'Nhiệt độ cao!')
+        vm.socket.on('highTemp', function (data) {
+            toastr.error('Nhiệt độ:' + data + '*C', 'Nhiệt độ cao!');
+            $timeout(function () {
+                var task = {
+                    type : 1,
+                    time: new Date(),
+                    season : $stateParams.seasonId
+                };
+                TaskService.createTask(task).then(
+                    function (res) {
+                        toastr.success('Thêm tác vụ thành công!', 'Thành công!');
+                        loadChart();
+                    },
+                    function (err) {
+                        toastr.error('Thêm tác vụ thất bại!', 'Thất bại!');
+                    }
+                );
+            });
         })
         vm.socket.on('sendMailError', function (data) {
             toastr.error(err, 'Lỗi khi gửi mail!');
@@ -286,7 +302,8 @@
                     }
                 );
             }
-        }
+        };
+        
         function remove(season) {
             $(function () {
                 $("#dialog-confirm").removeClass('hidden');

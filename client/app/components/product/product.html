@@ -39,11 +39,11 @@
                 <tr md-row ng-repeat="item in vm.pagedItems" ng-show="vm.products">
                     <td md-cell><a data-toggle="tooltip" title="Xem chi tiết vườn" ui-sref="index.garden-details({gardenId: item.garden._id})">{{item.garden.name}}</a></td>
                     <td md-cell><a data-toggle="tooltip" title="Xem chi tiết mùa vụ" ui-sref="index.season.details({gardenId: item.garden._id,seasonId: item._id})">{{item.name}}</a></td>
-                    <td md-cell>{{item.garden.address}}</td>
-                    <td md-cell>{{item.startDate|date:'dd/MM/yyyy'}}</td>
-                    <td md-cell>{{item.endDate|date:'dd/MM/yyyy'}} <span ng-if="item.status === 1" class="alert-warning">Dự kiến</span></td>
-                    <td md-cell>{{item.seedQuantity}}</td>
-                    <td md-cell>{{item.quantity}} <span ng-if="item.status === 1" class="alert-warning">Dự kiến</span></td>
+                    <td md-cell><small>{{item.garden.address}}</small></td>
+                    <td md-cell><small>{{item.startDate|date:'dd/MM/yyyy'}}</small></td>
+                    <td md-cell><small>{{item.endDate|date:'dd/MM/yyyy'}}</small><span ng-if="item.status === 1" class="alert-warning">Dự kiến</span></td>
+                    <td md-cell><small>{{item.seedQuantity}}</small></td>
+                    <td md-cell><small>{{item.quantity===0?item.seedQuantity*item.recipe.productRate/100000:item.quantity}} (Tấn) <span ng-if="item.status === 1" class="alert-warning">Dự kiến</span></small></td>
                 </tr>
             </tbody>
         </table>

@@ -1,8 +1,8 @@
 (function () {
     angular.module('app.season')
         .controller('EditSeasonController', EditSeasonController);
-    EditSeasonController.$inject = ['SeasonService', 'GardenService', '$stateParams', '$state', '$rootScope', 'toastr'];
-    function EditSeasonController(SeasonService, GardenService, $stateParams, $state, $rootScope, toastr) {
+    EditSeasonController.$inject = ['$localStorage', 'SeasonService', 'GardenService', '$stateParams', '$state', '$rootScope', 'toastr'];
+    function EditSeasonController($localStorage, SeasonService, GardenService, $stateParams, $state, $rootScope, toastr) {
         vm = this;
         vm.gardenId = $stateParams.gardenId;
         vm.garden = $rootScope.garden || {};

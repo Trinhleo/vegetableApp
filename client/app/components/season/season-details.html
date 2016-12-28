@@ -24,6 +24,7 @@
             <h2> <span style="color:#337ab7">Vườn rau:</span> {{vm.season.garden.name}}</h2>
             <h2> <span style="color:#337ab7">Mùa vụ :</span> {{vm.season.name}}</h2>
             <h2><span style="color:#337ab7">Đối tượng sản xuất:</span> {{vm.season.productionItem.name}}</h2>
+            <h2> <span style="color:#337ab7">Giống:</span> {{vm.season.variety.name}}</h2>
             <h2><span style="color:#337ab7">Ngày bắt đầu:</span> {{vm.season.startDate | date : 'dd/MM/yyyy'}}</h2>
             <h2><span style="color:#337ab7">Ngày thu hoạch:</span> {{vm.season.endDate| date : 'dd/MM/yyyy'}} <span class="alert-warning"
                     ng-if="vm.season.status < 2">(Dự kiến)</span></h2>
@@ -31,6 +32,7 @@
                 <span class="alert-success" ng-show="vm.season.status===1">Đang diễn ra</span>
                 <span class="alert-warning" ng-show="vm.season.status===0">Chưa bắt đầu</span>
             </h2>
+             <h2> <span style="color:#337ab7">Sản lượng <span ng-if="vm.season.status < 2">(Dự kiến)</span> :</span> {{vm.season.seedQuantity * vm.season.recipe.productRate/100000}} (Tấn)</h2>
             <h2>
                 <!--<em class="text-muted">
      Đã tạo lúc

@@ -70,9 +70,9 @@ module.exports = function (io) {
                 temperature: data.temp,
                 humidity: data.hud || 60
             }
-            if (data.temp >= 30) {
+            if (data.temp >= 38) {
                 console.log(data.temp)
-                socket.emit('hightTemp', data.temp);
+                socket.emit('highTemp', data.temp);
                 var mailOption = {
                     from: 'Admin FreshVegetable <hnkt2907@gmail.com>',
                     to: '<' + email_to + '>',

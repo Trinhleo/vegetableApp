@@ -14,30 +14,38 @@ module.exports = {
 };
 
 function listSeasons(query, callback) {
-    Season.find(query).sort('-created').populate('garden').populate('productionItem').exec(function (err, result) {
-        if (err) {
-            return callback(err, null);
-        }
-        callback(null, result);
-    });
+    Season.find(query).sort('-created').populate('garden').populate('productionItem')
+        .populate('recipe')
+        .populate('variety').exec(function (err, result) {
+            if (err) {
+                return callback(err, null);
+            }
+            callback(null, result);
+        });
 }
 
 function readSeasonById(id, callback) {
-    Season.findById(id).sort('-created').populate('garden').populate('productionItem').exec(function (err, result) {
-        if (err) {
-            return callback(err, null);
-        }
-        callback(null, result);
-    });
+    Season.findById(id).sort('-created').populate('garden').populate('productionItem')
+        .populate('recipe')
+        .populate('variety')
+        .exec(function (err, result) {
+            if (err) {
+                return callback(err, null);
+            }
+            callback(null, result);
+        });
 }
 
 function readSeason(query, callback) {
-    Season.findOne(query).populate('garden').populate('productionItem').exec(function (err, result) {
-        if (err) {
-            return callback(err, null);
-        }
-        callback(null, result);
-    });
+    Season.findOne(query).populate('garden').populate('productionItem')
+        .populate('recipe')
+        .populate('variety')
+        .exec(function (err, result) {
+            if (err) {
+                return callback(err, null);
+            }
+            callback(null, result);
+        });
 }
 
 function createSeason(creditial, callback) {

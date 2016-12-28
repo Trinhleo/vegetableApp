@@ -191,17 +191,20 @@ function createSeason(req, res) {
 
         console.log('approved', res.approved);
 
-        // var seasonInfo = {
-        //     user: req.decoded._id,
-        //     name: req.body.name,
-        //     garden: req.body.garden,
-        //     productionItem: req.body.productionItem,
-        //     startDate: req.body.startDate || '',
-        //     endDate: req.body.endDate || '',
-        //     seedQuantity: req.body.seedQuantity
-        // };
+        var seasonInfo = {
+            user: req.decoded._id,
+            name: req.body.name,
+            garden: req.body.garden,
+            productionItem: req.body.productionItem,
+            startDate: req.body.startDate || '',
+            endDate: req.body.endDate || '',
+            seedQuantity: req.body.seedQuantity,
+            recipe : req.body.recipe,
+            variety: req.body.variety
+        };
+        // req.body.user = req.decoded._id;
 
-        seasonDao.createSeason(req.body, cb);
+        seasonDao.createSeason(seasonInfo, cb);
         function cb(err, result) {
             if (err) {
                 return res.status(400).send(err);

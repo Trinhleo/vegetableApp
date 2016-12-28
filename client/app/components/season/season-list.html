@@ -26,13 +26,13 @@
       </thead>
       <tbody md-body>
         <tr md-row md-select="seasons" md-select-id="name" md-auto-select ng-repeat="season in vm.seasons">
-          <td md-cell><strong>{{season.name}}</strong></td>
-          <td md-cell> <strong class="alert alert-danger" ng-show="season.status===2">Đã kết thúc</strong>
-            <strong class="alert alert-success" ng-show="season.status===1">Đang diễn ra</strong>
-            <strong class="alert alert-warning" ng-show="season.status===0">Chưa bắt đầu</strong></td>
-          <td md-cell><strong>{{season.created | date:'short'}}</strong></td>
+          <td md-cell><small>{{season.name}}</small></td>
+          <td md-cell> <small class="alert alert-danger" ng-show="season.status===2">Đã kết thúc</small>
+            <small class="alert alert-success" ng-show="season.status===1">Đang diễn ra</small>
+            <small class="alert alert-warning" ng-show="season.status===0">Chưa bắt đầu</small></td>
+          <td md-cell><small>{{season.created | date:'short'}}</small></td>
           <td md-cell>
-            <strong style="padding-right:20px">{{season.productionItem.name}}</strong>
+            <small style="padding-right:20px">{{season.productionItem.name}}</small>
             <img data-toggle="tooltip" title="{{season.productionItem.name}}" alt="{{season.productionItem.name}}" ng-src="{{season.productionItemUrl}}"
               class="img-responsive center" width="128px" height="46px" style="margin-right: 0 !important" />
           </td>
