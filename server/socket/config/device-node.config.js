@@ -37,6 +37,7 @@ module.exports = function (io) {
         var arr = {};
         data = JSON.parse(payload);
         eventEmitter.emit('dataChange', data);
+
         var info = {
             apiKey: apiKey,
             temperature: data.temp,
@@ -52,6 +53,70 @@ module.exports = function (io) {
         // }
         // console.log(data.temp)
         console.log(data.temp);
+        if (data.temp >= 38) {
+            console.log(data.temp);
+            var mailOption = {
+                from: 'Admin FreshVegetable <hnkt2907@gmail.com>',
+                to: '<' + email_to + '>',
+                subject: 'Thông báo tình trạng vườn rau',
+                html: '<p>Xin chào!</p> <p>Nhiệt độ của vườn rau đang tăng cao. Nhiệt độ là:' + data.temp + '*C</p>'
+            };
+            transporter.sendMail(mailOption, function (err, info) {
+                if (err) {
+                    eventEmitter.emit('email_not_send', err);
+                } else {
+                    eventEmitter.emit('email_sended');
+                }
+            });
+        }
+        if (data.temp <= 10) {
+            console.log(data.temp);
+            var mailOption = {
+                from: 'Admin FreshVegetable <hnkt2907@gmail.com>',
+                to: '<' + email_to + '>',
+                subject: 'Thông báo tình trạng vườn rau',
+                html: '<p>Xin chào!</p> <p>Nhiệt độ của vườn rau đang hạ thấp. Nhiệt độ là:' + data.temp + '*C</p>'
+            };
+            transporter.sendMail(mailOption, function (err, info) {
+                if (err) {
+                    eventEmitter.emit('email_not_send', err);
+                } else {
+                    eventEmitter.emit('email_sended');
+                }
+            });
+        }
+        if (data.hud <= 50) {
+            console.log(data.hud);
+            var mailOption = {
+                from: 'Admin FreshVegetable <hnkt2907@gmail.com>',
+                to: '<' + email_to + '>',
+                subject: 'Thông báo tình trạng vườn rau',
+                html: '<p>Xin chào!</p> <p>Độ ẩm của vườn rau đang hạ thấp. Độ ẩm là:' + data.hud + '%</p>'
+            };
+            transporter.sendMail(mailOption, function (err, info) {
+                if (err) {
+                    eventEmitter.emit('email_not_send', err);
+                } else {
+                    eventEmitter.emit('email_sended');
+                }
+            });
+        }
+        if (data.hud >= 85) {
+            console.log(data.hud);
+            var mailOption = {
+                from: 'Admin FreshVegetable <hnkt2907@gmail.com>',
+                to: '<' + email_to + '>',
+                subject: 'Thông báo tình trạng vườn rau',
+                html: '<p>Xin chào!</p> <p>Độ ẩm của vườn rau đang tăng cao. Độ ẩm là:' + data.hud + '%</p>'
+            };
+            transporter.sendMail(mailOption, function (err, info) {
+                if (err) {
+                    eventEmitter.emit('email_not_send', err);
+                } else {
+                    eventEmitter.emit('email_sended');
+                }
+            });
+        }
         //  console.log(payload.hud);
         console.log("Device Event from :: " + deviceType + " : " + deviceId + " of event " + eventType + " with payload : " + payload);
     });
@@ -73,21 +138,14 @@ module.exports = function (io) {
             if (data.temp >= 38) {
                 console.log(data.temp)
                 socket.emit('highTemp', data.temp);
-                var mailOption = {
-                    from: 'Admin FreshVegetable <hnkt2907@gmail.com>',
-                    to: '<' + email_to + '>',
-                    subject: 'Thông báo tình trạng vườn rau',
-                    html: '<p>Xin chào!</p> <p>Nhiệt độ của vườn rau đang tăng cao. Nhiệt độ là:' + data.temp + '*C</p>'
-                };
-                transporter.sendMail(mailOption, function (err, info) {
-                    if (err) {
-                        socket.emit('sendMailError', err);
-                    } else {
-                        socket.emit('sendMailSuccess', email_to);
-                    }
-                });
             }
             socket.emit('deviceNodeData', info);
+        });
+        eventEmitter.on('email_sended', function (data) {
+            socket.emit('sendMailSuccess', email_to);
+        });
+        eventEmitter.on('email_not_send', function (data) {
+            socket.emit('sendMailError', err);
         });
         socket.on('disconnect', function onDisconnect() {
             socket.leaveAll()
